@@ -7,9 +7,6 @@ uses
 
 type
   TDataModule1 = class(TDataModule)
-    FDConnection1: TFDConnection;
-    FDQuery1: TFDQuery;
-    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
   private
     { Private declarations }
   public

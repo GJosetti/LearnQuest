@@ -2,15 +2,15 @@ program LearnQuest;
 
 uses
   Vcl.Forms,
-  tform_view_login in 'tform_view_login\tform_view_login.pas' {Form1},
-  DMConnection in 'DMConnection.pas' {DataModule1: TDataModule};
+  DMConnection in 'DMConnection.pas' {DataModule1: TDataModule},
+  frm_view in 'view\frm_view.pas' {frm_login};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(Tfrm_login, frm_login);
   Application.Run;
 end.

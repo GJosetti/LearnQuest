@@ -103,20 +103,6 @@ CREATE TABLE atividade_fase (
 );
 
 
-DROP TABLE IF EXISTS atividade_fase CASCADE;
-DROP TABLE IF EXISTS fase_trilha CASCADE;
-DROP TABLE IF EXISTS turma_trilha CASCADE;
-DROP TABLE IF EXISTS estudante_turma CASCADE;
-DROP TABLE IF EXISTS atividades CASCADE;
-DROP TABLE IF EXISTS turmas CASCADE;
-DROP TABLE IF EXISTS professores CASCADE;
-DROP TABLE IF EXISTS estudante CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS role_permissoes CASCADE;
-DROP TABLE IF EXISTS fase CASCADE;
-DROP TABLE IF EXISTS trilhas CASCADE;
-DROP TABLE IF EXISTS permissoes CASCADE;
-DROP TABLE IF EXISTS roles CASCADE;
 
 
 
@@ -125,30 +111,6 @@ DROP TABLE IF EXISTS roles CASCADE;
 
 
 
-
-
-
-
-
-
-insert into users (nome, password, email) values('Alguém','12345','alguemcoisa@gmail.com')
-
-insert into professores (user_id) values(2)
-
-select * from professores
-
-
-
-SELECT
-    u.nome
-FROM
-    professores p
-INNER JOIN
-    users u ON p.user_id = u.id;
-
-
-
-drop table users
 
 
 

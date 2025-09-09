@@ -1,0 +1,27 @@
+unit users_model;
+
+interface
+
+type
+  TUserModel = class
+  private
+    ID: Integer;
+    Name : String;
+    Role: Integer;
+    Password: String;
+    Email: String;
+  public
+    function GetID : Integer;
+
+  end;
+
+implementation
+
+{ TUserModel }
+
+function TUserModel.GetID: Integer;
+begin
+  Result := Self.ID;
+end;
+
+end.

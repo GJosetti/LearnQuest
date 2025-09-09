@@ -1,0 +1,18 @@
+unit my_contracts;
+
+interface
+
+type
+
+  ILoginView = interface
+  ['{40EB0EA9-09A3-4243-9EA7-DADD756A4B45}']
+
+  function GetNome: Integer;
+  procedure MensagemDeSucesso(aString: String);
+
+  end;
+
+
+implementation
+
+end.

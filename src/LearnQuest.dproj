@@ -128,10 +128,13 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="view\frm_view.pas">
+        <DCCReference Include="view\frm_login_view.pas">
             <Form>frm_login</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="controller\frm_login_controller.pas"/>
+        <DCCReference Include="model\users_model.pas"/>
+        <DCCReference Include="interfaces\my_contracts.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -1,0 +1,37 @@
+unit users_model;
+
+interface
+
+type
+  TUserModel = class
+  private
+    ID: Integer;
+    Name : String;
+    Role: Integer;
+    Password: String;
+    Email: String;
+  public
+    function GetID : Integer;
+    procedure SetID(aID : Integer);
+    function GetNome : String;
+    procedure SetNome(aID : String);
+
+  end;
+
+implementation
+
+{ TUserModel }
+
+function TUserModel.GetID: Integer;
+begin
+  Result := Self.ID;
+end;
+
+procedure TUserModel.SetID(aID: Integer);
+begin
+  Self.ID := aID;
+end;
+
+
+
+end.

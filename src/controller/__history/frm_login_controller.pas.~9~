@@ -27,7 +27,7 @@ end;
 
 function TLoginController.ProcessarNome: String;
 begin
-  var aaa := Fview.GetNome;
+
 end;
 
 end.

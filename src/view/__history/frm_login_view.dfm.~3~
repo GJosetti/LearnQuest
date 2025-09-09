@@ -40,12 +40,4 @@ object frm_login: Tfrm_login
     TabOrder = 1
     TextHint = 'Insira sua senha'
   end
-  object btn_login: TButton
-    Left = 368
-    Top = 448
-    Width = 75
-    Height = 25
-    Caption = 'btn_login'
-    TabOrder = 2
-  end
 end

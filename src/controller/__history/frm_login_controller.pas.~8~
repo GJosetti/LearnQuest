@@ -11,23 +11,15 @@ type
 
 
   private
-    FView : ILoginView;
-    function ProcessarNome : String;
-  public
-    constructor Create(const aView: ILoginView);
+  function ProcessarNome : String;
 
   end;
 
 { TLoginController }
 
-constructor TLoginController.Create(const aView: ILoginView);
-begin
-  FView := aView;
-end;
-
 function TLoginController.ProcessarNome: String;
 begin
-  var aaa := Fview.GetNome;
+
 end;
 
 end.

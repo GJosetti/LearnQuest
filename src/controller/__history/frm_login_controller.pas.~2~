@@ -1,0 +1,12 @@
+unit frm_login_controller;
+
+
+interface
+uses my_contracts;
+
+implementation
+
+type
+  TLoginController = class(IControllerLogin)
+
+end.

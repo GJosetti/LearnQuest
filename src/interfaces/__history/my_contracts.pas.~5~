@@ -7,14 +7,9 @@ type
   ILoginView = interface
   ['{40EB0EA9-09A3-4243-9EA7-DADD756A4B45}']
 
-  function GetNome: String;
+  function GetNome: Integer;
   procedure MensagemDeSucesso(aString: String);
-  end;
 
-  IControllerLogin = interface
-  ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
-
-  function ProcessarNome : String;
   end;
 
 

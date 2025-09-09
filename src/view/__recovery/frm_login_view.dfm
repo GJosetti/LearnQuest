@@ -41,7 +41,7 @@ object frm_login: Tfrm_login
     TextHint = 'Insira sua senha'
   end
   object btn_login: TButton
-    Left = 368
+    Left = 376
     Top = 448
     Width = 75
     Height = 25

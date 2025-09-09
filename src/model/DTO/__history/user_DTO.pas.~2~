@@ -1,0 +1,19 @@
+unit user_DTO;
+
+interface
+
+TUserDTO = class()
+public
+  ID: Integer;
+    Name : String;
+    Role: Integer;
+    Password: String;
+    Email: String;
+end;
+
+
+
+
+implementation
+
+end.

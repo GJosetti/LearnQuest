@@ -1,0 +1,19 @@
+unit frm_login_controller;
+
+
+interface
+uses my_contracts;
+
+implementation
+
+type
+  TLoginController = class(TInterfacedObject,IControllerLogin)
+
+
+  private
+  function ProcessarNome : String;
+
+
+  end;
+
+end.

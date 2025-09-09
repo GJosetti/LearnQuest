@@ -2,6 +2,8 @@ unit users_entity;
 
 interface
 
+//COM REGRAS DE NEGOCIO
+
 type
   TUserModel = class
   private

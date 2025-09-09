@@ -7,17 +7,20 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts;
 
 type
-  Tfrm_login = class(TForm, ILoginView)
+  Tfrm_login_view = class(TForm, ILoginView)
     lbl_title_login: TLabel;
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
+    btn_login: TButton;
   private
     { Private declarations }
+    FController : ILoginController;
 
   public
     { Public declarations }
     function GetNome: String;
     procedure MensagemDeSucesso(aString: String);
+    procedure SetController(aController: ILoginController);
 
 
   end;
@@ -31,6 +34,11 @@ implementation
 
 { Tfrm_login }
 
+procedure Tfrm_login.SetController(aController: ILoginController);
+begin
+  Self.FController := aController;
+end;
+
 function Tfrm_login.GetNome: String;
 begin
   Result := edt_nome_login.Text;
@@ -38,7 +46,9 @@ end;
 
 procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
-  ShowMessage(aString);
+  ShowMessage(FController.ProcessarNome);
 end;
+
+
 
 end.

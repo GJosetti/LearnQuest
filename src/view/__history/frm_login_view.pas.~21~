@@ -44,7 +44,7 @@ begin
   Result := edt_nome_login.Text;
 end;
 
-procedure Tfrm_login_view.MensagemDeSucesso(aString: String);
+procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
   ShowMessage(FController.ProcessarNome);
 end;

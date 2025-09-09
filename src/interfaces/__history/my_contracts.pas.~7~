@@ -11,7 +11,7 @@ type
   procedure MensagemDeSucesso(aString: String);
   end;
 
-  ILoginController = interface
+  IControllerLogin = interface
   ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
 
   function ProcessarNome : String;

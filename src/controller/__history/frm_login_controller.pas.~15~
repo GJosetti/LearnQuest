@@ -7,7 +7,7 @@ uses my_contracts;
 implementation
 
 type
-  TLoginController = class(TInterfacedObject,ILoginController)
+  TLoginController = class(TInterfacedObject,IControllerLogin)
 
 
   private

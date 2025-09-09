@@ -14,11 +14,13 @@ type
     btn_login: TButton;
   private
     { Private declarations }
+    FController : ILoginController;
 
   public
     { Public declarations }
     function GetNome: String;
     procedure MensagemDeSucesso(aString: String);
+    procedure SetController(aController: ILoginController);
 
 
   end;
@@ -31,6 +33,12 @@ implementation
 {$R *.dfm}
 
 { Tfrm_login }
+
+procedure Tfrm_login.SetController(aController: ILoginController);
+begin
+  Self.FController := aController;
+end;
+
 function Tfrm_login.GetNome: String;
 begin
   Result := edt_nome_login.Text;
@@ -40,5 +48,7 @@ procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
   ShowMessage(aString);
 end;
+
+
 
 end.

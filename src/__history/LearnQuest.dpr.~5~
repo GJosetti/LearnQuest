@@ -5,10 +5,8 @@ uses
   DMConnection in 'DMConnection.pas' {DataModule1: TDataModule},
   frm_login_view in 'view\frm_login_view.pas' {frm_login},
   frm_login_controller in 'controller\frm_login_controller.pas',
-  users_entity in 'model\entity\users_entity.pas',
-  my_contracts in 'interfaces\my_contracts.pas',
-  user_DTO in 'model\DTO\user_DTO.pas',
-  screen_factory in 'screen_factory.pas';
+  users_model in 'model\users_model.pas',
+  my_contracts in 'interfaces\my_contracts.pas';
 
 {$R *.res}
 

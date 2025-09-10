@@ -1,0 +1,23 @@
+unit screen_factory;
+
+interface
+uses frm_login_view, frm_login_controller, my_contracts;
+
+
+
+implementation
+
+
+procedure ExibirFormLogin;
+
+var Controller:
+
+begin
+
+View := Tfrm_login.Create(nil);
+
+
+end;
+
+
+end.

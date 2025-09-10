@@ -14,8 +14,8 @@ object frm_login: Tfrm_login
   object lbl_title_login: TLabel
     Left = 336
     Top = 40
-    Width = 169
-    Height = 89
+    Width = 158
+    Height = 86
     Caption = 'Login'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

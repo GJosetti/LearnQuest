@@ -8,14 +8,14 @@ uses frm_login_view, frm_login_controller, my_contracts;
 implementation
 
 procedure ExibirFormLogin;
-var
 
-Controller: TLoginController
-View: Tfrm_login_view;
+
+//Controller: TLoginController
+//View: Tfrm_login_view;
 
 begin
 
-View := Tfrm_login_view.Create(nil);
+//View := Tfrm_login_view.Create(nil);
 
 
 end;

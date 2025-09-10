@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts;
 
 type
-  Tfrm_login_view = class(TForm, ILoginView)
+  Tfrm_login = class(TForm, ILoginView)
     lbl_title_login: TLabel;
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
@@ -26,7 +26,7 @@ type
   end;
 
 var
-  frm_login: Tfrm_login_view;
+  frm_login: Tfrm_login;
 
 implementation
 
@@ -34,17 +34,17 @@ implementation
 
 { Tfrm_login }
 
-procedure Tfrm_login_view.SetController(aController: ILoginController);
+procedure Tfrm_login.SetController(aController: ILoginController);
 begin
   Self.FController := aController;
 end;
 
-function Tfrm_login_view.GetNome: String;
+function Tfrm_login.GetNome: String;
 begin
   Result := edt_nome_login.Text;
 end;
 
-procedure Tfrm_login_view.MensagemDeSucesso(aString: String);
+procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
   ShowMessage(FController.ProcessarNome);
 end;

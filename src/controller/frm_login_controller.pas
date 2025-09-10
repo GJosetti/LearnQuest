@@ -2,7 +2,7 @@ unit frm_login_controller;
 
 
 interface
-uses my_contracts, Vcl.Dialogs;
+uses my_contracts, Vcl.Dialogs, frm_login_service;
 
 type
   TLoginController = class(TInterfacedObject,ILoginController)
@@ -10,6 +10,7 @@ type
 
   private
     FView : ILoginView;
+    FService: ILoginService;
     procedure ProcessarNome;
   public
     constructor Create(aView: ILoginView);
@@ -25,12 +26,14 @@ implementation
 constructor TLoginController.Create(aView: ILoginView);
 begin
   Fview := aView;
+  FService := TLoginService.Create;
 end;
 
 procedure TLoginController.ProcessarNome;
 begin
   var a := Fview.GetNome;
-  ShowMessage( a + ' processado com sucesso');
+  FService.ValidarNome(a);
+
 end;
 
 end.

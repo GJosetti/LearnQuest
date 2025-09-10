@@ -1,0 +1,31 @@
+unit frm_login_service;
+
+interface
+uses my_contracts, Vcl.Dialogs;
+
+type
+TLoginService = class(TInterfacedObject,ILoginService)
+
+private
+
+
+public
+  function GetByID: TUserDTO;
+  procedure ValidarNome;
+end;
+
+
+
+
+implementation
+
+
+
+{ TLoginService }
+
+function TLoginService.GetByID: TUserDTO;
+begin
+
+end;
+
+end.

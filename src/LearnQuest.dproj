@@ -146,6 +146,7 @@
         <DCCReference Include="model\entity\users_entity.pas"/>
         <DCCReference Include="interfaces\my_contracts.pas"/>
         <DCCReference Include="model\DTO\user_DTO.pas"/>
+        <DCCReference Include="service\frm_login_service.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

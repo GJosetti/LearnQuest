@@ -43,6 +43,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL
 );
 
+
 -- Tabela de Estudantes
 CREATE TABLE estudante (
     id BIGSERIAL PRIMARY KEY,

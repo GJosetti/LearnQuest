@@ -1,0 +1,40 @@
+unit frm_login_controller;
+
+
+interface
+uses my_contracts, Vcl.Dialogs;
+
+type
+  TLoginController = class(TInterfacedObject,ILoginController)
+
+
+  private
+    FView : ILoginView;
+    FService: ILoginService;
+    procedure ProcessarNome;
+  public
+    constructor Create(aView: ILoginView);
+
+  end;
+
+implementation
+
+
+
+{ TLoginController }
+
+constructor TLoginController.Create(aView: ILoginView);
+begin
+
+
+  Fview := aView;
+  FService := aService;
+end;
+
+procedure TLoginController.ProcessarNome;
+begin
+  var a := Fview.GetNome;
+
+end;
+
+end.

@@ -17,7 +17,8 @@ type
   private
     { Private declarations }
     FController : ILoginController;
-    Fview : ILoginView;
+
+
 
   public
     { Public declarations }

@@ -14,7 +14,7 @@ type
   ILoginController = interface
   ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
 
-  function ProcessarNome : String;
+  procedure ProcessarNome;
   end;
 
 

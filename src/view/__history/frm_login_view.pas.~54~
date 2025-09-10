@@ -1,0 +1,57 @@
+unit frm_login_view;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller;
+
+type
+  Tfrm_login = class(TForm, ILoginView)
+    lbl_title_login: TLabel;
+    edt_nome_login: TEdit;
+    edt_senha_login: TEdit;
+    btn_login: TButton;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    FController : ILoginController;
+    Fview : ILoginView;
+
+  public
+    { Public declarations }
+    function GetNome: String;
+    procedure MensagemDeSucesso(aString: String);
+
+  end;
+
+var
+  frm_login: Tfrm_login;
+
+implementation
+
+{$R *.dfm}
+
+{ Tfrm_login }
+
+
+
+procedure Tfrm_login.FormCreate(Sender: TObject);
+begin
+  Fview := Tfrm_login.Create(nil);
+  FController := TLoginController.Create()
+end;
+
+function Tfrm_login.GetNome: String;
+begin
+  Result := edt_nome_login.Text;
+end;
+
+procedure Tfrm_login.MensagemDeSucesso(aString: String);
+begin
+
+end;
+
+
+
+end.

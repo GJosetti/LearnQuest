@@ -1,0 +1,34 @@
+unit frm_login_controller;
+
+
+interface
+uses my_contracts;
+
+implementation
+
+type
+  TLoginController = class(TInterfacedObject,ILoginController)
+
+
+  private
+    FView : ILoginView;
+    function ProcessarNome : String;
+  public
+    constructor Create();
+
+  end;
+
+{ TLoginController }
+
+constructor TLoginController.Create();
+begin
+
+end;
+
+function TLoginController.ProcessarNome;
+begin
+  var a := Fview.GetNome;
+  Result := a + ' processado com sucesso';
+end;
+
+end.

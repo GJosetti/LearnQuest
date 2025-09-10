@@ -7,8 +7,7 @@ uses
   frm_login_controller in 'controller\frm_login_controller.pas',
   users_entity in 'model\entity\users_entity.pas',
   my_contracts in 'interfaces\my_contracts.pas',
-  user_DTO in 'model\DTO\user_DTO.pas',
-  screen_factory in 'screen_factory.pas';
+  user_DTO in 'model\DTO\user_DTO.pas';
 
 {$R *.res}
 

@@ -10,6 +10,7 @@ object frm_login: Tfrm_login
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object lbl_title_login: TLabel
     Left = 336
@@ -28,7 +29,7 @@ object frm_login: Tfrm_login
     Left = 320
     Top = 248
     Width = 193
-    Height = 41
+    Height = 23
     TabOrder = 0
     TextHint = 'Insira seu usu'#225'rio'
   end
@@ -36,7 +37,7 @@ object frm_login: Tfrm_login
     Left = 320
     Top = 336
     Width = 193
-    Height = 41
+    Height = 23
     TabOrder = 1
     TextHint = 'Insira sua senha'
   end
@@ -47,5 +48,6 @@ object frm_login: Tfrm_login
     Height = 25
     Caption = 'btn_login'
     TabOrder = 2
+    OnClick = btn_loginClick
   end
 end

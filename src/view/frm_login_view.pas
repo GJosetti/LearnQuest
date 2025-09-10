@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -12,16 +12,17 @@ type
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
     btn_login: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btn_loginClick(Sender: TObject);
   private
     { Private declarations }
     FController : ILoginController;
+    Fview : ILoginView;
 
   public
     { Public declarations }
     function GetNome: String;
     procedure MensagemDeSucesso(aString: String);
-    procedure SetController(aController: ILoginController);
-
 
   end;
 
@@ -34,9 +35,15 @@ implementation
 
 { Tfrm_login }
 
-procedure Tfrm_login.SetController(aController: ILoginController);
+procedure Tfrm_login.FormCreate(Sender: TObject);
 begin
-  Self.FController := aController;
+
+  FController := TLoginController.Create(Self);
+end;
+
+procedure Tfrm_login.btn_loginClick(Sender: TObject);
+begin
+  FController.ProcessarNome;
 end;
 
 function Tfrm_login.GetNome: String;
@@ -46,7 +53,7 @@ end;
 
 procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
-  ShowMessage(FController.ProcessarNome);
+
 end;
 
 

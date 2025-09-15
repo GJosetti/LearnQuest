@@ -6,12 +6,20 @@ interface
 
 type
 TUserDTO = class
+
+
+
+
 public
-  ID: Integer;
+    ID: Integer;
     Name : String;
     Role: Integer;
     Password: String;
     Email: String;
+private
+
+
+
 end;
 
 

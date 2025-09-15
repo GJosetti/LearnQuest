@@ -1,0 +1,47 @@
+unit frm_login_controller;
+
+
+interface
+uses my_contracts, Vcl.Dialogs, frm_login_service,user_DTO;
+
+type
+  TLoginController = class(TInterfacedObject,ILoginController)
+
+
+  private
+    FView : ILoginView;
+    FService: ILoginService;
+    FDTO: TUserDTO;
+    procedure ProcessarLogin;
+    procedure CriarDTO;
+  public
+    constructor Create(aView: ILoginView);
+
+  end;
+
+implementation
+
+
+
+{ TLoginController }
+
+constructor TLoginController.Create(aView: ILoginView);
+begin
+  Fview := aView;
+  FService := TLoginService.Create;
+end;
+
+
+
+procedure TLoginController.ProcessarLogin();
+var ResultadoDTO : TUserDTO;
+begin
+  FDTO := TUserDTO.Create;
+  FDTO.Name := FView.GetNome;
+  ResultadoDTO := FService.ValidarLogin(FDTO);
+
+end;
+
+
+
+end.

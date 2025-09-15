@@ -2,7 +2,7 @@ unit frm_login_controller;
 
 
 interface
-uses my_contracts, Vcl.Dialogs, frm_login_service;
+uses my_contracts, Vcl.Dialogs, frm_login_service,user_DTO, SysUtils;
 
 type
   TLoginController = class(TInterfacedObject,ILoginController)
@@ -11,7 +11,8 @@ type
   private
     FView : ILoginView;
     FService: ILoginService;
-    procedure ProcessarNome;
+    procedure ProcessarLogin;
+
   public
     constructor Create(aView: ILoginView);
 
@@ -29,11 +30,26 @@ begin
   FService := TLoginService.Create;
 end;
 
-procedure TLoginController.ProcessarNome;
+
+
+procedure TLoginController.ProcessarLogin();
+var RequestDTO: TUserDTO;
+var ResultadoDTO : TUserDTO;
 begin
-  var a := Fview.GetNome;
-  FService.ValidarNome(a);
+  RequestDTO := TUserDTO.Create;
+  RequestDTO.Name := FView.GetNome;
+  ResultadoDTO := FService.ValidarLogin(RequestDTO);
+
+  if ResultadoDTO = nil then begin
+    //COLOCAR NA VIEW
+    ShowMessage('Usuário não encontrado!');
+  end else begin
+    //COLOCAR NA VIEW
+    ShowMessage('Login realizado com sucesso' + IntToStr(RequestDTO.ID));
+  end;
 
 end;
+
+
 
 end.

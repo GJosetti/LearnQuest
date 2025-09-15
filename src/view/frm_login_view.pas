@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -44,7 +44,7 @@ end;
 
 procedure Tfrm_login.btn_loginClick(Sender: TObject);
 begin
-  FController.ProcessarNome;
+  FController.ProcessarLogin;
 end;
 
 function Tfrm_login.GetNome: String;
@@ -54,7 +54,7 @@ end;
 
 procedure Tfrm_login.MensagemDeSucesso(aString: String);
 begin
-
+  ShowMessage(aString);
 end;
 
 

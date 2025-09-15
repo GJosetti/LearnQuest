@@ -147,6 +147,7 @@
         <DCCReference Include="interfaces\my_contracts.pas"/>
         <DCCReference Include="model\DTO\user_DTO.pas"/>
         <DCCReference Include="service\frm_login_service.pas"/>
+        <DCCReference Include="model\repository\user_repository.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -197,6 +198,12 @@
                     <Platform Name="Win32">
                         <Enabled>false</Enabled>
                         <RemoteName>LearnQuest.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\LearnQuest.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>LearnQuest.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

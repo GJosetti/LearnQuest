@@ -11,7 +11,7 @@ object DataModule1: TDataModule1
       'Server=localhost')
     Connected = True
     Left = 176
-    Top = 160
+    Top = 184
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1

@@ -8,7 +8,8 @@ uses
   users_entity in 'model\entity\users_entity.pas',
   my_contracts in 'interfaces\my_contracts.pas',
   user_DTO in 'model\DTO\user_DTO.pas',
-  frm_login_service in 'service\frm_login_service.pas';
+  frm_login_service in 'service\frm_login_service.pas',
+  user_repository in 'model\repository\user_repository.pas';
 
 {$R *.res}
 

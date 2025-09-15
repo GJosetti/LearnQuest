@@ -1,0 +1,27 @@
+unit frm_login_repository;
+
+interface
+uses my_contracts, users_entity;
+
+type
+TLoginRepository = class(TInterfacedObject,ILoginRepository)
+
+
+
+  function FindByID(aID: Integer) : TUserModel;
+end;
+
+
+implementation
+
+
+{ TLoginRepository }
+
+function TLoginRepository.FindByID(aID: Integer): TUserModel;
+FUserRepository : TUserModel;
+begin
+
+
+end;
+
+end.

@@ -1,0 +1,17 @@
+unit frm_login_repository;
+
+interface
+uses my_contracts;
+
+type
+TLoginRepository = class(TInterfacedObject,ILoginRepository)
+
+
+
+
+end;
+
+
+implementation
+
+end.

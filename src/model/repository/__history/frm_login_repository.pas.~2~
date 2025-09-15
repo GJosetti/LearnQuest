@@ -1,0 +1,16 @@
+unit frm_login_repository;
+
+interface
+
+type
+TLoginRepository = class(TInterfacedObject,ILoginRepository)
+
+
+
+
+end;
+
+
+implementation
+
+end.

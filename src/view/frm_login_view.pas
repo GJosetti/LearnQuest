@@ -23,6 +23,7 @@ type
   public
     { Public declarations }
     function GetNome: String;
+    function GetPassword: String;
     procedure Mensagem(aString: String);
 
   end;
@@ -50,6 +51,11 @@ end;
 function Tfrm_login.GetNome: String;
 begin
   Result := edt_nome_login.Text;
+end;
+
+function Tfrm_login.GetPassword: String;
+begin
+  Result := edt_senha_login.Text;
 end;
 
 procedure Tfrm_login.Mensagem(aString: String);

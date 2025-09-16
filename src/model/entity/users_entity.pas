@@ -17,6 +17,8 @@ type
     procedure SetID(aID : Integer);
     function GetNome : String;
     procedure SetNome(aName : String);
+    function GetPassword: String;
+    procedure SetPassword(aPassword: String);
 
   end;
 
@@ -34,6 +36,11 @@ begin
   Result := Self.Name
 end;
 
+function TUserModel.GetPassword: String;
+begin
+  Result := Self.Password;
+end;
+
 procedure TUserModel.SetID(aID: Integer);
 begin
   Self.ID := aID;
@@ -42,6 +49,11 @@ end;
 procedure TUserModel.SetNome(aName: String);
 begin
   Name := aName
+end;
+
+procedure TUserModel.SetPassword(aPassword: String);
+begin
+  Password := aPassword;
 end;
 
 end.

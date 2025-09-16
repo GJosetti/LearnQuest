@@ -38,11 +38,12 @@ var ResultadoDTO : TUserDTO;
 begin
   RequestDTO := TUserDTO.Create;
   RequestDTO.Name := FView.GetNome;
+  RequestDTO.Password := FView.GetPassword;
   ResultadoDTO := FService.ValidarLogin(RequestDTO);
 
   if ResultadoDTO = nil then begin
     //COLOCAR NA VIEW
-    FView.Mensagem('Usuário não encontrado!');
+    FView.Mensagem('Usuário ou senha incorretos!');
   end else begin
     //COLOCAR NA VIEW
    Fview.Mensagem('Login realizado com sucesso! ID: ' + ResultadoDTO.ID.ToString);

@@ -39,33 +39,41 @@ end;
 
 function TLoginService.ValidarLogin(aDTO: TUserDTO): TUserDTO;
 
-
-begin
+var hash: String;
 
 var FUser: TUserModel;
 var FUserDTO: TUserDTO;
 
-if Trim(aDto.Name) = '' then begin
+begin
 
-  ShowMessage('O Nome precisa ser preenchido!');
+
+//Verificações de preenchimento --------
+if Trim(aDto.Name) = '' then begin
+  ShowMessage('O nome precisa ser preenchido!');
+  //fazer de uma maneira mais visual
 end;
+if Trim(aDTO.Password) = '' then begin
+  ShowMessage('A senha precisa ser preenchido!');
+  //fazer de uma maneira mais visual
+end;
+//----------
+
 
 
 FUser := FUserRepository.FindByNome(aDTO.Name);
 
-if(FUser = nil) then begin
+hash := aDto.Password.GetHashCode.ToString;
 
-Result := nil;
 
+if (FUser = nil) or (FUser.GetPassword <> hash)  then begin
+  Result := nil;
 end else begin
+  FUserDTO := TUserDTO.Create;
 
-FUserDTO := TUserDTO.Create;
+  FuserDTO.Name := FUser.GetNome;
+  FUserDTO.ID := FUser.GetID;
 
-FuserDTO.Name := FUser.GetNome;
-FUserDTO.ID := FUser.GetID;
-
-Result := FUserDTO;
-
+  Result := FUserDTO;
 end;
 
 

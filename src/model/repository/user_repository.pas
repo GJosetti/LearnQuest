@@ -32,6 +32,7 @@ begin
   FUserRepo := TUserModel.Create;
   FUserRepo.SetID(aQuery.FieldByName('id').AsInteger);
   FUserRepo.SetNome(aQuery.FieldByName('user_name').AsString);
+  FUserRepo.SetPassword(aQuery.FieldByName('password').AsString);
   Result := FUserRepo;
 
 

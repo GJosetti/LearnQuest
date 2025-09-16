@@ -9,6 +9,7 @@ type
     ['{40EB0EA9-09A3-4243-9EA7-DADD756A4B45}']
 
     function GetNome: String;
+    function GetPassword: String;
     procedure Mensagem(aString: String);
   end;
 

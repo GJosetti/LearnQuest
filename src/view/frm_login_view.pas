@@ -23,7 +23,7 @@ type
   public
     { Public declarations }
     function GetNome: String;
-    procedure MensagemDeSucesso(aString: String);
+    procedure Mensagem(aString: String);
 
   end;
 
@@ -52,7 +52,7 @@ begin
   Result := edt_nome_login.Text;
 end;
 
-procedure Tfrm_login.MensagemDeSucesso(aString: String);
+procedure Tfrm_login.Mensagem(aString: String);
 begin
   ShowMessage(aString);
 end;

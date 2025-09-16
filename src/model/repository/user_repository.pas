@@ -58,7 +58,9 @@ begin
   Qry.ParamByName('NAME').AsString := aNome;
   Qry.Open();
 
-  Result := RowToUser(Qry);
+  if not Qry.IsEmpty then begin
+    Result := RowToUser(Qry);
+  end;
 
  finally
   Qry.Free;

@@ -2,7 +2,7 @@ unit frm_login_controller;
 
 
 interface
-uses my_contracts, Vcl.Dialogs, frm_login_service,user_DTO, SysUtils;
+uses my_contracts, frm_login_service,user_DTO, SysUtils;
 
 type
   TLoginController = class(TInterfacedObject,ILoginController)
@@ -42,10 +42,10 @@ begin
 
   if ResultadoDTO = nil then begin
     //COLOCAR NA VIEW
-    ShowMessage('Usuário não encontrado!');
+    FView.Mensagem('Usuário não encontrado!');
   end else begin
     //COLOCAR NA VIEW
-    ShowMessage('Login realizado com sucesso' + IntToStr(RequestDTO.ID));
+   Fview.Mensagem('Login realizado com sucesso! ID: ' + ResultadoDTO.ID.ToString);
   end;
 
 end;

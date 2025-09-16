@@ -9,7 +9,6 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
-    Connected = True
     Left = 176
     Top = 184
   end
@@ -21,8 +20,8 @@ object DataModule1: TDataModule1
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
-      'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
-      'ra\lib\libpq.dll'
+      'C:\Users\User\Desktop\LearnQuest\LearnQuest\src\infra\lib\libpq.' +
+      'dll'
     Left = 464
     Top = 192
   end

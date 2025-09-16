@@ -4,10 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts;
 
 type
-  Tfrm_menuAdmin_view = class(TForm)
+  Tfrm_menuAdmin_view = class(TForm, IMenuAdminView)
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +21,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_menuAdmin_view.FormCreate(Sender: TObject);
+begin
+  Self.Position := poScreenCenter;
+end;
 
 end.

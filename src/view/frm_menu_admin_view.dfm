@@ -9,5 +9,6 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
 end

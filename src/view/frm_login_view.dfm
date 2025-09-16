@@ -19,12 +19,11 @@ object frm_login: Tfrm_login
     Height = 718
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 48
     object lbl_title_login: TLabel
       Left = 1
       Top = 1
       Width = 1146
-      Height = 716
+      Height = 86
       Align = alTop
       Alignment = taCenter
       Caption = 'Login'
@@ -34,8 +33,7 @@ object frm_login: Tfrm_login
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 2
-      ExplicitTop = 17
+      ExplicitWidth = 158
     end
     object edt_nome_login: TEdit
       Left = 480

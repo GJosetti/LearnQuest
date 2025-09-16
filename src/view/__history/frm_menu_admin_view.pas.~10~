@@ -1,0 +1,30 @@
+unit frm_menu_admin_view;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts;
+
+type
+  Tfrm_menuAdmin_view = class(TForm,)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_menuAdmin_view: Tfrm_menuAdmin_view;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrm_menuAdmin_view.FormCreate(Sender: TObject);
+begin
+  Self.Position := poScreenCenter;
+end;
+
+end.

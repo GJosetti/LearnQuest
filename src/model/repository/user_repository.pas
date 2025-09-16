@@ -4,7 +4,7 @@ interface
 uses my_contracts, users_entity, FireDAC.Comp.Client;
 
 type
-TUserRepository = class(TInterfacedObject,ILoginRepository)
+TUserRepository = class(TInterfacedObject,IUserRepository)
 
   private
 
@@ -33,6 +33,7 @@ begin
   FUserRepo.SetID(aQuery.FieldByName('id').AsInteger);
   FUserRepo.SetNome(aQuery.FieldByName('user_name').AsString);
   FUserRepo.SetPassword(aQuery.FieldByName('password').AsString);
+  FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
   Result := FUserRepo;
 
 

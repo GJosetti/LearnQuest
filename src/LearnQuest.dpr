@@ -9,7 +9,9 @@ uses
   my_contracts in 'interfaces\my_contracts.pas',
   user_DTO in 'model\DTO\user_DTO.pas',
   frm_login_service in 'service\frm_login_service.pas',
-  user_repository in 'model\repository\user_repository.pas';
+  user_repository in 'model\repository\user_repository.pas',
+  frm_menu_admin_view in 'view\frm_menu_admin_view.pas' {frm_menuAdmin_view},
+  App_Consts in 'db\App_Consts.pas';
 
 {$R *.res}
 
@@ -18,5 +20,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tfrm_login, frm_login);
+  Application.CreateForm(Tfrm_menuAdmin_view, frm_menuAdmin_view);
   Application.Run;
 end.

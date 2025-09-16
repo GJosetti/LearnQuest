@@ -7,7 +7,7 @@ type
 TLoginService = class(TInterfacedObject,ILoginService)
 
 private
-  var FUserRepository : ILoginRepository;
+  var FUserRepository : IUserRepository;
 
 public
   function GetByID: TUserDTO;
@@ -29,6 +29,7 @@ uses DMConnection;
 constructor TLoginService.Create();
 begin
   FUserRepository := TUserRepository.Create(DataModule1.FDConnection1);
+  ;
 end;
 
 function TLoginService.GetByID: TUserDTO;
@@ -53,16 +54,17 @@ if Trim(aDto.Name) = '' then begin
   //fazer de uma maneira mais visual
 end;
 if Trim(aDTO.Password) = '' then begin
-  ShowMessage('A senha precisa ser preenchido!');
+  ShowMessage('A senha precisa ser preenchida!');
   //fazer de uma maneira mais visual
 end;
 //----------
 
 
+hash := aDto.Password.GetHashCode.ToString;
 
 FUser := FUserRepository.FindByNome(aDTO.Name);
 
-hash := aDto.Password.GetHashCode.ToString;
+
 
 
 if (FUser = nil) or (FUser.GetPassword <> hash)  then begin
@@ -72,6 +74,7 @@ end else begin
 
   FuserDTO.Name := FUser.GetNome;
   FUserDTO.ID := FUser.GetID;
+  FUserDTO.Role := Fuser.GetRole;
 
   Result := FUserDTO;
 end;

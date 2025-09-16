@@ -2,7 +2,7 @@ unit frm_login_controller;
 
 
 interface
-uses my_contracts, frm_login_service,user_DTO, SysUtils;
+uses my_contracts, frm_login_service,user_DTO, SysUtils, App_Consts;
 
 type
   TLoginController = class(TInterfacedObject,ILoginController)
@@ -47,6 +47,9 @@ begin
   end else begin
     //COLOCAR NA VIEW
    Fview.Mensagem('Login realizado com sucesso! ID: ' + ResultadoDTO.ID.ToString);
+   if ResultadoDTO.Role = ROLE_ADMIN then begin
+    Fview.TrocarTelaAdmin();
+   end;
   end;
 
 end;

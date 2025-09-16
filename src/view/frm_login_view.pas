@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO,
+  Vcl.ExtCtrls, frm_menu_admin_view;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -12,6 +13,7 @@ type
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
     btn_login: TButton;
+    pnl_login: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
   private
@@ -25,7 +27,7 @@ type
     function GetNome: String;
     function GetPassword: String;
     procedure Mensagem(aString: String);
-
+    procedure TrocarTelaAdmin();
   end;
 
 var
@@ -41,6 +43,7 @@ procedure Tfrm_login.FormCreate(Sender: TObject);
 begin
 
   FController := TLoginController.Create(Self);
+  Self.Position := poScreenCenter;
 end;
 
 procedure Tfrm_login.btn_loginClick(Sender: TObject);
@@ -64,5 +67,19 @@ begin
 end;
 
 
+
+procedure Tfrm_login.TrocarTelaAdmin;
+
+begin
+
+  frm_menuAdmin_view := Tfrm_menuAdmin_view.Create(nil);
+
+   Self.Hide;
+
+  frm_menuAdmin_view.Show;
+
+
+
+end;
 
 end.

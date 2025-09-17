@@ -28,8 +28,13 @@ uses DMConnection;
 
 constructor TLoginService.Create();
 begin
-  FUserRepository := TUserRepository.Create();
-  ;
+
+
+  if not Assigned(FUserRepository) then begin
+    FUserRepository := TUserRepository.Create();
+  end;
+
+
 end;
 
 function TLoginService.GetByID: TUserDTO;

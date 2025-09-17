@@ -15,6 +15,7 @@ type
     FDConnection1: TFDConnection;
     FDQuery1: TFDQuery;
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    FDQueryEscolas: TFDQuery;
   private
     { Private declarations }
   public

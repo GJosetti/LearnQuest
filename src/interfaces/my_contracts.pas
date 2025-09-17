@@ -59,6 +59,11 @@ type
   function AtualizarTabelaEscolas : TDataSet ;
   end;
 
+  IMenuAdminService = interface
+    ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
+
+    function AtualizarTabelaEscolas : TDataSet;
+  end;
 
 
 

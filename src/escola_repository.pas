@@ -29,7 +29,7 @@ function TEscolaRepository.GetEscolaDataSet: TDataSet;
 var  Query: TFDQuery;
 begin
   Query := TFDQuery.Create(nil);
-  //Query.Connection := FConnection;
+  Query.Connection := FConnection;
   Query.SQL.Text := 'SELECT ID, Nome, Cidade FROM Escolas';
   Query.Open;
   Result := Query;

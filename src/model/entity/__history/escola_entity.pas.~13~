@@ -1,0 +1,53 @@
+unit escola_entity;
+
+interface
+
+//COM REGRAS DE NEGOCIO
+
+type
+  TEscolaModel = class
+  private
+    ID: Integer;
+    Name : String;
+    Endereco: String;
+    QtdMembros: Integer;
+
+
+    public
+    function GetID : Integer;
+    procedure SetID(aID : Integer);
+    function GetNome : String;
+    procedure SetNome(aName : String);
+    function GetEndereco : String;
+    procedure SetEndereco(aEndereco : String);
+    function GetQtdMembros : Integer;
+    SetQtdMembros(aQtd : Integer);
+
+  end;
+
+implementation
+
+{ TUserModel }
+
+function TEscolaModel.GetID: Integer;
+begin
+  Result := Self.ID;
+end;
+
+function TEscolaModel.GetNome: String;
+begin
+  Result := Self.Name
+end;
+
+procedure TEscolaModel.SetID(aID: Integer);
+begin
+  Self.ID := aID;
+end;
+
+procedure TEscolaModel.SetNome(aName: String);
+begin
+  Name := aName
+end;
+
+
+end.

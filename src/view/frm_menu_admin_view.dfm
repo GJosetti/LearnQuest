@@ -55,9 +55,9 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     TabOrder = 2
     Visible = False
     object dbg_escolas: TDBGrid
-      Left = 272
+      Left = 112
       Top = 89
-      Width = 305
+      Width = 393
       Height = 344
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -75,7 +75,23 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
           Expanded = False
           FieldName = 'Nome'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Endereco'
+          Title.Caption = 'Endere'#231'o'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'membros_qtd'
+          Title.Caption = 'Quantidade'
+          Visible = True
         end>
     end
+  end
+  object d_Src_escolas: TDataSource
+    Left = 759
+    Top = 695
   end
 end

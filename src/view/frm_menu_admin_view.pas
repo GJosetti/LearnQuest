@@ -15,9 +15,11 @@ type
     Home: TButton;
     pnl_escolas_adminMenu: TPanel;
     dbg_escolas: TDBGrid;
+    d_Src_escolas: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
+
   private
     { Private declarations }
     FController: IMenuAdminController;
@@ -38,14 +40,20 @@ begin
  //MUDAR DE TELA: 1- Deixar home invisivel 2- deixar escola visivel 3 - atualizar tabela de escolas :)
  pnl_home_adminMenu.Visible := false;
  pnl_escolas_adminMenu.Visible := true;
- dbg_escolas.DataSource := FController.AtualizarTabelaEscolas() : TDataSet ;
+ if Assigned(d_Src_escolas.DataSet) then begin
+   d_Src_escolas.DataSet := nil; // limpa antes
+ end;
+d_Src_escolas.DataSet := FController.AtualizarTabelaEscolas;
+  dbg_escolas.DataSource := d_Src_escolas;
 
 end;
 
 procedure Tfrm_menuAdmin_view.FormCreate(Sender: TObject);
 begin
-  FController := TMenuAdminController.Create
+  FController := TMenuAdminController.Create(Self);
   Self.Position := poScreenCenter;
+
+
 end;
 
 

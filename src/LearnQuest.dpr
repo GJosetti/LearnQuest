@@ -12,7 +12,11 @@ uses
   user_repository in 'model\repository\user_repository.pas',
   frm_menu_admin_view in 'view\frm_menu_admin_view.pas' {frm_menuAdmin_view},
   App_Consts in 'db\App_Consts.pas',
-  frm_menu_admin_controller in 'controller\frm_menu_admin_controller.pas';
+  frm_menu_admin_controller in 'controller\frm_menu_admin_controller.pas',
+  frm_menuAdmin_service in 'service\frm_menuAdmin_service.pas',
+  escolas_DTO in 'model\DTO\escolas_DTO.pas',
+  escola_repository in 'model\repository\escola_repository.pas',
+  escola_entity in 'model\entity\escola_entity.pas';
 
 {$R *.res}
 

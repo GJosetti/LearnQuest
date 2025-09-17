@@ -1,0 +1,39 @@
+unit escola_repository;
+
+interface
+uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client;
+
+type
+TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
+
+
+private
+FConnection : TFDConnection;
+FQuery := TFDQuery;
+
+public
+
+function GetEscolaDataSet : TDataSet;
+constructor Create();
+end;
+
+implementation
+
+{ TEscolaRepository }
+
+constructor TEscolaRepository.Create;
+begin
+  FQuery := DataModule1.FDQueryEscolas;
+end;
+
+function TEscolaRepository.GetEscolaDataSet: TDataSet;
+begin
+  FQuery.Close;
+  FQuery.SQL.Text := 'SELECT id, nome, endereco, membros_qtd FROM tenants';
+  FQuery.Open;
+  Result := FQuery;
+end;
+
+
+end.
+

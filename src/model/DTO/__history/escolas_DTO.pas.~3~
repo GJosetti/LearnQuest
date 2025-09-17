@@ -1,0 +1,28 @@
+unit escolas_DTO;
+
+interface
+
+type
+TEscolaDTO = class
+
+
+
+
+public
+    ID: Integer;
+    Name : String;
+    Role: Integer;
+    Password: String;
+    Email: String;
+private
+
+
+
+end;
+
+
+
+
+implementation
+
+end.

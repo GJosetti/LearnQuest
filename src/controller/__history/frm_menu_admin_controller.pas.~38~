@@ -1,0 +1,44 @@
+unit frm_menu_admin_controller;
+
+
+interface
+uses my_contracts, Data.DB, frm_menuAdmin_service;
+
+
+
+
+type
+
+TMenuAdminController = class(TInterfacedObject, IMenuAdminController)
+
+private
+ Fview : IMenuAdminView;
+ FService : IMenuAdminService;
+
+public
+constructor Create(aView: IMenuAdminView);
+
+function AtualizarTabelaEscolas: TDataSet;
+
+end;
+
+implementation
+
+{ TMenuAdminController }
+
+constructor TMenuAdminController.Create(aView: IMenuAdminView);
+begin
+  if not Assigned(FService) then begin
+    FService := TFrm_menuAdmin_service.Create;
+  end;
+end;
+
+function TMenuAdminController.AtualizarTabelaEscolas : TDataSet;
+begin
+  if Assigned(FService) then begin
+    FService.AtualizarTabelaEscolas;
+  end;
+
+end;
+
+end.

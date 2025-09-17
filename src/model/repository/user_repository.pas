@@ -1,7 +1,7 @@
 unit user_repository;
 
 interface
-uses my_contracts, users_entity, FireDAC.Comp.Client;
+uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection;
 
 type
 TUserRepository = class(TInterfacedObject,IUserRepository)
@@ -14,16 +14,16 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
   public
     function FindByID(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
-    constructor Create(aConnection : TFDConnection);
+    constructor Create();
 end;
 
 
 implementation
 
 
-constructor TUserRepository.Create(aConnection: TFDConnection);
+constructor TUserRepository.Create();
 begin
-    FConnection := aConnection;
+    FConnection := DataModule1.FDConnection1;
 end;
 
 function TUserRepository.RowToUser(aQuery: TFDQuery): TUserModel;

@@ -28,7 +28,7 @@ uses DMConnection;
 
 constructor TLoginService.Create();
 begin
-  FUserRepository := TUserRepository.Create(DataModule1.FDConnection1);
+  FUserRepository := TUserRepository.Create();
   ;
 end;
 

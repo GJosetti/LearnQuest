@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB;
 
 type
 
@@ -14,6 +14,11 @@ type
     function FindByNome(aNome: String) : TUserModel;
   end;
 
+
+  IEscolaRepository = interface
+    ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
+    function GetEscolaDataSet: TDataSet;
+  end;
 
 
 
@@ -48,6 +53,14 @@ type
 
 
   end;
+  IMenuAdminController = interface
+    ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']
+
+  function AtualizarTabelaEscolas : TDataSet ;
+  end;
+
+
+
 
 
 implementation

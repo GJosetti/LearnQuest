@@ -1,0 +1,75 @@
+unit user_repository;
+
+interface
+uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection;
+
+type
+TUserRepository = class(TInterfacedObject,IUserRepository)
+
+  private
+
+  FConnection : TFDConnection;
+  function RowToUser(aQuery: TFDQuery): TUserModel;
+
+  public
+    function FindByID(aID: Integer) : TUserModel;
+    function FindByNome(aNome: String) : TUserModel;
+    constructor Create();
+end;
+
+
+implementation
+
+
+constructor TUserRepository.Create(aConnection: TFDConnection);
+begin
+    FConnection := DataModule1.FDConnection1;
+end;
+
+function TUserRepository.RowToUser(aQuery: TFDQuery): TUserModel;
+var FUserRepo : TUserModel;
+begin
+  FUserRepo := TUserModel.Create;
+  FUserRepo.SetID(aQuery.FieldByName('id').AsInteger);
+  FUserRepo.SetNome(aQuery.FieldByName('user_name').AsString);
+  FUserRepo.SetPassword(aQuery.FieldByName('password').AsString);
+  FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
+  Result := FUserRepo;
+
+
+end;
+
+{ TLoginRepository }
+
+function TUserRepository.FindByID(aID: Integer): TUserModel;
+
+begin
+
+
+end;
+
+
+function TUserRepository.FindByNome(aNome: String): TUserModel;
+var Qry : TFDQuery;
+begin
+  Result := nil;
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'Select * From users WHERE user_name = :NAME';
+  Qry.ParamByName('NAME').AsString := aNome;
+  Qry.Open();
+
+  if not Qry.IsEmpty then begin
+    Result := RowToUser(Qry);
+  end;
+
+ finally
+  Qry.Free;
+ end;
+
+end;
+
+
+
+end.

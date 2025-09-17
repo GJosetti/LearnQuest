@@ -153,6 +153,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="db\App_Consts.pas"/>
+        <DCCReference Include="controller\frm_menu_admin_controller.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

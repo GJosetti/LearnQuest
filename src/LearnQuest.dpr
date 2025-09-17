@@ -11,7 +11,8 @@ uses
   frm_login_service in 'service\frm_login_service.pas',
   user_repository in 'model\repository\user_repository.pas',
   frm_menu_admin_view in 'view\frm_menu_admin_view.pas' {frm_menuAdmin_view},
-  App_Consts in 'db\App_Consts.pas';
+  App_Consts in 'db\App_Consts.pas',
+  frm_menu_admin_controller in 'controller\frm_menu_admin_controller.pas';
 
 {$R *.res}
 

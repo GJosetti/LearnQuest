@@ -1,0 +1,36 @@
+unit frm_menu_admin_controller;
+
+
+interface
+uses my_contracts, Data.DB;
+
+
+
+
+type
+
+TMenuAdminController = class(TInterfacedObject, IMenuAdminController)
+
+private
+ Fview : IMenuAdminView;
+
+public
+
+
+
+function AtualizarTabelaEscolas: TDataSet;
+
+end;
+
+implementation
+
+{ TMenuAdminController }
+
+function TMenuAdminController.AtualizarTabelaEscolas : TDataSet;
+begin
+
+
+
+end;
+
+end.

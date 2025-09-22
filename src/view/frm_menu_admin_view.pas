@@ -8,6 +8,7 @@ uses
   Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller;
 
 type
+  TMode = (m_ADD,m_EDIT);
   Tfrm_menuAdmin_view = class(TForm, IMenuAdminView)
     pnl_sideMenu_adminMenu: TPanel;
     Escolas: TButton;
@@ -30,10 +31,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
+    procedure btn_adicionar_adminMenuClick(Sender: TObject);
 
   private
     { Private declarations }
     FController: IMenuAdminController;
+    Fmode : TMode;
+
   public
     { Public declarations }
 
@@ -45,6 +49,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_menuAdmin_view.btn_adicionar_adminMenuClick(Sender: TObject);
+begin
+// 1 - DEIXA O PANEL VISIVEL; 2- VERIFICA SE É UM ADD OU EDIT; 3- FAZ AS DEVIDAS ALTERAÇÕES;
+  pnl_addNEdit_adminMenu.Visible := true;
+  Fmode := m_ADD;
+  edt_nome_addNEdit_adminMenu.Clear;
+  edt_CEP_addNEdit_adminMenu.Clear;
+
+
+end;
 
 procedure Tfrm_menuAdmin_view.EscolasClick(Sender: TObject);
 begin

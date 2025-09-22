@@ -1,0 +1,206 @@
+object frm_menuAdmin_view: Tfrm_menuAdmin_view
+  Left = 0
+  Top = 0
+  ClientHeight = 720
+  ClientWidth = 1280
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OnCreate = FormCreate
+  TextHeight = 15
+  object pnl_sideMenu_adminMenu: TPanel
+    Left = -8
+    Top = 0
+    Width = 273
+    Height = 721
+    TabOrder = 0
+    object Escolas: TButton
+      Left = 48
+      Top = 216
+      Width = 161
+      Height = 49
+      Caption = 'Escolas'
+      TabOrder = 0
+      OnClick = EscolasClick
+    end
+    object Home: TButton
+      Left = 48
+      Top = 104
+      Width = 161
+      Height = 49
+      Caption = 'Home'
+      TabOrder = 1
+      OnClick = HomeClick
+    end
+  end
+  object pnl_home_adminMenu: TPanel
+    Left = 264
+    Top = 0
+    Width = 1017
+    Height = 721
+    Color = 16512
+    ParentBackground = False
+    TabOrder = 1
+  end
+  object pnl_escolas_adminMenu: TPanel
+    Left = 264
+    Top = 0
+    Width = 1017
+    Height = 721
+    Color = clTeal
+    ParentBackground = False
+    TabOrder = 2
+    Visible = False
+    object dbg_escolas: TDBGrid
+      Left = 112
+      Top = 89
+      Width = 513
+      Height = 344
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'ID'
+          ReadOnly = True
+          Width = 50
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Nome'
+          ReadOnly = True
+          Width = 150
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'Endereco'
+          ReadOnly = True
+          Title.Caption = 'Endere'#231'o'
+          Width = 125
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'membros_qtd'
+          ReadOnly = True
+          Title.Caption = 'Quantidade'
+          Width = 75
+          Visible = True
+        end>
+    end
+    object btn_adicionar_adminMenu: TPanel
+      Left = 112
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Adicionar'
+      TabOrder = 1
+    end
+    object btn_remover_adminMenu: TPanel
+      Left = 320
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Remover'
+      TabOrder = 2
+    end
+    object btn_editar_adminMenu: TPanel
+      Left = 520
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Editar'
+      TabOrder = 3
+    end
+    object pnl_addNEdit_adminMenu: TPanel
+      Left = 176
+      Top = 69
+      Width = 449
+      Height = 456
+      TabOrder = 4
+      Visible = False
+      object pnl_title_addNEdit_adminMenu: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 13
+        Width = 441
+        Height = 21
+        Margins.Top = 12
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Adicionar Escola'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 20
+        ExplicitTop = 59
+      end
+      object lbl_nome_edit_addNEdit_adminMenu: TLabel
+        Left = 160
+        Top = 122
+        Width = 88
+        Height = 15
+        Caption = 'Nome da Escola:'
+      end
+      object lbl_CEP_addNEdit_adminMenu: TLabel
+        Left = 32
+        Top = 212
+        Width = 24
+        Height = 15
+        Caption = 'CEP:'
+      end
+      object edt_nome_addNEdit_adminMenu: TEdit
+        Left = 32
+        Top = 143
+        Width = 353
+        Height = 23
+        TabOrder = 0
+        TextHint = 'Insira um nome'
+      end
+      object edt_CEP_addNEdit_adminMenu: TEdit
+        Left = 32
+        Top = 233
+        Width = 81
+        Height = 23
+        TabOrder = 1
+        TextHint = 'XXXXX-XXX'
+      end
+      object btn_concluir_addNEdit_adminMenu: TPanel
+        Left = 167
+        Top = 414
+        Width = 126
+        Height = 26
+        Caption = 'Sair'
+        TabOrder = 2
+      end
+      object btn_cancelar_addNEdit_adminMenu: TPanel
+        Left = 383
+        Top = 13
+        Width = 58
+        Height = 26
+        Caption = 'Sair'
+        TabOrder = 3
+      end
+    end
+  end
+  object d_Src_escolas: TDataSource
+    Left = 759
+    Top = 695
+  end
+end

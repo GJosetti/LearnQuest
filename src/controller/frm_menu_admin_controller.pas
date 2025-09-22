@@ -2,7 +2,7 @@ unit frm_menu_admin_controller;
 
 
 interface
-uses my_contracts, Data.DB, frm_menuAdmin_service;
+uses my_contracts, Data.DB, frm_menuAdmin_service, user_DTO;
 
 
 
@@ -19,6 +19,7 @@ public
 constructor Create(aView: IMenuAdminView);
 
 function AtualizarTabelaEscolas: TDataSet;
+procedure AdicionarEscola (aDTO: TUserDTO);
 
 end;
 
@@ -33,12 +34,18 @@ begin
   end;
 end;
 
+procedure TMenuAdminController.AdicionarEscola(aDTO: TUserDTO);
+begin
+
+end;
+
 function TMenuAdminController.AtualizarTabelaEscolas : TDataSet;
 begin
 
    Result := FService.AtualizarTabelaEscolas;
 
-
 end;
+
+
 
 end.

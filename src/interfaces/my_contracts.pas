@@ -12,12 +12,14 @@ type
     ['{F59799D9-0A28-49CB-9D35-1E3AB3056DAE}']
     function FindByID(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
+
   end;
 
 
   IEscolaRepository = interface
     ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
     function GetEscolaDataSet: TDataSet;
+
   end;
 
 
@@ -57,6 +59,7 @@ type
     ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']
 
   function AtualizarTabelaEscolas : TDataSet ;
+  procedure AdicionarEscola(aDTO : TUserDTO);
   end;
 
   IMenuAdminService = interface

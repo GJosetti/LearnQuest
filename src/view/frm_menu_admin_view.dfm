@@ -16,6 +16,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     Top = 0
     Width = 273
     Height = 721
+    Color = clBtnHighlight
+    ParentBackground = False
     TabOrder = 0
     object Escolas: TButton
       Left = 48
@@ -57,7 +59,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     object dbg_escolas: TDBGrid
       Left = 112
       Top = 89
-      Width = 419
+      Width = 513
       Height = 344
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -71,6 +73,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
           Expanded = False
           FieldName = 'ID'
           ReadOnly = True
+          Title.Caption = '-ID-'
           Width = 50
           Visible = True
         end
@@ -79,6 +82,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
           Expanded = False
           FieldName = 'Nome'
           ReadOnly = True
+          Title.Caption = 'Nome Institui'#231#227'o'
           Width = 150
           Visible = True
         end
@@ -107,27 +111,34 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Width = 105
       Height = 25
       Caption = 'Adicionar'
+      Color = clBtnHighlight
+      ParentBackground = False
       TabOrder = 1
+      OnClick = btn_adicionar_adminMenuClick
     end
     object btn_remover_adminMenu: TPanel
-      Left = 272
+      Left = 320
       Top = 456
       Width = 105
       Height = 25
       Caption = 'Remover'
+      Color = clBtnHighlight
+      ParentBackground = False
       TabOrder = 2
     end
     object btn_editar_adminMenu: TPanel
-      Left = 426
+      Left = 520
       Top = 456
       Width = 105
       Height = 25
       Caption = 'Editar'
+      Color = clBtnHighlight
+      ParentBackground = False
       TabOrder = 3
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 184
-      Top = 73
+      Left = 207
+      Top = 80
       Width = 449
       Height = 456
       TabOrder = 4
@@ -148,8 +159,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 20
-        ExplicitTop = 59
+        ExplicitLeft = 60
+        ExplicitTop = 95
       end
       object lbl_nome_edit_addNEdit_adminMenu: TLabel
         Left = 160

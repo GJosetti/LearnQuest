@@ -16,6 +16,7 @@ type
     FDQuery1: TFDQuery;
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     FDQueryEscolas: TFDQuery;
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,5 +31,14 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDataModule1.DataModuleDestroy(Sender: TObject);
+begin
+  if FDConnection1.Connected then begin
+
+    FDConnection1.Connected := false;
+
+  end;
+end;
 
 end.

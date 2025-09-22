@@ -16,6 +16,17 @@ type
     pnl_escolas_adminMenu: TPanel;
     dbg_escolas: TDBGrid;
     d_Src_escolas: TDataSource;
+    btn_adicionar_adminMenu: TPanel;
+    btn_remover_adminMenu: TPanel;
+    btn_editar_adminMenu: TPanel;
+    pnl_addNEdit_adminMenu: TPanel;
+    pnl_title_addNEdit_adminMenu: TLabel;
+    edt_nome_addNEdit_adminMenu: TEdit;
+    lbl_nome_edit_addNEdit_adminMenu: TLabel;
+    lbl_CEP_addNEdit_adminMenu: TLabel;
+    edt_CEP_addNEdit_adminMenu: TEdit;
+    btn_concluir_addNEdit_adminMenu: TPanel;
+    btn_cancelar_addNEdit_adminMenu: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
@@ -43,8 +54,10 @@ begin
  if Assigned(d_Src_escolas.DataSet) then begin
    d_Src_escolas.DataSet := nil; // limpa antes
  end;
-d_Src_escolas.DataSet := FController.AtualizarTabelaEscolas;
+  d_Src_escolas.DataSet := FController.AtualizarTabelaEscolas;
   dbg_escolas.DataSource := d_Src_escolas;
+
+
 
 end;
 

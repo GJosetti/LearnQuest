@@ -1,4 +1,5 @@
 object DataModule1: TDataModule1
+  OnDestroy = DataModuleDestroy
   Height = 480
   Width = 640
   object FDConnection1: TFDConnection

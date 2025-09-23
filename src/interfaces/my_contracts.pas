@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity;
 
 type
 
@@ -19,6 +19,7 @@ type
   IEscolaRepository = interface
     ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
     function GetEscolaDataSet: TDataSet;
+    procedure Save (aModel : TEscolaModel);
 
   end;
 
@@ -52,19 +53,21 @@ type
 
   IMenuAdminView = interface
     ['{1AE3AEEE-506A-4889-A0F8-8E44BEAC9A1C}']
-
-
+    function GetNomeEscola: String;
+    function GetNomeUsuario:String;
+    function GetCEP : String;
+    function GetPassword: String;
   end;
   IMenuAdminController = interface
     ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']
 
-  function AtualizarTabelaEscolas : TDataSet ;
-  procedure AdicionarEscola(aDTO : TUserDTO);
+    function AtualizarTabelaEscolas : TDataSet ;
+    procedure AdicionarEscola();
   end;
 
   IMenuAdminService = interface
     ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
-
+    procedure SalvarEscola (aDTO: TEscolaDTO);
     function AtualizarTabelaEscolas : TDataSet;
   end;
 

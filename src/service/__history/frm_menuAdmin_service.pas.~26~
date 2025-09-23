@@ -1,0 +1,42 @@
+unit frm_menuAdmin_service;
+
+interface
+uses my_contracts, Data.DB, escola_repository,escolas_DTO;
+
+type
+
+TFrm_menuAdmin_service = class(TInterfacedObject, IMenuAdminService)
+
+private
+FEscolaRepo : IEscolaRepository;
+
+public
+function AtualizarTabelaEscolas : TDataSet;
+procedure AdicionarEscola(aDTO: TEscolaDTO);
+constructor Create();
+end;
+
+implementation
+
+{ TFrm_menuAdmin_service }
+
+constructor TFrm_menuAdmin_service.Create;
+begin
+  if not Assigned(FEscolaRepo) then begin
+    FEscolaRepo := TEscolaRepository.Create;
+end;
+end;
+
+
+procedure TFrm_menuAdmin_service.AdicionarEscola;
+begin
+
+end;
+
+function TFrm_menuAdmin_service.AtualizarTabelaEscolas: TDataSet;
+begin
+  Result := FEscolaRepo.GetEscolaDataSet;
+end;
+
+
+end.

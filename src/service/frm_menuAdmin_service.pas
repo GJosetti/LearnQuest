@@ -1,7 +1,7 @@
 unit frm_menuAdmin_service;
 
 interface
-uses my_contracts, Data.DB, escola_repository;
+uses my_contracts, Data.DB, escola_repository,escolas_DTO, escola_entity;
 
 type
 
@@ -12,6 +12,7 @@ FEscolaRepo : IEscolaRepository;
 
 public
 function AtualizarTabelaEscolas : TDataSet;
+procedure SalvarEscola(aDTO: TEscolaDTO);
 constructor Create();
 end;
 
@@ -26,6 +27,19 @@ begin
 end;
 end;
 
+
+procedure TFrm_menuAdmin_service.SalvarEscola(aDTO : TEscolaDTO);
+var FEscola : TEscolaModel;
+begin
+  FEscola := TEscolaModel.Create;
+  FEscola.SetNome(aDTO.Name);
+  FEscola.SetEndereco(aDTO.Endereco);
+  FEscola.SetQtdMembros(aDTO.QtdMembros);
+
+  FEscolaRepo.Save(FEscola);
+
+
+end;
 
 function TFrm_menuAdmin_service.AtualizarTabelaEscolas: TDataSet;
 begin

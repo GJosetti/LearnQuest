@@ -1,7 +1,7 @@
 unit escola_repository;
 
 interface
-uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client;
+uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity;
 
 type
 TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
@@ -14,6 +14,7 @@ FQuery : TFDQuery;
 public
 
 function GetEscolaDataSet : TDataSet;
+procedure Save (aModel: TEscolaModel);
 constructor Create();
 end;
 
@@ -24,6 +25,7 @@ implementation
 constructor TEscolaRepository.Create;
 begin
   FQuery := DataModule1.FDQueryEscolas;
+  FConnection := DataModule1.FDConnection1;
 end;
 
 function TEscolaRepository.GetEscolaDataSet: TDataSet;
@@ -34,6 +36,25 @@ begin
   Result := DataModule1.FDQueryEscolas;
 end;
 
+
+
+procedure TEscolaRepository.Save(aModel: TEscolaModel);
+var Qry : TFDQuery;
+begin
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'insert into tenants (nome,endereco, membros_qtd)' + 'values (:NAME ,:CEP ,:QTD )';
+  Qry.ParamByName('NAME').AsString := aModel.GetNome;
+  Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
+  Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
+  Qry.ExecSQL;
+
+ finally
+  Qry.Free;
+ end;
+
+end;
 
 end.
 

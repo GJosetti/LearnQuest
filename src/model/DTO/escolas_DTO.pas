@@ -11,8 +11,9 @@ TEscolaDTO = class
 public
     ID: Integer;
     Name : String;
-    Endereco: Integer;
+    Endereco: String;
     QtdMembros: Integer;
+    User_ID : Integer;
 private
 
 

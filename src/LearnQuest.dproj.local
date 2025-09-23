@@ -46,20 +46,21 @@
     <Transaction>2025/09/16 17:01:02.000.069,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\db\App_Consts.pas</Transaction>
     <Transaction>2025/09/17 14:05:35.000.319,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/17 14:06:06.000.410,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\controller\frm_menu_admin_controller.pas</Transaction>
-    <Transaction>2025/09/17 15:35:36.355,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 15:35:47.476,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\escola_repository.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 15:57:17.885,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 15:57:31.557,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\frm_adminMenu_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 15:57:48.212,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\frm_adminMenu_service.pas=</Transaction>
-    <Transaction>2025/09/17 15:57:53.271,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 15:58:06.816,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\frm_menuAdmin_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:00:07.056,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:00:30.214,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\DTO\escolas_DTO.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:05:25.167,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\escola_repository.pas=</Transaction>
-    <Transaction>2025/09/17 16:05:31.694,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:05:54.283,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\repository\escola_repository.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:06:18.243,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
-    <Transaction>2025/09/17 16:06:43.837,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\entity\escola_entity.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:35:36.000.355,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:35:47.000.476,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\escola_repository.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:57:17.000.885,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:57:31.000.557,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\frm_adminMenu_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:57:48.000.212,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\frm_adminMenu_service.pas=</Transaction>
+    <Transaction>2025/09/17 15:57:53.000.271,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 15:58:06.000.816,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\frm_menuAdmin_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:00:07.000.056,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:00:30.000.214,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\DTO\escolas_DTO.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:05:25.000.167,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\escola_repository.pas=</Transaction>
+    <Transaction>2025/09/17 16:05:31.000.694,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:05:54.000.283,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\repository\escola_repository.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:06:18.000.243,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/17 16:06:43.000.837,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\entity\escola_entity.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
+    <Transaction>2025/09/23 15:59:08.669,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\user_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\frm_login_service.pas</Transaction>
   </Transactions>
 	<BT_BuildType>AppStore</BT_BuildType>
 	<ProjectSortOrder AutoSort="0" SortType="0">
@@ -72,17 +73,17 @@
     <File Path="interfaces\my_contracts.pas"/>
     <File Path="model"/>
     <File Path="model\DTO"/>
-    <File Path="model\DTO\user_DTO.pas"/>
     <File Path="model\DTO\escolas_DTO.pas"/>
+    <File Path="model\DTO\user_DTO.pas"/>
     <File Path="model\entity"/>
-    <File Path="model\entity\users_entity.pas"/>
     <File Path="model\entity\escola_entity.pas"/>
+    <File Path="model\entity\users_entity.pas"/>
     <File Path="model\repository"/>
-    <File Path="model\repository\user_repository.pas"/>
     <File Path="model\repository\escola_repository.pas"/>
+    <File Path="model\repository\user_repository.pas"/>
     <File Path="service"/>
-    <File Path="service\frm_login_service.pas"/>
     <File Path="service\frm_menuAdmin_service.pas"/>
+    <File Path="service\user_service.pas"/>
     <File Path="view"/>
     <File Path="view\frm_login_view.pas"/>
     <File Path="view\frm_login_view.dfm"/>

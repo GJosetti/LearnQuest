@@ -2,7 +2,7 @@ unit frm_menu_admin_controller;
 
 
 interface
-uses my_contracts, Data.DB, frm_menuAdmin_service, user_DTO;
+uses my_contracts, Data.DB, frm_menuAdmin_service, user_DTO, escolas_DTO;
 
 
 
@@ -19,7 +19,7 @@ public
 constructor Create(aView: IMenuAdminView);
 
 function AtualizarTabelaEscolas: TDataSet;
-procedure AdicionarEscola (aDTO: TUserDTO);
+procedure AdicionarEscola ();
 
 end;
 
@@ -32,10 +32,23 @@ begin
   if not Assigned(FService) then begin
     FService := TFrm_menuAdmin_service.Create;
   end;
+  if not Assigned(Fview) then begin
+    Fview := aView ;
+  end;
 end;
 
-procedure TMenuAdminController.AdicionarEscola(aDTO: TUserDTO);
+procedure TMenuAdminController.AdicionarEscola();
+var RequestDTOEscola : TEscolaDTO;
 begin
+
+//Criar DTO - chamar service para validar e então ele chama o repository
+  RequestDTOEscola := TEscolaDTO.Create;
+  RequestDTOEscola.Name := Fview.GetNomeEscola;
+  RequestDTOEscola.Endereco := Fview.GetCEP;
+  RequestDTOEscola.QtdMembros := 1;
+
+  FService.SalvarEscola(RequestDTOEscola);
+
 
 end;
 

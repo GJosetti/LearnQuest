@@ -40,7 +40,7 @@ type
     ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
     procedure ProcessarLogin;
   end;
-  ILoginService = interface
+  IUserService = interface
     ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
     function GetByID: TUserDTO;
     function ValidarLogin(aDTO: TUserDTO) : TUserDTO;

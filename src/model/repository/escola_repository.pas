@@ -1,7 +1,7 @@
 unit escola_repository;
 
 interface
-uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity;
+uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity, System.SysUtils;
 
 type
 TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
@@ -40,6 +40,8 @@ end;
 
 procedure TEscolaRepository.Save(aModel: TEscolaModel);
 var Qry : TFDQuery;
+SchemaName : String;
+SQL : String;
 begin
   Qry:= TFDQuery.Create(nil);
  try
@@ -49,6 +51,8 @@ begin
   Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
   Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
   Qry.ExecSQL;
+
+  Qry.SQL.Clear;
 
  finally
   Qry.Free;

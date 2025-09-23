@@ -154,7 +154,7 @@
         </DCCReference>
         <DCCReference Include="db\App_Consts.pas"/>
         <DCCReference Include="controller\frm_menu_admin_controller.pas"/>
-        <DCCReference Include="service\frm_menuAdmin_service.pas"/>
+        <DCCReference Include="service\escola_service.pas"/>
         <DCCReference Include="model\DTO\escolas_DTO.pas"/>
         <DCCReference Include="model\repository\escola_repository.pas"/>
         <DCCReference Include="model\entity\escola_entity.pas"/>

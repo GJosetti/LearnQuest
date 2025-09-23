@@ -2,7 +2,7 @@ unit frm_menu_admin_controller;
 
 
 interface
-uses my_contracts, Data.DB, frm_menuAdmin_service, user_DTO, escolas_DTO;
+uses my_contracts, Data.DB, escola_service, user_DTO, escolas_DTO;
 
 
 
@@ -30,7 +30,7 @@ implementation
 constructor TMenuAdminController.Create(aView: IMenuAdminView);
 begin
   if not Assigned(FService) then begin
-    FService := TFrm_menuAdmin_service.Create;
+    FService := TEscola_Service.Create;
   end;
   if not Assigned(Fview) then begin
     Fview := aView ;

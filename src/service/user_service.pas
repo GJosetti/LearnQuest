@@ -4,7 +4,7 @@ interface
 uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository;
 
 type
-TLoginService = class(TInterfacedObject,ILoginService)
+TUserService = class(TInterfacedObject,IUserService)
 
 private
   var FUserRepository : IUserRepository;
@@ -22,11 +22,11 @@ implementation
 uses DMConnection;
 
 
-{ TLoginService }
+{ TUserService }
 
 
 
-constructor TLoginService.Create();
+constructor TUserService.Create();
 begin
 
 
@@ -37,13 +37,13 @@ begin
 
 end;
 
-function TLoginService.GetByID: TUserDTO;
+function TUserService.GetByID: TUserDTO;
 begin
 
 end;
 
 
-function TLoginService.ValidarLogin(aDTO: TUserDTO): TUserDTO;
+function TUserService.ValidarLogin(aDTO: TUserDTO): TUserDTO;
 
 var hash: String;
 

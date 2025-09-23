@@ -38,6 +38,7 @@ type
     procedure HomeClick(Sender: TObject);
     procedure btn_adicionar_adminMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_adminMenuClick(Sender: TObject);
+    procedure btn_cancelar_addNEdit_adminMenuClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -82,6 +83,13 @@ begin
   ClearAllEdits;
 
 
+end;
+
+procedure Tfrm_menuAdmin_view.btn_cancelar_addNEdit_adminMenuClick(
+  Sender: TObject);
+begin
+  pnl_addNEdit_adminMenu.Visible := false;
+  ClearAllEdits;
 end;
 
 procedure Tfrm_menuAdmin_view.btn_concluir_addNEdit_adminMenuClick(

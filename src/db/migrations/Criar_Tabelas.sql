@@ -1,16 +1,5 @@
--- =========== TABELAS PRINCIPAIS (SEM DEPENDÊNCIAS) ===========
 
--- Tabela de Funções/Perfis de Usuário
-CREATE TABLE roles (
-    id BIGSERIAL PRIMARY KEY,
-    descricao VARCHAR(100) NOT NULL
-);
 
--- Tabela de Permissões do Sistema
-CREATE TABLE permissoes (
-    id BIGSERIAL PRIMARY KEY,
-    descricao VARCHAR(255) NOT NULL
-);
 
 -- Tabela de Trilhas de Aprendizagem
 CREATE TABLE trilhas (
@@ -27,21 +16,10 @@ CREATE TABLE fase (
 
 -- =========== TABELAS DE RELACIONAMENTO E DEPENDENTES ===========
 
--- Tabela de Ligação entre Funções e Permissões
-CREATE TABLE role_permissoes (
-    id BIGSERIAL PRIMARY KEY,
-    permissao_id BIGINT NOT NULL REFERENCES permissoes(id),
-    role_id BIGINT NOT NULL REFERENCES roles(id)
-);
 
--- Tabela de Usuários
-CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
-    user_role_id BIGINT NOT NULL REFERENCES roles(id),
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL
-);
+
+
+
 
 
 -- Tabela de Estudantes

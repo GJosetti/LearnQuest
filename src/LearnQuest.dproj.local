@@ -2,8 +2,8 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2025/09/01 17:14:39.000.707,=C:\Users\Guilherme Josetti\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/09/01 17:15:23.000.536,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\tform_view_login\tform_view_login.dfm=C:\Users\Guilherme Josetti\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2025/09/01 17:15:23.000.536,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\tform_view_login\tform_view_login.pas=C:\Users\Guilherme Josetti\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/09/01 17:15:23.000.536,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\tform_view_login\tform_view_login.dfm=C:\Users\Guilherme Josetti\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>2025/09/01 17:15:37.000.622,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\LearnQuest.dproj=C:\Users\Guilherme Josetti\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
     <Transaction>2025/09/01 17:16:13.000.592,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/01 17:16:35.000.137,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\DMConnection.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
@@ -12,10 +12,10 @@
     <Transaction>2025/09/02 15:01:51.000.960,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/02 15:02:17.000.184,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.dfm=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view.dfm</Transaction>
     <Transaction>2025/09/02 15:02:17.000.184,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view.pas</Transaction>
-    <Transaction>2025/09/09 13:52:25.000.695,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.dfm=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view.dfm</Transaction>
     <Transaction>2025/09/09 13:52:25.000.695,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view.pas</Transaction>
-    <Transaction>2025/09/09 13:59:16.000.383,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_login_view.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.pas</Transaction>
+    <Transaction>2025/09/09 13:52:25.000.695,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.dfm=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view.dfm</Transaction>
     <Transaction>2025/09/09 13:59:16.000.383,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_login_view.dfm=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.dfm</Transaction>
+    <Transaction>2025/09/09 13:59:16.000.383,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_login_view.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\view\frm_view_login.pas</Transaction>
     <Transaction>2025/09/09 14:00:35.000.391,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/09 14:00:54.000.364,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\controller\frm_login_controller.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/09 14:19:13.000.135,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
@@ -61,6 +61,7 @@
     <Transaction>2025/09/17 16:06:18.000.243,=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/17 16:06:43.000.837,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\model\entity\escola_entity.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\Unit1.pas</Transaction>
     <Transaction>2025/09/23 15:59:08.669,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\user_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\frm_login_service.pas</Transaction>
+    <Transaction>2025/09/23 16:04:14.908,C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\escola_service.pas=C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\service\frm_menuAdmin_service.pas</Transaction>
   </Transactions>
 	<BT_BuildType>AppStore</BT_BuildType>
 	<ProjectSortOrder AutoSort="0" SortType="0">
@@ -82,7 +83,7 @@
     <File Path="model\repository\escola_repository.pas"/>
     <File Path="model\repository\user_repository.pas"/>
     <File Path="service"/>
-    <File Path="service\frm_menuAdmin_service.pas"/>
+    <File Path="service\escola_service.pas"/>
     <File Path="service\user_service.pas"/>
     <File Path="view"/>
     <File Path="view\frm_login_view.pas"/>

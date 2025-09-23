@@ -10,7 +10,7 @@ type
 
   private
     FView : ILoginView;
-    FService: ILoginService;
+    FService: IUserService;
     procedure ProcessarLogin;
 
   public
@@ -27,7 +27,7 @@ implementation
 constructor TLoginController.Create(aView: ILoginView);
 begin
   Fview := aView;
-  FService := TLoginService.Create;
+  FService := TUserService.Create;
 end;
 
 

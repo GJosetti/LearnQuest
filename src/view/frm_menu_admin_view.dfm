@@ -58,7 +58,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     Visible = False
     object dbg_escolas: TDBGrid
       Left = 112
-      Top = 89
+      Top = 93
       Width = 513
       Height = 344
       TabOrder = 0
@@ -243,6 +243,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Color = clBtnHighlight
         ParentBackground = False
         TabOrder = 3
+        OnClick = btn_cancelar_addNEdit_adminMenuClick
       end
       object edt_nomeUsurario_addNEdit_adminMenu: TEdit
         Left = 32

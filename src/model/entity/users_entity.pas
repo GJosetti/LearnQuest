@@ -12,6 +12,7 @@ type
     Role: Integer;
     Password: String;
     Email: String;
+    Escola: Integer;
   public
     function GetID : Integer;
     procedure SetID(aID : Integer);
@@ -21,12 +22,27 @@ type
     procedure SetPassword(aPassword: String);
     function GetRole: Integer;
     procedure SetRole(aRole: Integer);
+    procedure SetEmail(aEmail: String);
+    function GetEmail : String;
+    procedure SetEscola(aEscola: Integer);
+    function GetEscola : Integer;
+
 
   end;
 
 implementation
 
 { TUserModel }
+
+function TUserModel.GetEmail: String;
+begin
+  Result := Self.Email;
+end;
+
+function TUserModel.GetEscola: Integer;
+begin
+  Result := Self.Escola
+end;
 
 function TUserModel.GetID: Integer;
 begin
@@ -46,6 +62,16 @@ end;
 function TUserModel.GetRole: Integer;
 begin
   Result := Self.Role;
+end;
+
+procedure TUserModel.SetEmail(aEmail: String);
+begin
+  Self.Email := aEmail;
+end;
+
+procedure TUserModel.SetEscola(aEscola: Integer);
+begin
+  Self.Escola := aEscola;
 end;
 
 procedure TUserModel.SetID(aID: Integer);

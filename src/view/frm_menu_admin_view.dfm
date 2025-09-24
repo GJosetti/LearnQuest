@@ -207,6 +207,13 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object lbl_email_addNEdit_adminMenu: TLabel
+        Left = 240
+        Top = 212
+        Width = 32
+        Height = 15
+        Caption = 'Email:'
+      end
       object edt_nome_addNEdit_adminMenu: TEdit
         Left = 32
         Top = 143
@@ -259,6 +266,14 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Width = 145
         Height = 23
         TabOrder = 5
+        TextHint = 'XXXXX-XXX'
+      end
+      object edt_email_addNEdit_adminMenu: TEdit
+        Left = 241
+        Top = 233
+        Width = 112
+        Height = 23
+        TabOrder = 6
         TextHint = 'XXXXX-XXX'
       end
     end

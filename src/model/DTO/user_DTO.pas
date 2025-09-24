@@ -16,6 +16,7 @@ public
     Role: Integer;
     Password: String;
     Email: String;
+    Escola: Integer;
 private
 
 

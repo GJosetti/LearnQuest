@@ -33,6 +33,8 @@ type
     lbl_passwordAdmin_addNEdit_adminMenu: TLabel;
     edt_password_addNEdit__adminMenu: TEdit;
     Label1: TLabel;
+    edt_email_addNEdit_adminMenu: TEdit;
+    lbl_email_addNEdit_adminMenu: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
@@ -56,6 +58,7 @@ type
     function GetNomeUsuario:String;
     function GetCEP : String;
     function GetPassword: String;
+    function GetEmail: String;
 
   end;
 
@@ -133,6 +136,11 @@ end;
 function Tfrm_menuAdmin_view.GetCEP: String;
 begin
   Result := edt_CEP_addNEdit_adminMenu.Text;
+end;
+
+function Tfrm_menuAdmin_view.GetEmail: String;
+begin
+  Result := edt_email_addNEdit_adminMenu.Text;
 end;
 
 function Tfrm_menuAdmin_view.GetNomeEscola: String;

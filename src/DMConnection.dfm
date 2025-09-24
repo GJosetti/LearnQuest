@@ -28,7 +28,7 @@ object DataModule1: TDataModule1
   end
   object FDQueryEscolas: TFDQuery
     Connection = FDConnection1
-    Left = 304
-    Top = 368
+    Left = 216
+    Top = 384
   end
 end

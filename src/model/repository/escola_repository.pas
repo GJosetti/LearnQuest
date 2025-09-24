@@ -14,7 +14,7 @@ FQuery : TFDQuery;
 public
 
 function GetEscolaDataSet : TDataSet;
-procedure Save (aModel: TEscolaModel);
+function Save (aModel: TEscolaModel) : Integer;
 constructor Create();
 end;
 
@@ -38,26 +38,27 @@ end;
 
 
 
-procedure TEscolaRepository.Save(aModel: TEscolaModel);
-var Qry : TFDQuery;
-SchemaName : String;
-SQL : String;
+function TEscolaRepository.Save(aModel: TEscolaModel): Integer;
+var
+  Qry: TFDQuery;
 begin
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'insert into tenants (nome,endereco, membros_qtd)' + 'values (:NAME ,:CEP ,:QTD )';
-  Qry.ParamByName('NAME').AsString := aModel.GetNome;
-  Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
-  Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
-  Qry.ExecSQL;
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'INSERT INTO tenants (nome, endereco, membros_qtd) ' +
+      'VALUES (:NAME, :CEP, :QTD) RETURNING id';
 
-  Qry.SQL.Clear;
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
+    Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
 
- finally
-  Qry.Free;
- end;
+    Qry.Open; // ? aqui é Open, não ExecSQL
 
+    Result := Qry.FieldByName('id').AsInteger;
+  finally
+    Qry.Free;
+  end;
 end;
 
 end.

@@ -12,6 +12,7 @@ private
 public
   function GetByID: TUserDTO;
   function ValidarLogin(aDTO: TUserDTO):TUserDTO;
+  procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
   constructor Create();
 end;
 
@@ -43,6 +44,22 @@ begin
 end;
 
 
+procedure TUserService.Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+
+var FUsuario : TUserModel;
+begin
+
+  FUsuario := TUserModel.Create;
+  FUsuario.SetNome(aDTO.Name);
+  FUsuario.SetPassword(aDTO.Password);
+  FUsuario.SetRole(aDTO.Role);
+  FUsuario.SetEmail(aDTO.Email);
+  FUsuario.SetEscola(aIDEscola);
+
+  FUserRepository.Save(FUsuario);
+
+end;
+
 function TUserService.ValidarLogin(aDTO: TUserDTO): TUserDTO;
 
 var hash: String;
@@ -68,8 +85,6 @@ end;
 hash := aDto.Password.GetHashCode.ToString;
 
 FUser := FUserRepository.FindByNome(aDTO.Name);
-
-
 
 
 if (FUser = nil) or (FUser.GetPassword <> hash)  then begin

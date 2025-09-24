@@ -14,6 +14,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
   public
     function FindByID(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
+    procedure Save (aModel : TUserModel);
     constructor Create();
 end;
 
@@ -36,6 +37,30 @@ begin
   FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
   Result := FUserRepo;
 
+
+end;
+
+procedure TUserRepository.Save(aModel: TUserModel);
+var Qry : TFDQuery;
+SchemaName : String;
+SQL : String;
+begin
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'insert into users (user_name,user_role_id, password, email, user_escola_id)' + 'values (:NAME ,:ROLE,:SENHA ,:EMAIL ,:ESCOLA )';
+  Qry.ParamByName('NAME').AsString := aModel.GetNome;
+  Qry.ParamByName('ROLE').AsInteger := aModel.GetRole;
+  Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
+  Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
+  Qry.ParamByName('ESCOLA').AsInteger := aModel.GetEscola;
+  Qry.ExecSQL;
+
+  Qry.SQL.Clear;
+
+ finally
+  Qry.Free;
+ end;
 
 end;
 

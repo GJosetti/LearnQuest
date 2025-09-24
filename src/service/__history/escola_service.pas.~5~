@@ -1,0 +1,50 @@
+unit escola_service;
+
+interface
+uses my_contracts, Data.DB, escola_repository,escolas_DTO, escola_entity;
+
+type
+
+TEscola_Service = class(TInterfacedObject, IMenuAdminService)
+
+private
+FEscolaRepo : IEscolaRepository;
+
+public
+function AtualizarTabelaEscolas : TDataSet;
+procedure SalvarEscola(aDTO: TEscolaDTO);
+constructor Create();
+end;
+
+implementation
+
+{ TFrm_menuAdmin_service }
+
+constructor TEscola_Service.Create;
+begin
+  if not Assigned(FEscolaRepo) then begin
+    FEscolaRepo := TEscolaRepository.Create;
+end;
+end;
+
+
+procedure TEscola_Service.SalvarEscola(aDTO : TEscolaDTO);
+var FEscola : TEscolaModel;
+begin
+  FEscola := TEscolaModel.Create;
+  FEscola.SetNome(aDTO.Name);
+  FEscola.SetEndereco(aDTO.Endereco);
+  FEscola.SetQtdMembros(aDTO.QtdMembros);
+
+  FEscolaRepo.Save(FEscola);
+
+
+end;
+
+function TEscola_Service.AtualizarTabelaEscolas: TDataSet;
+begin
+  Result := FEscolaRepo.GetEscolaDataSet;
+end;
+
+
+end.

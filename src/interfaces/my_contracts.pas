@@ -59,6 +59,7 @@ type
     function GetCEP : String;
     function GetPassword: String;
     function GetEmail: String;
+    function CamposValidos: Boolean;
   end;
   IMenuAdminController = interface
     ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']

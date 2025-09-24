@@ -59,6 +59,7 @@ type
     function GetCEP : String;
     function GetPassword: String;
     function GetEmail: String;
+    function CamposValidos: Boolean;
 
   end;
 
@@ -68,6 +69,21 @@ var
 implementation
 
 {$R *.dfm}
+
+function Tfrm_menuAdmin_view.CamposValidos: Boolean;
+begin
+
+//Valida todos os campos
+if(edt_nome_addNEdit_adminMenu.Text = Trim('')) or (edt_CEP_addNEdit_adminMenu.Text = Trim('')) or (edt_email_addNEdit_adminMenu.Text = Trim('')) or (edt_nomeUsurario_addNEdit_adminMenu.Text = Trim('')) or (edt_password_addNEdit__adminMenu.Text = Trim('')) then begin
+
+  raise Exception.Create('Todos os campos precisam ser preenchidos');
+end else begin
+  Result := True;
+end;
+
+
+
+end;
 
 procedure Tfrm_menuAdmin_view.ClearAllEdits;
 begin
@@ -99,10 +115,15 @@ procedure Tfrm_menuAdmin_view.btn_concluir_addNEdit_adminMenuClick(
   Sender: TObject);
 begin
 
-  FController.AdicionarEscola();
-  FController.AtualizarTabelaEscolas;
-  pnl_addNEdit_adminMenu.Visible := false;
-  ClearAllEdits;
+
+  if CamposValidos then begin
+    FController.AdicionarEscola();
+    FController.AtualizarTabelaEscolas;
+    pnl_addNEdit_adminMenu.Visible := false;
+    ClearAllEdits;
+
+  end;
+
 
 end;
 

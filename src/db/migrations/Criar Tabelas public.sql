@@ -9,6 +9,7 @@ CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
     user_role_id BIGINT NOT NULL REFERENCES roles(id),
+    user_escola_id int references tenants (id),
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL
 );

@@ -180,9 +180,9 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       object lbl_nomeAdmin_addNEdit_adminMenu: TLabel
         Left = 32
         Top = 300
-        Width = 88
+        Width = 92
         Height = 15
-        Caption = 'Nome do usu'#225'io'
+        Caption = 'Nome do usu'#225'rio'
       end
       object lbl_passwordAdmin_addNEdit_adminMenu: TLabel
         Left = 32

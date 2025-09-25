@@ -21,14 +21,14 @@ object DataModule1: TDataModule1
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
-      'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
-      'ra\lib\libpq.dll'
+      'C:\Users\guilherme.8623\Desktop\LearnQuest\LearnQuest\src\infra\' +
+      'lib\libpq.dll'
     Left = 464
     Top = 192
   end
   object FDQueryEscolas: TFDQuery
     Connection = FDConnection1
-    Left = 216
-    Top = 384
+    Left = 376
+    Top = 368
   end
 end

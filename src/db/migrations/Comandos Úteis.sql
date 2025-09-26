@@ -1,6 +1,8 @@
-insert into users (user_name,user_role_id, password, email) values('admin',1,'1234','administrador@gmail.com');
+insert into users (user_name,user_role_id, password, email) values('admin',1,'1592916','administrador@gmail.com');
 insert into roles (descricao) values('Cargo de Administrador');
+insert into roles (descricao) values('Escola');
 
+delete from users  where id = 5;
 select *from users; 
 select user_name, roles.descricao from users inner join roles on user_role_id = roles.id;
 
@@ -21,12 +23,16 @@ DROP TABLE IF EXISTS roles CASCADE;
 
 
 drop table tenants;
+drop table users ;
 
 select * from tenants;
+select *from users; 
 
-delete from tenants where nome = 'UFPR'; 
 
-update users set password = 1592916 where id = 2;  
+delete from tenants where id = 1; 
+delete from users  where id = 5;
+
+update users set password = 1592916 where id = 3;  
 
 insert into tenants (nome,endereco, membros_qtd) values ('UFPR','Não Sei', 2 );
 insert into tenants (nome, endereco, membros_qtd) values ('PUCPR' ,'senhaBacana', 'Prado Velho', 3 );

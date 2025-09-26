@@ -9,7 +9,7 @@ CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
     user_role_id BIGINT NOT NULL REFERENCES roles(id),
-    user_escola_id int references tenants (id),
+    user_escola_id int references tenants (id) on delete cascade,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL
 );
@@ -17,7 +17,6 @@ CREATE TABLE users (
 create table tenants(	
 	id bigserial primary key,
 	nome varchar not null,
-	user_id int references users(id),
 	endereco varchar not null,
 	membros_qtd int not null
 );

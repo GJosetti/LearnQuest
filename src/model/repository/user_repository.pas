@@ -17,6 +17,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     function FindByNome(aNome: String) : TUserModel;
     procedure Save (aModel : TUserModel);
     constructor Create();
+    procedure Update(aModel: TUserModel);
 end;
 
 
@@ -64,6 +65,11 @@ begin
   Qry.Free;
  end;
 
+
+end;
+
+procedure TUserRepository.Update(aModel: TUserModel);
+begin
 
 end;
 

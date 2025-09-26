@@ -13,6 +13,7 @@ FEscolaRepo : IEscolaRepository;
 public
 function AtualizarTabelaEscolas : TDataSet;
 function SalvarEscola(aDTO: TEscolaDTO): Integer;
+procedure Update(aDto : TEscolaDTO);
 constructor Create();
 end;
 
@@ -32,6 +33,7 @@ function TEscola_Service.SalvarEscola(aDTO : TEscolaDTO): Integer;
 var FEscola : TEscolaModel;
 begin
   FEscola := TEscolaModel.Create;
+  FEscola.SetID(aDTO.ID);
   FEscola.SetNome(aDTO.Name);
   FEscola.SetEndereco(aDTO.Endereco);
   FEscola.SetQtdMembros(aDTO.QtdMembros);
@@ -39,6 +41,18 @@ begin
   Result := FEscolaRepo.Save(FEscola);
 
 
+
+end;
+
+procedure TEscola_Service.Update(aDto: TEscolaDTO);
+var FEscola : TEscolaModel;
+begin
+  FEscola := TEscolaModel.Create;
+  FEscola.SetNome(aDTO.Name);
+  FEscola.SetEndereco(aDTO.Endereco);
+  FEscola.SetQtdMembros(aDTO.QtdMembros);
+
+  FEscolaRepo.Update(FEscola);
 
 end;
 

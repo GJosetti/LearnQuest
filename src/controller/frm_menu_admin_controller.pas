@@ -23,6 +23,7 @@ function AtualizarTabelaEscolas: TDataSet;
 procedure AdicionarEscola ();
 function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
 function RetornarEscola(aID : Integer) : TEscolaDTO;
+procedure Update;
 
 end;
 
@@ -53,6 +54,18 @@ var FuserDTO : TUserDTO;
 begin
 
   Result := FServiceUser.GetByEscolaID(aID);
+
+end;
+
+procedure TMenuAdminController.Update;
+var FEscolaDTO : TEscolaDTO;
+begin
+  FEscolaDTO := TEscolaDTO.Create;
+  FEscolaDTO.ID := Fview.GetID;
+  FEscolaDTO.Name := Fview.GetNomeEscola;
+  FEscolaDTO.Endereco := Fview.GetCEP;
+
+  FServiceEscola.Update(FEscolaDTO);
 
 end;
 

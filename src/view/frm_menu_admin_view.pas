@@ -48,6 +48,7 @@ type
     { Private declarations }
     FController: IMenuAdminController;
     Fmode : TMode;
+    FID : Integer;
     NomeEscola : String;
     CEP : String;
     NomeUsuario: String;
@@ -62,6 +63,7 @@ type
     function GetPassword: String;
     function GetEmail: String;
     function CamposValidos: Boolean;
+    function GetID : Integer;
 
   end;
 
@@ -119,7 +121,13 @@ begin
 
 
   if CamposValidos then begin
-    FController.AdicionarEscola();
+    if Fmode = m_ADD then begin
+      FController.AdicionarEscola();
+    end else begin
+      FController.Update
+    end;
+
+
     FController.AtualizarTabelaEscolas;
     pnl_addNEdit_adminMenu.Visible := false;
     ClearAllEdits;
@@ -134,7 +142,7 @@ end;
 
 
 procedure Tfrm_menuAdmin_view.btn_editar_adminMenuClick(Sender: TObject);
-var ID : Integer;
+
 var Nome : String;
 var CEP : String;
 var Email : String;
@@ -143,9 +151,9 @@ var Password: String;
 var FuserDTO: TUserDTO;
 begin
  try
-  ID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
+  FID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
 
-  FuserDTO := FController.RetornarUsuarioAdmin(ID);
+  FuserDTO := FController.RetornarUsuarioAdmin(FID);
 
   if(FuserDTO <> nil) then begin
 
@@ -203,6 +211,11 @@ end;
 function Tfrm_menuAdmin_view.GetEmail: String;
 begin
   Result := edt_email_addNEdit_adminMenu.Text;
+end;
+
+function Tfrm_menuAdmin_view.GetID: Integer;
+begin
+  Result := FID;
 end;
 
 function Tfrm_menuAdmin_view.GetNomeEscola: String;

@@ -13,9 +13,12 @@ FQuery : TFDQuery;
 
 public
 
+function FindByID(aID: Integer) : TEscolaModel;
 function GetEscolaDataSet : TDataSet;
 function Save (aModel: TEscolaModel) : Integer;
+procedure Update(aModel : TEscolaModel);
 constructor Create();
+
 end;
 
 implementation
@@ -26,6 +29,11 @@ constructor TEscolaRepository.Create;
 begin
   FQuery := DataModule1.FDQueryEscolas;
   FConnection := DataModule1.FDConnection1;
+end;
+
+function TEscolaRepository.FindByID(aID: Integer): TEscolaModel;
+begin
+
 end;
 
 function TEscolaRepository.GetEscolaDataSet: TDataSet;
@@ -61,5 +69,26 @@ begin
   end;
 end;
 
+procedure TEscolaRepository.Update(aModel: TEscolaModel);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'UPDATE tenants SET nome = :NAME, endereco = :CEP where :ID = ;
+
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
+    Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
+
+    Qry.Open; // ? aqui é Open, não ExecSQL
+
+    Result := Qry.FieldByName('id').AsInteger;
+  finally
+    Qry.Free;
+  end;
+end;
 end.
 

@@ -13,13 +13,16 @@ type
     function FindByID(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
     procedure Save (aModel : TUserModel);
+    function FindByIDEscola(aID: Integer) : TUserModel;
   end;
 
 
   IEscolaRepository = interface
     ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
+    //function FindByID(aID: Integer) : TUserModel;
     function GetEscolaDataSet: TDataSet;
     function Save (aModel : TEscolaModel): Integer;
+
 
   end;
 
@@ -42,9 +45,10 @@ type
   end;
   IUserService = interface
     ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
-    function GetByID: TUserDTO;
+    function GetByID (aID : Integer): TUserDTO;
     function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
     procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+    function GetByEscolaID (aID : Integer): TUserDTO;
   end;
 
 
@@ -66,6 +70,8 @@ type
 
     function AtualizarTabelaEscolas : TDataSet ;
     procedure AdicionarEscola();
+    function RetornarEscola(aID : Integer) : TEscolaDTO;
+    function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
   end;
 
   IMenuAdminService = interface

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO;
 
 type
   TMode = (m_ADD,m_EDIT);
@@ -41,6 +41,8 @@ type
     procedure btn_adicionar_adminMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_adminMenuClick(Sender: TObject);
     procedure btn_cancelar_addNEdit_adminMenuClick(Sender: TObject);
+    procedure btn_editar_adminMenuClick(Sender: TObject);
+
 
   private
     { Private declarations }
@@ -128,6 +130,45 @@ begin
 end;
 
 
+
+
+
+procedure Tfrm_menuAdmin_view.btn_editar_adminMenuClick(Sender: TObject);
+var ID : Integer;
+var Nome : String;
+var CEP : String;
+var Email : String;
+var UserName: String;
+var Password: String;
+var FuserDTO: TUserDTO;
+begin
+ try
+  ID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
+
+  FuserDTO := FController.RetornarUsuarioAdmin(ID);
+
+  if(FuserDTO <> nil) then begin
+
+    Nome := dbg_escolas.DataSource.DataSet.FieldByName('nome').AsString;
+    CEP := dbg_escolas.DataSource.DataSet.FieldByName('endereco').AsString;
+
+
+    pnl_addNEdit_adminMenu.Visible := true;
+    Fmode := m_EDIT;
+
+    edt_nome_addNEdit_adminMenu.Text := Nome;
+    edt_CEP_addNEdit_adminMenu.Text := CEP;
+    edt_email_addNEdit_adminMenu.Text := FuserDTO.Email;
+    edt_nomeUsurario_addNEdit_adminMenu.Text := FuserDTO.Name;
+    edt_password_addNEdit__adminMenu.Text := FuserDTO.Password;
+  end;
+
+
+ finally
+   FuserDTO.Free;
+ end;
+
+end;
 
 procedure Tfrm_menuAdmin_view.EscolasClick(Sender: TObject);
 begin

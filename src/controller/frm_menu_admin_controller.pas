@@ -21,6 +21,8 @@ constructor Create(aView: IMenuAdminView);
 
 function AtualizarTabelaEscolas: TDataSet;
 procedure AdicionarEscola ();
+function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
+function RetornarEscola(aID : Integer) : TEscolaDTO;
 
 end;
 
@@ -39,6 +41,19 @@ begin
   if not Assigned(Fview) then begin
     Fview := aView ;
   end;
+end;
+
+function TMenuAdminController.RetornarEscola(aID: Integer): TEscolaDTO;
+begin
+
+end;
+
+function TMenuAdminController.RetornarUsuarioAdmin(aID: Integer): TUserDTO;
+var FuserDTO : TUserDTO;
+begin
+
+  Result := FServiceUser.GetByEscolaID(aID);
+
 end;
 
 procedure TMenuAdminController.AdicionarEscola();

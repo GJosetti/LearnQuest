@@ -13,6 +13,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
 
   public
     function FindByID(aID: Integer) : TUserModel;
+    function FindByIDEscola(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
     procedure Save (aModel : TUserModel);
     constructor Create();
@@ -34,6 +35,7 @@ begin
   FUserRepo.SetID(aQuery.FieldByName('id').AsInteger);
   FUserRepo.SetNome(aQuery.FieldByName('user_name').AsString);
   FUserRepo.SetPassword(aQuery.FieldByName('password').AsString);
+  FUserRepo.SetEmail(aQuery.FieldByName('email').AsString);
   FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
   Result := FUserRepo;
 
@@ -62,17 +64,53 @@ begin
   Qry.Free;
  end;
 
+
 end;
 
 { TLoginRepository }
 
 function TUserRepository.FindByID(aID: Integer): TUserModel;
-
+var Qry : TFDQuery;
 begin
+  Result := nil;
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'Select * From users WHERE id = :ID';
+  Qry.ParamByName('ID').AsInteger := aID;
+  Qry.Open();
 
+  if not Qry.IsEmpty then begin
+    Result := RowToUser(Qry);
+  end;
+
+ finally
+  Qry.Free;
+ end;
 
 end;
 
+
+function TUserRepository.FindByIDEscola(aID: Integer): TUserModel;
+var Qry : TFDQuery;
+begin
+  Result := nil;
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'Select * From users WHERE user_escola_id = :ID';
+  Qry.ParamByName('ID').AsInteger := aID;
+  Qry.Open();
+
+  if not Qry.IsEmpty then begin
+    Result := RowToUser(Qry);
+  end;
+
+ finally
+  Qry.Free;
+ end;
+
+end;
 
 function TUserRepository.FindByNome(aNome: String): TUserModel;
 var Qry : TFDQuery;

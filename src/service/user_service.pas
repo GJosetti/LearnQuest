@@ -10,7 +10,8 @@ private
   var FUserRepository : IUserRepository;
 
 public
-  function GetByID: TUserDTO;
+  function GetByID(aID: Integer): TUserDTO;
+  function GetByEscolaID (aID: Integer): TuserDTO;
   function ValidarLogin(aDTO: TUserDTO):TUserDTO;
   procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
   constructor Create();
@@ -38,9 +39,49 @@ begin
 
 end;
 
-function TUserService.GetByID: TUserDTO;
+function TUserService.GetByEscolaID(aID: Integer): TuserDTO;
+var FResultDTO : TUserDTO;
+var FUserModel : TUserModel;
 begin
+  try
+    FUserModel := FUserRepository.FindByIDEscola(aID);
+    if FuserModel <> nil then begin
+      FResultDTO := TUserDTO.Create;
+      FResultDTO.ID := FUserModel.GetID;
+      FResultDTO.Name := FUserModel.GetNome;
+      FResultDTO.Role := FUserModel.GetRole;
+      FResultDTO.Password := FUserModel.GetPassword;
+      FResultDTO.Email := FUserModel.GetEmail;
+    Result := FResultDTO;
 
+    end else begin
+      Result := nil;
+    end;
+
+
+  finally
+    FUserModel.Free;
+  end;
+end;
+
+
+function TUserService.GetByID (aID : Integer): TUserDTO;
+var FResultDTO : TUserDTO;
+var FUserModel : TUserModel;
+begin
+  try
+    FUserModel := FUserRepository.FindByID(aID);
+    FResultDTO := TUserDTO.Create;
+    FResultDTO.Name := FUserModel.GetNome;
+    FResultDTO.Role := FUserModel.GetRole;
+    FResultDTO.Password := FUserModel.GetPassword;
+    FResultDTO.Email := FUserModel.GetEmail;
+
+    Result := FResultDTO;
+
+  finally
+    FUserModel.Free;
+  end;
 end;
 
 
@@ -69,34 +110,37 @@ var FUserDTO: TUserDTO;
 
 begin
 
-
-//Verificações de preenchimento --------
-if Trim(aDto.Name) = '' then begin
-  ShowMessage('O nome precisa ser preenchido!');
-  //fazer de uma maneira mais visual
-end;
-if Trim(aDTO.Password) = '' then begin
-  ShowMessage('A senha precisa ser preenchida!');
-  //fazer de uma maneira mais visual
-end;
-//----------
-
-
-hash := aDto.Password.GetHashCode.ToString;
-
-FUser := FUserRepository.FindByNome(aDTO.Name);
+try
+  //Verificações de preenchimento --------
+  if Trim(aDto.Name) = '' then begin
+    ShowMessage('O nome precisa ser preenchido!');
+    //fazer de uma maneira mais visual
+  end;
+  if Trim(aDTO.Password) = '' then begin
+    ShowMessage('A senha precisa ser preenchida!');
+    //fazer de uma maneira mais visual
+  end;
+  //----------
 
 
-if (FUser = nil) or (FUser.GetPassword <> hash)  then begin
-  Result := nil;
-end else begin
-  FUserDTO := TUserDTO.Create;
+  hash := aDto.Password.GetHashCode.ToString;
 
-  FuserDTO.Name := FUser.GetNome;
-  FUserDTO.ID := FUser.GetID;
-  FUserDTO.Role := Fuser.GetRole;
+  FUser := FUserRepository.FindByNome(aDTO.Name);
 
-  Result := FUserDTO;
+
+  if (FUser = nil) or (FUser.GetPassword <> hash)  then begin
+    Result := nil;
+  end else begin
+    FUserDTO := TUserDTO.Create;
+
+    FuserDTO.Name := FUser.GetNome;
+    FUserDTO.ID := FUser.GetID;
+    FUserDTO.Role := Fuser.GetRole;
+
+    Result := FUserDTO;
+  end;
+finally
+
 end;
 
 

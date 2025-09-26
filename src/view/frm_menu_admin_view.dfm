@@ -135,10 +135,11 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 3
+      OnClick = btn_editar_adminMenuClick
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 207
-      Top = 80
+      Left = 151
+      Top = 56
       Width = 449
       Height = 456
       Color = clBtnHighlight

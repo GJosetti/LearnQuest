@@ -24,6 +24,7 @@ procedure AdicionarEscola ();
 function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
 function RetornarEscola(aID : Integer) : TEscolaDTO;
 procedure Update;
+procedure Delete(aID: Integer);
 
 end;
 
@@ -42,6 +43,16 @@ begin
   if not Assigned(Fview) then begin
     Fview := aView ;
   end;
+end;
+
+procedure TMenuAdminController.Delete (aID : Integer);
+
+begin
+  FServiceEscola.Delete(aID);
+  //FServiceUser.Delete(RetornarUsuarioAdmin(aID).ID);
+
+
+
 end;
 
 function TMenuAdminController.RetornarEscola(aID: Integer): TEscolaDTO;

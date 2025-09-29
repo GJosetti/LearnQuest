@@ -17,6 +17,7 @@ function FindByID(aID: Integer) : TEscolaModel;
 function GetEscolaDataSet : TDataSet;
 function Save (aModel: TEscolaModel) : Integer;
 procedure Update(aModel : TEscolaModel);
+procedure Delete (aID: Integer);
 constructor Create();
 
 end;
@@ -29,6 +30,21 @@ constructor TEscolaRepository.Create;
 begin
   FQuery := DataModule1.FDQueryEscolas;
   FConnection := DataModule1.FDConnection1;
+end;
+
+procedure TEscolaRepository.Delete(aID: Integer);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'DELETE from tenants where id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
 end;
 
 function TEscolaRepository.FindByID(aID: Integer): TEscolaModel;

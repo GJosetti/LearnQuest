@@ -16,6 +16,7 @@ public
   procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
   constructor Create();
   procedure Update(aDto : TUserDTO);
+  procedure Delete (aID: Integer);
 end;
 
 
@@ -38,6 +39,12 @@ begin
   end;
 
 
+end;
+
+procedure TUserService.Delete(aID: Integer);
+begin
+  //Validações
+  FUserRepository.Delete(aID);
 end;
 
 function TUserService.GetByEscolaID(aID: Integer): TuserDTO;

@@ -42,6 +42,7 @@ type
     procedure btn_concluir_addNEdit_adminMenuClick(Sender: TObject);
     procedure btn_cancelar_addNEdit_adminMenuClick(Sender: TObject);
     procedure btn_editar_adminMenuClick(Sender: TObject);
+    procedure btn_remover_adminMenuClick(Sender: TObject);
 
 
   private
@@ -176,6 +177,25 @@ begin
  finally
    FuserDTO.Free;
  end;
+
+end;
+
+procedure Tfrm_menuAdmin_view.btn_remover_adminMenuClick(Sender: TObject);
+
+begin
+
+FID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
+//Confirmação de exclusão
+if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+              [mbYes, mbNo], 0) = mrYes then
+begin
+  FController.Delete(FID);
+  FController.AtualizarTabelaEscolas;
+  ShowMessage('Registro excluído!');
+end;
+
+
+
 
 end;
 

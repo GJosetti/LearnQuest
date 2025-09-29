@@ -18,6 +18,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     procedure Save (aModel : TUserModel);
     constructor Create();
     procedure Update(aModel: TUserModel);
+    procedure Delete (aID: Integer);
 end;
 
 
@@ -85,6 +86,21 @@ begin
   finally
     Qry.Free;
     aModel.Free;
+  end;
+end;
+
+procedure TUserRepository.Delete(aID: Integer);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'delete from users where id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
   end;
 end;
 

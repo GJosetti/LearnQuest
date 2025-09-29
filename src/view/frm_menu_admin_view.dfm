@@ -125,6 +125,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 2
+      OnClick = btn_remover_adminMenuClick
     end
     object btn_editar_adminMenu: TPanel
       Left = 520

@@ -15,6 +15,7 @@ type
     procedure Save (aModel : TUserModel);
     function FindByIDEscola(aID: Integer) : TUserModel;
     procedure Update(aModel : TUserModel);
+    procedure Delete (aID : Integer);
   end;
 
 
@@ -24,6 +25,7 @@ type
     function GetEscolaDataSet: TDataSet;
     function Save (aModel : TEscolaModel): Integer;
     procedure Update(aModel : TEscolaModel);
+    procedure Delete (aID: Integer);
 
   end;
 
@@ -51,6 +53,7 @@ type
     procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
     function GetByEscolaID (aID : Integer): TUserDTO;
     procedure Update(aDto : TUserDTO);
+    procedure Delete (aID: Integer);
   end;
 
 
@@ -76,6 +79,7 @@ type
     function RetornarEscola(aID : Integer) : TEscolaDTO;
     function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
     procedure Update;
+    procedure Delete(aID : Integer);
   end;
 
   IMenuAdminService = interface
@@ -83,6 +87,7 @@ type
     function SalvarEscola (aDTO: TEscolaDTO): Integer;
     function AtualizarTabelaEscolas : TDataSet;
     procedure Update(aDto : TEscolaDTO);
+    procedure Delete (aID : Integer);
   end;
 
 

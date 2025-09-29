@@ -14,7 +14,9 @@ public
 function AtualizarTabelaEscolas : TDataSet;
 function SalvarEscola(aDTO: TEscolaDTO): Integer;
 procedure Update(aDto : TEscolaDTO);
+procedure Delete (aID: Integer);
 constructor Create();
+
 end;
 
 implementation
@@ -28,6 +30,11 @@ begin
 end;
 end;
 
+
+procedure TEscola_Service.Delete(aID: Integer);
+begin
+  FEscolaRepo.Delete(aID);
+end;
 
 function TEscola_Service.SalvarEscola(aDTO : TEscolaDTO): Integer;
 var FEscola : TEscolaModel;

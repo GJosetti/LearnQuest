@@ -15,6 +15,7 @@ public
   function ValidarLogin(aDTO: TUserDTO):TUserDTO;
   procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
   constructor Create();
+  procedure Update(aDto : TUserDTO);
 end;
 
 
@@ -99,6 +100,18 @@ begin
 
   FUserRepository.Save(FUsuario);
 
+end;
+
+procedure TUserService.Update(aDto: TUserDTO);
+var FUsuario : TUserModel;
+begin
+  FUsuario := TUserModel.Create;
+  FUsuario.SetID(aDto.ID);
+  FUsuario.SetNome(aDTO.Name);
+  FUsuario.SetPassword(aDTO.Password.GetHashCode.ToString);
+  FUsuario.SetEmail(aDTO.Email);
+
+  FUserRepository.Update(FUsuario);
 end;
 
 function TUserService.ValidarLogin(aDTO: TUserDTO): TUserDTO;

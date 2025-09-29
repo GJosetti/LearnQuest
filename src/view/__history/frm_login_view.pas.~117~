@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, frm_menu_admin_view;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -27,7 +27,7 @@ type
     function GetNome: String;
     function GetPassword: String;
     procedure Mensagem(aString: String);
-    procedure TrocarTelaAdmin(aForm: TForm);
+    procedure TrocarTelaAdmin();
   end;
 
 var
@@ -68,10 +68,19 @@ end;
 
 
 
-procedure Tfrm_login.TrocarTelaAdmin(aForm: TForm);
+procedure Tfrm_login.TrocarTelaAdmin;
+
 begin
-  Self.Destroy;
-  TForm.Create(aForm);
+  Self.Hide;
+  frm_menuAdmin_view := Tfrm_menuAdmin_view.Create(nil);
+  frm_menuAdmin_view.ShowModal;
+
+  Self.Close;
+
+
+
+
+
 end;
 
 end.

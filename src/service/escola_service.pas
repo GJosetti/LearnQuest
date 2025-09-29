@@ -47,12 +47,22 @@ end;
 procedure TEscola_Service.Update(aDto: TEscolaDTO);
 var FEscola : TEscolaModel;
 begin
-  FEscola := TEscolaModel.Create;
-  FEscola.SetNome(aDTO.Name);
-  FEscola.SetEndereco(aDTO.Endereco);
-  FEscola.SetQtdMembros(aDTO.QtdMembros);
+  try
 
-  FEscolaRepo.Update(FEscola);
+    FEscola := TEscolaModel.Create;
+    FEscola.SetID(aDto.ID);
+    FEscola.SetNome(aDTO.Name);
+    FEscola.SetEndereco(aDTO.Endereco);
+    FEscola.SetQtdMembros(aDTO.QtdMembros);
+
+    FEscolaRepo.Update(FEscola);
+
+  finally
+
+    aDto.Free;
+
+  end;
+
 
 end;
 

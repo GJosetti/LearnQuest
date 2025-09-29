@@ -14,7 +14,7 @@ type
     function FindByNome(aNome: String) : TUserModel;
     procedure Save (aModel : TUserModel);
     function FindByIDEscola(aID: Integer) : TUserModel;
-    procedure Update(aModel : TEscolaModel);
+    procedure Update(aModel : TUserModel);
   end;
 
 
@@ -75,7 +75,7 @@ type
     procedure AdicionarEscola();
     function RetornarEscola(aID : Integer) : TEscolaDTO;
     function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
-    procedure Update (aID : Integer);
+    procedure Update;
   end;
 
   IMenuAdminService = interface

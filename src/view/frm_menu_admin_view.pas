@@ -95,6 +95,7 @@ begin
     edt_CEP_addNEdit_adminMenu.Clear;
     edt_nomeUsurario_addNEdit_adminMenu.Clear;
     edt_password_addNEdit__adminMenu.Clear;
+    edt_email_addNEdit_adminMenu.Clear;
 end;
 
 
@@ -124,7 +125,7 @@ begin
     if Fmode = m_ADD then begin
       FController.AdicionarEscola();
     end else begin
-      FController.Update
+      FController.Update();
     end;
 
 
@@ -168,7 +169,7 @@ begin
     edt_CEP_addNEdit_adminMenu.Text := CEP;
     edt_email_addNEdit_adminMenu.Text := FuserDTO.Email;
     edt_nomeUsurario_addNEdit_adminMenu.Text := FuserDTO.Name;
-    edt_password_addNEdit__adminMenu.Text := FuserDTO.Password;
+
   end;
 
 

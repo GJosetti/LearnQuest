@@ -69,8 +69,23 @@ begin
 end;
 
 procedure TUserRepository.Update(aModel: TUserModel);
+var
+  Qry: TFDQuery;
 begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'UPDATE users SET user_name = :NAME, password = :SENHA, email = :EMAIL where id = :ID';
 
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
+    Qry.ParamByName('ID').AsInteger := aModel.GetID;
+    Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+    aModel.Free;
+  end;
 end;
 
 { TLoginRepository }

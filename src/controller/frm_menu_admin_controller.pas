@@ -58,15 +58,23 @@ begin
 end;
 
 procedure TMenuAdminController.Update;
-var FEscolaDTO : TEscolaDTO;
+
+var EscolaDTO: TEscolaDTO;
+var UsuarioDTO: TUserDTO;
 begin
-  FEscolaDTO := TEscolaDTO.Create;
-  FEscolaDTO.ID := Fview.GetID;
-  FEscolaDTO.Name := Fview.GetNomeEscola;
-  FEscolaDTO.Endereco := Fview.GetCEP;
+  EscolaDTO := TEscolaDTO.Create;
+  EscolaDTO.ID := Fview.GetID;
+  EscolaDTO.Name := Fview.GetNomeEscola;
+  EscolaDTO.Endereco := Fview.GetCEP;
 
-  FServiceEscola.Update(FEscolaDTO);
+  UsuarioDTO := TUserDTO.Create;
+  UsuarioDTO.ID := RetornarUsuarioAdmin(Fview.GetID).ID;
+  UsuarioDTO.Name := Fview.GetNomeUsuario;
+  UsuarioDTO.Password := Fview.GetPassword;
+  UsuarioDTO.Email := Fview.GetEmail;
 
+  FServiceUser.Update(UsuarioDTO);
+  FServiceEscola.Update(EscolaDTO);
 end;
 
 procedure TMenuAdminController.AdicionarEscola();

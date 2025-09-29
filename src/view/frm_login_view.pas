@@ -71,12 +71,12 @@ end;
 procedure Tfrm_login.TrocarTelaAdmin;
 
 begin
-
+  Self.Hide;
   frm_menuAdmin_view := Tfrm_menuAdmin_view.Create(nil);
+  frm_menuAdmin_view.ShowModal;
+  Self.Close;
 
-   Self.Hide;
 
-  frm_menuAdmin_view.Show;
 
 
 

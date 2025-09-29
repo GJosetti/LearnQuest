@@ -61,7 +61,7 @@ begin
     Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
     Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
 
-    Qry.Open; // ? aqui é Open, não ExecSQL
+    Qry.Open;
 
     Result := Qry.FieldByName('id').AsInteger;
   finally
@@ -77,17 +77,15 @@ begin
   try
     Qry.Connection := FConnection;
     Qry.SQL.Text :=
-      'UPDATE tenants SET nome = :NAME, endereco = :CEP where :ID = ;
+      'UPDATE tenants SET nome = :NAME, endereco = :CEP where id = :ID';
 
     Qry.ParamByName('NAME').AsString := aModel.GetNome;
     Qry.ParamByName('CEP').AsString := aModel.GetEndereco;
-    Qry.ParamByName('QTD').AsInteger := aModel.GetQtdMembros;
-
-    Qry.Open; // ? aqui é Open, não ExecSQL
-
-    Result := Qry.FieldByName('id').AsInteger;
+    Qry.ParamByName('ID').AsInteger := aModel.GetID;
+    Qry.ExecSQL;
   finally
     Qry.Free;
+    aModel.Free;
   end;
 end;
 end.

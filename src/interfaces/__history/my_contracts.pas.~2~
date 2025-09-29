@@ -1,0 +1,93 @@
+unit my_contracts;
+
+interface
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity;
+
+type
+
+
+
+//User Repo
+ IUserRepository = interface
+    ['{F59799D9-0A28-49CB-9D35-1E3AB3056DAE}']
+    function FindByID(aID: Integer) : TUserModel;
+    function FindByNome(aNome: String) : TUserModel;
+    procedure Save (aModel : TUserModel);
+    function FindByIDEscola(aID: Integer) : TUserModel;
+    procedure Update(aModel : TUserModel);
+  end;
+
+
+  IEscolaRepository = interface
+    ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
+    function FindByID(aID: Integer) : TEscolaModel;
+    function GetEscolaDataSet: TDataSet;
+    function Save (aModel : TEscolaModel): Integer;
+    procedure Update(aModel : TEscolaModel);
+
+  end;
+
+
+
+  //--------------Login-----------------------//
+
+  ILoginView = interface
+    ['{40EB0EA9-09A3-4243-9EA7-DADD756A4B45}']
+
+    function GetNome: String;
+    function GetPassword: String;
+    procedure Mensagem(aString: String);
+    procedure TrocarTelaAdmin();
+  end;
+
+  ILoginController = interface
+    ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
+    procedure ProcessarLogin;
+  end;
+  IUserService = interface
+    ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
+    function GetByID (aID : Integer): TUserDTO;
+    function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
+    procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+    function GetByEscolaID (aID : Integer): TUserDTO;
+    procedure Update(aDto : TUserDTO);
+  end;
+
+
+  //------------------------------------------//
+
+  //---------------Tela Admin-----------------//
+
+  IMenuAdminView = interface
+    ['{1AE3AEEE-506A-4889-A0F8-8E44BEAC9A1C}']
+    function GetNomeEscola: String;
+    function GetNomeUsuario:String;
+    function GetCEP : String;
+    function GetPassword: String;
+    function GetEmail: String;
+    function GetID : Integer;
+    function CamposValidos: Boolean;
+  end;
+  IMenuAdminController = interface
+    ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']
+
+    function AtualizarTabelaEscolas : TDataSet ;
+    procedure AdicionarEscola();
+    function RetornarEscola(aID : Integer) : TEscolaDTO;
+    function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
+    procedure Update (aID : Integer);
+  end;
+
+  IMenuAdminService = interface
+    ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
+    function SalvarEscola (aDTO: TEscolaDTO): Integer;
+    function AtualizarTabelaEscolas : TDataSet;
+    procedure Update(aDto : TEscolaDTO);
+  end;
+
+
+
+
+implementation
+
+end.

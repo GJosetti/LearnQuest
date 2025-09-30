@@ -1,7 +1,7 @@
 unit escola_repository;
 
 interface
-uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity, System.SysUtils;
+uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity, System.SysUtils,System.Classes;
 
 type
 TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
@@ -10,6 +10,7 @@ TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
 private
 FConnection : TFDConnection;
 FQuery : TFDQuery;
+CriarTabelas : TStringList;
 
 public
 
@@ -63,9 +64,21 @@ end;
 
 
 function TEscolaRepository.Save(aModel: TEscolaModel): Integer;
+
 var
+  FID: Integer;
   Qry: TFDQuery;
+  SchemaName : String;
+  FS : string;
+
 begin
+
+  if not Assigned (CriarTabelas) then begin
+    CriarTabelas := TStringList.Create;
+    CriarTabelas.LoadFromFile('C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
+
+  end;
+
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
@@ -79,7 +92,30 @@ begin
 
     Qry.Open;
 
-    Result := Qry.FieldByName('id').AsInteger;
+    FID := Qry.FieldByName('id').AsInteger;
+    Qry.Close;
+
+  Qry.SQL.Text :=
+  'UPDATE tenants ' +
+  'SET schema_name = ''escola_'' || :FID ' +
+  'WHERE id = :FID ' +
+  'RETURNING schema_name';
+  Qry.ParamByName('FID').AsInteger := FID;
+  Qry.Open;
+
+  SchemaName := Qry.FieldByName('schema_name').AsString;
+  Qry.Close;
+
+  // 3. Cria o schema no banco
+  FConnection.ExecSQL('CREATE SCHEMA IF NOT EXISTS ' + SchemaName);
+
+  FConnection.ExecSQL('SET search_path TO ' + SchemaName + ', public');
+
+  Qry.SQL.Text := CriarTabelas.Text;
+  Qry.ExecSQL();
+
+
+  Result := FID;
   finally
     Qry.Free;
   end;

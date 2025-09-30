@@ -25,14 +25,14 @@ CREATE TABLE fase (
 -- Tabela de Estudantes
 CREATE TABLE estudante (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES users(id),
+    user_id BIGINT NOT NULL REFERENCES public.users(id),
     coins VARCHAR(100) 
 );
 
 -- Tabela de Professores
 CREATE TABLE professores (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES users(id)
+    user_id BIGINT NOT NULL REFERENCES public.users(id)
     
 );
 

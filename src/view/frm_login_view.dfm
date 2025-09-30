@@ -33,7 +33,8 @@ object frm_login: Tfrm_login
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 158
+      ExplicitLeft = 0
+      ExplicitTop = 0
     end
     object edt_nome_login: TEdit
       Left = 480

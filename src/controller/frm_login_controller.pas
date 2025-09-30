@@ -48,9 +48,10 @@ begin
   end else begin
     //COLOCAR NA VIEW
    Fview.Mensagem('Login realizado com sucesso! ID: ' + ResultadoDTO.ID.ToString);
-   if ResultadoDTO.Role = ROLE_ADMIN then begin
-    Fview.TrocarTelaAdmin();
-   end;
+
+   Fview.TrocarTela(ResultadoDTO.Role);
+
+
   end;
 
 end;

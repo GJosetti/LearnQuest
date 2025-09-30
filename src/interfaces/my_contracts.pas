@@ -39,7 +39,7 @@ type
     function GetNome: String;
     function GetPassword: String;
     procedure Mensagem(aString: String);
-    procedure TrocarTelaAdmin();
+    procedure TrocarTela(aRole : Integer);
   end;
 
   ILoginController = interface
@@ -88,6 +88,16 @@ type
     function AtualizarTabelaEscolas : TDataSet;
     procedure Update(aDto : TEscolaDTO);
     procedure Delete (aID : Integer);
+  end;
+  //-----------------Tela Escolas---------------------//
+  IEscolaAdminView = interface
+    ['{1AE3AEEE-506A-4889-A0F8-8E44BEAC9A1C}']
+    function GetNome:String;
+    function GetPassword: String;
+    function GetEmail: String;
+    function GetID : Integer;
+    function GetRole: Integer;
+    function CamposValidos: Boolean;
   end;
 
 

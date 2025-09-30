@@ -16,7 +16,8 @@ uses
   escola_service in 'service\escola_service.pas',
   escolas_DTO in 'model\DTO\escolas_DTO.pas',
   escola_repository in 'model\repository\escola_repository.pas',
-  escola_entity in 'model\entity\escola_entity.pas';
+  escola_entity in 'model\entity\escola_entity.pas',
+  frm_menu_escola_view in 'view\frm_menu_escola_view.pas' {frm_menuEscola};
 
 {$R *.res}
 
@@ -26,5 +27,6 @@ begin
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(Tfrm_login, frm_login);
   Application.CreateForm(Tfrm_menuAdmin_view, frm_menuAdmin_view);
+  Application.CreateForm(Tfrm_menuEscola, frm_menuEscola);
   Application.Run;
 end.

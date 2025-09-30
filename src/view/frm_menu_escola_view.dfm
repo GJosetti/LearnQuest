@@ -35,6 +35,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Height = 49
       Caption = 'Membros'
       TabOrder = 0
+      OnClick = MembrosClick
     end
     object Home: TButton
       Left = 48
@@ -43,9 +44,10 @@ object frm_menuEscola: Tfrm_menuEscola
       Height = 49
       Caption = 'Home'
       TabOrder = 1
+      OnClick = HomeClick
     end
   end
-  object pnl_escolas_EscolaMenu: TPanel
+  object pnl_membros_EscolaMenu: TPanel
     Left = 263
     Top = -1
     Width = 1017

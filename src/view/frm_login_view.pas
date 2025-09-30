@@ -49,8 +49,15 @@ end;
 
 procedure Tfrm_login.btn_loginClick(Sender: TObject);
 begin
-  FController.ProcessarLogin;
+  if(edt_nome_login.Text = Trim('')) or (edt_senha_login.Text = Trim('')) then begin
+    raise Exception.Create('Todos os campos precisam ser preenchidos');
+  end else begin
+    FController.ProcessarLogin;
+  end;
+
 end;
+
+
 
 function Tfrm_login.GetNome: String;
 begin

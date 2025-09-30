@@ -10,7 +10,7 @@ uses
 type
   Tfrm_menuEscola = class(TForm, IEscolaAdminView)
     d_Src_membros_escola: TDataSource;
-    pnl_escolas_EscolaMenu: TPanel;
+    pnl_membros_EscolaMenu: TPanel;
     dbg_membrosEscola: TDBGrid;
     btn_adicionar_EscolaMenu: TPanel;
     btn_remover_EscolaMenu: TPanel;
@@ -31,6 +31,8 @@ type
     Home: TButton;
     cb_role_addNEdit_EscolaMenu: TComboBox;
     lbl_role_addNEdit_EscolaAdmin: TLabel;
+    procedure MembrosClick(Sender: TObject);
+    procedure HomeClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -82,6 +84,30 @@ function Tfrm_menuEscola.GetRole: Integer;
 begin
   //Começa em 0
   Result := cb_role_addNEdit_EscolaMenu.ItemIndex;
+end;
+
+procedure Tfrm_menuEscola.HomeClick(Sender: TObject);
+begin
+
+  pnl_home_EscolaMenu.Visible := true;
+  pnl_membros_EscolaMenu.Visible := false;
+  //Limpar Lista na memória
+
+end;
+
+procedure Tfrm_menuEscola.MembrosClick(Sender: TObject);
+begin
+ //MUDAR DE TELA: 1- Deixar home invisivel 2- deixar escola visivel 3 - atualizar tabela de escolas :)
+ pnl_home_EscolaMenu.Visible := false;
+ pnl_membros_EscolaMenu.Visible := true;
+ if Assigned(d_Src_membros_escola) then begin
+   d_Src_membros_escola.DataSet := nil; // limpa antes
+ end;
+  //d_Src_membros_escola.DataSet := FController.AtualizarTabelaEscolas;
+ // dbg_membrosEscola.DataSource := d_Src_escolas;
+
+
+
 end;
 
 end.

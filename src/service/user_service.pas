@@ -118,6 +118,7 @@ begin
   FUsuario.SetPassword(aDTO.Password.GetHashCode.ToString);
   FUsuario.SetEmail(aDTO.Email);
 
+
   FUserRepository.Update(FUsuario);
 end;
 
@@ -133,12 +134,10 @@ begin
 try
   //Verificações de preenchimento --------
   if Trim(aDto.Name) = '' then begin
-    ShowMessage('O nome precisa ser preenchido!');
-    //fazer de uma maneira mais visual
+
   end;
   if Trim(aDTO.Password) = '' then begin
-    ShowMessage('A senha precisa ser preenchida!');
-    //fazer de uma maneira mais visual
+
   end;
   //----------
 

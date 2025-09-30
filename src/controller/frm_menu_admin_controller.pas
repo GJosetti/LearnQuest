@@ -13,7 +13,7 @@ TMenuAdminController = class(TInterfacedObject, IMenuAdminController)
 
 private
  Fview : IMenuAdminView;
- FServiceEscola : IMenuAdminService;
+ FServiceEscola : IEscolaService;
  FServiceUser: IUserService;
 
 public

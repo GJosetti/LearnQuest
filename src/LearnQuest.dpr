@@ -17,7 +17,8 @@ uses
   escolas_DTO in 'model\DTO\escolas_DTO.pas',
   escola_repository in 'model\repository\escola_repository.pas',
   escola_entity in 'model\entity\escola_entity.pas',
-  frm_menu_escola_view in 'view\frm_menu_escola_view.pas' {frm_menuEscola};
+  frm_menu_escola_view in 'view\frm_menu_escola_view.pas' {frm_menuEscola},
+  frm_menu_escola_controller in 'controller\frm_menu_escola_controller.pas';
 
 {$R *.res}
 

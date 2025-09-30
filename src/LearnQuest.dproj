@@ -162,6 +162,7 @@
             <Form>frm_menuEscola</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="controller\frm_menu_escola_controller.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -82,7 +82,7 @@ type
     procedure Delete(aID : Integer);
   end;
 
-  IMenuAdminService = interface
+  IEscolaService = interface
     ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
     function SalvarEscola (aDTO: TEscolaDTO): Integer;
     function AtualizarTabelaEscolas : TDataSet;
@@ -99,6 +99,16 @@ type
     function GetRole: Integer;
     function CamposValidos: Boolean;
   end;
+
+   IMenuEscolaController = interface
+    ['{5ED2F029-DA31-4020-8B22-5BCDE38D4849}']
+    function AtualizarTabelaMembros : TDataSet ;
+    procedure AdicionarUsuario();
+    function RetornarMembro(aID : Integer) : TUserDTO;
+    procedure Update;
+    procedure Delete(aID : Integer);
+  end;
+
 
 
 

@@ -5,7 +5,7 @@ uses my_contracts, Data.DB, escola_repository,escolas_DTO, escola_entity;
 
 type
 
-TEscola_Service = class(TInterfacedObject, IMenuAdminService)
+TEscola_Service = class(TInterfacedObject, IEscolaService)
 
 private
 FEscolaRepo : IEscolaRepository;

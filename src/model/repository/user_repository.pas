@@ -214,4 +214,13 @@ end;
 
 
 
+function TUserRepository.GetUsersDataSet: TDataSet;
+begin
+  DataModule1.FDQuery1.Close;
+  DataModule1.FDQuery1.SQL.Text := 'SELECT u.user_name, u.email, r.descricao FROM users u join roles r ON u.user_role_id = r.id WHERE user_escola_id = :ESCOLA ';
+  DataModule1.FDQuery1.ParamByName('ESCOLA').AsInteger := UsuarioLogado.Escola;
+  DataModule1.FDQuery1.Open;
+  Result := DataModule1.FDQuery1;
+end;
+
 end.

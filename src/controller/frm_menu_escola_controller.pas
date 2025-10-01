@@ -52,7 +52,7 @@ end;
 
 function TMenuAdminController.AtualizarTabelaMembros: TDataSet;
 begin
-
+  Result := FServiceUser.AtualizarTabelaUsuarios;
 end;
 
 

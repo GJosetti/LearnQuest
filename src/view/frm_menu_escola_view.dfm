@@ -82,16 +82,17 @@ object frm_menuEscola: Tfrm_menuEscola
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'Nome'
+          FieldName = 'email'
           ReadOnly = True
           Title.Alignment = taCenter
-          Title.Caption = 'Nome Institui'#231#227'o'
+          Title.Caption = 'Email'
           Width = 150
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
-          FieldName = 'role'
+          FieldName = 'descricao'
           Title.Alignment = taCenter
           Title.Caption = 'Cargo'
           Width = 100
@@ -130,8 +131,8 @@ object frm_menuEscola: Tfrm_menuEscola
       TabOrder = 3
     end
     object pnl_addNEdit_EscolaMenu: TPanel
-      Left = 208
-      Top = 305
+      Left = 176
+      Top = 81
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -154,8 +155,8 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 148
-        ExplicitTop = 207
+        ExplicitLeft = -20
+        ExplicitTop = -14
       end
       object lbl_nome_edit_addNEdit_EscolaMenu: TLabel
         Left = 160

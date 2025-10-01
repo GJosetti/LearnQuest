@@ -32,6 +32,11 @@ uses DMConnection;
 
 
 
+function TUserService.AtualizarTabelaUsuarios: TDataSet;
+begin
+  Result := FUserRepository.GetUsersDataSet;
+end;
+
 constructor TUserService.Create();
 begin
 

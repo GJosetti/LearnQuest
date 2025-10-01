@@ -129,8 +129,8 @@ begin
  if Assigned(d_Src_membros_escola) then begin
    d_Src_membros_escola.DataSet := nil; // limpa antes
  end;
-  //d_Src_membros_escola.DataSet := FController.AtualizarTabelaEscolas;
- // dbg_membrosEscola.DataSource := d_Src_escolas;
+  d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
+  dbg_membrosEscola.DataSource := d_Src_membros_escola;
 
 
 

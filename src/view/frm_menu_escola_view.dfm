@@ -10,6 +10,7 @@ object frm_menuEscola: Tfrm_menuEscola
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object pnl_home_EscolaMenu: TPanel
     Left = 263
@@ -71,10 +72,11 @@ object frm_menuEscola: Tfrm_menuEscola
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'ID'
+          FieldName = 'user_name'
           ReadOnly = True
-          Title.Caption = '-ID-'
-          Width = 50
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 150
           Visible = True
         end
         item
@@ -82,26 +84,17 @@ object frm_menuEscola: Tfrm_menuEscola
           Expanded = False
           FieldName = 'Nome'
           ReadOnly = True
+          Title.Alignment = taCenter
           Title.Caption = 'Nome Institui'#231#227'o'
           Width = 150
           Visible = True
         end
         item
-          Alignment = taCenter
           Expanded = False
-          FieldName = 'Endereco'
-          ReadOnly = True
-          Title.Caption = 'Endere'#231'o'
-          Width = 125
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'membros_qtd'
-          ReadOnly = True
-          Title.Caption = 'Quantidade'
-          Width = 75
+          FieldName = 'role'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cargo'
+          Width = 100
           Visible = True
         end>
     end
@@ -114,6 +107,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 1
+      OnClick = btn_adicionar_EscolaMenuClick
     end
     object btn_remover_EscolaMenu: TPanel
       Left = 320
@@ -136,8 +130,8 @@ object frm_menuEscola: Tfrm_menuEscola
       TabOrder = 3
     end
     object pnl_addNEdit_EscolaMenu: TPanel
-      Left = 176
-      Top = 93
+      Left = 208
+      Top = 305
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -160,7 +154,8 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 137
+        ExplicitLeft = 148
+        ExplicitTop = 207
       end
       object lbl_nome_edit_addNEdit_EscolaMenu: TLabel
         Left = 160
@@ -217,6 +212,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Color = clBtnHighlight
         ParentBackground = False
         TabOrder = 2
+        OnClick = btn_cancelar_addNEdit_EscolaMenuClick
       end
       object edt_password_addNEdit__EscolaMenu: TEdit
         Left = 32

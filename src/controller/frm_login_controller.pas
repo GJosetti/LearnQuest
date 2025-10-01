@@ -2,7 +2,7 @@ unit frm_login_controller;
 
 
 interface
-uses my_contracts, user_service,user_DTO, SysUtils, App_Consts;
+uses my_contracts, user_service,user_DTO, SysUtils, App_Consts, Sessao;
 
 type
   TLoginController = class(TInterfacedObject,ILoginController)
@@ -28,6 +28,7 @@ constructor TLoginController.Create(aView: ILoginView);
 begin
   Fview := aView;
   FService := TUserService.Create;
+
 end;
 
 
@@ -47,9 +48,14 @@ begin
     FView.Mensagem('Usuário ou senha incorretos!');
   end else begin
     //COLOCAR NA VIEW
-   Fview.Mensagem('Login realizado com sucesso! ID: ' + ResultadoDTO.ID.ToString);
+   Fview.Mensagem('Login realizado com sucesso! Bem-vindo(a) ' + ResultadoDTO.Name);
 
-   Fview.TrocarTela(ResultadoDTO.Role);
+   UsuarioLogado:= ResultadoDTO;
+   FService.SetPathByEscola(ResultadoDTO.ID);
+   Fview.TrocarTela(ResultadoDTO);
+
+
+
 
 
   end;

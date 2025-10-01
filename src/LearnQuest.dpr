@@ -18,7 +18,16 @@ uses
   escola_repository in 'model\repository\escola_repository.pas',
   escola_entity in 'model\entity\escola_entity.pas',
   frm_menu_escola_view in 'view\frm_menu_escola_view.pas' {frm_menuEscola},
-  frm_menu_escola_controller in 'controller\frm_menu_escola_controller.pas';
+  frm_menu_escola_controller in 'controller\frm_menu_escola_controller.pas',
+  Sessao in 'db\Sessao.pas',
+  professores_DTO in 'model\DTO\professores_DTO.pas',
+  estudante_entity in 'model\entity\estudante_entity.pas',
+  professor_entity in 'model\entity\professor_entity.pas',
+  estudantes_DTO in 'model\DTO\estudantes_DTO.pas',
+  professor_service in 'service\professor_service.pas',
+  estudante_service in 'service\estudante_service.pas',
+  professor_repository in 'model\repository\professor_repository.pas',
+  estudante_repository in 'model\repository\estudante_repository.pas';
 
 {$R *.res}
 

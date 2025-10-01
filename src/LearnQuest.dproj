@@ -163,6 +163,15 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controller\frm_menu_escola_controller.pas"/>
+        <DCCReference Include="db\Sessao.pas"/>
+        <DCCReference Include="model\DTO\professores_DTO.pas"/>
+        <DCCReference Include="model\entity\estudante_entity.pas"/>
+        <DCCReference Include="model\entity\professor_entity.pas"/>
+        <DCCReference Include="model\DTO\estudantes_DTO.pas"/>
+        <DCCReference Include="service\professor_service.pas"/>
+        <DCCReference Include="service\estudante_service.pas"/>
+        <DCCReference Include="model\repository\professor_repository.pas"/>
+        <DCCReference Include="model\repository\estudante_repository.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

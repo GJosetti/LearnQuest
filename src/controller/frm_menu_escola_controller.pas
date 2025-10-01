@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB, user_DTO, user_service, escola_service;
+uses my_contracts, Data.DB, user_DTO, user_service, escola_service, professor_service;
 
 type
 
@@ -11,6 +11,8 @@ private
  Fview : IEscolaAdminView;
  FServiceEscola : IEscolaService;
  FServiceUser: IUserService;
+ FServiceProfessor : IProfessorService;
+ //FServiceEstudante : IEstudanteService;
 public
    function AtualizarTabelaMembros : TDataSet ;
    procedure AdicionarUsuario();
@@ -34,6 +36,9 @@ if not Assigned(FServiceEscola) then begin
   end;
   if not Assigned(FServiceUser) then begin
     FServiceUser := TUserService.Create;
+  end;
+  if not Assigned(FServiceProfessor) then begin
+    FServiceProfessor := TProfessorService.Create;
   end;
   if not Assigned(Fview) then begin
     Fview := aView ;

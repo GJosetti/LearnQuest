@@ -163,8 +163,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 76
-        ExplicitTop = 54
+        ExplicitWidth = 126
       end
       object lbl_nome_edit_addNEdit_adminMenu: TLabel
         Left = 160

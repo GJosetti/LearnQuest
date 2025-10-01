@@ -1,7 +1,7 @@
 unit user_service;
 
 interface
-uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository;
+uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository, Data.DB;
 
 type
 TUserService = class(TInterfacedObject,IUserService)
@@ -17,6 +17,8 @@ public
   constructor Create();
   procedure Update(aDto : TUserDTO);
   procedure Delete (aID: Integer);
+  procedure SetPathByEscola (aID: Integer);
+  function AtualizarTabelaUsuarios : TDataSet;
 end;
 
 
@@ -83,6 +85,7 @@ begin
     FResultDTO.Name := FUserModel.GetNome;
     FResultDTO.Role := FUserModel.GetRole;
     FResultDTO.Password := FUserModel.GetPassword;
+    FResultDTO.Escola := FUserModel.GetEscola;
     FResultDTO.Email := FUserModel.GetEmail;
 
     Result := FResultDTO;
@@ -107,6 +110,11 @@ begin
 
   FUserRepository.Save(FUsuario);
 
+end;
+
+procedure TUserService.SetPathByEscola(aID: Integer);
+begin
+  FUserRepository.SetPathSchema(aID);
 end;
 
 procedure TUserService.Update(aDto: TUserDTO);
@@ -155,6 +163,9 @@ try
     FuserDTO.Name := FUser.GetNome;
     FUserDTO.ID := FUser.GetID;
     FUserDTO.Role := Fuser.GetRole;
+    FUserDTO.Escola := FUser.GetEscola;
+    FUserDTO.Email := FUser.GetEmail;
+
 
     Result := FUserDTO;
   end;

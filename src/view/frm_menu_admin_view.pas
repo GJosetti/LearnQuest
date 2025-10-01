@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO, Sessao;
 
 type
   TMode = (m_ADD,m_EDIT);

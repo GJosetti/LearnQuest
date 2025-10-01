@@ -1,7 +1,7 @@
   unit user_repository;
 
 interface
-uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection;
+uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection,Sessao, VCL.Dialogs, Data.DB;
 
 type
 TUserRepository = class(TInterfacedObject,IUserRepository)
@@ -19,6 +19,8 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     constructor Create();
     procedure Update(aModel: TUserModel);
     procedure Delete (aID: Integer);
+    procedure SetPathSchema (aID : Integer);
+    function GetUsersDataSet: TDataSet;
 end;
 
 
@@ -39,6 +41,7 @@ begin
   FUserRepo.SetPassword(aQuery.FieldByName('password').AsString);
   FUserRepo.SetEmail(aQuery.FieldByName('email').AsString);
   FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
+  FUserRepo.SetEscola(aQuery.FieldByName('user_escola_id').AsInteger);
   Result := FUserRepo;
 
 
@@ -67,6 +70,45 @@ begin
  end;
 
 
+end;
+
+procedure TUserRepository.SetPathSchema(aID: Integer);
+var
+  Qry: TFDQuery;
+  SchemaName: string;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'SELECT t.schema_name ' +
+      '  FROM users u ' +
+      '  JOIN tenants t ON t.id = u.user_escola_id ' +
+      ' WHERE u.id = :users_id';
+    Qry.ParamByName('users_id').AsInteger := aID;
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+    begin
+      SchemaName := Qry.FieldByName('schema_name').AsString;
+
+
+      FConnection.ExecSQL(
+        'SET search_path TO ' + SchemaName + ', public'
+      );
+
+    //Teste de Schema
+  //      Qry.Close;
+  //      Qry.SQL.Text := 'SHOW search_path';
+  //      Qry.Open;
+  //      ShowMessage(Qry.Fields[0].AsString);
+
+      //Guarda na sessão atual
+      FPathSchema := SchemaName;
+    end;
+  finally
+    Qry.Free;
+  end;
 end;
 
 procedure TUserRepository.Update(aModel: TUserModel);

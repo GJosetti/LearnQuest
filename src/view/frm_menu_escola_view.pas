@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller;
 
 type
   Tfrm_menuEscola = class(TForm, IEscolaAdminView)
@@ -33,9 +33,13 @@ type
     lbl_role_addNEdit_EscolaAdmin: TLabel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn_adicionar_EscolaMenuClick(Sender: TObject);
+    procedure btn_cancelar_addNEdit_EscolaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
+    FController : IMenuEscolaController;
   public
    function GetNome:String;
     function GetPassword: String;
@@ -55,9 +59,31 @@ implementation
 { Tfrm_menuEscola }
 
 
+procedure Tfrm_menuEscola.btn_adicionar_EscolaMenuClick(Sender: TObject);
+begin
+  pnl_addNEdit_EscolaMenu.Visible := true;
+end;
+
+procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
+  Sender: TObject);
+begin
+pnl_addNEdit_EscolaMenu.Visible := false;
+end;
+
 function Tfrm_menuEscola.CamposValidos: Boolean;
 begin
 
+end;
+
+
+
+procedure Tfrm_menuEscola.FormCreate(Sender: TObject);
+begin
+  if not Assigned(FController) then begin
+    FController := TMenuAdminController.Create(Self);
+  end;
+  cb_role_addNEdit_EscolaMenu.Items.Add('Professor');
+  cb_role_addNEdit_EscolaMenu.Items.Add('Estudante');
 end;
 
 function Tfrm_menuEscola.GetEmail: String;

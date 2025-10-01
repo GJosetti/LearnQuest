@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO;
 
 type
 
@@ -16,6 +16,8 @@ type
     function FindByIDEscola(aID: Integer) : TUserModel;
     procedure Update(aModel : TUserModel);
     procedure Delete (aID : Integer);
+    procedure SetPathSchema (aID : Integer);
+    function GetUsersDataSet: TDataSet;
   end;
 
 
@@ -29,6 +31,48 @@ type
 
   end;
 
+  IProfessorRepository = interface
+    ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
+    function GetByID (aID : Integer): TProfessorModel;
+    procedure Salvar(aDTO: TProfessorModel);
+    function GetUserByID (aID: Integer): TProfessorModel;
+    procedure Update(aDto : TProfessorModel);
+    procedure Delete (aID: Integer);
+
+  end;
+
+
+  //Services
+
+  IUserService = interface
+    ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
+    function GetByID (aID : Integer): TUserDTO;
+    function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
+    procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+    function GetByEscolaID (aID : Integer): TUserDTO;
+    procedure Update(aDto : TUserDTO);
+    procedure Delete (aID: Integer);
+    procedure SetPathByEscola (aID: Integer);
+    function AtualizarTabelaUsuarios : TDataSet;
+  end;
+
+  IEscolaService = interface
+    ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
+    function SalvarEscola (aDTO: TEscolaDTO): Integer;
+    function AtualizarTabelaEscolas : TDataSet;
+    procedure Update(aDto : TEscolaDTO);
+    procedure Delete (aID : Integer);
+  end;
+
+  IProfessorService = interface
+    ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
+    function GetByID (aID : Integer): TProfessorDTO;
+    procedure Salvar(aDTO: TProfessorDTO);
+    function GetUserByID (aID: Integer): TProfessorDTO;
+    procedure Update(aDto : TProfessorDTO);
+    procedure Delete (aID: Integer);
+
+  end;
 
 
   //--------------Login-----------------------//
@@ -39,22 +83,14 @@ type
     function GetNome: String;
     function GetPassword: String;
     procedure Mensagem(aString: String);
-    procedure TrocarTela(aRole : Integer);
+    procedure TrocarTela(aDTO: TUserDTO);
   end;
 
   ILoginController = interface
     ['{BE824FC4-BE45-42AD-A6A2-C15D6A105824}']
     procedure ProcessarLogin;
   end;
-  IUserService = interface
-    ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
-    function GetByID (aID : Integer): TUserDTO;
-    function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
-    procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
-    function GetByEscolaID (aID : Integer): TUserDTO;
-    procedure Update(aDto : TUserDTO);
-    procedure Delete (aID: Integer);
-  end;
+
 
 
   //------------------------------------------//
@@ -82,13 +118,7 @@ type
     procedure Delete(aID : Integer);
   end;
 
-  IEscolaService = interface
-    ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
-    function SalvarEscola (aDTO: TEscolaDTO): Integer;
-    function AtualizarTabelaEscolas : TDataSet;
-    procedure Update(aDto : TEscolaDTO);
-    procedure Delete (aID : Integer);
-  end;
+
   //-----------------Tela Escolas---------------------//
   IEscolaAdminView = interface
     ['{1AE3AEEE-506A-4889-A0F8-8E44BEAC9A1C}']

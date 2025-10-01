@@ -27,7 +27,7 @@ type
     function GetNome: String;
     function GetPassword: String;
     procedure Mensagem(aString: String);
-    procedure TrocarTela(aRole : Integer);
+    procedure TrocarTela(aDTO: TUserDTO);
   end;
 
 var
@@ -76,15 +76,15 @@ end;
 
 
 
-procedure Tfrm_login.TrocarTela(aRole : Integer);
+procedure Tfrm_login.TrocarTela(aDTO: TUserDTO);
 
 begin
 
   Self.Hide;
-  if(aRole = ROLE_ADMIN) then begin
+  if(aDTO.Role = ROLE_ADMIN) then begin
     frm_menuAdmin_view := Tfrm_menuAdmin_view.Create(nil);
     frm_menuAdmin_view.ShowModal;
-  end else if aRole = ROLE_ESCOLA then begin
+  end else if (aDTO.Role = ROLE_ESCOLA) then begin
     frm_menuEscola := Tfrm_menuEscola.Create(nil);
     frm_menuEscola.ShowModal;
   end;

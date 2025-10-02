@@ -18,5 +18,7 @@ create table tenants(
 	id bigserial primary key,
 	nome varchar not null,
 	endereco varchar not null,
-	membros_qtd int not null
+	membros_qtd int not null,
+	schema_name varchar
 );
+

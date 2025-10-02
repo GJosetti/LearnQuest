@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB, user_DTO, user_service, escola_service, professor_service;
+uses my_contracts, Data.DB, user_DTO, user_service, escola_service, professor_service, professores_DTO, Sessao;
 
 type
 
@@ -46,8 +46,22 @@ if not Assigned(FServiceEscola) then begin
 end;
 
 procedure TMenuAdminController.AdicionarUsuario;
+var UserDTO : TUserDTO;
+var ProfessorDTO : TProfessorDTO;
 begin
+  UserDTO := TUserDTO.Create;
+  ProfessorDTO := TProfessorDTO.Create;
 
+  UserDTO.Name := Fview.GetNome;
+  UserDTO.Password := Fview.GetPassword;
+  UserDTO.Role := Fview.GetRole;
+  UserDTO.Email := Fview.GetEmail;
+  UserDTO.Escola := UsuarioLogado.Escola;
+
+
+  ProfessorDTO.UserId := FServiceUser.Salvar(UserDTO);
+
+  FServiceProfessor.Salvar(ProfessorDTO);
 end;
 
 function TMenuAdminController.AtualizarTabelaMembros: TDataSet;

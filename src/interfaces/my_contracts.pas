@@ -12,7 +12,7 @@ type
     ['{F59799D9-0A28-49CB-9D35-1E3AB3056DAE}']
     function FindByID(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
-    procedure Save (aModel : TUserModel);
+    function Save (aModel : TUserModel) : Integer;
     function FindByIDEscola(aID: Integer) : TUserModel;
     procedure Update(aModel : TUserModel);
     procedure Delete (aID : Integer);
@@ -34,7 +34,7 @@ type
   IProfessorRepository = interface
     ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
     function GetByID (aID : Integer): TProfessorModel;
-    procedure Salvar(aDTO: TProfessorModel);
+    procedure Salvar(aModel: TProfessorModel);
     function GetUserByID (aID: Integer): TProfessorModel;
     procedure Update(aDto : TProfessorModel);
     procedure Delete (aID: Integer);
@@ -48,7 +48,7 @@ type
     ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
     function GetByID (aID : Integer): TUserDTO;
     function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
-    procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+    function Salvar(aDTO: TUserDTO) : Integer;
     function GetByEscolaID (aID : Integer): TUserDTO;
     procedure Update(aDto : TUserDTO);
     procedure Delete (aID: Integer);

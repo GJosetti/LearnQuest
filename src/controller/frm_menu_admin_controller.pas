@@ -106,8 +106,9 @@ begin
   RequestDTOUsuario.Password := Fview.GetPassword.GetHashCode.ToString;
   RequestDTOUsuario.Email := Fview.GetEmail;
 
-  tempID := FServiceEscola.SalvarEscola(RequestDTOEscola);
-  FServiceUser.Salvar(RequestDTOUsuario, tempID);
+
+  RequestDTOUsuario.Escola := FServiceEscola.SalvarEscola(RequestDTOEscola);
+  FServiceUser.Salvar(RequestDTOUsuario);
 
 
 end;

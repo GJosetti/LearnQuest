@@ -2,7 +2,7 @@ insert into users (user_name,user_role_id, password, email) values('admin',1,'15
 insert into roles (descricao) values('Cargo de Administrador');
 insert into roles (descricao) values('Escola');
 
-delete from users  where id = 5;
+delete from users  where id = 3;
 select *from users; 
 select user_name, roles.descricao from users inner join roles on user_role_id = roles.id;
 
@@ -29,8 +29,8 @@ select * from tenants;
 select *from users; 
 
 
-delete from tenants where id = 1; 
-delete from users  where id = 5;
+delete from tenants where id = 3; 
+delete from users  where id = 7;
 
 update users set password = 1592916 where id = 3;  
 

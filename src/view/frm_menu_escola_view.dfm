@@ -129,10 +129,11 @@ object frm_menuEscola: Tfrm_menuEscola
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 3
+      OnClick = btn_editar_EscolaMenuClick
     end
     object pnl_addNEdit_EscolaMenu: TPanel
-      Left = 176
-      Top = 81
+      Left = 160
+      Top = 12
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -155,7 +156,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = -20
+        ExplicitLeft = 140
         ExplicitTop = -14
       end
       object lbl_nome_edit_addNEdit_EscolaMenu: TLabel
@@ -182,7 +183,7 @@ object frm_menuEscola: Tfrm_menuEscola
       object lbl_role_addNEdit_EscolaAdmin: TLabel
         Left = 168
         Top = 313
-        Width = 82
+        Width = 81
         Height = 15
         Caption = 'Tipo de usu'#225'rio'
       end
@@ -203,6 +204,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Color = clBtnHighlight
         ParentBackground = False
         TabOrder = 1
+        OnClick = btn_concluir_addNEdit_EscolaMenuClick
       end
       object btn_cancelar_addNEdit_EscolaMenu: TPanel
         Left = 383

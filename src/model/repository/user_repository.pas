@@ -15,7 +15,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     function FindByID(aID: Integer) : TUserModel;
     function FindByIDEscola(aID: Integer) : TUserModel;
     function FindByNome(aNome: String) : TUserModel;
-    procedure Save (aModel : TUserModel);
+    function Save (aModel : TUserModel) : Integer;
     constructor Create();
     procedure Update(aModel: TUserModel);
     procedure Delete (aID: Integer);
@@ -47,24 +47,26 @@ begin
 
 end;
 
-procedure TUserRepository.Save(aModel: TUserModel);
+function TUserRepository.Save(aModel: TUserModel) : Integer;
 var Qry : TFDQuery;
+FID : Integer;
 SchemaName : String;
 SQL : String;
 begin
   Qry:= TFDQuery.Create(nil);
  try
   Qry.Connection := FConnection;
-  Qry.SQL.Text := 'insert into users (user_name,user_role_id, password, email, user_escola_id)' + 'values (:NAME ,:ROLE,:SENHA ,:EMAIL ,:ESCOLA )';
+  Qry.SQL.Text := 'insert into users (user_name,user_role_id, password, email, user_escola_id)' + 'values (:NAME ,:ROLE,:SENHA ,:EMAIL ,:ESCOLA ) RETURNING id';
   Qry.ParamByName('NAME').AsString := aModel.GetNome;
   Qry.ParamByName('ROLE').AsInteger := aModel.GetRole;
   Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
   Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
   Qry.ParamByName('ESCOLA').AsInteger := aModel.GetEscola;
-  Qry.ExecSQL;
-
+  Qry.Open;
+  FID := Qry.FieldByName('id').AsInteger;
   Qry.SQL.Clear;
-
+  Qry.Close;
+  Result := FID;
  finally
   Qry.Free;
  end;

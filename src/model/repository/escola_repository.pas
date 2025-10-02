@@ -75,7 +75,7 @@ begin
 
   if not Assigned (CriarTabelas) then begin
     CriarTabelas := TStringList.Create;
-    CriarTabelas.LoadFromFile('C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
+    CriarTabelas.LoadFromFile('C:\Users\guilherme.8623\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
 
   end;
 

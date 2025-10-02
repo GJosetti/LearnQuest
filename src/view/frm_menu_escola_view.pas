@@ -8,6 +8,7 @@ uses
   Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller;
 
 type
+  TMode = (m_Add,m_Edit);
   Tfrm_menuEscola = class(TForm, IEscolaAdminView)
     d_Src_membros_escola: TDataSource;
     pnl_membros_EscolaMenu: TPanel;
@@ -36,10 +37,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btn_adicionar_EscolaMenuClick(Sender: TObject);
     procedure btn_cancelar_addNEdit_EscolaMenuClick(Sender: TObject);
+    procedure btn_editar_EscolaMenuClick(Sender: TObject);
+    procedure btn_concluir_addNEdit_EscolaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
     FController : IMenuEscolaController;
+    Fmode : TMode;
+    procedure ClearAllEdits;
   public
    function GetNome:String;
     function GetPassword: String;
@@ -61,13 +66,35 @@ implementation
 
 procedure Tfrm_menuEscola.btn_adicionar_EscolaMenuClick(Sender: TObject);
 begin
+
   pnl_addNEdit_EscolaMenu.Visible := true;
+  Fmode := m_Add;
 end;
 
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
-pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  ClearAllEdits;
+
+end;
+
+procedure Tfrm_menuEscola.btn_concluir_addNEdit_EscolaMenuClick(
+  Sender: TObject);
+begin
+
+  if Fmode = m_Add then begin
+    FController.AdicionarUsuario;
+  end;
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  FController.AtualizarTabelaMembros;
+  ClearAllEdits;
+end;
+
+procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
+begin
+  pnl_addNEdit_EscolaMenu.Visible := true;
+  Fmode := m_Edit;
 end;
 
 function Tfrm_menuEscola.CamposValidos: Boolean;
@@ -76,6 +103,15 @@ begin
 end;
 
 
+
+procedure Tfrm_menuEscola.ClearAllEdits;
+begin
+  edt_nome_addNEdit_EscolaMenu.Clear;
+  edt_password_addNEdit__EscolaMenu.Clear;
+  edt_email_addNEdit_EscolaMenu.Clear;
+  cb_role_addNEdit_EscolaMenu.ItemIndex := -1;
+  cb_role_addNEdit_EscolaMenu.TextHint := 'Selecione um tipo:'
+end;
 
 procedure Tfrm_menuEscola.FormCreate(Sender: TObject);
 begin
@@ -109,7 +145,8 @@ end;
 function Tfrm_menuEscola.GetRole: Integer;
 begin
   //Começa em 0
-  Result := cb_role_addNEdit_EscolaMenu.ItemIndex;
+
+  Result := (cb_role_addNEdit_EscolaMenu.ItemIndex + 3); //Começa em 0 e 1 é administrador e 2 é escola
 end;
 
 procedure Tfrm_menuEscola.HomeClick(Sender: TObject);

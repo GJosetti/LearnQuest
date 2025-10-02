@@ -13,7 +13,7 @@ public
   function GetByID(aID: Integer): TUserDTO;
   function GetByEscolaID (aID: Integer): TuserDTO;
   function ValidarLogin(aDTO: TUserDTO):TUserDTO;
-  procedure Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+  function Salvar(aDTO: TUserDTO) : Integer;
   constructor Create();
   procedure Update(aDto : TUserDTO);
   procedure Delete (aID: Integer);
@@ -101,7 +101,7 @@ begin
 end;
 
 
-procedure TUserService.Salvar(aDTO: TUserDTO; aIDEscola : Integer);
+function TUserService.Salvar(aDTO: TUserDTO) : Integer;
 
 var FUsuario : TUserModel;
 begin
@@ -111,9 +111,9 @@ begin
   FUsuario.SetPassword(aDTO.Password);
   FUsuario.SetRole(aDTO.Role);
   FUsuario.SetEmail(aDTO.Email);
-  FUsuario.SetEscola(aIDEscola);
+  FUsuario.SetEscola(aDTO.Escola);
 
-  FUserRepository.Save(FUsuario);
+  Result := FUserRepository.Save(FUsuario);
 
 end;
 

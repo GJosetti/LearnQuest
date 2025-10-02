@@ -49,10 +49,16 @@ begin
 end;
 
 procedure TProfessorService.Salvar(aDTO: TProfessorDTO);
+var FProfessor : TProfessorModel;
 begin
 
-end;
+  FProfessor := TProfessorModel.Create;
+  FProfessor.SetUserID(aDTO.UserId);
 
+
+  FProfessorRepo.Salvar(FProfessor);
+
+end;
 procedure TProfessorService.Update(aDto: TProfessorDTO);
 begin
 

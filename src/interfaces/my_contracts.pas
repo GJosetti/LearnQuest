@@ -28,6 +28,7 @@ type
     function Save (aModel : TEscolaModel): Integer;
     procedure Update(aModel : TEscolaModel);
     procedure Delete (aID: Integer);
+    procedure AtualizarQtd();
 
   end;
 

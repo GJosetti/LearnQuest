@@ -19,6 +19,7 @@ function GetEscolaDataSet : TDataSet;
 function Save (aModel: TEscolaModel) : Integer;
 procedure Update(aModel : TEscolaModel);
 procedure Delete (aID: Integer);
+procedure AtualizarQtd();
 constructor Create();
 
 end;
@@ -26,6 +27,40 @@ end;
 implementation
 
 { TEscolaRepository }
+
+procedure TEscolaRepository.AtualizarQtd;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+
+    // Atualiza tenants com usuários
+    Qry.SQL.Text :=
+      'UPDATE tenants t ' +
+      'SET membros_qtd = sub.qtd ' +
+      'FROM ( ' +
+      '   SELECT user_escola_id AS escola_id, COUNT(*) AS qtd ' +
+      '   FROM users ' +
+      '   GROUP BY user_escola_id ' +
+      ') sub ' +
+      'WHERE t.id = sub.escola_id';
+    Qry.ExecSQL;
+
+    // Atualiza tenants sem usuários para 0
+    Qry.SQL.Text :=
+      'UPDATE tenants ' +
+      'SET membros_qtd = 0 ' +
+      'WHERE id NOT IN (SELECT DISTINCT user_escola_id FROM users)';
+    Qry.ExecSQL;
+
+  finally
+    Qry.Free;
+  end;
+end;
+
+
 
 constructor TEscolaRepository.Create;
 begin
@@ -57,6 +92,8 @@ begin
     Qry.ParamByName('ID').AsInteger := aID;
     Qry.ExecSQL;
 
+    AtualizarQtd;
+
   finally
     Qry.Free;
   end;
@@ -69,10 +106,12 @@ end;
 
 function TEscolaRepository.GetEscolaDataSet: TDataSet;
 begin
+  AtualizarQtd;
   DataModule1.FDQueryEscolas.Close;
   DataModule1.FDQueryEscolas.SQL.Text := 'SELECT id, nome, endereco, membros_qtd FROM tenants';
   DataModule1.FDQueryEscolas.Open;
   Result := DataModule1.FDQueryEscolas;
+
 end;
 
 
@@ -130,6 +169,7 @@ begin
 
 
   Result := FID;
+  AtualizarQtd;
   finally
     Qry.Free;
   end;

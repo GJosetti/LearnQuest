@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO;
 
 type
 
@@ -41,6 +41,16 @@ type
 
   end;
 
+  IEstudanteRepository = interface
+    ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
+    function GetByID (aID : Integer): TEstudanteModel;
+    procedure Salvar(aModel: TEstudanteModel);
+    function GetUserByID (aID: Integer): TEstudanteModel;
+    procedure Update(aDto : TEstudanteModel);
+    procedure Delete (aID: Integer);
+
+  end;
+
 
   //Services
 
@@ -74,6 +84,14 @@ type
 
   end;
 
+    IEstudanteService = interface
+    ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
+    function GetByID (aID : Integer): TEstudanteDTO;
+    procedure Salvar(aDTO: TEstudanteDTO);
+    function GetUserByID (aID: Integer): TEstudanteDTO;
+    procedure Update(aDto : TEstudanteDTO);
+    procedure Delete (aID: Integer);
+    end;
 
   //--------------Login-----------------------//
 

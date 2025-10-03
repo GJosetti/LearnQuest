@@ -1,7 +1,7 @@
 unit escola_repository;
 
 interface
-uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity, System.SysUtils,System.Classes;
+uses my_contracts, Data.DB, DMConnection, FireDAC.Comp.Client, escola_entity, System.SysUtils,System.Classes, Vcl.Dialogs;
 
 type
 TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
@@ -36,13 +36,27 @@ end;
 procedure TEscolaRepository.Delete(aID: Integer);
 var
   Qry: TFDQuery;
+  FSchemaName : String;
 begin
   Qry := TFDQuery.Create(nil);
   try
-    Qry.Connection := FConnection;
+     Qry.Connection := FConnection;
+
+    Qry.SQL.Text := 'SELECT schema_name from tenants where id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.Open;
+    FSchemaName := Qry.FieldByName('schema_name').AsString;
+
+    ShowMessage(FSchemaName);
+    Qry.sql.Text := 'DROP SCHEMA ' + FSchemaName +' CASCADE';
+
+    Qry.ExecSQL;
+
+
     Qry.SQL.Text := 'DELETE from tenants where id = :ID';
     Qry.ParamByName('ID').AsInteger := aID;
     Qry.ExecSQL;
+
   finally
     Qry.Free;
   end;

@@ -59,6 +59,7 @@ begin
 
  finally
   Qry.Free;
+  aModel.Free;
  end;
 
 

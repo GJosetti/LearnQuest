@@ -1,6 +1,10 @@
 insert into users (user_name,user_role_id, password, email) values('admin',1,'1592916','administrador@gmail.com');
 insert into roles (descricao) values('Cargo de Administrador');
 insert into roles (descricao) values('Escola');
+insert into roles (descricao) values ('Professor');
+insert into roles (descricao) values ('Estudante');
+
+select * from roles
 
 delete from users  where id = 3;
 select *from users; 
@@ -30,7 +34,14 @@ select *from users;
 
 
 delete from tenants where id = 3; 
-delete from users  where id = 7;
+delete from users  where id = 16;
+
+delete from escola_4.professores where id = 6;
+select * from escola_4.estudante e ;
+select * from escola_4.professores;
+
+delete from escola_4.estudante where id = 1;
+delete from escola_4.professores where id = 5;
 
 update users set password = 1592916 where id = 3;  
 

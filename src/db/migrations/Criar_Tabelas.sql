@@ -40,6 +40,7 @@ CREATE TABLE professores (
 CREATE TABLE turmas (
     id BIGSERIAL PRIMARY KEY,
     turma_name VARCHAR(255) NOT NULL,
+    descricao VARCHAR not null,
     professor_id BIGINT NOT NULL REFERENCES professores(id)
 );
 
@@ -80,6 +81,7 @@ CREATE TABLE atividade_fase (
     atividade_id BIGINT NOT NULL REFERENCES atividades(id),
     fase_id BIGINT NOT NULL REFERENCES fase(id)
 );
+
 
 
 

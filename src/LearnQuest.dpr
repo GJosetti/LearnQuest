@@ -27,7 +27,10 @@ uses
   professor_service in 'service\professor_service.pas',
   estudante_service in 'service\estudante_service.pas',
   professor_repository in 'model\repository\professor_repository.pas',
-  estudante_repository in 'model\repository\estudante_repository.pas';
+  estudante_repository in 'model\repository\estudante_repository.pas',
+  turma_entity in 'model\entity\turma_entity.pas',
+  turma_DTO in 'model\DTO\turma_DTO.pas',
+  turma_repository in 'model\repository\turma_repository.pas';
 
 {$R *.res}
 

@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity;
 
 type
 
@@ -49,6 +49,16 @@ type
     function GetUserByID (aID: Integer): TEstudanteModel;
     procedure Update(aDto : TEstudanteModel);
     procedure Delete (aID: Integer);
+
+  end;
+
+  ITurmaRepository = interface
+    ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
+    function GetByID (aID : Integer): TTurmaModel;
+    procedure Salvar(aModel: TTurmaModel);
+    procedure Update(aModel : TTurmaModel);
+    procedure Delete (aID: Integer);
+    procedure LinkEstudante (aID: Integer);
 
   end;
 

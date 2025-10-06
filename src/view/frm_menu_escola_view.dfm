@@ -54,7 +54,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Height = 49
       Caption = 'Turmas'
       TabOrder = 2
-      OnClick = MembrosClick
+      OnClick = TurmasClick
     end
   end
   object pnl_membros_EscolaMenu: TPanel
@@ -311,7 +311,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 1
-      OnClick = btn_adicionar_EscolaMenuClick
+      OnClick = btn_AdicionarTurmaMenuClick
     end
     object btn_RemoverTurmaMenu: TPanel
       Left = 320

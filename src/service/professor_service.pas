@@ -1,7 +1,7 @@
 unit professor_service;
 
 interface
-uses my_contracts, professores_DTO,professor_entity, professor_repository;
+uses my_contracts, professores_DTO,professor_entity, professor_repository, System.Classes;
 
 type
 TProfessorService = class(TInterfacedObject,IProfessorService)
@@ -16,6 +16,7 @@ public
  procedure Update(aDto : TProfessorDTO);
  procedure Delete (aID: Integer);
  constructor Create;
+ function GetAllNames : TStringList;
 
 
 
@@ -36,6 +37,11 @@ end;
 procedure TProfessorService.Delete(aID: Integer);
 begin
 
+end;
+
+function TProfessorService.GetAllNames: TStringList;
+begin
+  Result := FProfessorRepo.GetAllNames;
 end;
 
 function TProfessorService.GetByID(aID: Integer): TProfessorDTO;

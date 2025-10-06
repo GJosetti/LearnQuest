@@ -30,7 +30,8 @@ uses
   estudante_repository in 'model\repository\estudante_repository.pas',
   turma_entity in 'model\entity\turma_entity.pas',
   turma_DTO in 'model\DTO\turma_DTO.pas',
-  turma_repository in 'model\repository\turma_repository.pas';
+  turma_repository in 'model\repository\turma_repository.pas',
+  turma_service in 'service\turma_service.pas';
 
 {$R *.res}
 

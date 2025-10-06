@@ -1,7 +1,7 @@
 unit professor_repository;
 
 interface
-uses my_contracts, professor_entity,DMConnection,FireDAC.Comp.Client;
+uses my_contracts,System.Classes, professor_entity,DMConnection,FireDAC.Comp.Client;
 
 type
 
@@ -15,6 +15,7 @@ public
     function GetUserByID (aID: Integer): TProfessorModel;
     procedure Update(aDto : TProfessorModel);
     procedure Delete (aID: Integer);
+    function GetAllNames : TStringList;
     constructor Create();
 end;
 
@@ -32,6 +33,34 @@ procedure TProfessorRepository.Delete(aID: Integer);
 begin
 
 end;
+
+function TProfessorRepository.GetAllNames: TStringList;
+var
+Qry : TFDQuery;
+SQL : String;
+sL : TStringList;
+begin
+  Qry := TFDQuery.Create(nil);
+  sL := TStringList.Create;
+try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'SELECT u.user_name FROM professores p JOIN users u ON u.id = p.user_id';
+  Qry.Open();
+  while not Qry.Eof do begin
+    sL.Add(Qry.FieldByName('user_name').AsString);
+    Qry.Next;
+  end;
+
+  Result := sL;
+
+finally
+  Qry.Free;
+end;
+
+
+
+end;
+
 
 function TProfessorRepository.GetByID(aID: Integer): TProfessorModel;
 begin

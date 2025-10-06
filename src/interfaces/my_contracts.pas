@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity, System.Classes;
 
 type
 
@@ -23,42 +23,43 @@ type
 
   IEscolaRepository = interface
     ['{1D9016AA-15DA-4253-926A-EEF2ABF7AF12}']
-    function FindByID(aID: Integer) : TEscolaModel;
-    function GetEscolaDataSet: TDataSet;
-    function Save (aModel : TEscolaModel): Integer;
-    procedure Update(aModel : TEscolaModel);
-    procedure Delete (aID: Integer);
-    procedure AtualizarQtd();
+      function FindByID(aID: Integer) : TEscolaModel;
+      function GetEscolaDataSet: TDataSet;
+      function Save (aModel : TEscolaModel): Integer;
+      procedure Update(aModel : TEscolaModel);
+      procedure Delete (aID: Integer);
+      procedure AtualizarQtd();
 
   end;
 
   IProfessorRepository = interface
     ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
-    function GetByID (aID : Integer): TProfessorModel;
-    procedure Salvar(aModel: TProfessorModel);
-    function GetUserByID (aID: Integer): TProfessorModel;
-    procedure Update(aDto : TProfessorModel);
-    procedure Delete (aID: Integer);
+      function GetByID (aID : Integer): TProfessorModel;
+      procedure Salvar(aModel: TProfessorModel);
+      function GetUserByID (aID: Integer): TProfessorModel;
+      procedure Update(aDto : TProfessorModel);
+      procedure Delete (aID: Integer);
+      function GetAllNames : TStringList;
 
   end;
 
   IEstudanteRepository = interface
     ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
-    function GetByID (aID : Integer): TEstudanteModel;
-    procedure Salvar(aModel: TEstudanteModel);
-    function GetUserByID (aID: Integer): TEstudanteModel;
-    procedure Update(aDto : TEstudanteModel);
-    procedure Delete (aID: Integer);
+      function GetByID (aID : Integer): TEstudanteModel;
+      procedure Salvar(aModel: TEstudanteModel);
+      function GetUserByID (aID: Integer): TEstudanteModel;
+      procedure Update(aDto : TEstudanteModel);
+      procedure Delete (aID: Integer);
 
   end;
 
   ITurmaRepository = interface
     ['{4EDAED98-B9E2-4C4A-9450-73412A4B3FE4}']
-    function GetByID (aID : Integer): TTurmaModel;
-    procedure Salvar(aModel: TTurmaModel);
-    procedure Update(aModel : TTurmaModel);
-    procedure Delete (aID: Integer);
-    procedure LinkEstudante (aID: Integer);
+      function GetByID (aID : Integer): TTurmaModel;
+      procedure Salvar(aModel: TTurmaModel);
+      procedure Update(aModel : TTurmaModel);
+      procedure Delete (aID: Integer);
+      procedure LinkEstudante (aID: Integer);
 
   end;
 
@@ -67,41 +68,51 @@ type
 
   IUserService = interface
     ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
-    function GetByID (aID : Integer): TUserDTO;
-    function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
-    function Salvar(aDTO: TUserDTO) : Integer;
-    function GetByEscolaID (aID : Integer): TUserDTO;
-    procedure Update(aDto : TUserDTO);
-    procedure Delete (aID: Integer);
-    procedure SetPathByEscola (aID: Integer);
-    function AtualizarTabelaUsuarios : TDataSet;
+      function GetByID (aID : Integer): TUserDTO;
+      function ValidarLogin(aDTO: TUserDTO) : TUserDTO;
+      function Salvar(aDTO: TUserDTO) : Integer;
+      function GetByEscolaID (aID : Integer): TUserDTO;
+      procedure Update(aDto : TUserDTO);
+      procedure Delete (aID: Integer);
+      procedure SetPathByEscola (aID: Integer);
+      function AtualizarTabelaUsuarios : TDataSet;
   end;
 
   IEscolaService = interface
     ['{8569A16D-14A9-44D7-8422-C669431E4C11}']
-    function SalvarEscola (aDTO: TEscolaDTO): Integer;
-    function AtualizarTabelaEscolas : TDataSet;
-    procedure Update(aDto : TEscolaDTO);
-    procedure Delete (aID : Integer);
+      function SalvarEscola (aDTO: TEscolaDTO): Integer;
+      function AtualizarTabelaEscolas : TDataSet;
+      procedure Update(aDto : TEscolaDTO);
+      procedure Delete (aID : Integer);
   end;
 
   IProfessorService = interface
     ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
-    function GetByID (aID : Integer): TProfessorDTO;
-    procedure Salvar(aDTO: TProfessorDTO);
-    function GetUserByID (aID: Integer): TProfessorDTO;
-    procedure Update(aDto : TProfessorDTO);
-    procedure Delete (aID: Integer);
+      function GetByID (aID : Integer): TProfessorDTO;
+      procedure Salvar(aDTO: TProfessorDTO);
+      function GetUserByID (aID: Integer): TProfessorDTO;
+      procedure Update(aDto : TProfessorDTO);
+      procedure Delete (aID: Integer);
+      function GetAllNames : TStringList;
 
   end;
 
     IEstudanteService = interface
     ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
-    function GetByID (aID : Integer): TEstudanteDTO;
-    procedure Salvar(aDTO: TEstudanteDTO);
-    function GetUserByID (aID: Integer): TEstudanteDTO;
-    procedure Update(aDto : TEstudanteDTO);
-    procedure Delete (aID: Integer);
+      function GetByID (aID : Integer): TEstudanteDTO;
+      procedure Salvar(aDTO: TEstudanteDTO);
+      function GetUserByID (aID: Integer): TEstudanteDTO;
+      procedure Update(aDto : TEstudanteDTO);
+      procedure Delete (aID: Integer);
+    end;
+
+    ITurmaService = interface
+    ['{264FF2B7-E8D5-45F4-A038-06879A17B0B0}']
+      function GetByID (aID : Integer): TTurmaDTO;
+      procedure Salvar(aDTO : TTurmaDTO);
+      procedure Update(aDTO :TTurmaDTO);
+      procedure Delete (aID: Integer);
+      procedure LinkEstudante (aID: Integer);
     end;
 
   //--------------Login-----------------------//
@@ -157,6 +168,10 @@ type
     function GetID : Integer;
     function GetRole: Integer;
     function CamposValidos: Boolean;
+    function GetNomeTurma : String;
+    function GetDescTurma : String;
+    function GetIDProfessorTurma: Integer;
+    procedure PopularCBProfessores();
   end;
 
    IMenuEscolaController = interface
@@ -166,6 +181,8 @@ type
     function RetornarMembro(aID : Integer) : TUserDTO;
     procedure Update;
     procedure Delete(aID : Integer);
+    procedure AdicionarTurma();
+    function PopularCBProfessores : TStringList;
   end;
 
 

@@ -55,6 +55,8 @@ type
     procedure btn_cancelar_addNEdit_EscolaMenuClick(Sender: TObject);
     procedure btn_editar_EscolaMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_EscolaMenuClick(Sender: TObject);
+    procedure TurmasClick(Sender: TObject);
+    procedure btn_AdicionarTurmaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -68,6 +70,10 @@ type
     function GetID : Integer;
     function GetRole: Integer;
     function CamposValidos: Boolean;
+    function GetNomeTurma : String;
+    function GetDescTurma : String;
+    function GetIDProfessorTurma: Integer;
+    procedure PopularCBProfessores();
   end;
 
 var
@@ -79,6 +85,12 @@ implementation
 
 { Tfrm_menuEscola }
 
+
+procedure Tfrm_menuEscola.btn_AdicionarTurmaMenuClick(Sender: TObject);
+begin
+  pnl_addNEdit_Turma_EscolaMenu.Visible := true;
+  PopularCBProfessores;
+end;
 
 procedure Tfrm_menuEscola.btn_adicionar_EscolaMenuClick(Sender: TObject);
 begin
@@ -138,6 +150,11 @@ begin
   cb_role_addNEdit_EscolaMenu.Items.Add('Estudante');
 end;
 
+function Tfrm_menuEscola.GetDescTurma: String;
+begin
+  Result := edt_Descricao_addNEdit_Turma_EscolaMenu.Text;
+end;
+
 function Tfrm_menuEscola.GetEmail: String;
 begin
   Result := edt_email_addNEdit_EscolaMenu.Text;
@@ -148,9 +165,19 @@ begin
   Result := FID;
 end;
 
+function Tfrm_menuEscola.GetIDProfessorTurma: Integer;
+begin
+ // Result := //fazer lógica de pegar o id do professor FINDBYNAME
+end;
+
 function Tfrm_menuEscola.GetNome: String;
 begin
   Result := edt_nome_addNEdit_EscolaMenu.Text;
+end;
+
+function Tfrm_menuEscola.GetNomeTurma: String;
+begin
+  Result := edt_Nome_Turma_EscolaMenu.Text;
 end;
 
 function Tfrm_menuEscola.GetPassword: String;
@@ -167,7 +194,7 @@ end;
 
 procedure Tfrm_menuEscola.HomeClick(Sender: TObject);
 begin
-
+  pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := true;
   pnl_membros_EscolaMenu.Visible := false;
   //Limpar Lista na memória
@@ -177,6 +204,7 @@ end;
 procedure Tfrm_menuEscola.MembrosClick(Sender: TObject);
 begin
  //MUDAR DE TELA: 1- Deixar home invisivel 2- deixar escola visivel 3 - atualizar tabela de escolas :)
+ pnl_turmas_EscolaMenu.Visible := false;
  pnl_home_EscolaMenu.Visible := false;
  pnl_membros_EscolaMenu.Visible := true;
  if Assigned(d_Src_membros_escola) then begin
@@ -187,6 +215,41 @@ begin
 
 
 
+end;
+
+procedure Tfrm_menuEscola.PopularCBProfessores();
+var I : Integer;
+var sL : TStringList;
+begin
+
+sL := FController.PopularCBProfessores;
+try
+
+
+    for I := 0 to (sL.Count -1) do begin
+
+    cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Items.Add(sL[I]);
+
+    end;
+
+
+finally
+
+  sL.Free;
+end;
+
+
+
+
+
+
+end;
+
+procedure Tfrm_menuEscola.TurmasClick(Sender: TObject);
+begin
+  pnl_membros_EscolaMenu.Visible := false;
+  pnl_home_EscolaMenu.Visible := false;
+  pnl_turmas_EscolaMenu.Visible := true;
 end;
 
 end.

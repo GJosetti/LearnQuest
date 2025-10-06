@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB, user_DTO, user_service, escola_service, professor_service, professores_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB, user_DTO, user_service,System.Classes, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -13,6 +13,7 @@ private
  FServiceUser: IUserService;
  FServiceProfessor : IProfessorService;
  FServiceEstudante : IEstudanteService;
+ FServiceTurma : ITurmaService;
 
 public
    function AtualizarTabelaMembros : TDataSet ;
@@ -20,7 +21,9 @@ public
    function RetornarMembro(aID : Integer) : TUserDTO;
    procedure Update;
    procedure Delete(aID : Integer);
+   procedure AdicionarTurma();
    constructor Create(aView : IEscolaAdminView);
+   function PopularCBProfessores : TStringList;
 
 
 end;
@@ -47,6 +50,23 @@ if not Assigned(FServiceEscola) then begin
   if not Assigned(Fview) then begin
     Fview := aView ;
   end;
+  if not Assigned(FServiceTurma) then begin
+    FServiceTurma :=  TTurmaService.Create;
+  end;
+end;
+
+procedure TMenuAdminController.AdicionarTurma;
+var
+TurmaDTO : TTurmaDTO;
+begin
+  TurmaDTO := TTurmaDTO.Create;
+  TurmaDTO.Nome := Fview.GetNomeTurma;
+  TurmaDTO.Descricao := Fview.GetDescTurma;
+  TurmaDTO.ProfessorID := Fview.GetIDProfessorTurma;
+
+  FServiceTurma.Salvar(TurmaDTO);
+
+
 end;
 
 procedure TMenuAdminController.AdicionarUsuario;
@@ -89,6 +109,11 @@ end;
 procedure TMenuAdminController.Delete(aID: Integer);
 begin
 
+end;
+
+function TMenuAdminController.PopularCBProfessores: TStringList;
+begin
+  Result := FServiceProfessor.GetAllNames;
 end;
 
 function TMenuAdminController.RetornarMembro(aID: Integer): TUserDTO;

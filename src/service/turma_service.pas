@@ -1,7 +1,7 @@
 unit turma_service;
 
 interface
-uses my_contracts, turma_DTO, turma_entity,turma_repository;
+uses my_contracts, turma_DTO, turma_entity,turma_repository,Data.DB;
 
 
 type
@@ -21,6 +21,7 @@ public
       procedure Update(aDTO :TTurmaDTO);
       procedure Delete (aID: Integer);
       procedure LinkEstudante (aID: Integer);
+      function AtualizarTabelaTurmas : TDataSet;
       constructor Create;
 
 end;
@@ -28,6 +29,11 @@ end;
 implementation
 
 { TTurmaService }
+
+function TTurmaService.AtualizarTabelaTurmas: TDataSet;
+begin
+  Result := FTurmaRepo.GetTurmaDataSet;
+end;
 
 constructor TTurmaService.Create;
 begin

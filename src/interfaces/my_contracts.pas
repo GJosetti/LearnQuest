@@ -41,6 +41,7 @@ type
       procedure Delete (aID: Integer);
       function GetAllNames : TStringList;
 
+
   end;
 
   IEstudanteRepository = interface
@@ -60,6 +61,8 @@ type
       procedure Update(aModel : TTurmaModel);
       procedure Delete (aID: Integer);
       procedure LinkEstudante (aID: Integer);
+      function GetTurmaDataSet: TDataSet;
+
 
   end;
 
@@ -114,7 +117,9 @@ type
       procedure Update(aDTO :TTurmaDTO);
       procedure Delete (aID: Integer);
       procedure LinkEstudante (aID: Integer);
+      function AtualizarTabelaTurmas : TDataSet;
     end;
+
 
   //--------------Login-----------------------//
 
@@ -185,7 +190,7 @@ type
     procedure AdicionarTurma();
     function PopularCBProfessores : TStringList;
     function FindByName (aString : String) : TUserDTO;
-
+    function AtualizarTabelaTurmas : TDataSet;
   end;
 
 

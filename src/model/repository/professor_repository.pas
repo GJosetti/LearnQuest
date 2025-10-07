@@ -13,6 +13,7 @@ public
     function GetByID (aID : Integer): TProfessorModel;
     procedure Salvar(aModel: TProfessorModel);
     function GetUserByID (aID: Integer): TProfessorModel;
+
     procedure Update(aDto : TProfessorModel);
     procedure Delete (aID: Integer);
     function GetAllNames : TStringList;

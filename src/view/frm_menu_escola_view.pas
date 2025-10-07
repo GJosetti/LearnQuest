@@ -63,6 +63,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btn_remover_EscolaMenuClick(Sender: TObject);
     procedure pnl_back_EscolaMenuClick(Sender: TObject);
+    procedure btn_Sair_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
+    procedure btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -111,6 +113,7 @@ end;
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
+
   pnl_addNEdit_EscolaMenu.Visible := false;
   ClearAllEdits;
 
@@ -129,6 +132,12 @@ begin
   pnl_addNEdit_EscolaMenu.Visible := false;
   FController.AtualizarTabelaMembros;
   ClearAllEdits;
+end;
+
+procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(
+  Sender: TObject);
+begin
+  FController.AdicionarTurma;
 end;
 
 procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
@@ -178,6 +187,13 @@ begin
 end;
 end;
 
+procedure Tfrm_menuEscola.btn_Sair_addNEdit_Turma_EscolaMenuClick(
+  Sender: TObject);
+begin
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+  ClearAllEdits;
+end;
+
 function Tfrm_menuEscola.CamposValidos: Boolean;
 begin
 
@@ -191,7 +207,14 @@ begin
   edt_password_addNEdit__EscolaMenu.Clear;
   edt_email_addNEdit_EscolaMenu.Clear;
   cb_role_addNEdit_EscolaMenu.ItemIndex := -1;
-  cb_role_addNEdit_EscolaMenu.TextHint := 'Selecione um tipo:'
+  cb_role_addNEdit_EscolaMenu.TextHint := 'Selecione um tipo:';
+
+
+  edt_Nome_Turma_EscolaMenu.Clear;
+  edt_Descricao_addNEdit_Turma_EscolaMenu.Clear;
+  cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := -1;
+  cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.TextHint := 'Selecione um Professor';
+
 end;
 
 procedure Tfrm_menuEscola.dbg_membrosEscolaColumnMoved(Sender: TObject;
@@ -249,7 +272,7 @@ end;
 
 function Tfrm_menuEscola.GetIDProfessorTurma: Integer;
 begin
- // Result := //fazer lógica de pegar o id do professor FINDBYNAME
+  Result := FController.FindByName(cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Text).ID;
 end;
 
 function Tfrm_menuEscola.GetNome: String;
@@ -340,6 +363,18 @@ begin
   pnl_membros_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
   pnl_turmas_EscolaMenu.Visible := true;
+
+
+
+ if Assigned(d_Src_membros_escola.DataSet) then begin
+   d_Src_membros_escola.DataSet := nil; // limpa antes
+ end;
+  d_Src_membros_escola.DataSet := FController.AtualizarTabelaTurmas;
+  dbg_membrosEscola.DataSource := d_Src_membros_escola;
+
 end;
+
+
+
 
 end.

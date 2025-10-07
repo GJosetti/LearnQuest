@@ -26,6 +26,8 @@ public
    function PopularCBProfessores : TStringList;
    function FindByName (aString : String) : TUserDTO;
 
+   function AtualizarTabelaTurmas : TDataSet;
+
 
 end;
 
@@ -106,6 +108,11 @@ begin
   Result := FServiceUser.AtualizarTabelaUsuarios;
 end;
 
+
+function TMenuAdminController.AtualizarTabelaTurmas: TDataSet;
+begin
+  Result := FServiceTurma.AtualizarTabelaTurmas;
+end;
 
 procedure TMenuAdminController.Delete(aID: Integer);
 begin

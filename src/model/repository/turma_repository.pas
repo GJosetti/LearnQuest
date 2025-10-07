@@ -1,7 +1,7 @@
 unit turma_repository;
 
 interface
-uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client;
+uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client,Data.DB;
 type
 
 TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
@@ -16,6 +16,7 @@ function GetByID (aID : Integer): TTurmaModel;
     procedure Update(aModel : TTurmaModel);
     procedure Delete (aID: Integer);
     procedure LinkEstudante (aID: Integer);
+    function GetTurmaDataSet: TDataSet;
     constructor Create;
 end;
 
@@ -37,6 +38,15 @@ end;
 function TTurmaRepository.GetByID(aID: Integer): TTurmaModel;
 begin
 
+end;
+
+function TTurmaRepository.GetTurmaDataSet: TDataSet;
+begin
+  DataModule1.FDQuery1.Close;
+
+  DataModule1.FDQuery1.SQL.Text:= 'SELECT t.turma_name , t.descricao, u.user_name FROM escola_11.turmas t JOIN escola_11.professores p ON t.professor_id = p.id JOIN users u ON p.user_id = u.id';
+  DataModule1.FDQuery1.Open;
+  Result := DataModule1.FDQuery1;
 end;
 
 procedure TTurmaRepository.LinkEstudante(aID: Integer);

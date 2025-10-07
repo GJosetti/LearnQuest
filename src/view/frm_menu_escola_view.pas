@@ -60,6 +60,7 @@ type
     procedure dbg_membrosEscolaColumnMoved(Sender: TObject; FromIndex,
       ToIndex: LongInt);
     procedure FormDestroy(Sender: TObject);
+    procedure btn_remover_EscolaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -119,7 +120,6 @@ begin
     FController.AdicionarUsuario;
   end else if Fmode = m_Edit then begin
     FController.Update(FID);
-    FController.AtualizarTabelaMembros;
 
   end;
   pnl_addNEdit_EscolaMenu.Visible := false;
@@ -153,6 +153,25 @@ begin
 
 
 
+end;
+
+procedure Tfrm_menuEscola.btn_remover_EscolaMenuClick(Sender: TObject);
+var
+FDTO : TUserDTO;
+FName : String;
+begin
+
+FName := dbg_membrosEscola.DataSource.DataSet.FieldByName('user_name').AsString;
+FDTO := FController.FindByName(FName);
+
+//Confirmação de exclusão
+if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+              [mbYes, mbNo], 0) = mrYes then
+begin
+  FController.Delete(FDTO.ID);
+  FController.AtualizarTabelaMembros;
+  ShowMessage('Registro excluído!');
+end;
 end;
 
 function Tfrm_menuEscola.CamposValidos: Boolean;

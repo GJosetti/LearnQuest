@@ -109,7 +109,7 @@ end;
 
 procedure TMenuAdminController.Delete(aID: Integer);
 begin
-
+  FServiceUser.Delete(aID);
 end;
 
 function TMenuAdminController.FindByName(aString: String): TUserDTO;

@@ -309,6 +309,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 2
+      OnClick = btn_remover_EscolaMenuClick
     end
     object btn_editar_EscolaMenu: TPanel
       Left = 520

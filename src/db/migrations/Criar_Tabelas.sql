@@ -25,14 +25,14 @@ CREATE TABLE fase (
 -- Tabela de Estudantes
 CREATE TABLE estudante (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES public.users(id),
+    user_id BIGINT NOT NULL REFERENCES public.users(id) on delete cascade,
     coins VARCHAR(100) 
 );
 
 -- Tabela de Professores
 CREATE TABLE professores (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES public.users(id)
+    user_id BIGINT NOT NULL REFERENCES public.users(id) on delete cascade
     
 );
 
@@ -41,14 +41,14 @@ CREATE TABLE turmas (
     id BIGSERIAL PRIMARY KEY,
     turma_name VARCHAR(255) NOT NULL,
     descricao VARCHAR not null,
-    professor_id BIGINT NOT NULL REFERENCES professores(id)
+    professor_id BIGINT NOT NULL REFERENCES professores(id) on delete cascade
 );
 
 -- Tabela de Atividades
 CREATE TABLE atividades (
     id BIGSERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    professor_id BIGINT NOT NULL REFERENCES professores(id)
+    professor_id BIGINT NOT NULL REFERENCES professores(id) on delete cascade
 );
 
 
@@ -57,29 +57,29 @@ CREATE TABLE atividades (
 -- Liga estudantes às turmas
 CREATE TABLE estudante_turma (
     id BIGSERIAL PRIMARY KEY,
-    estudante_id BIGINT NOT NULL REFERENCES estudante(id),
-    turma_id BIGINT NOT NULL REFERENCES turmas(id)
+    estudante_id BIGINT NOT NULL REFERENCES estudante(id) on delete cascade,
+    turma_id BIGINT NOT NULL REFERENCES turmas(id) on delete cascade
 );
 
 -- Liga turmas às trilhas
 CREATE TABLE turma_trilha (
     id BIGSERIAL PRIMARY KEY,
-    turma_id BIGINT NOT NULL REFERENCES turmas(id),
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id)
+    turma_id BIGINT NOT NULL REFERENCES turmas(id) on delete cascade,
+    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) on delete cascade
 );
 
 -- Liga fases às trilhas
 CREATE TABLE fase_trilha (
     id BIGSERIAL PRIMARY KEY,
-    fase_id BIGINT NOT NULL REFERENCES fase(id),
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id)
+    fase_id BIGINT NOT NULL REFERENCES fase(id) on delete cascade,
+    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) on delete cascade
 );
 
 -- Liga atividades às fases
 CREATE TABLE atividade_fase (
     id BIGSERIAL PRIMARY KEY,
-    atividade_id BIGINT NOT NULL REFERENCES atividades(id),
-    fase_id BIGINT NOT NULL REFERENCES fase(id)
+    atividade_id BIGINT NOT NULL REFERENCES atividades(id) on delete cascade,
+    fase_id BIGINT NOT NULL REFERENCES fase(id) on delete cascade
 );
 
 

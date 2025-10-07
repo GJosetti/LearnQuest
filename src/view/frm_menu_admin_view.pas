@@ -35,6 +35,7 @@ type
     Label1: TLabel;
     edt_email_addNEdit_adminMenu: TEdit;
     lbl_email_addNEdit_adminMenu: TLabel;
+    pnl_back_adminMenu: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
@@ -45,6 +46,7 @@ type
     procedure btn_remover_adminMenuClick(Sender: TObject);
     procedure dbg_escolasColumnMoved(Sender: TObject; FromIndex,
       ToIndex: LongInt);
+    procedure pnl_back_adminMenuClick(Sender: TObject);
 
 
   private
@@ -58,6 +60,7 @@ type
     Password : String;
     FPreventColumnMove : Boolean;
     procedure ClearAllEdits;
+
 
 
   public
@@ -76,6 +79,7 @@ var
   frm_menuAdmin_view: Tfrm_menuAdmin_view;
 
 implementation
+uses frm_login_view;
 
 {$R *.dfm}
 
@@ -286,6 +290,15 @@ begin
   pnl_home_adminMenu.Visible := true;
   pnl_escolas_adminMenu.Visible := false;
   //Limpar Lista na memória
+end;
+
+procedure Tfrm_menuAdmin_view.pnl_back_adminMenuClick(Sender: TObject);
+begin
+  Self.Hide;
+  frm_login := Tfrm_login.Create(nil);
+  frm_login.ShowModal;
+  Self.Close;
+
 end;
 
 end.

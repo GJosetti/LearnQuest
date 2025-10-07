@@ -48,6 +48,7 @@ type
     btn_Sair_addNEdit_Turma_EscolaMenu: TPanel;
     edt_Descricao_addNEdit_Turma_EscolaMenu: TEdit;
     cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu: TComboBox;
+    pnl_back_EscolaMenu: TPanel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -61,6 +62,7 @@ type
       ToIndex: LongInt);
     procedure FormDestroy(Sender: TObject);
     procedure btn_remover_EscolaMenuClick(Sender: TObject);
+    procedure pnl_back_EscolaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -85,6 +87,8 @@ var
   frm_menuEscola: Tfrm_menuEscola;
 
 implementation
+
+uses frm_login_view;
 
 {$R *.dfm}
 
@@ -293,6 +297,14 @@ begin
 
 
 
+end;
+
+procedure Tfrm_menuEscola.pnl_back_EscolaMenuClick(Sender: TObject);
+begin
+  Self.Hide;
+  frm_login := Tfrm_login.Create(nil);
+  frm_login.ShowModal;
+  Self.Close;
 end;
 
 procedure Tfrm_menuEscola.PopularCBProfessores();

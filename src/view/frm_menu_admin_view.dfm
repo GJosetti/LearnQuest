@@ -37,6 +37,23 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       TabOrder = 1
       OnClick = HomeClick
     end
+    object pnl_back_adminMenu: TPanel
+      Left = 8
+      Top = 0
+      Width = 185
+      Height = 41
+      Caption = 'Voltar'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 2
+      OnClick = pnl_back_adminMenuClick
+    end
   end
   object pnl_home_adminMenu: TPanel
     Left = 264

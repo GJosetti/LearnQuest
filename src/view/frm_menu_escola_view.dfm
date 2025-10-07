@@ -57,6 +57,23 @@ object frm_menuEscola: Tfrm_menuEscola
       TabOrder = 2
       OnClick = TurmasClick
     end
+    object pnl_back_EscolaMenu: TPanel
+      Left = 8
+      Top = 5
+      Width = 185
+      Height = 41
+      Caption = 'Voltar'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 3
+      OnClick = pnl_back_EscolaMenuClick
+    end
   end
   object pnl_turmas_EscolaMenu: TPanel
     Left = 263

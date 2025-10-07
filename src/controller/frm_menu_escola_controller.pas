@@ -19,11 +19,12 @@ public
    function AtualizarTabelaMembros : TDataSet ;
    procedure AdicionarUsuario();
    function RetornarMembro(aID : Integer) : TUserDTO;
-   procedure Update;
+   procedure Update(aID : Integer);
    procedure Delete(aID : Integer);
    procedure AdicionarTurma();
    constructor Create(aView : IEscolaAdminView);
    function PopularCBProfessores : TStringList;
+   function FindByName (aString : String) : TUserDTO;
 
 
 end;
@@ -111,6 +112,11 @@ begin
 
 end;
 
+function TMenuAdminController.FindByName(aString: String): TUserDTO;
+begin
+  Result := FServiceUser.GetByNome(aString);
+end;
+
 function TMenuAdminController.PopularCBProfessores: TStringList;
 begin
   Result := FServiceProfessor.GetAllNames;
@@ -121,8 +127,18 @@ begin
 
 end;
 
-procedure TMenuAdminController.Update;
+procedure TMenuAdminController.Update(aID : Integer);
+var UsuarioDTO: TUserDTO;
 begin
+
+
+  UsuarioDTO := TUserDTO.Create;
+  UsuarioDTO.Name := Fview.GetNome;
+  UsuarioDTO.ID := aID;
+  UsuarioDTO.Password := Fview.GetPassword;
+  UsuarioDTO.Email := Fview.GetEmail;
+
+  FServiceUser.Update(UsuarioDTO);
 
 end;
 

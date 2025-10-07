@@ -61,12 +61,14 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 93
       Width = 513
       Height = 344
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnColumnMoved = dbg_escolasColumnMoved
       Columns = <
         item
           Alignment = taCenter
@@ -139,8 +141,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       OnClick = btn_editar_adminMenuClick
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 176
-      Top = 93
+      Left = 80
+      Top = 65
       Width = 449
       Height = 456
       Color = clBtnHighlight

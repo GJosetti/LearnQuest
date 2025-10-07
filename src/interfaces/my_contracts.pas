@@ -76,6 +76,7 @@ type
       procedure Delete (aID: Integer);
       procedure SetPathByEscola (aID: Integer);
       function AtualizarTabelaUsuarios : TDataSet;
+      function GetByNome (aString : String) : TUserDTO;
   end;
 
   IEscolaService = interface
@@ -179,10 +180,12 @@ type
     function AtualizarTabelaMembros : TDataSet ;
     procedure AdicionarUsuario();
     function RetornarMembro(aID : Integer) : TUserDTO;
-    procedure Update;
+    procedure Update(aID : Integer);
     procedure Delete(aID : Integer);
     procedure AdicionarTurma();
     function PopularCBProfessores : TStringList;
+    function FindByName (aString : String) : TUserDTO;
+
   end;
 
 

@@ -43,6 +43,8 @@ type
     procedure btn_cancelar_addNEdit_adminMenuClick(Sender: TObject);
     procedure btn_editar_adminMenuClick(Sender: TObject);
     procedure btn_remover_adminMenuClick(Sender: TObject);
+    procedure dbg_escolasColumnMoved(Sender: TObject; FromIndex,
+      ToIndex: LongInt);
 
 
   private
@@ -54,7 +56,9 @@ type
     CEP : String;
     NomeUsuario: String;
     Password : String;
+    FPreventColumnMove : Boolean;
     procedure ClearAllEdits;
+
 
   public
     { Public declarations }
@@ -97,6 +101,29 @@ begin
     edt_nomeUsurario_addNEdit_adminMenu.Clear;
     edt_password_addNEdit__adminMenu.Clear;
     edt_email_addNEdit_adminMenu.Clear;
+end;
+
+
+procedure Tfrm_menuAdmin_view.dbg_escolasColumnMoved(Sender: TObject; FromIndex,
+  ToIndex: LongInt);
+var
+  col: TColumn;
+begin
+  if FPreventColumnMove then Exit;
+
+
+  col := dbg_escolas.Columns[ToIndex];
+
+
+
+  FPreventColumnMove := True;
+
+    try
+      // recoloca a coluna de volta à posição original (FromIndex)
+      col.Index := FromIndex;
+    finally
+      FPreventColumnMove := False;
+    end;
 end;
 
 

@@ -19,6 +19,7 @@ public
   procedure Delete (aID: Integer);
   procedure SetPathByEscola (aID: Integer);
   function AtualizarTabelaUsuarios : TDataSet;
+  function GetByNome (aString : String) : TUserDTO;
 end;
 
 
@@ -100,6 +101,24 @@ begin
   end;
 end;
 
+
+function TUserService.GetByNome(aString: String): TUserDTO;
+var
+FUser : TUserModel;
+FUserDto : TUserDTO;
+begin
+
+  FUser := FUserRepository.FindByNome(aString);
+  FUserDTO := TUserDTO.Create;
+
+  FuserDTO.Name := FUser.GetNome;
+  FUserDTO.ID := FUser.GetID;
+  FUserDTO.Role := Fuser.GetRole;
+  FUserDTO.Escola := FUser.GetEscola;
+  FUserDTO.Email := FUser.GetEmail;
+  Result := FUserDTO;
+
+end;
 
 function TUserService.Salvar(aDTO: TUserDTO) : Integer;
 

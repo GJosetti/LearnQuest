@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO;
 
 type
   TMode = (m_Add,m_Edit);
@@ -57,11 +57,15 @@ type
     procedure btn_concluir_addNEdit_EscolaMenuClick(Sender: TObject);
     procedure TurmasClick(Sender: TObject);
     procedure btn_AdicionarTurmaMenuClick(Sender: TObject);
+    procedure dbg_membrosEscolaColumnMoved(Sender: TObject; FromIndex,
+      ToIndex: LongInt);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
     FController : IMenuEscolaController;
     Fmode : TMode;
+    FPreventColumnMove : Boolean;
     procedure ClearAllEdits;
   public
    function GetNome:String;
@@ -113,6 +117,10 @@ begin
 
   if Fmode = m_Add then begin
     FController.AdicionarUsuario;
+  end else if Fmode = m_Edit then begin
+    FController.Update(FID);
+    FController.AtualizarTabelaMembros;
+
   end;
   pnl_addNEdit_EscolaMenu.Visible := false;
   FController.AtualizarTabelaMembros;
@@ -120,9 +128,31 @@ begin
 end;
 
 procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
+var
+FName : String;
+FDTO : TUserDTO;
+
 begin
   pnl_addNEdit_EscolaMenu.Visible := true;
   Fmode := m_Edit;
+  FName := dbg_membrosEscola.DataSource.DataSet.FieldByName('user_name').AsString;
+  FDTO := TUserDTO.Create;
+   try
+
+      FDTO := FController.FindByName(FName);
+      edt_nome_addNEdit_EscolaMenu.Text := FDTO.Name;
+      edt_email_addNEdit_EscolaMenu.Text := FDTO.Email;
+      cb_role_addNEdit_EscolaMenu.ItemIndex := FDTO.Role - 2;
+      FID := FDTO.ID;
+
+   finally
+
+   end;
+
+
+
+
+
 end;
 
 function Tfrm_menuEscola.CamposValidos: Boolean;
@@ -141,13 +171,42 @@ begin
   cb_role_addNEdit_EscolaMenu.TextHint := 'Selecione um tipo:'
 end;
 
+procedure Tfrm_menuEscola.dbg_membrosEscolaColumnMoved(Sender: TObject;
+  FromIndex, ToIndex: LongInt);
+var
+  col: TColumn;
+begin
+  if FPreventColumnMove then Exit;
+
+
+  col := dbg_membrosEscola.Columns[ToIndex];
+
+
+
+  FPreventColumnMove := True;
+
+    try
+      // recoloca a coluna de volta à posição original (FromIndex)
+      col.Index := FromIndex;
+    finally
+      FPreventColumnMove := False;
+    end;
+end;
+
 procedure Tfrm_menuEscola.FormCreate(Sender: TObject);
 begin
   if not Assigned(FController) then begin
     FController := TMenuAdminController.Create(Self);
   end;
+  cb_role_addNEdit_EscolaMenu.Items.Add('Escola');
   cb_role_addNEdit_EscolaMenu.Items.Add('Professor');
   cb_role_addNEdit_EscolaMenu.Items.Add('Estudante');
+end;
+
+procedure Tfrm_menuEscola.FormDestroy(Sender: TObject);
+begin
+   dbg_membrosEscola.DataSource := nil;
+    dbg_turmasEscola.DataSource := nil;
 end;
 
 function Tfrm_menuEscola.GetDescTurma: String;
@@ -189,7 +248,7 @@ function Tfrm_menuEscola.GetRole: Integer;
 begin
   //Começa em 0
 
-  Result := (cb_role_addNEdit_EscolaMenu.ItemIndex + 3); //Começa em 0 e 1 é administrador e 2 é escola
+  Result := (cb_role_addNEdit_EscolaMenu.ItemIndex + 2); //Começa em 0 e 1 é administrador
 end;
 
 procedure Tfrm_menuEscola.HomeClick(Sender: TObject);

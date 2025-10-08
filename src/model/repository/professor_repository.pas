@@ -13,7 +13,7 @@ public
     function GetByID (aID : Integer): TProfessorModel;
     procedure Salvar(aModel: TProfessorModel);
     function GetUserByID (aID: Integer): TProfessorModel;
-
+    function FindByName(aString : String): TProfessorModel;
     procedure Update(aDto : TProfessorModel);
     procedure Delete (aID: Integer);
     function GetAllNames : TStringList;
@@ -35,6 +35,33 @@ begin
 
 end;
 
+function TProfessorRepository.FindByName(aString: String): TProfessorModel;
+var
+Qry : TFDQuery;
+FModel : TProfessorModel;
+begin
+  Result := nil;
+  Qry:= TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'Select p.id, p.user_id From professores p join users u ON u.id = p.user_id WHERE user_name = :NAME';
+  Qry.ParamByName('NAME').AsString := aString;
+
+  Qry.Open();
+
+
+  if not Qry.IsEmpty then begin
+    FModel := TProfessorModel.Create;
+    Fmodel.SetID(Qry.FieldByName('id').AsInteger);
+    FModel.SetUserID(Qry.FieldByName('user_id').AsInteger);
+    Result := FModel;
+  end;
+
+ finally
+  Qry.Free;
+ end;
+
+end;
 function TProfessorRepository.GetAllNames: TStringList;
 var
 Qry : TFDQuery;

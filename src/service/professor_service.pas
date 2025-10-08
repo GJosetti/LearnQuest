@@ -17,6 +17,7 @@ public
  procedure Delete (aID: Integer);
  constructor Create;
  function GetAllNames : TStringList;
+ function FindByName(aString : String): TProfessorDTO;
 
 
 
@@ -37,6 +38,17 @@ end;
 procedure TProfessorService.Delete(aID: Integer);
 begin
 
+end;
+
+function TProfessorService.FindByName(aString: String): TProfessorDTO;
+var
+FDTO : TProfessorDTO;
+FProfessor : TProfessorModel;
+begin
+  FProfessor := FProfessorRepo.FindByName(aString);
+  FDTO.ID := FProfessor.GetID;
+  FDTO.UserId := FProfessor.GetUserID;
+  Result := FDTO;
 end;
 
 function TProfessorService.GetAllNames: TStringList;

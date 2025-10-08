@@ -25,7 +25,7 @@ public
    constructor Create(aView : IEscolaAdminView);
    function PopularCBProfessores : TStringList;
    function FindByName (aString : String) : TUserDTO;
-
+   function FindByNameProfessores (aString : String): TProfessorDTO;
    function AtualizarTabelaTurmas : TDataSet;
 
 
@@ -50,11 +50,11 @@ if not Assigned(FServiceEscola) then begin
   if not Assigned(FServiceEstudante) then begin
     FServiceEstudante := TEstudanteService.Create;
   end;
-  if not Assigned(Fview) then begin
-    Fview := aView ;
-  end;
   if not Assigned(FServiceTurma) then begin
     FServiceTurma :=  TTurmaService.Create;
+  end;
+  if not Assigned(Fview) then begin
+    Fview := aView ;
   end;
 end;
 
@@ -122,6 +122,11 @@ end;
 function TMenuAdminController.FindByName(aString: String): TUserDTO;
 begin
   Result := FServiceUser.GetByNome(aString);
+end;
+
+function TMenuAdminController.FindByNameProfessores(aString: String): TProfessorDTO;
+begin
+  Result := FServiceProfessor.FindByName(aString);
 end;
 
 function TMenuAdminController.PopularCBProfessores: TStringList;

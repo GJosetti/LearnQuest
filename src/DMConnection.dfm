@@ -31,4 +31,9 @@ object DataModule1: TDataModule1
     Left = 376
     Top = 368
   end
+  object FDQueryTurmas: TFDQuery
+    Connection = FDConnection1
+    Left = 472
+    Top = 384
+  end
 end

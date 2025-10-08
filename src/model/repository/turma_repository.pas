@@ -1,7 +1,7 @@
 unit turma_repository;
 
 interface
-uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client,Data.DB;
+uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client,Data.DB, vcl.Dialogs, System.SysUtils;
 type
 
 TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
@@ -17,7 +17,7 @@ function GetByID (aID : Integer): TTurmaModel;
     procedure Delete (aID: Integer);
     procedure LinkEstudante (aID: Integer);
     function GetTurmaDataSet: TDataSet;
-    constructor Create;
+    constructor Create();
 end;
 
 
@@ -25,8 +25,9 @@ implementation
 
 { TTurmaRepository }
 
-constructor TTurmaRepository.Create;
+constructor TTurmaRepository.Create();
 begin
+  
   FConnection := DataModule1.FDConnection1;
 end;
 
@@ -44,9 +45,9 @@ function TTurmaRepository.GetTurmaDataSet: TDataSet;
 begin
   DataModule1.FDQuery1.Close;
 
-  DataModule1.FDQuery1.SQL.Text:= 'SELECT t.turma_name , t.descricao, u.user_name FROM escola_11.turmas t JOIN escola_11.professores p ON t.professor_id = p.id JOIN users u ON p.user_id = u.id';
-  DataModule1.FDQuery1.Open;
-  Result := DataModule1.FDQuery1;
+  DataModule1.FDQueryTurmas.SQL.Text:= 'SELECT t.turma_name , t.descricao, u.user_name FROM turmas t JOIN professores p ON t.professor_id = p.id JOIN users u ON p.user_id = u.id';
+  DataModule1.FDQueryTurmas.Open;
+  Result := DataModule1.FDQueryTurmas;
 end;
 
 procedure TTurmaRepository.LinkEstudante(aID: Integer);
@@ -56,23 +57,24 @@ end;
 
 procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
 var
-Qry : TFDQuery;
-SQL : String;
+  Qry: TFDQuery;
 begin
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'insert into turmas (turma_name,descricao,professor_id)' + 'values (:NAME ,:DESC,:PID)';
-  Qry.ParamByName('NAME').AsString := aModel.GetNome;
-  Qry.ParamByName('DESC').AsString := aModel.GetDescricao;
-  Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
-  Qry.ExecSQL;
- finally
-  Qry.Free;
- end;
 
 
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
+                    'VALUES (:NAME, :DESCR, :PID)';
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('DESCR').AsString := aModel.GetDescricao;
+    Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
 end;
+
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
 begin

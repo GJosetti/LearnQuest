@@ -295,7 +295,7 @@ object frm_menuEscola: Tfrm_menuEscola
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'user_name'
+          FieldName = 'turma_name'
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Nome'
@@ -305,19 +305,19 @@ object frm_menuEscola: Tfrm_menuEscola
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'email'
+          FieldName = 'descricao'
           ReadOnly = True
           Title.Alignment = taCenter
-          Title.Caption = 'Email'
+          Title.Caption = 'Descri'#231#227'o'
           Width = 150
           Visible = True
         end
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'descricao'
+          FieldName = 'user_name'
           Title.Alignment = taCenter
-          Title.Caption = 'Cargo'
+          Title.Caption = 'Professor'
           Width = 100
           Visible = True
         end>

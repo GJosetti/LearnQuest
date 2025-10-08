@@ -44,6 +44,8 @@ CREATE TABLE turmas (
     professor_id BIGINT NOT NULL REFERENCES professores(id) on delete cascade
 );
 
+
+
 -- Tabela de Atividades
 CREATE TABLE atividades (
     id BIGSERIAL PRIMARY KEY,

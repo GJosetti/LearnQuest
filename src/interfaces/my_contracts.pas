@@ -40,6 +40,7 @@ type
       procedure Update(aDto : TProfessorModel);
       procedure Delete (aID: Integer);
       function GetAllNames : TStringList;
+      function FindByName (aString : String): TProfessorModel;
 
 
   end;
@@ -98,6 +99,7 @@ type
       procedure Update(aDto : TProfessorDTO);
       procedure Delete (aID: Integer);
       function GetAllNames : TStringList;
+      function FindByName(aString : String): TProfessorDTO;
 
   end;
 
@@ -191,6 +193,7 @@ type
     function PopularCBProfessores : TStringList;
     function FindByName (aString : String) : TUserDTO;
     function AtualizarTabelaTurmas : TDataSet;
+    function FindByNameProfessores (aString : String): TProfessorDTO;
   end;
 
 

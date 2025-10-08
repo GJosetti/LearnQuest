@@ -16,6 +16,7 @@ type
     FDQuery1: TFDQuery;
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     FDQueryEscolas: TFDQuery;
+    FDQueryTurmas: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }

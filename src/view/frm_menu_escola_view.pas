@@ -138,6 +138,11 @@ procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(
   Sender: TObject);
 begin
   FController.AdicionarTurma;
+
+  FController.AtualizarTabelaTurmas;
+
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+  ClearAllEdits;
 end;
 
 procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
@@ -272,7 +277,7 @@ end;
 
 function Tfrm_menuEscola.GetIDProfessorTurma: Integer;
 begin
-  Result := FController.FindByName(cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Text).ID;
+  Result := FController.FindByNameProfessores(cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Text).ID;//FAZER UM FINDBYNAME PARA PROFESSORES
 end;
 
 function Tfrm_menuEscola.GetNome: String;
@@ -370,7 +375,7 @@ begin
    d_Src_membros_escola.DataSet := nil; // limpa antes
  end;
   d_Src_membros_escola.DataSet := FController.AtualizarTabelaTurmas;
-  dbg_membrosEscola.DataSource := d_Src_membros_escola;
+  dbg_turmasEscola.DataSource := d_Src_membros_escola;
 
 end;
 

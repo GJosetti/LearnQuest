@@ -1,7 +1,7 @@
 unit turma_service;
 
 interface
-uses my_contracts, turma_DTO, turma_entity,turma_repository,Data.DB;
+uses my_contracts, turma_DTO, turma_entity,turma_repository,Data.DB,DMConnection, Vcl.Dialogs;
 
 
 type
@@ -37,8 +37,11 @@ end;
 
 constructor TTurmaService.Create;
 begin
+
+ 
+
   if not Assigned (FTurmaRepo) then begin
-    FTurmaRepo := TTurmaRepository.Create;
+    FTurmaRepo := TTurmaRepository.Create();
   end;
 end;
 
@@ -69,7 +72,7 @@ begin
 
     FTurmaRepo.Salvar(FTurma);
   finally
-    aDTO.Free;
+
   end;
 
 

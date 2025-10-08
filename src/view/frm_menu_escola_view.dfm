@@ -285,6 +285,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Top = 93
       Width = 513
       Height = 344
+      Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -318,7 +319,7 @@ object frm_menuEscola: Tfrm_menuEscola
           FieldName = 'user_name'
           Title.Alignment = taCenter
           Title.Caption = 'Professor'
-          Width = 100
+          Width = 170
           Visible = True
         end>
     end
@@ -355,8 +356,8 @@ object frm_menuEscola: Tfrm_menuEscola
       OnClick = btn_editar_EscolaMenuClick
     end
     object pnl_addNEdit_Turma_EscolaMenu: TPanel
-      Left = 160
-      Top = 57
+      Left = 176
+      Top = 74
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -379,7 +380,8 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 126
+        ExplicitLeft = -44
+        ExplicitTop = 122
       end
       object lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel
         Left = 160

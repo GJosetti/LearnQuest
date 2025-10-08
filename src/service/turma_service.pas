@@ -38,8 +38,6 @@ end;
 constructor TTurmaService.Create;
 begin
 
- 
-
   if not Assigned (FTurmaRepo) then begin
     FTurmaRepo := TTurmaRepository.Create();
   end;
@@ -72,7 +70,7 @@ begin
 
     FTurmaRepo.Salvar(FTurma);
   finally
-
+    aDTO.Free;
   end;
 
 

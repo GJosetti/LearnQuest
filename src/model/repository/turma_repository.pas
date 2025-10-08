@@ -45,9 +45,9 @@ function TTurmaRepository.GetTurmaDataSet: TDataSet;
 begin
   DataModule1.FDQuery1.Close;
 
-  DataModule1.FDQueryTurmas.SQL.Text:= 'SELECT t.turma_name , t.descricao, u.user_name FROM turmas t JOIN professores p ON t.professor_id = p.id JOIN users u ON p.user_id = u.id';
-  DataModule1.FDQueryTurmas.Open;
-  Result := DataModule1.FDQueryTurmas;
+  DataModule1.FDQuery1.SQL.Text:= 'SELECT t.turma_name , t.descricao, u.user_name FROM turmas t JOIN professores p ON t.professor_id = p.id JOIN users u ON p.user_id = u.id';
+  DataModule1.FDQuery1.Open;
+  Result := DataModule1.FDQuery1;
 end;
 
 procedure TTurmaRepository.LinkEstudante(aID: Integer);
@@ -59,8 +59,6 @@ procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
 var
   Qry: TFDQuery;
 begin
-
-
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;

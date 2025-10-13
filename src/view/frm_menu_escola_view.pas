@@ -317,6 +317,10 @@ begin
  pnl_turmas_EscolaMenu.Visible := false;
  pnl_home_EscolaMenu.Visible := false;
  pnl_membros_EscolaMenu.Visible := true;
+
+ pnl_addNEdit_EscolaMenu.Visible := false;
+ pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+
  if Assigned(d_Src_membros_escola) then begin
    d_Src_membros_escola.DataSet := nil; // limpa antes
  end;
@@ -343,7 +347,8 @@ begin
 sL := FController.PopularCBProfessores;
 try
 
-
+    cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Clear;
+    cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.TextHint := 'Selecione um Professor';
     for I := 0 to (sL.Count -1) do begin
 
     cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Items.Add(sL[I]);
@@ -369,7 +374,8 @@ begin
   pnl_home_EscolaMenu.Visible := false;
   pnl_turmas_EscolaMenu.Visible := true;
 
-
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
 
  if Assigned(d_Src_membros_escola.DataSet) then begin
    d_Src_membros_escola.DataSet := nil; // limpa antes

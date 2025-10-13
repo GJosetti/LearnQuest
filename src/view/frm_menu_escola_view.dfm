@@ -380,8 +380,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = -44
-        ExplicitTop = 122
+        ExplicitWidth = 126
       end
       object lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel
         Left = 160

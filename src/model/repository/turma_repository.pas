@@ -8,6 +8,7 @@ TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
 
 private
     FConnection: TFDConnection;
+    function RowToTurma(aQuery : TFDQuery) : TTurmaModel;
 public
 
 
@@ -17,6 +18,7 @@ function GetByID (aID : Integer): TTurmaModel;
     procedure Delete (aID: Integer);
     procedure LinkEstudante (aID: Integer);
     function GetTurmaDataSet: TDataSet;
+    function FindByName (aNome : String): TTurmaModel;
     constructor Create();
 end;
 
@@ -32,7 +34,51 @@ begin
 end;
 
 procedure TTurmaRepository.Delete(aID: Integer);
+var
+  Qry: TFDQuery;
 begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'delete from turmas where id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+function TTurmaRepository.RowToTurma(aQuery: TFDQuery): TTurmaModel;
+var FTurma : TTurmaModel;
+begin
+  FTurma := TTurmaModel.Create;
+  FTurma.SetID(aQuery.FieldByName('id').AsInteger);
+  FTurma.SetNome(aQuery.FieldByName('turma_name').AsString);
+  FTurma.SetDescricao(aQuery.FieldByName('descricao').AsString);
+  FTurma.SetProfessorID(aQuery.FieldByName('professor_id').AsInteger);
+  Result := FTurma;
+end;
+
+
+
+function TTurmaRepository.FindByName(aNome: String): TTurmaModel;
+var
+Qry : TFDQuery;
+begin
+Qry := TFDQuery.Create(nil);
+ try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'Select * From turmas WHERE turma_name = :NAME';
+  Qry.ParamByName('NAME').AsString := aNome;
+  Qry.Open();
+
+  if not Qry.IsEmpty then begin
+    Result := RowToTurma(Qry);
+  end;
+
+ finally
+  Qry.Free;
+ end;
 
 end;
 
@@ -54,6 +100,8 @@ procedure TTurmaRepository.LinkEstudante(aID: Integer);
 begin
 
 end;
+
+
 
 procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
 var

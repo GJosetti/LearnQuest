@@ -158,8 +158,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       OnClick = btn_editar_adminMenuClick
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 80
-      Top = 65
+      Left = 128
+      Top = 12
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -182,7 +182,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 126
+        ExplicitLeft = 20
+        ExplicitTop = -14
       end
       object lbl_nome_edit_addNEdit_adminMenu: TLabel
         Left = 160

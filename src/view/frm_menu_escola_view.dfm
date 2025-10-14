@@ -343,6 +343,7 @@ object frm_menuEscola: Tfrm_menuEscola
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 2
+      OnClick = btn_RemoverTurmaMenuClick
     end
     object btn_EditarTurmaMenu: TPanel
       Left = 520
@@ -356,8 +357,8 @@ object frm_menuEscola: Tfrm_menuEscola
       OnClick = btn_editar_EscolaMenuClick
     end
     object pnl_addNEdit_Turma_EscolaMenu: TPanel
-      Left = 176
-      Top = 74
+      Left = 164
+      Top = 4
       Width = 449
       Height = 456
       Color = clBtnHighlight

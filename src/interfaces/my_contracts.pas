@@ -63,6 +63,7 @@ type
       procedure Delete (aID: Integer);
       procedure LinkEstudante (aID: Integer);
       function GetTurmaDataSet: TDataSet;
+      function FindByName (aNome : String): TTurmaModel;
 
 
   end;
@@ -119,6 +120,7 @@ type
       procedure Update(aDTO :TTurmaDTO);
       procedure Delete (aID: Integer);
       procedure LinkEstudante (aID: Integer);
+      function FindByName (aNome : String) : TTUrmaDTO;
       function AtualizarTabelaTurmas : TDataSet;
     end;
 
@@ -187,6 +189,7 @@ type
     function AtualizarTabelaMembros : TDataSet ;
     procedure AdicionarUsuario();
     function RetornarMembro(aID : Integer) : TUserDTO;
+    procedure DeleteTurma(aNome : String);
     procedure Update(aID : Integer);
     procedure Delete(aID : Integer);
     procedure AdicionarTurma();

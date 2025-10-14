@@ -27,6 +27,7 @@ public
    function FindByName (aString : String) : TUserDTO;
    function FindByNameProfessores (aString : String): TProfessorDTO;
    function AtualizarTabelaTurmas : TDataSet;
+   procedure DeleteTurma(aNome: String);
 
 
 end;
@@ -117,6 +118,14 @@ end;
 procedure TMenuAdminController.Delete(aID: Integer);
 begin
   FServiceUser.Delete(aID);
+end;
+
+procedure TMenuAdminController.DeleteTurma(aNome: String);
+var
+  FDTO : TTurmaDTO;
+begin
+  FDTO := FServiceTurma.FindByName(aNome);
+  FServiceTurma.Delete(FDTO.ID);
 end;
 
 function TMenuAdminController.FindByName(aString: String): TUserDTO;

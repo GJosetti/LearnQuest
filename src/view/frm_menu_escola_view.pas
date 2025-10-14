@@ -65,6 +65,7 @@ type
     procedure pnl_back_EscolaMenuClick(Sender: TObject);
     procedure btn_Sair_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
+    procedure btn_RemoverTurmaMenuClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -169,6 +170,24 @@ begin
 
 
 
+
+
+end;
+
+procedure Tfrm_menuEscola.btn_RemoverTurmaMenuClick(Sender: TObject);
+var
+FName : String;
+begin
+
+FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('turma_name').AsString;
+//Confirmação de exclusão
+if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+              [mbYes, mbNo], 0) = mrYes then
+begin
+  FController.DeleteTurma(FName);
+  FController.AtualizarTabelaTurmas;
+  ShowMessage('Registro excluído!');
+end;
 
 
 end;

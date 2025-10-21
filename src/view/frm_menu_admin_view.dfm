@@ -182,8 +182,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 20
-        ExplicitTop = -14
+        ExplicitWidth = 126
       end
       object lbl_nome_edit_addNEdit_adminMenu: TLabel
         Left = 160
@@ -213,7 +212,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Height = 15
         Caption = 'Senha do usu'#225'rio'
       end
-      object Label1: TLabel
+      object lbl_title_UserAdmin_pnl_AddNEdit_adminMenu: TLabel
         AlignWithMargins = True
         Left = 142
         Top = 268
@@ -244,14 +243,6 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         TabOrder = 0
         TextHint = 'Insira um nome'
       end
-      object edt_CEP_addNEdit_adminMenu: TEdit
-        Left = 32
-        Top = 233
-        Width = 81
-        Height = 23
-        TabOrder = 1
-        TextHint = 'XXXXX-XXX'
-      end
       object btn_concluir_addNEdit_adminMenu: TPanel
         Left = 167
         Top = 414
@@ -260,7 +251,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Caption = 'Concluir'
         Color = clBtnHighlight
         ParentBackground = False
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btn_concluir_addNEdit_adminMenuClick
       end
       object btn_cancelar_addNEdit_adminMenu: TPanel
@@ -271,7 +262,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Caption = 'Sair'
         Color = clBtnHighlight
         ParentBackground = False
-        TabOrder = 3
+        TabOrder = 2
         OnClick = btn_cancelar_addNEdit_adminMenuClick
       end
       object edt_nomeUsurario_addNEdit_adminMenu: TEdit
@@ -279,24 +270,33 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Top = 321
         Width = 145
         Height = 23
-        TabOrder = 4
-        TextHint = 'XXXXX-XXX'
+        TabOrder = 3
       end
       object edt_password_addNEdit__adminMenu: TEdit
         Left = 32
         Top = 371
         Width = 145
         Height = 23
-        TabOrder = 5
-        TextHint = 'XXXXX-XXX'
+        PasswordChar = '*'
+        TabOrder = 4
       end
       object edt_email_addNEdit_adminMenu: TEdit
         Left = 241
         Top = 233
         Width = 112
         Height = 23
+        TabOrder = 5
+        TextHint = 'Insira um email'
+      end
+      object edt_CEP_addNEdit_adminMenu: TMaskEdit
+        Left = 32
+        Top = 233
+        Width = 104
+        Height = 23
+        EditMask = '00000-000;1;_'
+        MaxLength = 9
         TabOrder = 6
-        TextHint = 'XXXXX-XXX'
+        Text = '     -   '
       end
     end
   end

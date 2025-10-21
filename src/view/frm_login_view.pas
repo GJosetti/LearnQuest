@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO,
-  Vcl.ExtCtrls, frm_menu_admin_view,frm_menu_escola_view, App_Consts;
+  Vcl.ExtCtrls, frm_menu_admin_view,frm_menu_escola_view, App_Consts,
+  Vcl.Imaging.pngimage;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -14,6 +15,7 @@ type
     edt_senha_login: TEdit;
     btn_login: TButton;
     pnl_login: TPanel;
+    s: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
   private
@@ -87,6 +89,9 @@ begin
   end else if (aDTO.Role = ROLE_ESCOLA) then begin
     frm_menuEscola := Tfrm_menuEscola.Create(nil);
     frm_menuEscola.ShowModal;
+  end else if (aDTO.Role = ROLE_PROFESSOR) then begin
+    //Criar Form
+    //ShowModal
   end;
 
 

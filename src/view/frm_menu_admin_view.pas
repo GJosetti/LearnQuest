@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO, Sessao;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO, Sessao,
+  Vcl.Mask;
 
 type
   TMode = (m_ADD,m_EDIT);
@@ -25,17 +26,17 @@ type
     edt_nome_addNEdit_adminMenu: TEdit;
     lbl_nome_edit_addNEdit_adminMenu: TLabel;
     lbl_CEP_addNEdit_adminMenu: TLabel;
-    edt_CEP_addNEdit_adminMenu: TEdit;
     btn_concluir_addNEdit_adminMenu: TPanel;
     btn_cancelar_addNEdit_adminMenu: TPanel;
     lbl_nomeAdmin_addNEdit_adminMenu: TLabel;
     edt_nomeUsurario_addNEdit_adminMenu: TEdit;
     lbl_passwordAdmin_addNEdit_adminMenu: TLabel;
     edt_password_addNEdit__adminMenu: TEdit;
-    Label1: TLabel;
+    lbl_title_UserAdmin_pnl_AddNEdit_adminMenu: TLabel;
     edt_email_addNEdit_adminMenu: TEdit;
     lbl_email_addNEdit_adminMenu: TLabel;
     pnl_back_adminMenu: TPanel;
+    edt_CEP_addNEdit_adminMenu: TMaskEdit;
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);

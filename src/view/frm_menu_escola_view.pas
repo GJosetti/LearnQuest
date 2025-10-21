@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO;
 
 type
   TMode = (m_Add,m_Edit);
@@ -138,7 +138,16 @@ end;
 procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(
   Sender: TObject);
 begin
-  FController.AdicionarTurma;
+  if  (Fmode = m_Add) then begin
+
+    FController.AdicionarTurma;
+
+  end else begin
+
+    FController.UpdateTurma(FID);
+
+  end;
+
 
   FController.AtualizarTabelaTurmas;
 
@@ -149,20 +158,22 @@ end;
 procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
 var
 FName : String;
-FDTO : TUserDTO;
+FDTO : TTurmaDTO;
 
 begin
   pnl_addNEdit_EscolaMenu.Visible := true;
   Fmode := m_Edit;
-  FName := dbg_membrosEscola.DataSource.DataSet.FieldByName('user_name').AsString;
-  FDTO := TUserDTO.Create;
+  FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('turma_name').AsString;
+  FDTO := TTurmaDTO.Create;
    try
-
-      FDTO := FController.FindByName(FName);
-      edt_nome_addNEdit_EscolaMenu.Text := FDTO.Name;
-      edt_email_addNEdit_EscolaMenu.Text := FDTO.Email;
-      cb_role_addNEdit_EscolaMenu.ItemIndex := FDTO.Role - 2;
+      pnl_addNEdit_Turma_EscolaMenu.Visible := true;
+      FDTO := FController.FindByNameTurmas(FName);
+      edt_Nome_Turma_EscolaMenu.Text := FDTO.Nome;
+      edt_Descricao_addNEdit_Turma_EscolaMenu.Text := FDTO.Descricao;
+      PopularCBProfessores;
+      cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := FDTO.ProfessorID -1 ;
       FID := FDTO.ID;
+
 
    finally
 

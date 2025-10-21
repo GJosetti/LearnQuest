@@ -1,7 +1,7 @@
 unit turma_repository;
 
 interface
-uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client,Data.DB, vcl.Dialogs, System.SysUtils;
+uses my_contracts, turma_DTO,turma_entity, DMConnection, FireDAC.Comp.Client,FireDAC.Stan.Param, FireDAC.DApt,Data.DB, vcl.Dialogs, System.SysUtils;
 type
 
 TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
@@ -109,6 +109,7 @@ var
 begin
   Qry := TFDQuery.Create(nil);
   try
+
     Qry.Connection := FConnection;
     Qry.SQL.Text := 'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
                     'VALUES (:NAME, :DESCR, :PID)';
@@ -123,8 +124,24 @@ end;
 
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
+var
+  Qry: TFDQuery;
 begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'UPDATE turmas SET turma_name = :NAME, descricao = :DESCRIC, professor_ID = :PID where id = :ID';
 
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('DESCRIC').AsString := aModel.GetDescricao;
+    Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
+    Qry.ParamByName('ID').AsInteger := aModel.GetID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+    aModel.Free;
+  end;
 end;
+
 
 end.

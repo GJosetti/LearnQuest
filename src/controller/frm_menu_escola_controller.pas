@@ -26,8 +26,10 @@ public
    function PopularCBProfessores : TStringList;
    function FindByName (aString : String) : TUserDTO;
    function FindByNameProfessores (aString : String): TProfessorDTO;
+   function FindByNameTurmas (aString : String): TTurmaDTO;
    function AtualizarTabelaTurmas : TDataSet;
    procedure DeleteTurma(aNome: String);
+   procedure UpdateTurma (aID : Integer);
 
 
 end;
@@ -138,6 +140,11 @@ begin
   Result := FServiceProfessor.FindByName(aString);
 end;
 
+function TMenuAdminController.FindByNameTurmas(aString: String): TTurmaDTO;
+begin
+  Result := FServiceTurma.FindByName(aString);
+end;
+
 function TMenuAdminController.PopularCBProfessores: TStringList;
 begin
   Result := FServiceProfessor.GetAllNames;
@@ -160,6 +167,21 @@ begin
   UsuarioDTO.Email := Fview.GetEmail;
 
   FServiceUser.Update(UsuarioDTO);
+
+end;
+
+procedure TMenuAdminController.UpdateTurma(aID: Integer);
+var TurmaDTO: TTurmaDTO;
+begin
+
+
+  TurmaDTO := TTurmaDTO.Create;
+  TurmaDTO.Nome := Fview.GetNomeTurma;
+  TurmaDTO.ID := aID;
+  TurmaDTO.Descricao := Fview.GetDescTurma;
+  TurmaDTO.ProfessorID := Fview.GetIDProfessorTurma;
+
+  FServiceTurma.Update(TurmaDTO);
 
 end;
 

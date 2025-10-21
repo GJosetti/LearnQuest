@@ -93,7 +93,18 @@ begin
 end;
 
 procedure TTurmaService.Update(aDTO: TTurmaDTO);
+var
+FTurma : TTurmaModel;
 begin
+
+FTurma := TTurmaModel.Create;
+
+FTurma.SetID(aDTO.ID);
+FTurma.SetNome(aDto.Nome);
+FTurma.SetDescricao(aDto.Descricao);
+FTurma.SetProfessorID(aDto.ProfessorID);
+
+FTurmaRepo.Update(FTurma);
 
 end;
 

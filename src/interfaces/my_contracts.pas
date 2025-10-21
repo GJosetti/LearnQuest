@@ -197,6 +197,8 @@ type
     function FindByName (aString : String) : TUserDTO;
     function AtualizarTabelaTurmas : TDataSet;
     function FindByNameProfessores (aString : String): TProfessorDTO;
+    function FindByNameTurmas (aString : String): TTurmaDTO;
+    procedure UpdateTurma (aID : Integer);
   end;
 
 

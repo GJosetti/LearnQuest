@@ -38,10 +38,10 @@ object frm_login: Tfrm_login
       ExplicitWidth = 158
     end
     object s: TImage
-      Left = 695
-      Top = 282
-      Width = 106
-      Height = 79
+      Left = 703
+      Top = 304
+      Width = 74
+      Height = 65
       Center = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000004000000
@@ -28337,11 +28337,12 @@ object frm_login: Tfrm_login
         D828E7722B760A0B6ED7BBAF5CE89D8B97CD18A6F10B2BE48CFE81A4675C4F52
         C1FD3FA03E908834E444150000000049454E44AE426082}
       Stretch = True
+      OnClick = sClick
     end
     object edt_nome_login: TEdit
-      Left = 464
+      Left = 472
       Top = 248
-      Width = 193
+      Width = 209
       Height = 23
       TabOrder = 1
       TextHint = 'Insira seu usu'#225'rio'
@@ -28350,7 +28351,7 @@ object frm_login: Tfrm_login
       Left = 472
       Top = 320
       Width = 209
-      Height = 25
+      Height = 23
       PasswordChar = '*'
       TabOrder = 2
       TextHint = 'Insira sua senha'

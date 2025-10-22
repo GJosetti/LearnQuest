@@ -66,6 +66,7 @@ type
     procedure btn_Sair_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_RemoverTurmaMenuClick(Sender: TObject);
+
   private
     { Private declarations }
     FID : Integer;
@@ -79,7 +80,8 @@ type
     function GetEmail: String;
     function GetID : Integer;
     function GetRole: Integer;
-    function CamposValidos: Boolean;
+    function CamposValidosUsuario: Boolean;
+    function CamposValidosTurma: Boolean;
     function GetNomeTurma : String;
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;
@@ -123,30 +125,35 @@ end;
 procedure Tfrm_menuEscola.btn_concluir_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
+  if(CamposValidosUsuario)then begin
+    if Fmode = m_Add then begin
+      FController.AdicionarUsuario;
+    end else if Fmode = m_Edit then begin
+      FController.Update(FID);
 
-  if Fmode = m_Add then begin
-    FController.AdicionarUsuario;
-  end else if Fmode = m_Edit then begin
-    FController.Update(FID);
-
+    end;
+    pnl_addNEdit_EscolaMenu.Visible := false;
+    FController.AtualizarTabelaMembros;
+    ClearAllEdits;
   end;
-  pnl_addNEdit_EscolaMenu.Visible := false;
-  FController.AtualizarTabelaMembros;
-  ClearAllEdits;
+
 end;
 
 procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(
   Sender: TObject);
 begin
-  if  (Fmode = m_Add) then begin
+  if(CamposValidosTurma) then begin
+    if  (Fmode = m_Add) then begin
 
-    FController.AdicionarTurma;
+      FController.AdicionarTurma;
 
-  end else begin
+    end else begin
 
-    FController.UpdateTurma(FID);
+      FController.UpdateTurma(FID);
 
+    end;
   end;
+
 
 
   FController.AtualizarTabelaTurmas;
@@ -229,12 +236,27 @@ begin
   ClearAllEdits;
 end;
 
-function Tfrm_menuEscola.CamposValidos: Boolean;
+function Tfrm_menuEscola.CamposValidosTurma: Boolean;
 begin
+     //Valida todos os campos
+  if(edt_Nome_Turma_EscolaMenu.Text = Trim('')) or (edt_Descricao_addNEdit_Turma_EscolaMenu.Text = Trim('')) or (cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex = - 1) then begin
 
+    raise Exception.Create('Todos os campos precisam ser preenchidos');
+  end else begin
+    Result := True;
+  end;
 end;
 
+function Tfrm_menuEscola.CamposValidosUsuario: Boolean;
+begin
+     //Valida todos os campos
+  if(edt_nome_addNEdit_EscolaMenu.Text = Trim('')) or (edt_password_addNEdit__EscolaMenu.Text = Trim('')) or (edt_email_addNEdit_EscolaMenu.Text = Trim('')) or (cb_role_addNEdit_EscolaMenu.ItemIndex = -1) then begin
 
+    raise Exception.Create('Todos os campos precisam ser preenchidos');
+  end else begin
+    Result := True;
+  end;
+end;
 
 procedure Tfrm_menuEscola.ClearAllEdits;
 begin
@@ -419,3 +441,5 @@ end;
 
 
 end.
+
+

@@ -34,17 +34,16 @@ begin
 end;
 
 procedure TTurmaRepository.Delete(aID: Integer);
-var
-  Qry: TFDQuery;
+
+
 begin
-  Qry := TFDQuery.Create(nil);
   try
-    Qry.Connection := FConnection;
-    Qry.SQL.Text := 'delete from turmas where id = :ID';
-    Qry.ParamByName('ID').AsInteger := aID;
-    Qry.ExecSQL;
+     DataModule1.FDQueryTurmas.Connection := FConnection;
+     DataModule1.FDQueryTurmas.SQL.Text := 'delete from turmas where id = :ID';
+     DataModule1.FDQueryTurmas.ParamByName('ID').AsInteger := aID;
+     DataModule1.FDQueryTurmas.ExecSQL;
   finally
-    Qry.Free;
+
   end;
 end;
 
@@ -62,22 +61,22 @@ end;
 
 
 function TTurmaRepository.FindByName(aNome: String): TTurmaModel;
-var
-Qry : TFDQuery;
-begin
-Qry := TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'Select * From turmas WHERE turma_name = :NAME';
-  Qry.ParamByName('NAME').AsString := aNome;
-  Qry.Open();
 
-  if not Qry.IsEmpty then begin
-    Result := RowToTurma(Qry);
+begin
+
+ try
+   DataModule1.FDQueryTurmas.Connection := FConnection;
+   DataModule1.FDQueryTurmas.SQL.Text := 'Select * From turmas WHERE turma_name = :NAME';
+   DataModule1.FDQueryTurmas.ParamByName('NAME').AsString := aNome;
+   DataModule1.FDQueryTurmas.Open();
+
+  if not  DataModule1.FDQueryTurmas.IsEmpty then begin
+    Result := RowToTurma( DataModule1.FDQueryTurmas);
   end;
 
  finally
-  Qry.Free;
+   DataModule1.FDQueryTurmas.Close;
+
  end;
 
 end;
@@ -104,42 +103,54 @@ end;
 
 
 procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
-var
-  Qry: TFDQuery;
-begin
-  Qry := TFDQuery.Create(nil);
-  try
 
-    Qry.Connection := FConnection;
-    Qry.SQL.Text := 'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
+begin
+
+  try
+    if not Assigned(FConnection) then
+  raise Exception.Create('Conexão FConnection está nula!');
+if not FConnection.Connected then
+  raise Exception.Create('Conexão FConnection não está ativa!');
+
+    if not Assigned(DataModule1) then
+  raise Exception.Create('DataModule1 não foi criado!');
+
+if not Assigned(DataModule1.FDQueryTurmas) then
+  raise Exception.Create('FDQueryTurmas não foi criado!');
+
+
+
+    DataModule1.FDQueryTurmas.Connection := FConnection;
+     DataModule1.FDQueryTurmas.SQL.Text := 'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
                     'VALUES (:NAME, :DESCR, :PID)';
-    Qry.ParamByName('NAME').AsString := aModel.GetNome;
-    Qry.ParamByName('DESCR').AsString := aModel.GetDescricao;
-    Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
-    Qry.ExecSQL;
+     DataModule1.FDQueryTurmas.ParamByName('NAME').AsString := aModel.GetNome;
+     DataModule1.FDQueryTurmas.ParamByName('DESCR').AsString := aModel.GetDescricao;
+     DataModule1.FDQueryTurmas.ParamByName('PID').AsInteger := aModel.GetProfessorID;
+     DataModule1.FDQueryTurmas.ExecSQL;
   finally
-    Qry.Free;
+
+
+
   end;
 end;
 
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
-var
-  Qry: TFDQuery;
-begin
-  Qry := TFDQuery.Create(nil);
-  try
-    Qry.Connection := FConnection;
-    Qry.SQL.Text := 'UPDATE turmas SET turma_name = :NAME, descricao = :DESCRIC, professor_ID = :PID where id = :ID';
 
-    Qry.ParamByName('NAME').AsString := aModel.GetNome;
-    Qry.ParamByName('DESCRIC').AsString := aModel.GetDescricao;
-    Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
-    Qry.ParamByName('ID').AsInteger := aModel.GetID;
-    Qry.ExecSQL;
+begin
+
+  try
+     DataModule1.FDQueryTurmas.Connection := FConnection;
+     DataModule1.FDQueryTurmas.SQL.Text := 'UPDATE turmas SET turma_name = :NAME, descricao = :DESCRIC, professor_ID = :PID where id = :ID';
+
+     DataModule1.FDQueryTurmas.ParamByName('NAME').AsString := aModel.GetNome;
+     DataModule1.FDQueryTurmas.ParamByName('DESCRIC').AsString := aModel.GetDescricao;
+     DataModule1.FDQueryTurmas.ParamByName('PID').AsInteger := aModel.GetProfessorID;
+     DataModule1.FDQueryTurmas.ParamByName('ID').AsInteger := aModel.GetID;
+     DataModule1.FDQueryTurmas.ExecSQL;
   finally
-    Qry.Free;
-    aModel.Free;
+
+
   end;
 end;
 

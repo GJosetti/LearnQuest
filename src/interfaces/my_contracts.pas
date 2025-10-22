@@ -177,7 +177,8 @@ type
     function GetEmail: String;
     function GetID : Integer;
     function GetRole: Integer;
-    function CamposValidos: Boolean;
+    function CamposValidosUsuario: Boolean;
+    function CamposValidosTurma: Boolean;
     function GetNomeTurma : String;
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;

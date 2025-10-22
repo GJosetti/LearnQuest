@@ -18,10 +18,11 @@ type
     s: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
+    procedure sClick(Sender: TObject);
   private
     { Private declarations }
     FController : ILoginController;
-
+    isPasswordVisible : Boolean;
 
 
   public
@@ -77,6 +78,19 @@ begin
 end;
 
 
+
+procedure Tfrm_login.sClick(Sender: TObject);
+begin
+  isPasswordVisible := not isPasswordVisible;
+
+  if(isPasswordVisible) then begin
+    edt_senha_login.PasswordChar := #0;
+  end else begin
+    edt_senha_login.PasswordChar := '*';
+  end;
+
+
+end;
 
 procedure Tfrm_login.TrocarTela(aDTO: TUserDTO);
 

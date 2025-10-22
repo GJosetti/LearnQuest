@@ -49,6 +49,9 @@ type
     edt_Descricao_addNEdit_Turma_EscolaMenu: TEdit;
     cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu: TComboBox;
     pnl_back_EscolaMenu: TPanel;
+    pnl_participantes_Turma: TPanel;
+    dbg_participantes_turma: TDBGrid;
+    btn_ListarMembros: TPanel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -67,10 +70,12 @@ type
     procedure btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_RemoverTurmaMenuClick(Sender: TObject);
     procedure btn_editar_EscolaMenuClick(Sender: TObject);
+    procedure btn_ListarMembrosClick(Sender: TObject);
 
   private
     { Private declarations }
     FID : Integer;
+    FIDTurmaSelected : Integer;
     FController : IMenuEscolaController;
     Fmode : TMode;
     FPreventColumnMove : Boolean;
@@ -221,6 +226,26 @@ begin
 
 
 
+end;
+
+procedure Tfrm_menuEscola.btn_ListarMembrosClick(Sender: TObject);
+var
+FName : String;
+FTurmaDTO : TTurmaDTO;
+begin
+//////////////////////////////////////////////////////////////////////////
+  FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('turma_name').AsString;
+  FTurmaDTO := FController.FindByNameTurmas(Fname);
+  FIDTurmaSelected := FTurmaDTO.ID;
+  FController.GetEstudantesPorTurma(FIDTurmaSelected);
+
+  pnl_participantes_Turma.Visible := true;
+
+  if Assigned(d_Src_membros_escola.DataSet) then begin
+   d_Src_membros_escola.DataSet := nil; // limpa antes
+ end;
+  d_Src_membros_escola.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
+  dbg_participantes_turma.DataSource := d_Src_membros_escola;
 end;
 
 procedure Tfrm_menuEscola.btn_RemoverTurmaMenuClick(Sender: TObject);

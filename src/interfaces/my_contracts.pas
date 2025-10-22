@@ -61,9 +61,14 @@ type
       procedure Salvar(aModel: TTurmaModel);
       procedure Update(aModel : TTurmaModel);
       procedure Delete (aID: Integer);
-      procedure LinkEstudante (aID: Integer);
+
       function GetTurmaDataSet: TDataSet;
       function FindByName (aNome : String): TTurmaModel;
+
+      procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
+      function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+      procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+      function GetParticipantesDataSet(aID : Integer): TDataSet;
 
 
   end;
@@ -119,9 +124,14 @@ type
       procedure Salvar(aDTO : TTurmaDTO);
       procedure Update(aDTO :TTurmaDTO);
       procedure Delete (aID: Integer);
-      procedure LinkEstudante (aID: Integer);
+
       function FindByName (aNome : String) : TTUrmaDTO;
       function AtualizarTabelaTurmas : TDataSet;
+
+      procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
+      function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+      procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+      function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
     end;
 
 
@@ -200,7 +210,12 @@ type
     function FindByNameProfessores (aString : String): TProfessorDTO;
     function FindByNameTurmas (aString : String): TTurmaDTO;
     procedure UpdateTurma (aID : Integer);
-  end;
+
+    procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
+    function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+    procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+    function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
+   end;
 
 
 

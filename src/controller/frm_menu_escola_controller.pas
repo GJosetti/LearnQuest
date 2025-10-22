@@ -31,6 +31,11 @@ public
    procedure DeleteTurma(aNome: String);
    procedure UpdateTurma (aID : Integer);
 
+    procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
+    function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+    procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+    function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
+
 
 end;
 
@@ -112,6 +117,11 @@ begin
 end;
 
 
+function TMenuAdminController.AtualizarTabelaParticipantes(aID: Integer): TDataSet;
+begin
+  Result := FServiceTurma.AtualizarTabelaParticipantes(aID);
+end;
+
 function TMenuAdminController.AtualizarTabelaTurmas: TDataSet;
 begin
   Result := FServiceTurma.AtualizarTabelaTurmas;
@@ -145,9 +155,26 @@ begin
   Result := FServiceTurma.FindByName(aString);
 end;
 
+function TMenuAdminController.GetEstudantesPorTurma(
+  aTurmaID: Integer): TDataSet;
+begin
+
+end;
+
+procedure TMenuAdminController.LinkEstudante(aEstudanteID, aTurmaID: Integer);
+begin
+
+end;
+
 function TMenuAdminController.PopularCBProfessores: TStringList;
 begin
   Result := FServiceProfessor.GetAllNames;
+end;
+
+procedure TMenuAdminController.RemoverEstudanteDaTurma(aEstudanteID,
+  aTurmaID: Integer);
+begin
+
 end;
 
 function TMenuAdminController.RetornarMembro(aID: Integer): TUserDTO;

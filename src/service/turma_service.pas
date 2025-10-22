@@ -19,16 +19,26 @@ public
       procedure Salvar(aDTO : TTurmaDTO);
       procedure Update(aDTO :TTurmaDTO);
       procedure Delete (aID: Integer);
-      procedure LinkEstudante (aID: Integer);
+
       function AtualizarTabelaTurmas : TDataSet;
       function FindByName (aNome : String) : TTUrmaDTO;
       constructor Create;
+
+      procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
+      function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+      procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+      function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
 
 end;
 
 implementation
 
 { TTurmaService }
+
+function TTurmaService.AtualizarTabelaParticipantes(aID: Integer): TDataSet;
+begin
+  Result := FTurmaRepo.GetParticipantesDataSet(aID);
+end;
 
 function TTurmaService.AtualizarTabelaTurmas: TDataSet;
 begin
@@ -69,10 +79,17 @@ begin
 
 end;
 
-procedure TTurmaService.LinkEstudante(aID: Integer);
+function TTurmaService.GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
 begin
 
 end;
+
+procedure TTurmaService.LinkEstudante(aEstudanteID, aTurmaID: Integer);
+begin
+
+end;
+
+
 
 procedure TTurmaService.Salvar(aDTO: TTurmaDTO);
 var
@@ -105,6 +122,12 @@ FTurma.SetDescricao(aDto.Descricao);
 FTurma.SetProfessorID(aDto.ProfessorID);
 
 FTurmaRepo.Update(FTurma);
+
+end;
+
+procedure TTurmaService.RemoverEstudanteDaTurma(aEstudanteID,
+  aTurmaID: Integer);
+begin
 
 end;
 

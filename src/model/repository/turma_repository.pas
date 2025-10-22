@@ -16,10 +16,15 @@ function GetByID (aID : Integer): TTurmaModel;
     procedure Salvar(aModel: TTurmaModel);
     procedure Update(aModel : TTurmaModel);
     procedure Delete (aID: Integer);
-    procedure LinkEstudante (aID: Integer);
+
     function GetTurmaDataSet: TDataSet;
     function FindByName (aNome : String): TTurmaModel;
     constructor Create();
+
+    procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
+    function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+    procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+    function GetParticipantesDataSet(aID : Integer): TDataSet;
 end;
 
 
@@ -45,6 +50,12 @@ begin
   finally
 
   end;
+end;
+
+procedure TTurmaRepository.RemoverEstudanteDaTurma(aEstudanteID,
+  aTurmaID: Integer);
+begin
+
 end;
 
 function TTurmaRepository.RowToTurma(aQuery: TFDQuery): TTurmaModel;
@@ -86,6 +97,21 @@ begin
 
 end;
 
+function TTurmaRepository.GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
+begin
+
+end;
+
+function TTurmaRepository.GetParticipantesDataSet(aID : Integer): TDataSet;
+begin
+  DataModule1.FDQuery1.Close;
+
+  DataModule1.FDQuery1.SQL.Text:= 'SELECT u.user_name , r.descricao FROM estudante_turma t JOIN estudante e ON e.id = t.estudante_id JOIn users u ON u.id = e.user_id JOIN roles r ON r.id = u.user_role_id  WHERE t.turma_id = :ID';
+  DataModule1.FDQuery1.ParamByName('ID').AsInteger :=  aID;
+  DataModule1.FDQuery1.Open;
+  Result := DataModule1.FDQuery1;
+end;
+
 function TTurmaRepository.GetTurmaDataSet: TDataSet;
 begin
   DataModule1.FDQuery1.Close;
@@ -95,10 +121,11 @@ begin
   Result := DataModule1.FDQuery1;
 end;
 
-procedure TTurmaRepository.LinkEstudante(aID: Integer);
+procedure TTurmaRepository.LinkEstudante(aEstudanteID, aTurmaID: Integer);
 begin
 
 end;
+
 
 
 

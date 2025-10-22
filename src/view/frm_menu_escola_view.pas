@@ -54,7 +54,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btn_adicionar_EscolaMenuClick(Sender: TObject);
     procedure btn_cancelar_addNEdit_EscolaMenuClick(Sender: TObject);
-    procedure btn_editar_EscolaMenuClick(Sender: TObject);
+    procedure btn_editarTurma_EscolaMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_EscolaMenuClick(Sender: TObject);
     procedure TurmasClick(Sender: TObject);
     procedure btn_AdicionarTurmaMenuClick(Sender: TObject);
@@ -66,6 +66,7 @@ type
     procedure btn_Sair_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
     procedure btn_RemoverTurmaMenuClick(Sender: TObject);
+    procedure btn_editar_EscolaMenuClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -162,7 +163,7 @@ begin
   ClearAllEdits;
 end;
 
-procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
+procedure Tfrm_menuEscola.btn_editarTurma_EscolaMenuClick(Sender: TObject);
 var
 FName : String;
 FDTO : TTurmaDTO;
@@ -179,6 +180,36 @@ begin
       edt_Descricao_addNEdit_Turma_EscolaMenu.Text := FDTO.Descricao;
       PopularCBProfessores;
       cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := FDTO.ProfessorID -1 ;
+      FID := FDTO.ID;
+
+
+   finally
+
+   end;
+
+
+
+
+
+end;
+
+procedure Tfrm_menuEscola.btn_editar_EscolaMenuClick(Sender: TObject);
+var
+FName : String;
+FDTO : TUserDTO;
+
+begin
+  pnl_addNEdit_EscolaMenu.Visible := true;
+  Fmode := m_Edit;
+  FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('user_name').AsString;
+  FDTO := TUserDTO.Create;
+   try
+      pnl_addNEdit_Turma_EscolaMenu.Visible := true;
+      FDTO := FController.FindByName(FName);
+      edt_nome_addNEdit_EscolaMenu.Text := FDTO.Name;
+      edt_password_addNEdit__EscolaMenu.Text := FDTO.Password;
+      cb_role_addNEdit_EscolaMenu.ItemIndex := FDTO.Role - 1;
+      edt_email_addNEdit_EscolaMenu.Text := FDTO.Email;
       FID := FDTO.ID;
 
 

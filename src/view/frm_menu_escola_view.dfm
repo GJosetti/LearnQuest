@@ -475,9 +475,9 @@ object frm_menuEscola: Tfrm_menuEscola
       Visible = False
       object dbg_participantes_turma: TDBGrid
         Left = 47
-        Top = 26
+        Top = 19
         Width = 319
-        Height = 391
+        Height = 335
         Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -505,6 +505,30 @@ object frm_menuEscola: Tfrm_menuEscola
             Width = 150
             Visible = True
           end>
+      end
+      object btn_Vincular_Aluno: TPanel
+        Left = 79
+        Top = 395
+        Width = 113
+        Height = 26
+        Caption = 'Adicionar'
+        TabOrder = 1
+      end
+      object btn_remover_aluno: TPanel
+        Left = 231
+        Top = 395
+        Width = 107
+        Height = 26
+        Caption = 'Remover'
+        TabOrder = 2
+      end
+      object btn_back_participantes_Escola_Menu: TPanel
+        Left = 360
+        Top = 4
+        Width = 58
+        Height = 26
+        Caption = 'Voltar'
+        TabOrder = 3
       end
     end
   end

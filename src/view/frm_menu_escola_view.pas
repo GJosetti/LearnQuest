@@ -52,6 +52,9 @@ type
     pnl_participantes_Turma: TPanel;
     dbg_participantes_turma: TDBGrid;
     btn_ListarMembros: TPanel;
+    btn_Vincular_Aluno: TPanel;
+    btn_remover_aluno: TPanel;
+    btn_back_participantes_Escola_Menu: TPanel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

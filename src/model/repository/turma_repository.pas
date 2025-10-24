@@ -104,12 +104,12 @@ end;
 
 function TTurmaRepository.GetParticipantesDataSet(aID : Integer): TDataSet;
 begin
-  DataModule1.FDQuery1.Close;
+  DataModule1.FDQueryParticipantes.Close;
 
-  DataModule1.FDQuery1.SQL.Text:= 'SELECT u.user_name , r.descricao FROM estudante_turma t JOIN estudante e ON e.id = t.estudante_id JOIn users u ON u.id = e.user_id JOIN roles r ON r.id = u.user_role_id  WHERE t.turma_id = :ID';
-  DataModule1.FDQuery1.ParamByName('ID').AsInteger :=  aID;
-  DataModule1.FDQuery1.Open;
-  Result := DataModule1.FDQuery1;
+  DataModule1.FDQueryParticipantes.SQL.Text:= 'SELECT u.user_name , r.descricao FROM estudante_turma t JOIN estudante e ON e.id = t.estudante_id JOIn users u ON u.id = e.user_id JOIN roles r ON r.id = u.user_role_id  WHERE t.turma_id = :ID';
+  DataModule1.FDQueryParticipantes.ParamByName('ID').AsInteger :=  aID;
+  DataModule1.FDQueryParticipantes.Open;
+  Result := DataModule1.FDQueryParticipantes;
 end;
 
 function TTurmaRepository.GetTurmaDataSet: TDataSet;
@@ -122,7 +122,18 @@ begin
 end;
 
 procedure TTurmaRepository.LinkEstudante(aEstudanteID, aTurmaID: Integer);
+
 begin
+
+  try
+
+    DataModule1.FDQueryTurmas.SQL.Text := 'INSERT INTO estudante_turma(estudante_id, turma_id) VALUES (:eID , :aID)';
+    DataModule1.FDQueryTurmas.ParamByName('eID').AsInteger := aEstudanteID;
+    DataModule1.FDQueryTurmas.ParamByName('aID').AsInteger := aTurmaID;
+    DataModule1.FDQueryTurmas.ExecSql();
+  finally
+
+  end;
 
 end;
 

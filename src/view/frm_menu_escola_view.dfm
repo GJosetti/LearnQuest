@@ -392,8 +392,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = -12
-        ExplicitTop = 19
+        ExplicitWidth = 126
       end
       object lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel
         Left = 160
@@ -474,7 +473,7 @@ object frm_menuEscola: Tfrm_menuEscola
       TabOrder = 5
       Visible = False
       object dbg_participantes_turma: TDBGrid
-        Left = 47
+        Left = 27
         Top = 19
         Width = 319
         Height = 335
@@ -507,33 +506,54 @@ object frm_menuEscola: Tfrm_menuEscola
           end>
       end
       object btn_Vincular_Aluno: TPanel
-        Left = 79
+        Left = 47
         Top = 395
         Width = 113
         Height = 26
         Caption = 'Adicionar'
+        Color = clWhite
+        ParentBackground = False
         TabOrder = 1
+        OnClick = btn_Vincular_AlunoClick
       end
       object btn_remover_aluno: TPanel
-        Left = 231
+        Left = 223
         Top = 395
         Width = 107
         Height = 26
         Caption = 'Remover'
+        Color = clWhite
+        ParentBackground = False
         TabOrder = 2
       end
       object btn_back_participantes_Escola_Menu: TPanel
-        Left = 360
+        Left = 352
         Top = 4
         Width = 58
         Height = 26
         Caption = 'Voltar'
+        Color = clWhite
+        ParentBackground = False
         TabOrder = 3
+        OnClick = btn_back_participantes_Escola_MenuClick
+      end
+      object cb_alunos_participantes_EscolaMenu: TComboBox
+        Left = 120
+        Top = 360
+        Width = 145
+        Height = 23
+        TabOrder = 4
+        Text = 'Alunos'
+        TextHint = 'Alunos'
       end
     end
   end
   object d_Src_membros_escola: TDataSource
     Left = 735
     Top = 655
+  end
+  object d_Src_participantes_turma: TDataSource
+    Left = 1103
+    Top = 439
   end
 end

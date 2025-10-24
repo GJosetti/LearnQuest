@@ -1,7 +1,7 @@
   unit user_repository;
 
 interface
-uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection,Sessao, VCL.Dialogs, Data.DB;
+uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection,Sessao, VCL.Dialogs, Data.DB, System.Generics.Collections;
 
 type
 TUserRepository = class(TInterfacedObject,IUserRepository)
@@ -21,6 +21,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     procedure Delete (aID: Integer);
     procedure SetPathSchema (aID : Integer);
     function GetUsersDataSet: TDataSet;
+    function GetAll : TObjectList<TUserModel>;
 end;
 
 
@@ -47,6 +48,31 @@ begin
 
 end;
 
+function TUserRepository.GetAll: TObjectList<TUserModel>;
+var
+lst : TObjectList<TUserModel>;
+Qry : TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  lst := TObjectList<TUserModel>.Create;
+try
+  Qry.Connection := FConnection;
+  Qry.SQL.Text := 'SELECT * FROM users u JOIN estudante e ON u.id = e.user_id';
+  Qry.Open();
+  while not Qry.Eof do begin
+    lst.Add(RowToUser(Qry));
+    Qry.Next;
+  end;
+
+  Result := lst;
+
+finally
+  Qry.Free;
+  end;
+end;
+
+
+
 function TUserRepository.Save(aModel: TUserModel) : Integer;
 var Qry : TFDQuery;
 FID : Integer;
@@ -66,6 +92,7 @@ begin
   FID := Qry.FieldByName('id').AsInteger;
   Qry.SQL.Clear;
   Qry.Close;
+
   Result := FID;
  finally
   Qry.Free;

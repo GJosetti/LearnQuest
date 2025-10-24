@@ -130,7 +130,7 @@ begin
 
   if not Assigned (CriarTabelas) then begin
     CriarTabelas := TStringList.Create;
-    CriarTabelas.LoadFromFile('C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
+    CriarTabelas.LoadFromFile('C:\Users\User\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
 
   end;
 
@@ -157,6 +157,7 @@ begin
   'RETURNING schema_name';
   Qry.ParamByName('FID').AsInteger := FID;
   Qry.Open;
+
 
   SchemaName := Qry.FieldByName('schema_name').AsString;
   Qry.Close;

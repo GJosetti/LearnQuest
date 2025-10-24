@@ -86,7 +86,7 @@ end;
 
 procedure TTurmaService.LinkEstudante(aEstudanteID, aTurmaID: Integer);
 begin
-
+  FTurmaRepo.LinkEstudante(aEstudanteID,aTurmaID);
 end;
 
 

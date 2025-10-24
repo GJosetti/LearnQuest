@@ -1,7 +1,7 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity, System.Classes;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity, System.Classes,System.Generics.Collections;
 
 type
 
@@ -18,6 +18,7 @@ type
     procedure Delete (aID : Integer);
     procedure SetPathSchema (aID : Integer);
     function GetUsersDataSet: TDataSet;
+    function GetAll : TObjectList<TUserModel>;
   end;
 
 
@@ -51,7 +52,9 @@ type
       procedure Salvar(aModel: TEstudanteModel);
       function GetUserByID (aID: Integer): TEstudanteModel;
       procedure Update(aDto : TEstudanteModel);
+      function GetIdByUserId(AUserId: Integer): Integer;
       procedure Delete (aID: Integer);
+
 
   end;
 
@@ -87,6 +90,7 @@ type
       procedure SetPathByEscola (aID: Integer);
       function AtualizarTabelaUsuarios : TDataSet;
       function GetByNome (aString : String) : TUserDTO;
+      function GetAll : TObjectList<TUserModel>;
   end;
 
   IEscolaService = interface
@@ -113,7 +117,9 @@ type
     ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
       function GetByID (aID : Integer): TEstudanteDTO;
       procedure Salvar(aDTO: TEstudanteDTO);
+
       function GetUserByID (aID: Integer): TEstudanteDTO;
+      function GetIdByUserId(AUserId: Integer): Integer;
       procedure Update(aDto : TEstudanteDTO);
       procedure Delete (aID: Integer);
     end;
@@ -205,11 +211,13 @@ type
     procedure Delete(aID : Integer);
     procedure AdicionarTurma();
     function PopularCBProfessores : TStringList;
+    function PopularCBParticipantes : TObjectList<TUserModel>;
     function FindByName (aString : String) : TUserDTO;
     function AtualizarTabelaTurmas : TDataSet;
     function FindByNameProfessores (aString : String): TProfessorDTO;
     function FindByNameTurmas (aString : String): TTurmaDTO;
     procedure UpdateTurma (aID : Integer);
+    function GetEstudanteIDByUser(aID : Integer) : Integer;
 
     procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
     function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;

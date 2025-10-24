@@ -1,7 +1,7 @@
 unit estudante_repository;
 
 interface
-uses my_contracts, estudante_entity,DMConnection,FireDAC.Comp.Client;
+uses my_contracts, estudante_entity,DMConnection,FireDAC.Comp.Client, System.Generics.Collections, System.Classes;
 
 type
 
@@ -13,9 +13,11 @@ public
     function GetByID (aID : Integer): TEstudanteModel;
     procedure Salvar(aModel: TEstudanteModel);
     function GetUserByID (aID: Integer): TEstudanteModel;
+    function GetIdByUserId(AUserId: Integer): Integer;
     procedure Update(aDto : TEstudanteModel);
     procedure Delete (aID: Integer);
     constructor Create();
+
 end;
 
 implementation
@@ -31,6 +33,31 @@ procedure TEstudanteRepository.Delete(aID: Integer);
 begin
 
 end;
+
+
+
+function TEstudanteRepository.GetIdByUserId(AUserId: Integer): Integer;
+var
+Qry : TFDQuery;
+ID : Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT id FROM estudante WHERE user_id = :ID';
+    Qry.ParamByName('ID').AsInteger := AUserId;
+    Qry.Open();
+    ID := Qry.FieldByName('id').AsInteger;
+    Result := ID;
+  finally
+    Qry.Close;
+  end;
+
+end;
+
+
+
+
 
 function TEstudanteRepository.GetByID(aID: Integer): TEstudanteModel;
 begin

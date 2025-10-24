@@ -1,7 +1,7 @@
 unit user_service;
 
 interface
-uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository, Data.DB;
+uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository, Data.DB, System.Generics.Collections,System.Classes;
 
 type
 TUserService = class(TInterfacedObject,IUserService)
@@ -20,6 +20,7 @@ public
   procedure SetPathByEscola (aID: Integer);
   function AtualizarTabelaUsuarios : TDataSet;
   function GetByNome (aString : String) : TUserDTO;
+  function GetAll : TObjectList<TUserModel>;
 end;
 
 
@@ -53,6 +54,12 @@ procedure TUserService.Delete(aID: Integer);
 begin
   //Validações
   FUserRepository.Delete(aID);
+end;
+
+function TUserService.GetAll : TObjectList<TUserModel>;
+begin
+
+  Result := FUserRepository.GetAll;
 end;
 
 function TUserService.GetByEscolaID(aID: Integer): TuserDTO;
@@ -131,6 +138,7 @@ begin
   FUsuario.SetRole(aDTO.Role);
   FUsuario.SetEmail(aDTO.Email);
   FUsuario.SetEscola(aDTO.Escola);
+
 
 
 

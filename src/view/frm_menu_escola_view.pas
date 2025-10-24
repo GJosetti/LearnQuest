@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections;
 
 type
   TMode = (m_Add,m_Edit);
@@ -55,6 +55,8 @@ type
     btn_Vincular_Aluno: TPanel;
     btn_remover_aluno: TPanel;
     btn_back_participantes_Escola_Menu: TPanel;
+    cb_alunos_participantes_EscolaMenu: TComboBox;
+    d_Src_participantes_turma: TDataSource;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -74,6 +76,8 @@ type
     procedure btn_RemoverTurmaMenuClick(Sender: TObject);
     procedure btn_editar_EscolaMenuClick(Sender: TObject);
     procedure btn_ListarMembrosClick(Sender: TObject);
+    procedure btn_back_participantes_Escola_MenuClick(Sender: TObject);
+    procedure btn_Vincular_AlunoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -120,6 +124,12 @@ begin
 
   pnl_addNEdit_EscolaMenu.Visible := true;
   Fmode := m_Add;
+end;
+
+procedure Tfrm_menuEscola.btn_back_participantes_Escola_MenuClick(
+  Sender: TObject);
+begin
+  pnl_participantes_Turma.Visible := False;
 end;
 
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
@@ -235,8 +245,12 @@ procedure Tfrm_menuEscola.btn_ListarMembrosClick(Sender: TObject);
 var
 FName : String;
 FTurmaDTO : TTurmaDTO;
+
+lst : TObjectList<TUserModel>;
+I : Integer;
+
 begin
-//////////////////////////////////////////////////////////////////////////
+///////Popular Tabela
   FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('turma_name').AsString;
   FTurmaDTO := FController.FindByNameTurmas(Fname);
   FIDTurmaSelected := FTurmaDTO.ID;
@@ -244,12 +258,34 @@ begin
 
   pnl_participantes_Turma.Visible := true;
 
-  if Assigned(d_Src_membros_escola.DataSet) then begin
-   d_Src_membros_escola.DataSet := nil; // limpa antes
+  if Assigned(d_Src_participantes_turma.DataSet) then begin
+   d_Src_participantes_turma.DataSet := nil; // limpa antes
  end;
-  d_Src_membros_escola.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
-  dbg_participantes_turma.DataSource := d_Src_membros_escola;
+  d_Src_participantes_turma.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
+  dbg_participantes_turma.DataSource := d_Src_participantes_turma;
+
+////Popular ComboBox
+ lst := FController.PopularCBParticipantes;
+try
+
+    cb_alunos_participantes_EscolaMenu.Clear;
+    cb_alunos_participantes_EscolaMenu.TextHint := 'Selecione um Aluno Para Adicionar';
+    for I := 0 to (lst.Count -1) do begin
+
+    cb_alunos_participantes_EscolaMenu.Items.AddObject(lst[i].GetNome, lst[i]);
+
+    end;
+
+
+finally
+
+  lst.Free;
 end;
+
+
+
+
+ end;
 
 procedure Tfrm_menuEscola.btn_RemoverTurmaMenuClick(Sender: TObject);
 var
@@ -295,11 +331,33 @@ begin
   ClearAllEdits;
 end;
 
+procedure Tfrm_menuEscola.btn_Vincular_AlunoClick(Sender: TObject);
+var
+user : TUserModel;
+IDEstudante : Integer;
+begin
+
+
+  if(cb_alunos_participantes_EscolaMenu.ItemIndex <> -1) then begin
+     user := TUserModel(cb_alunos_participantes_EscolaMenu.Items.Objects[
+      cb_alunos_participantes_EscolaMenu.ItemIndex
+    ]);
+    IDEstudante := FController.GetEstudanteIDByUser(user.GetID);
+    FController.LinkEstudante(IDEstudante, FIDTurmaSelected);
+
+
+
+  end else begin
+    raise Exception.Create('Um Aluno deve ser selecionado!');
+  end;
+
+
+end;
+
 function Tfrm_menuEscola.CamposValidosTurma: Boolean;
 begin
      //Valida todos os campos
   if(edt_Nome_Turma_EscolaMenu.Text = Trim('')) or (edt_Descricao_addNEdit_Turma_EscolaMenu.Text = Trim('')) or (cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex = - 1) then begin
-
     raise Exception.Create('Todos os campos precisam ser preenchidos');
   end else begin
     Result := True;

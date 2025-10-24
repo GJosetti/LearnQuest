@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB, user_DTO, user_service,System.Classes, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB, user_DTO, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -24,12 +24,14 @@ public
    procedure AdicionarTurma();
    constructor Create(aView : IEscolaAdminView);
    function PopularCBProfessores : TStringList;
+   function PopularCBParticipantes : TObjectList<TUserModel>;
    function FindByName (aString : String) : TUserDTO;
    function FindByNameProfessores (aString : String): TProfessorDTO;
    function FindByNameTurmas (aString : String): TTurmaDTO;
    function AtualizarTabelaTurmas : TDataSet;
    procedure DeleteTurma(aNome: String);
    procedure UpdateTurma (aID : Integer);
+   function GetEstudanteIDByUser(aID : Integer) : Integer;
 
     procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
     function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
@@ -155,6 +157,11 @@ begin
   Result := FServiceTurma.FindByName(aString);
 end;
 
+function TMenuAdminController.GetEstudanteIDByUser(aId: Integer): Integer;
+begin
+  Result := FServiceEstudante.GetIdByUserId(aID);
+end;
+
 function TMenuAdminController.GetEstudantesPorTurma(
   aTurmaID: Integer): TDataSet;
 begin
@@ -163,7 +170,12 @@ end;
 
 procedure TMenuAdminController.LinkEstudante(aEstudanteID, aTurmaID: Integer);
 begin
+  FServiceTurma.LinkEstudante(aEstudanteID,aTurmaID);
+end;
 
+function TMenuAdminController.PopularCBParticipantes: TObjectList<TUserModel>;
+begin
+  Result := FServiceUser.GetAll;
 end;
 
 function TMenuAdminController.PopularCBProfessores: TStringList;

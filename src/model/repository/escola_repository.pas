@@ -127,13 +127,17 @@ var
   Qry: TFDQuery;
   SchemaName : String;
   FS : string;
+  FilePath: string;
 
 begin
 
+  FilePath := ExpandFileName(
+    ExtractFilePath(ParamStr(0)) + '..\..\db\migrations\Criar_Tabelas.sql'
+  );
+
   if not Assigned (CriarTabelas) then begin
     CriarTabelas := TStringList.Create;
-    CriarTabelas.LoadFromFile('C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\db\migrations\Criar_Tabelas.sql');
-
+    CriarTabelas.LoadFromFile(FilePath);
   end;
 
   Qry := TFDQuery.Create(nil);

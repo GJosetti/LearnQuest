@@ -19,6 +19,7 @@ type
     FDQueryTurmas: TFDQuery;
     FDQueryParticipantes: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +34,12 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDataModule1.DataModuleCreate(Sender: TObject);
+begin
+FDPhysPgDriverLink1.VendorLib :=
+    ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\infra\lib\libpq.dll');
+end;
 
 procedure TDataModule1.DataModuleDestroy(Sender: TObject);
 begin

@@ -46,11 +46,6 @@ begin
   FEscola.SetEndereco(aDTO.Endereco);
   FEscola.SetQtdMembros(aDTO.QtdMembros);
 
-  if not Assigned(FEscolaRepo) then begin
-    raise Exception.Create('FEscolaRepo é NIL dentro de TEscola_Service.SalvarEscola');
-  end;
-
-
   Result := FEscolaRepo.Save(FEscola);
 
 

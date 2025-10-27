@@ -19,6 +19,7 @@ type
     procedure SetPathSchema (aID : Integer);
     function GetUsersDataSet: TDataSet;
     function GetAll : TObjectList<TUserModel>;
+    function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
   end;
 
 
@@ -99,6 +100,7 @@ type
       function AtualizarTabelaUsuarios : TDataSet;
       function GetByNome (aString : String) : TUserDTO;
       function GetAll : TObjectList<TUserModel>;
+      function GetAllForTurmas(aID :Integer) : TObjectList<TUserModel>;
   end;
 
   IEscolaService = interface
@@ -206,9 +208,11 @@ type
     function CamposValidosUsuario: Boolean;
     function CamposValidosTurma: Boolean;
     function GetNomeTurma : String;
+    function GetIDTurmaSelecionada : Integer;
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;
     procedure PopularCBProfessores();
+
   end;
 
    IMenuEscolaController = interface

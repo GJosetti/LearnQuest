@@ -19,9 +19,6 @@ CREATE TABLE fase (
 
 
 
-
-
-
 -- Tabela de Estudantes
 CREATE TABLE estudante (
     id BIGSERIAL PRIMARY KEY,
@@ -83,6 +80,7 @@ CREATE TABLE atividade_fase (
     atividade_id BIGINT NOT NULL REFERENCES atividades(id) on delete cascade,
     fase_id BIGINT NOT NULL REFERENCES fase(id) on delete cascade
 );
+
 
 
 

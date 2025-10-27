@@ -128,7 +128,7 @@ end;
 procedure TTurmaService.RemoverEstudanteDaTurma(aEstudanteID,
   aTurmaID: Integer);
 begin
-
+  FTurmaRepo.RemoverEstudanteDaTurma(aEstudanteID, aTurmaID);
 end;
 
 end.

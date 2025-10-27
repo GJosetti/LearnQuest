@@ -175,7 +175,7 @@ end;
 
 function TMenuAdminController.PopularCBParticipantes: TObjectList<TUserModel>;
 begin
-  Result := FServiceUser.GetAll;
+  Result := FServiceUser.GetAllForTurmas(Fview.GetIDTurmaSelecionada);
 end;
 
 function TMenuAdminController.PopularCBProfessores: TStringList;
@@ -186,7 +186,7 @@ end;
 procedure TMenuAdminController.RemoverEstudanteDaTurma(aEstudanteID,
   aTurmaID: Integer);
 begin
-
+  FServiceTurma.RemoverEstudanteDaTurma(aEstudanteID,aTurmaID);
 end;
 
 function TMenuAdminController.RetornarMembro(aID: Integer): TUserDTO;

@@ -54,9 +54,24 @@ end;
 
 procedure TTurmaRepository.RemoverEstudanteDaTurma(aEstudanteID,
   aTurmaID: Integer);
+var
+  Qry: TFDQuery;
 begin
-
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'DELETE FROM estudante_turma ' +
+      'WHERE estudante_id = :EstudanteID ' +
+      'AND turma_id = :TurmaID';
+    Qry.ParamByName('EstudanteID').AsInteger := aEstudanteID;
+    Qry.ParamByName('TurmaID').AsInteger := aTurmaID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
 end;
+
 
 function TTurmaRepository.RowToTurma(aQuery: TFDQuery): TTurmaModel;
 var FTurma : TTurmaModel;

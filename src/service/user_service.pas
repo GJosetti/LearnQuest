@@ -21,6 +21,7 @@ public
   function AtualizarTabelaUsuarios : TDataSet;
   function GetByNome (aString : String) : TUserDTO;
   function GetAll : TObjectList<TUserModel>;
+  function GetAllForTurmas(aID : Integer) : TObjectList<TUserModel>;
 end;
 
 
@@ -57,9 +58,19 @@ begin
 end;
 
 function TUserService.GetAll : TObjectList<TUserModel>;
+var
+lst :TObjectList<TUserModel>;
 begin
 
-  Result := FUserRepository.GetAll;
+
+  lst :=  FUserRepository.GetAll;
+  Result := lst;
+
+end;
+
+function TUserService.GetAllForTurmas(aID : Integer): TObjectList<TUserModel>;
+begin
+  Result := FUserRepository.GetAllAvailableForTurma(aID);
 end;
 
 function TUserService.GetByEscolaID(aID: Integer): TuserDTO;

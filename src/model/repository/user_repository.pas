@@ -22,6 +22,7 @@ TUserRepository = class(TInterfacedObject,IUserRepository)
     procedure SetPathSchema (aID : Integer);
     function GetUsersDataSet: TDataSet;
     function GetAll : TObjectList<TUserModel>;
+    function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
 end;
 
 
@@ -71,6 +72,41 @@ finally
   end;
 end;
 
+
+
+function TUserRepository.GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
+var
+  lst: TObjectList<TUserModel>;
+  Qry: TFDQuery;
+begin
+  lst := TObjectList<TUserModel>.Create(True);
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'SELECT u.*, e.id AS estudante_id ' +
+      'FROM users u ' +
+      'JOIN estudante e ON u.id = e.user_id ' +
+      'WHERE NOT EXISTS ( ' +
+      '  SELECT 1 FROM estudante_turma te ' +
+      '  WHERE te.estudante_id = e.id ' +
+      '  AND te.turma_id = :IDTurma ' +
+      ')';
+
+    Qry.ParamByName('IDTurma').AsInteger := aIDTurma;
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      lst.Add(RowToUser(Qry));
+      Qry.Next;
+    end;
+
+    Result := lst;
+  finally
+    Qry.Free;
+  end;
+end;
 
 
 function TUserRepository.Save(aModel: TUserModel) : Integer;

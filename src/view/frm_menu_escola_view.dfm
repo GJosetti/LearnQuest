@@ -526,6 +526,7 @@ object frm_menuEscola: Tfrm_menuEscola
         Color = clWhite
         ParentBackground = False
         TabOrder = 2
+        OnClick = btn_remover_alunoClick
       end
       object btn_back_participantes_Escola_Menu: TPanel
         Left = 352

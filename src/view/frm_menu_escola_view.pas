@@ -78,16 +78,20 @@ type
     procedure btn_ListarMembrosClick(Sender: TObject);
     procedure btn_back_participantes_Escola_MenuClick(Sender: TObject);
     procedure btn_Vincular_AlunoClick(Sender: TObject);
+    procedure btn_remover_alunoClick(Sender: TObject);
 
   private
     { Private declarations }
     FID : Integer;
-    FIDTurmaSelected : Integer;
+
     FController : IMenuEscolaController;
     Fmode : TMode;
     FPreventColumnMove : Boolean;
+    FIDTurmaSelected : Integer;
     procedure ClearAllEdits;
   public
+
+   function GetIDTurmaSelecionada : Integer;
    function GetNome:String;
     function GetPassword: String;
     function GetEmail: String;
@@ -99,6 +103,7 @@ type
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;
     procedure PopularCBProfessores();
+    procedure PopularCBParticipantes();
   end;
 
 var
@@ -264,23 +269,8 @@ begin
   d_Src_participantes_turma.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
   dbg_participantes_turma.DataSource := d_Src_participantes_turma;
 
-////Popular ComboBox
- lst := FController.PopularCBParticipantes;
-try
 
-    cb_alunos_participantes_EscolaMenu.Clear;
-    cb_alunos_participantes_EscolaMenu.TextHint := 'Selecione um Aluno Para Adicionar';
-    for I := 0 to (lst.Count -1) do begin
-
-    cb_alunos_participantes_EscolaMenu.Items.AddObject(lst[i].GetNome, lst[i]);
-
-    end;
-
-
-finally
-
-  lst.Free;
-end;
+  PopularCBParticipantes;
 
 
 
@@ -302,6 +292,32 @@ begin
   ShowMessage('Registro excluído!');
 end;
 
+
+end;
+
+procedure Tfrm_menuEscola.btn_remover_alunoClick(Sender: TObject);
+var
+user : TUserDTO;
+IDEstudante : Integer;
+
+begin
+
+user := FController.FindByName(dbg_participantes_turma.DataSource.DataSet.FieldByName('user_name').AsString);
+
+
+if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+              [mbYes, mbNo], 0) = mrYes then
+begin
+
+  IDEstudante := FController.GetEstudanteIDByUser(user.ID);
+  FController.RemoverEstudanteDaTurma(IDEstudante,FIDTurmaSelected);
+
+  FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
+  ClearAllEdits;
+
+  PopularCBParticipantes;
+  ShowMessage('Registro Excluído!')
+end;
 
 end;
 
@@ -346,7 +362,10 @@ begin
     FController.LinkEstudante(IDEstudante, FIDTurmaSelected);
 
 
+    FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
+    ClearAllEdits;
 
+    PopularCBParticipantes;
   end else begin
     raise Exception.Create('Um Aluno deve ser selecionado!');
   end;
@@ -388,6 +407,8 @@ begin
   edt_Descricao_addNEdit_Turma_EscolaMenu.Clear;
   cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := -1;
   cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.TextHint := 'Selecione um Professor';
+  cb_alunos_participantes_EscolaMenu.ItemIndex := -1;
+  cb_alunos_participantes_EscolaMenu.TextHint := 'Selecione um Aluno'
 
 end;
 
@@ -449,6 +470,11 @@ begin
   Result := FController.FindByNameProfessores(cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Text).ID;//FAZER UM FINDBYNAME PARA PROFESSORES
 end;
 
+function Tfrm_menuEscola.GetIDTurmaSelecionada: Integer;
+begin
+  Result := FIDTurmaSelected;
+end;
+
 function Tfrm_menuEscola.GetNome: String;
 begin
   Result := edt_nome_addNEdit_EscolaMenu.Text;
@@ -506,6 +532,32 @@ begin
   frm_login := Tfrm_login.Create(nil);
   frm_login.ShowModal;
   Self.Close;
+end;
+
+procedure Tfrm_menuEscola.PopularCBParticipantes;
+var
+lst : TObjectList<TUserModel>;
+var I : Integer;
+begin
+
+ lst := FController.PopularCBParticipantes;
+try
+
+    cb_alunos_participantes_EscolaMenu.Clear;
+    cb_alunos_participantes_EscolaMenu.TextHint := 'Selecione um Aluno Para Adicionar';
+    for I := 0 to (lst.Count -1) do begin
+
+    cb_alunos_participantes_EscolaMenu.Items.AddObject(lst[i].GetNome, lst[i]);
+
+    end;
+
+
+
+finally
+
+
+end;
+
 end;
 
 procedure Tfrm_menuEscola.PopularCBProfessores();

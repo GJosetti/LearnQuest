@@ -496,6 +496,7 @@ object frm_menuEscola: Tfrm_menuEscola
             Visible = True
           end
           item
+            Alignment = taCenter
             Expanded = False
             FieldName = 'descricao'
             ReadOnly = True

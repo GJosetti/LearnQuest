@@ -132,6 +132,11 @@ function TUserService.Salvar(aDTO: TUserDTO) : Integer;
 var FUsuario : TUserModel;
 begin
 
+  if (FUserRepository.FindByNome(aDTO.Name) <> nil) then begin
+    raise Exception.Create('Já existe um usuário com esse Nome');
+  end;
+
+
   FUsuario := TUserModel.Create;
   FUsuario.SetNome(aDTO.Name);
   FUsuario.SetPassword(aDTO.Password);

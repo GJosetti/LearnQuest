@@ -79,6 +79,14 @@ type
 
   //Services
 
+  IAdminService = interface
+    ['{693916A9-5FCB-47CB-B53F-337A1DD8C2FD}']
+
+    procedure SalvarEscolaEUsuario(aEscolaDTo : TEscolaDTO ; aUsuarioDTO: TUserDTO );
+  end;
+
+
+
   IUserService = interface
     ['{F33A6AD7-3ED7-415E-91FF-A75BA5004DD8}']
       function GetByID (aID : Integer): TUserDTO;
@@ -139,6 +147,8 @@ type
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
     end;
+
+
 
 
   //--------------Login-----------------------//

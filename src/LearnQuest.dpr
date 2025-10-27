@@ -32,7 +32,8 @@ uses
   turma_DTO in 'model\DTO\turma_DTO.pas',
   turma_repository in 'model\repository\turma_repository.pas',
   turma_service in 'service\turma_service.pas',
-  estudantes_turma_entity in 'model\entity\estudantes_turma_entity.pas';
+  estudantes_turma_entity in 'model\entity\estudantes_turma_entity.pas',
+  AdminService in 'service\AdminService.pas';
 
 {$R *.res}
 

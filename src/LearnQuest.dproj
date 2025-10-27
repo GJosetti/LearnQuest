@@ -177,6 +177,7 @@
         <DCCReference Include="model\repository\turma_repository.pas"/>
         <DCCReference Include="service\turma_service.pas"/>
         <DCCReference Include="model\entity\estudantes_turma_entity.pas"/>
+        <DCCReference Include="service\AdminService.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

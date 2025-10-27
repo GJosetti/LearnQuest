@@ -2,7 +2,7 @@ unit frm_menu_admin_controller;
 
 
 interface
-uses my_contracts, Data.DB, escola_service, user_DTO, escolas_DTO, App_Consts,System.SysUtils, user_service;
+uses my_contracts, Data.DB, escola_service, user_DTO, escolas_DTO, App_Consts,System.SysUtils, user_service, AdminService,DMConnection;
 
 
 
@@ -15,6 +15,7 @@ private
  Fview : IMenuAdminView;
  FServiceEscola : IEscolaService;
  FServiceUser: IUserService;
+ FAdminService : IAdminService;
 
 public
 constructor Create(aView: IMenuAdminView);
@@ -43,6 +44,10 @@ begin
   if not Assigned(Fview) then begin
     Fview := aView ;
   end;
+  if not Assigned(FAdminService) then begin
+    FAdminService := TAdminService.Create(DataModule1.FDConnection1,FServiceEscola,FServiceUser);
+  end;
+
 end;
 
 procedure TMenuAdminController.Delete (aID : Integer);
@@ -88,29 +93,29 @@ begin
   FServiceEscola.Update(EscolaDTO);
 end;
 
-procedure TMenuAdminController.AdicionarEscola();
-var RequestDTOEscola : TEscolaDTO;
-var RequestDTOUsuario: TUserDTO;
-var tempID : Integer;
+procedure TMenuAdminController.AdicionarEscola;
+var
+  EscolaDTO: TEscolaDTO;
+  UsuarioDTO: TUserDTO;
 begin
+  EscolaDTO := TEscolaDTO.Create;
+  UsuarioDTO := TUserDTO.Create;
+  try
+    EscolaDTO.Name := FView.GetNomeEscola;
+    EscolaDTO.Endereco := FView.GetCEP;
+    EscolaDTO.QtdMembros := 1;
 
-//Criar DTO - chamar service para validar e então ele chama o repository
-  RequestDTOEscola := TEscolaDTO.Create;
-  RequestDTOEscola.Name := Fview.GetNomeEscola;
-  RequestDTOEscola.Endereco := Fview.GetCEP;
-  RequestDTOEscola.QtdMembros := 1;
-
-  RequestDTOUsuario := TUserDTO.Create;
-  RequestDTOUsuario.Name := Fview.GetNomeUsuario;
-  RequestDTOUsuario.Role := ROLE_ESCOLA;
-  RequestDTOUsuario.Password := Fview.GetPassword.GetHashCode.ToString;
-  RequestDTOUsuario.Email := Fview.GetEmail;
-
-
-  RequestDTOUsuario.Escola := FServiceEscola.SalvarEscola(RequestDTOEscola);
-  FServiceUser.Salvar(RequestDTOUsuario);
+    UsuarioDTO.Name := FView.GetNomeUsuario;
+    UsuarioDTO.Role := ROLE_ESCOLA;
+    UsuarioDTO.Password := FView.GetPassword.GetHashCode.ToString;
+    UsuarioDTO.Email := FView.GetEmail;
 
 
+    FAdminService.SalvarEscolaEUsuario(EscolaDTO, UsuarioDTO);
+  finally
+    EscolaDTO.Free;
+    UsuarioDTO.Free;
+  end;
 end;
 
 function TMenuAdminController.AtualizarTabelaEscolas : TDataSet;

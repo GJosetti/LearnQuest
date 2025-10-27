@@ -1,7 +1,7 @@
 unit escola_service;
 
 interface
-uses my_contracts, Data.DB, escola_repository,escolas_DTO, escola_entity;
+uses my_contracts, Data.DB, escola_repository,escolas_DTO, escola_entity,SysUtils,DMConnection;
 
 type
 
@@ -26,7 +26,8 @@ implementation
 constructor TEscola_Service.Create;
 begin
   if not Assigned(FEscolaRepo) then begin
-    FEscolaRepo := TEscolaRepository.Create;
+    FEscolaRepo := TEscolaRepository.Create(DataModule1.FDConnection1);
+
 end;
 end;
 
@@ -44,6 +45,11 @@ begin
   FEscola.SetNome(aDTO.Name);
   FEscola.SetEndereco(aDTO.Endereco);
   FEscola.SetQtdMembros(aDTO.QtdMembros);
+
+  if not Assigned(FEscolaRepo) then begin
+    raise Exception.Create('FEscolaRepo é NIL dentro de TEscola_Service.SalvarEscola');
+  end;
+
 
   Result := FEscolaRepo.Save(FEscola);
 

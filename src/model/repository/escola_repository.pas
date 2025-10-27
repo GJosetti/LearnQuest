@@ -11,7 +11,7 @@ TEscolaRepository = class (TInterfacedObject, IEscolaRepository)
 
 private
 FConnection : TFDConnection;
-FQuery : TFDQuery;
+
 CriarTabelas : TStringList;
 
 public
@@ -22,7 +22,7 @@ function Save (aModel: TEscolaModel) : Integer;
 procedure Update(aModel : TEscolaModel);
 procedure Delete (aID: Integer);
 procedure AtualizarQtd();
-constructor Create();
+constructor Create(aConnection: TFDConnection);
 
 end;
 
@@ -64,10 +64,12 @@ end;
 
 
 
-constructor TEscolaRepository.Create;
+constructor TEscolaRepository.Create(aConnection : TFDConnection);
 begin
-  FQuery := DataModule1.FDQueryEscolas;
-  FConnection := DataModule1.FDConnection1;
+
+
+
+  FConnection := aConnection;
 end;
 
 procedure TEscolaRepository.Delete(aID: Integer);

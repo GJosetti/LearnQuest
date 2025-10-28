@@ -34,7 +34,8 @@ uses
   turma_service in 'service\turma_service.pas',
   estudantes_turma_entity in 'model\entity\estudantes_turma_entity.pas',
   AdminService in 'service\AdminService.pas',
-  uLogger in 'log\uLogger.pas';
+  uLogger in 'log\uLogger.pas',
+  frm_menu_professor_view in 'view\frm_menu_professor_view.pas' {frm_professor};
 
 {$R *.res}
 
@@ -45,5 +46,6 @@ begin
   Application.CreateForm(Tfrm_login, frm_login);
   Application.CreateForm(Tfrm_menuAdmin_view, frm_menuAdmin_view);
   Application.CreateForm(Tfrm_menuEscola, frm_menuEscola);
+  Application.CreateForm(Tfrm_menu_professor, frm_professor);
   Application.Run;
 end.

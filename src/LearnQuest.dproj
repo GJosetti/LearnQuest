@@ -179,6 +179,10 @@
         <DCCReference Include="model\entity\estudantes_turma_entity.pas"/>
         <DCCReference Include="service\AdminService.pas"/>
         <DCCReference Include="log\uLogger.pas"/>
+        <DCCReference Include="view\frm_menu_professor_view.pas">
+            <Form>frm_professor</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

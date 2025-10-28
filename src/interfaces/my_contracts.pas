@@ -239,7 +239,10 @@ type
     function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
    end;
 
+  //-----------------Tela Professores---------------------//
+  ITelaProfessorView = interface
 
+  end;
 
 
 

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO,
   Vcl.ExtCtrls, frm_menu_admin_view,frm_menu_escola_view, App_Consts,System.Math,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, frm_menu_professor_view;
 
 type
   Tfrm_login = class(TForm, ILoginView)
@@ -131,8 +131,8 @@ begin
     frm_menuEscola := Tfrm_menuEscola.Create(nil);
     frm_menuEscola.ShowModal;
   end else if (aDTO.Role = ROLE_PROFESSOR) then begin
-    //Criar Form
-    //ShowModal
+    frm_professor := Tfrm_menu_professor.Create(nil);
+    frm_professor.ShowModal;
   end;
 
 

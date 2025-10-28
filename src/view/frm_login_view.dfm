@@ -22,13 +22,11 @@ object frm_login: Tfrm_login
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
     object caption_btn_login: TLabel
       Left = 530
       Top = 478
       Width = 52
-      Height = 25
+      Height = 26
       Caption = 'Login'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -38,7 +36,7 @@ object frm_login: Tfrm_login
       ParentFont = False
     end
     object s: TImage
-      Left = 751
+      Left = 711
       Top = 384
       Width = 74
       Height = 65

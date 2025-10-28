@@ -1,13 +1,14 @@
 unit user_service;
 
 interface
-uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository, Data.DB, System.Generics.Collections,System.Classes;
+uses my_contracts, Vcl.Dialogs,user_DTO, users_entity, SysUtils, user_repository, Data.DB, System.Generics.Collections,System.Classes, uLogger,Sessao;
 
 type
 TUserService = class(TInterfacedObject,IUserService)
 
 private
   var FUserRepository : IUserRepository;
+  var Logger : TLogger;
 
 public
   function GetByID(aID: Integer): TUserDTO;
@@ -43,7 +44,7 @@ end;
 constructor TUserService.Create();
 begin
 
-
+  Logger := TLogger.Create;
   if not Assigned(FUserRepository) then begin
     FUserRepository := TUserRepository.Create();
   end;
@@ -52,9 +53,14 @@ begin
 end;
 
 procedure TUserService.Delete(aID: Integer);
+var
+FName : String;
 begin
   //Validações
+  FName := FUserRepository.FindByID(aID).GetNome;
   FUserRepository.Delete(aID);
+
+  Logger.Log(FPathSchema,'Deletou o usuário ' + FName + ' do sistema',UsuarioLogado);
 end;
 
 function TUserService.GetAll : TObjectList<TUserModel>;
@@ -156,7 +162,7 @@ begin
   FUsuario.SetEscola(aDTO.Escola);
 
 
-
+  Logger.Log(FPathSchema,'Adicionou o usuario ' + FUsuario.GetNome + ' no sistema',UsuarioLogado);
 
   Result := FUserRepository.Save(FUsuario);
 
@@ -168,7 +174,8 @@ begin
 end;
 
 procedure TUserService.Update(aDto: TUserDTO);
-var FUsuario : TUserModel;
+var
+FUsuario : TUserModel;
 begin
   FUsuario := TUserModel.Create;
   FUsuario.SetID(aDto.ID);
@@ -176,8 +183,9 @@ begin
   FUsuario.SetPassword(aDTO.Password.GetHashCode.ToString);
   FUsuario.SetEmail(aDTO.Email);
 
-
   FUserRepository.Update(FUsuario);
+
+  Logger.Log(FPathSchema,'Atualizou as informações do usuário '+aDTO.Name+'(de ID '+ aDto.ID.ToString+') no sistema',UsuarioLogado);
 end;
 
 function TUserService.ValidarLogin(aDTO: TUserDTO): TUserDTO;
@@ -216,6 +224,9 @@ try
     FUserDTO.Escola := FUser.GetEscola;
     FUserDTO.Email := FUser.GetEmail;
 
+    SetPathByEscola(FUserDTO.ID);
+
+    Logger.Log(FPathSchema,'Logou no sistema', FUserDTO);
 
     Result := FUserDTO;
   end;

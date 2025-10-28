@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections, App_Consts;
 
 type
   TMode = (m_Add,m_Edit);
@@ -222,16 +222,30 @@ FName : String;
 FDTO : TUserDTO;
 
 begin
-  pnl_addNEdit_EscolaMenu.Visible := true;
-  Fmode := m_Edit;
   FName := dbg_turmasEscola.DataSource.DataSet.FieldByName('user_name').AsString;
   FDTO := TUserDTO.Create;
+  FDTO := FController.FindByName(FName);
+      if(FDTO.Role = ROLE_ESCOLA) then begin
+        raise Exception.Create('O usuário Administraor não pode ser alterado manualmente, entre em contato com o suporte para fazer a alteração.');
+      end;
+
+  pnl_addNEdit_EscolaMenu.Visible := true;
+  Fmode := m_Edit;
+
+
+
+  dbg_turmasEscola.DataSource := d_Src_membros_escola;
+
+
    try
+
+
+
+
       pnl_addNEdit_Turma_EscolaMenu.Visible := true;
-      FDTO := FController.FindByName(FName);
       edt_nome_addNEdit_EscolaMenu.Text := FDTO.Name;
       edt_password_addNEdit__EscolaMenu.Text := FDTO.Password;
-      cb_role_addNEdit_EscolaMenu.ItemIndex := FDTO.Role - 1;
+      cb_role_addNEdit_EscolaMenu.ItemIndex := FDTO.Role - 3;
       edt_email_addNEdit_EscolaMenu.Text := FDTO.Email;
       FID := FDTO.ID;
 
@@ -302,22 +316,26 @@ IDEstudante : Integer;
 
 begin
 
-user := FController.FindByName(dbg_participantes_turma.DataSource.DataSet.FieldByName('user_name').AsString);
+  user := FController.FindByName(dbg_participantes_turma.DataSource.DataSet.FieldByName('user_name').AsString);
 
 
-if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+  if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
               [mbYes, mbNo], 0) = mrYes then
-begin
+  begin
 
-  IDEstudante := FController.GetEstudanteIDByUser(user.ID);
-  FController.RemoverEstudanteDaTurma(IDEstudante,FIDTurmaSelected);
+    IDEstudante := FController.GetEstudanteIDByUser(user.ID);
 
-  FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
-  ClearAllEdits;
 
-  PopularCBParticipantes;
-  ShowMessage('Registro Excluído!')
-end;
+
+
+    FController.RemoverEstudanteDaTurma(IDEstudante,FIDTurmaSelected);
+
+    FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
+    ClearAllEdits;
+
+    PopularCBParticipantes;
+    ShowMessage('Registro Excluído!')
+  end;
 
 end;
 
@@ -329,6 +347,10 @@ begin
 
 FName := dbg_membrosEscola.DataSource.DataSet.FieldByName('user_name').AsString;
 FDTO := FController.FindByName(FName);
+
+if(FDTO.Role = ROLE_ESCOLA) then begin
+  raise Exception.Create('Não é possível excluir o usuário administrador da escola!');
+end;
 
 //Confirmação de exclusão
 if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
@@ -439,7 +461,7 @@ begin
   if not Assigned(FController) then begin
     FController := TMenuAdminController.Create(Self);
   end;
-  cb_role_addNEdit_EscolaMenu.Items.Add('Escola');
+
   cb_role_addNEdit_EscolaMenu.Items.Add('Professor');
   cb_role_addNEdit_EscolaMenu.Items.Add('Estudante');
 end;
@@ -494,7 +516,7 @@ function Tfrm_menuEscola.GetRole: Integer;
 begin
   //Começa em 0
 
-  Result := (cb_role_addNEdit_EscolaMenu.ItemIndex + 2); //Começa em 0 e 1 é administrador
+  Result := (cb_role_addNEdit_EscolaMenu.ItemIndex + 3); //Começa em 0 e 1 é administrador
 end;
 
 procedure Tfrm_menuEscola.HomeClick(Sender: TObject);

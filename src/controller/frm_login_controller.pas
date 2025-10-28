@@ -50,8 +50,10 @@ begin
     //COLOCAR NA VIEW
    Fview.Mensagem('Login realizado com sucesso! Bem-vindo(a) ' + ResultadoDTO.Name);
 
+
    UsuarioLogado:= ResultadoDTO;
    FService.SetPathByEscola(ResultadoDTO.ID);
+
    Fview.TrocarTela(ResultadoDTO);
 
 

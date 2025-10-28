@@ -5,24 +5,30 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, my_contracts, frm_login_controller, user_DTO,
-  Vcl.ExtCtrls, frm_menu_admin_view,frm_menu_escola_view, App_Consts,
+  Vcl.ExtCtrls, frm_menu_admin_view,frm_menu_escola_view, App_Consts,System.Math,
   Vcl.Imaging.pngimage;
 
 type
   Tfrm_login = class(TForm, ILoginView)
-    lbl_title_login: TLabel;
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
-    btn_login: TButton;
     pnl_login: TPanel;
     s: TImage;
+    btn_login: TImage;
+    Timer: TTimer;
+    caption_btn_login: TLabel;
+    Title: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
     procedure sClick(Sender: TObject);
+    
+    procedure btn_loginMouseEnter(Sender: TObject);
+    procedure btn_loginMouseLeave(Sender: TObject);
   private
     { Private declarations }
     FController : ILoginController;
     isPasswordVisible : Boolean;
+
 
 
   public
@@ -42,6 +48,27 @@ implementation
 {$R *.dfm}
 
 { Tfrm_login }
+
+procedure Tfrm_login.btn_loginMouseEnter(Sender: TObject);
+var
+FilePath : String;
+begin
+  FilePath := ExpandFileName(
+    ExtractFilePath(ParamStr(0)) + '..\..\assets\Botão1Hover.png'
+  );
+  btn_login.Picture.LoadFromFile(FilePath);
+end;
+
+procedure Tfrm_login.btn_loginMouseLeave(Sender: TObject);
+var
+FilePath : String;
+begin
+  FilePath := ExpandFileName(
+    ExtractFilePath(ParamStr(0)) + '..\..\assets\Botão1.png'
+  );
+  btn_login.Picture.LoadFromFile(FilePath);
+end;
+
 
 procedure Tfrm_login.FormCreate(Sender: TObject);
 begin

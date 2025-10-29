@@ -49,6 +49,6 @@ begin
   Application.CreateForm(Tfrm_login, frm_login);
   Application.CreateForm(Tfrm_menuAdmin_view, frm_menuAdmin_view);
   Application.CreateForm(Tfrm_menuEscola, frm_menuEscola);
-  Application.CreateForm(Tfrm_professor, frm_professor);
+  Application.CreateForm(Tfrm_menu_professor, frm_professor);
   Application.Run;
 end.

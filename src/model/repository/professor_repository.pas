@@ -18,6 +18,7 @@ public
     procedure Delete (aID: Integer);
     function GetAllNames : TStringList;
     constructor Create();
+    function GetIdByUserId(AUserId: Integer): Integer;
 end;
 
 
@@ -92,6 +93,25 @@ end;
 
 function TProfessorRepository.GetByID(aID: Integer): TProfessorModel;
 begin
+
+end;
+
+function TProfessorRepository.GetIdByUserId(AUserId: Integer): Integer;
+var
+Qry : TFDQuery;
+ID : Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT id FROM professores WHERE user_id = :ID';
+    Qry.ParamByName('ID').AsInteger := AUserId;
+    Qry.Open();
+    ID := Qry.FieldByName('id').AsInteger;
+    Result := ID;
+  finally
+    Qry.Close;
+  end;
 
 end;
 

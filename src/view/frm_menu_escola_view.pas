@@ -462,6 +462,8 @@ begin
     FController := TMenuAdminController.Create(Self);
   end;
 
+  Self.Position := poScreenCenter;
+
   cb_role_addNEdit_EscolaMenu.Items.Add('Professor');
   cb_role_addNEdit_EscolaMenu.Items.Add('Estudante');
 end;

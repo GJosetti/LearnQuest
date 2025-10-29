@@ -328,9 +328,9 @@ object frm_menu_professor: Tfrm_menu_professor
     TabOrder = 3
     Visible = False
     object dbg_atividades: TDBGrid
-      Left = 336
+      Left = 256
       Top = 116
-      Width = 217
+      Width = 449
       Height = 344
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
@@ -343,7 +343,7 @@ object frm_menu_professor: Tfrm_menu_professor
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'title'
+          FieldName = 'atividade_nome'
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Nome'
@@ -353,13 +353,24 @@ object frm_menu_professor: Tfrm_menu_professor
         item
           Alignment = taCenter
           Expanded = False
-          FieldName = 'name'
+          FieldName = 'template_nome'
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Tipo'
           Width = 100
           Visible = True
         end>
+    end
+    object pnl_adicionar_atividades: TPanel
+      Left = 343
+      Top = 484
+      Width = 29
+      Height = 29
+      Caption = '+'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      OnClick = pnl_adicionar_atividadesClick
     end
   end
   object d_src_turmas: TDataSource

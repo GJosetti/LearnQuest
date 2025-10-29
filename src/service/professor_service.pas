@@ -18,6 +18,7 @@ public
  constructor Create;
  function GetAllNames : TStringList;
  function FindByName(aString : String): TProfessorDTO;
+ function GetIdByUserId(AUserId: Integer): Integer;
 
 
 
@@ -59,6 +60,11 @@ end;
 function TProfessorService.GetByID(aID: Integer): TProfessorDTO;
 begin
 
+end;
+
+function TProfessorService.GetIdByUserId(AUserId: Integer): Integer;
+begin
+  Result := FProfessorRepo.GetIdByUserId(AUserId);
 end;
 
 function TProfessorService.GetUserByID(aID: Integer): TProfessorDTO;

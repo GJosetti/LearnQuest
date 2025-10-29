@@ -186,6 +186,10 @@
         <DCCReference Include="controller\frm_menu_professor_controller.pas"/>
         <DCCReference Include="service\atividades_service.pas"/>
         <DCCReference Include="model\repository\atividade_repository.pas"/>
+        <DCCReference Include="view\frm_create_atividade_view.pas">
+            <Form>frm_criar_atividades</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

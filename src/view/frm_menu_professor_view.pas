@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller;
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller, frm_create_atividade_view;
 
 type
   Tfrm_menu_professor = class(TForm, ITelaProfessorView)
@@ -41,9 +41,11 @@ type
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
+    pnl_adicionar_atividades: TPanel;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure pnl_adicionar_atividadesClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -53,6 +55,8 @@ type
 
 var
   frm_professor: Tfrm_menu_professor;
+
+
 
 implementation
 uses frm_login_view;
@@ -82,6 +86,15 @@ begin
 
    FController := TMenuProfessorController.Create;
  end;
+ Self.Position := poScreenCenter;
+end;
+
+procedure Tfrm_menu_professor.pnl_adicionar_atividadesClick(Sender: TObject);
+begin
+    frm_criar_atividades := Tfrm_criar_atividades.Create(nil);
+    frm_criar_atividades.ShowModal;
+
+
 end;
 
 procedure Tfrm_menu_professor.pnl_backClick(Sender: TObject);

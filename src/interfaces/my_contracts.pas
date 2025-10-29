@@ -43,6 +43,7 @@ type
       procedure Delete (aID: Integer);
       function GetAllNames : TStringList;
       function FindByName (aString : String): TProfessorModel;
+      function GetIdByUserId(AUserId: Integer): Integer;
 
 
   end;
@@ -78,7 +79,7 @@ type
   end;
 
   IAtividadeRepository = interface
-    function GetAtividadeDataSet : TDataSet;
+    function GetAtividadeDataSet(aID : Integer) : TDataSet;
   end;
 
 
@@ -124,6 +125,7 @@ type
       procedure Delete (aID: Integer);
       function GetAllNames : TStringList;
       function FindByName(aString : String): TProfessorDTO;
+      function GetIdByUserId(AUserId: Integer): Integer;
 
   end;
 
@@ -157,7 +159,7 @@ type
       IAtividadesService = interface
         ['{1277E089-5357-4464-8C7D-0C5323A806C5}']
 
-        function AtualizarTabelaAtividades : TDataSet ;
+        function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
 
       end;
 
@@ -260,7 +262,14 @@ type
     function AtualizarTabelaAtividades : TDataSet ;
   end;
 
+  //-----------------Tela Professores---------------------//
+  ITelaCreateAtividadesView = interface
 
+  end;
+
+  ITelaCreateAtividadesController = interface
+
+  end;
 
 implementation
 

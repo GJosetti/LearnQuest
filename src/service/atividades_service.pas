@@ -12,7 +12,7 @@ FRepo : IAtividadeRepository;
 
 public
 
-function AtualizarTabelaAtividades : TDataSet ;
+function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
 constructor Create;
 
 
@@ -31,9 +31,10 @@ begin
   end;
 end;
 
-function TAtividadeService.AtualizarTabelaAtividades: TDataSet;
+function TAtividadeService.AtualizarTabelaAtividades(aID : Integer): TDataSet;
 begin
-  Result := FRepo.GetAtividadeDataSet;
+
+  Result := FRepo.GetAtividadeDataSet(aID);
 end;
 
 

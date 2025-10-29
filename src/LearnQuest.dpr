@@ -38,7 +38,8 @@ uses
   frm_menu_professor_view in 'view\frm_menu_professor_view.pas' {frm_professor},
   frm_menu_professor_controller in 'controller\frm_menu_professor_controller.pas',
   atividades_service in 'service\atividades_service.pas',
-  atividade_repository in 'model\repository\atividade_repository.pas';
+  atividade_repository in 'model\repository\atividade_repository.pas',
+  frm_create_atividade_view in 'view\frm_create_atividade_view.pas' {frm_criar_atividades};
 
 {$R *.res}
 
@@ -50,5 +51,6 @@ begin
   Application.CreateForm(Tfrm_menuAdmin_view, frm_menuAdmin_view);
   Application.CreateForm(Tfrm_menuEscola, frm_menuEscola);
   Application.CreateForm(Tfrm_menu_professor, frm_professor);
+  Application.CreateForm(Tfrm_criar_atividades, frm_criar_atividades);
   Application.Run;
 end.

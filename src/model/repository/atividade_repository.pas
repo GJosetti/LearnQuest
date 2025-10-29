@@ -1,7 +1,7 @@
 unit atividade_repository;
 
 interface
-uses my_contracts,Data.DB, DMConnection, Sessao;
+uses my_contracts,Data.DB, DMConnection, Sessao, Vcl.Dialogs;
 type
 
 TAtividadeRepository = class(TInterfacedObject, IAtividadeRepository)
@@ -10,7 +10,7 @@ private
 
 public
 
-function GetAtividadeDataSet : TDataSet;
+function GetAtividadeDataSet(aID : Integer) : TDataSet;
 
 end;
 
@@ -18,12 +18,12 @@ implementation
 
 { TAtividadeRepository }
 
-function TAtividadeRepository.GetAtividadeDataSet: TDataSet;
+function TAtividadeRepository.GetAtividadeDataSet(aID : Integer): TDataSet;
 begin
   with DataModule1.FDQuery1 do
   begin
-    Close;
-    SQL.Text :=
+     DataModule1.FDQuery1.Close;
+     DataModule1.FDQuery1.SQL.Text :=
       'SELECT ' +
       '  a.id, ' +
       '  a.title AS atividade_nome, ' +
@@ -34,8 +34,10 @@ begin
       'WHERE a.professor_id = :PROF ' +
       'ORDER BY a.created_at DESC;';
 
-    ParamByName('PROF').AsInteger := UsuarioLogado.ID;
-    Open;
+
+
+    ParamByName('PROF').AsInteger := aID;
+    DataModule1.FDQuery1.Open;
 
     Result := DataModule1.FDQuery1;
   end;

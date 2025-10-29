@@ -21,8 +21,8 @@ object frm_criar_atividades: Tfrm_criar_atividades
     TabOrder = 0
   end
   object cb_types: TComboBox
-    Left = 560
-    Top = 99
+    Left = 544
+    Top = 67
     Width = 169
     Height = 23
     TabOrder = 1
@@ -30,7 +30,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
   end
   object pnl_atividade_quiz: TPanel
     Left = 184
-    Top = 144
+    Top = 112
     Width = 937
     Height = 457
     TabOrder = 2
@@ -48,7 +48,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
       ParentFont = False
     end
     object lbl_descricao_quiz: TLabel
-      Left = 136
+      Left = 144
       Top = 147
       Width = 95
       Height = 30
@@ -149,13 +149,13 @@ object frm_criar_atividades: Tfrm_criar_atividades
     object edt_descricao: TEdit
       Left = 64
       Top = 183
-      Width = 249
-      Height = 170
+      Width = 257
+      Height = 202
       Alignment = taCenter
       TabOrder = 1
     end
-    object Edit1: TEdit
-      Left = 456
+    object edt_pergunta_quiz: TEdit
+      Left = 464
       Top = 183
       Width = 361
       Height = 42
@@ -194,5 +194,13 @@ object frm_criar_atividades: Tfrm_criar_atividades
       Alignment = taCenter
       TabOrder = 6
     end
+  end
+  object pnl_Concluido: TPanel
+    Left = 560
+    Top = 592
+    Width = 185
+    Height = 41
+    Caption = 'Criar'
+    TabOrder = 3
   end
 end

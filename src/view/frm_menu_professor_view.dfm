@@ -347,7 +347,7 @@ object frm_menu_professor: Tfrm_menu_professor
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Nome'
-          Width = 100
+          Width = 200
           Visible = True
         end
         item
@@ -357,7 +357,7 @@ object frm_menu_professor: Tfrm_menu_professor
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Tipo'
-          Width = 100
+          Width = 200
           Visible = True
         end>
     end

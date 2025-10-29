@@ -91,7 +91,7 @@ end;
 
 procedure Tfrm_menu_professor.pnl_adicionar_atividadesClick(Sender: TObject);
 begin
-    frm_criar_atividades := Tfrm_criar_atividades.Create(nil);
+    frm_criar_atividades := Tfrm_criar_atividades.Create(mCreate);
     frm_criar_atividades.ShowModal;
 
 

@@ -19,7 +19,7 @@ type
     lbl_title: TLabel;
     lbl_descricao_quiz: TLabel;
     lbl_pergunta_quiz: TLabel;
-    Edit1: TEdit;
+    edt_pergunta_quiz: TEdit;
     lbl_alternativas_quiz: TLabel;
     edt_alternativa_a_quiz: TEdit;
     lbl_alternativa_a_quiz: TLabel;
@@ -29,6 +29,7 @@ type
     lbl_alternativa_c_quiz: TLabel;
     edt_alternativa_d_quiz: TEdit;
     lbl_alternativa_d_quiz: TLabel;
+    pnl_Concluido: TPanel;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

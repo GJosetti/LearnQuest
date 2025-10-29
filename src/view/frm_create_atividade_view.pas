@@ -32,6 +32,7 @@ type
     pnl_Concluido: TPanel;
     rg_alternativas_quiz: TRadioGroup;
     procedure FormCreate(Sender: TObject);
+    procedure cb_typesSelect(Sender: TObject);
   private
     FMode: TMode;
     FController: ITelaCreateAtividadesController;
@@ -69,6 +70,15 @@ implementation
 {$R *.dfm}
 
 { ------------------------- FORM -------------------------------- }
+
+procedure Tfrm_criar_atividades.cb_typesSelect(Sender: TObject);
+begin
+  //////////////////////////////////////////////////////////
+  if cb_types.SelText = 'Quiz' then begin
+    pnl_atividade_quiz.Visible := true;
+  end;
+
+  end;
 
 constructor Tfrm_criar_atividades.Create(aMode: TMode);
 begin

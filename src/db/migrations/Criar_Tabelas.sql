@@ -81,6 +81,16 @@ CREATE TABLE atividade_fase (
 );
 
 
+   SELECT  +
+        a.id,  
+        a.title AS atividade_nome,  
+        t.name AS template_nome,  
+        a.created_at 
+      FROM escola_50.atividades a  
+      LEFT JOIN public.activity_template t ON a.template_id = t.id  
+      WHERE a.professor_id = 1  
+      ORDER BY a.created_at DESC;
+
 
 
 

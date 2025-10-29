@@ -27,6 +27,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
     Height = 23
     TabOrder = 1
     Text = 'cb_types'
+    OnSelect = cb_typesSelect
   end
   object pnl_atividade_quiz: TPanel
     Left = 184

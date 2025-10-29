@@ -10,6 +10,7 @@ object frm_menu_professor: Tfrm_menu_professor
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object pnl_home_adminMenu: TPanel
     Left = 263
@@ -68,6 +69,7 @@ object frm_menu_professor: Tfrm_menu_professor
       Height = 49
       Caption = 'Minhas Atividades'
       TabOrder = 3
+      OnClick = btn_minhas_atividadesClick
     end
     object btn_minhas_fases: TButton
       Left = 48
@@ -188,7 +190,7 @@ object frm_menu_professor: Tfrm_menu_professor
         AlignWithMargins = True
         Left = 4
         Top = 13
-        Width = 126
+        Width = 441
         Height = 21
         Margins.Top = 12
         Align = alTop
@@ -200,6 +202,7 @@ object frm_menu_professor: Tfrm_menu_professor
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitWidth = 126
       end
       object lbl_nome_edit_addNEdit_adminMenu: TLabel
         Left = 160
@@ -315,8 +318,56 @@ object frm_menu_professor: Tfrm_menu_professor
       end
     end
   end
+  object pnl_minhas_atividades: TPanel
+    Left = 263
+    Top = -1
+    Width = 1017
+    Height = 721
+    Color = 16744576
+    ParentBackground = False
+    TabOrder = 3
+    Visible = False
+    object dbg_atividades: TDBGrid
+      Left = 336
+      Top = 116
+      Width = 217
+      Height = 344
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'title'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'name'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Width = 100
+          Visible = True
+        end>
+    end
+  end
   object d_src_turmas: TDataSource
-    Left = 735
-    Top = 655
+    Left = 759
+    Top = 599
+  end
+  object d_src_atividades: TDataSource
+    Left = 663
+    Top = 599
   end
 end

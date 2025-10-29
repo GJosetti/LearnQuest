@@ -77,6 +77,10 @@ type
 
   end;
 
+  IAtividadeRepository = interface
+    function GetAtividadeDataSet : TDataSet;
+  end;
+
 
   //Services
 
@@ -149,6 +153,13 @@ type
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
     end;
+
+      IAtividadesService = interface
+        ['{1277E089-5357-4464-8C7D-0C5323A806C5}']
+
+        function AtualizarTabelaAtividades : TDataSet ;
+
+      end;
 
 
 
@@ -242,6 +253,11 @@ type
   //-----------------Tela Professores---------------------//
   ITelaProfessorView = interface
 
+  end;
+
+  ITelaProfessorController = interface
+    function AtualizarTabelaTurmas : TDataSet ;
+    function AtualizarTabelaAtividades : TDataSet ;
   end;
 
 

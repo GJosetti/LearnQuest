@@ -1,87 +1,84 @@
+-- =========== BASE ===========
 
+-- Usuários já devem existir em public.users
+-- e templates em public.activity_template
 
-
--- Tabela de Trilhas de Aprendizagem
-CREATE TABLE trilhas (
-    id BIGSERIAL PRIMARY KEY
-    
-);
-
--- Tabela de Fases dentro das Trilhas
-CREATE TABLE fase (
-    id BIGSERIAL PRIMARY KEY
-    
-);
-
-
--- =========== TABELAS DE RELACIONAMENTO E DEPENDENTES ===========
-
-
-
-
--- Tabela de Estudantes
-CREATE TABLE estudante (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES public.users(id) on delete cascade,
-    coins VARCHAR(100) 
-);
-
--- Tabela de Professores
+-- Professores precisam existir antes das turmas e fases
 CREATE TABLE professores (
     id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES public.users(id) on delete cascade
-    
+    user_id BIGINT NOT NULL REFERENCES public.users(id) ON DELETE CASCADE
 );
 
--- Tabela de Turmas
+-- Estudantes
+CREATE TABLE estudante (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
+    coins VARCHAR(100)
+);
+
+-- =========== ESTRUTURA DE TRILHAS ===========
+
+-- Trilhas = conjuntos de fases
+CREATE TABLE trilhas (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Fases pertencem a trilhas
+CREATE TABLE fase (
+    id BIGSERIAL PRIMARY KEY,
+    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) ON DELETE CASCADE,
+    teacher_id BIGINT REFERENCES professores(id),
+    nome VARCHAR(100),
+    descricao TEXT,
+    order_index INT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- =========== ESTRUTURA DE TURMAS ===========
+
 CREATE TABLE turmas (
     id BIGSERIAL PRIMARY KEY,
     turma_name VARCHAR(255) NOT NULL,
-    descricao VARCHAR not null,
-    professor_id BIGINT NOT NULL REFERENCES professores(id) on delete cascade
+    descricao VARCHAR NOT NULL,
+    professor_id BIGINT NOT NULL REFERENCES professores(id) ON DELETE CASCADE
 );
-
-
-
--- Tabela de Atividades
-CREATE TABLE atividades (
-    id BIGSERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    professor_id BIGINT NOT NULL REFERENCES professores(id) on delete cascade
-);
-
-
--- =========== TABELAS DE LIGAÇÃO ===========
 
 -- Liga estudantes às turmas
 CREATE TABLE estudante_turma (
     id BIGSERIAL PRIMARY KEY,
-    estudante_id BIGINT NOT NULL REFERENCES estudante(id) on delete cascade,
-    turma_id BIGINT NOT NULL REFERENCES turmas(id) on delete cascade
+    estudante_id BIGINT NOT NULL REFERENCES estudante(id) ON DELETE CASCADE,
+    turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE
 );
 
--- Liga turmas às trilhas
+-- Liga turmas às trilhas (as turmas seguem trilhas)
 CREATE TABLE turma_trilha (
     id BIGSERIAL PRIMARY KEY,
-    turma_id BIGINT NOT NULL REFERENCES turmas(id) on delete cascade,
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) on delete cascade
+    turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE,
+    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) ON DELETE CASCADE
 );
 
--- Liga fases às trilhas
-CREATE TABLE fase_trilha (
+-- =========== ATIVIDADES ===========
+
+-- Atividades criadas pelos professores
+CREATE TABLE atividades (
     id BIGSERIAL PRIMARY KEY,
-    fase_id BIGINT NOT NULL REFERENCES fase(id) on delete cascade,
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) on delete cascade
+    template_id BIGINT REFERENCES public.activity_template(id),
+    professor_id BIGINT REFERENCES professores(id),
+    title VARCHAR(100),
+    content_json JSONB NOT NULL,   -- conteúdo preenchido pelo professor
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
--- Liga atividades às fases
+-- Liga atividades às fases (N:N possível)
 CREATE TABLE atividade_fase (
     id BIGSERIAL PRIMARY KEY,
-    atividade_id BIGINT NOT NULL REFERENCES atividades(id) on delete cascade,
-    fase_id BIGINT NOT NULL REFERENCES fase(id) on delete cascade
+    atividade_id BIGINT NOT NULL REFERENCES atividades(id) ON DELETE CASCADE,
+    fase_id BIGINT NOT NULL REFERENCES fase(id) ON DELETE CASCADE,
+    ordem INT
 );
-
-
 
 
 

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts;
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller;
 
 type
   Tfrm_menu_professor = class(TForm, ITelaProfessorView)
@@ -38,9 +38,15 @@ type
     btn_minhas_atividades: TButton;
     btn_minhas_fases: TButton;
     btn_minhas_trilhas: TButton;
+    pnl_minhas_atividades: TPanel;
+    dbg_atividades: TDBGrid;
+    d_src_atividades: TDataSource;
     procedure pnl_backClick(Sender: TObject);
+    procedure btn_minhas_atividadesClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    FController : ITelaProfessorController;
   public
     { Public declarations }
   end;
@@ -52,6 +58,31 @@ implementation
 uses frm_login_view;
 
 {$R *.dfm}
+
+procedure Tfrm_menu_professor.btn_minhas_atividadesClick(Sender: TObject);
+begin
+  pnl_minhas_turmas.Visible := false;
+  pnl_home_adminMenu.Visible := false;
+
+
+ if Assigned(d_src_atividades) then begin
+   d_src_atividades.DataSet := nil; // limpa antes
+ end;
+  d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
+  dbg_atividades.DataSource := d_src_atividades;
+
+
+  pnl_minhas_atividades.Visible := true;
+
+end;
+
+procedure Tfrm_menu_professor.FormCreate(Sender: TObject);
+begin
+ if not Assigned(FController) then begin
+
+   FController := TMenuProfessorController.Create;
+ end;
+end;
 
 procedure Tfrm_menu_professor.pnl_backClick(Sender: TObject);
 begin

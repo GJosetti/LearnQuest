@@ -22,3 +22,12 @@ create table tenants(
 	schema_name varchar
 );
 
+CREATE TABLE activity_template (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    structure_json JSONB NOT NULL,  -- descreve os campos do template
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+

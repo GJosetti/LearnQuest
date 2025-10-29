@@ -39,7 +39,9 @@ uses
   frm_menu_professor_controller in 'controller\frm_menu_professor_controller.pas',
   atividades_service in 'service\atividades_service.pas',
   atividade_repository in 'model\repository\atividade_repository.pas',
-  frm_create_atividade_view in 'view\frm_create_atividade_view.pas' {frm_criar_atividades};
+  frm_create_atividade_view in 'view\frm_create_atividade_view.pas' {frm_criar_atividades},
+  atividade_entity in 'model\entity\atividade_entity.pas',
+  frm_create_atividade_controller in 'controller\frm_create_atividade_controller.pas';
 
 {$R *.res}
 

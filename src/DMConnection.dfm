@@ -34,12 +34,17 @@ object DataModule1: TDataModule1
   end
   object FDQueryTurmas: TFDQuery
     Connection = FDConnection1
-    Left = 472
-    Top = 384
+    Left = 504
+    Top = 376
   end
   object FDQueryParticipantes: TFDQuery
     Connection = FDConnection1
-    Left = 528
+    Left = 512
     Top = 288
+  end
+  object FDQueryAtividades: TFDQuery
+    Connection = FDConnection1
+    Left = 216
+    Top = 400
   end
 end

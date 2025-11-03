@@ -1,7 +1,8 @@
 unit my_contracts;
 
 interface
-uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO, turma_DTO,turma_entity, System.Classes,System.Generics.Collections;
+uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO,
+turma_DTO,turma_entity, System.Classes,System.Generics.Collections,atividade_entity;
 
 type
 
@@ -80,6 +81,7 @@ type
 
   IAtividadeRepository = interface
     function GetAtividadeDataSet(aID : Integer) : TDataSet;
+    procedure Save(aModel : atividade_Model);
   end;
 
 
@@ -160,6 +162,7 @@ type
         ['{1277E089-5357-4464-8C7D-0C5323A806C5}']
 
         function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
+        procedure Save(aModel: atividade_Model);
 
       end;
 
@@ -265,9 +268,34 @@ type
   //-----------------Tela Professores---------------------//
   ITelaCreateAtividadesView = interface
 
+
+          // Getters
+    function GetTitulo: string;
+    function GetDescricao: string;
+    function GetTipo: Integer;
+    function GetPergunta: string;
+    function GetAlternativaA: string;
+    function GetAlternativaB: string;
+    function GetAlternativaC: string;
+    function GetAlternativaD: string;
+    function GetAlternativaCorreta: Integer;
+
+    // Setters
+    procedure SetTitulo(const Value: string);
+    procedure SetDescricao(const Value: string);
+    procedure SetTipo(const Value: Integer);
+    procedure SetPergunta(const Value: string);
+    procedure SetAlternativaA(const Value: string);
+    procedure SetAlternativaB(const Value: string);
+    procedure SetAlternativaC(const Value: string);
+    procedure SetAlternativaD(const Value: string);
+    procedure SetAlternativaCorreta(const Value: Integer);
+
+
   end;
 
   ITelaCreateAtividadesController = interface
+    procedure Save();
 
   end;
 

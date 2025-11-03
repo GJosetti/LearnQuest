@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  frm_create_atividade_controller, my_contracts;
+  frm_create_atividade_controller, my_contracts, atividade_entity;
 
 type
   TMode = (mCreate, mEdit);
@@ -33,33 +33,37 @@ type
     rg_alternativas_quiz: TRadioGroup;
     procedure FormCreate(Sender: TObject);
     procedure cb_typesSelect(Sender: TObject);
+    procedure pnl_ConcluidoClick(Sender: TObject);
+    procedure cb_typesChange(Sender: TObject);
+
   private
     FMode: TMode;
     FController: ITelaCreateAtividadesController;
 
-    // Getters
+
+  public
+    constructor Create(aMode: TMode);
+        // Getters
     function GetTitulo: string;
     function GetDescricao: string;
-    function GetTipo: string;
+    function GetTipo: Integer;
     function GetPergunta: string;
     function GetAlternativaA: string;
     function GetAlternativaB: string;
     function GetAlternativaC: string;
     function GetAlternativaD: string;
-    function GetAlternativaCorreta: string;
+    function GetAlternativaCorreta: Integer;
 
     // Setters
     procedure SetTitulo(const Value: string);
     procedure SetDescricao(const Value: string);
-    procedure SetTipo(const Value: string);
+    procedure SetTipo(const Value: Integer);
     procedure SetPergunta(const Value: string);
     procedure SetAlternativaA(const Value: string);
     procedure SetAlternativaB(const Value: string);
     procedure SetAlternativaC(const Value: string);
     procedure SetAlternativaD(const Value: string);
-    procedure SetAlternativaCorreta(const Value: string);
-  public
-    constructor Create(aMode: TMode);
+    procedure SetAlternativaCorreta(const Value: Integer);
   end;
 
 var
@@ -70,6 +74,18 @@ implementation
 {$R *.dfm}
 
 { ------------------------- FORM -------------------------------- }
+
+procedure Tfrm_criar_atividades.cb_typesChange(Sender: TObject);
+begin
+  if (cb_types.SelText = 'Verdadeiro ou Falso') then begin
+    //Mostra formulário de Quiz
+
+  end else begin
+    //Mostra Formulário de Quiz
+  end;
+
+
+end;
 
 procedure Tfrm_criar_atividades.cb_typesSelect(Sender: TObject);
 begin
@@ -99,7 +115,7 @@ begin
   rg_alternativas_quiz.ItemIndex := -1;
 
   if not Assigned(FController) then begin
-    FController := TCriarAtividadeController.Create;
+    FController := TCriarAtividadeController.Create(Self);
   end;
 
 end;
@@ -111,14 +127,21 @@ begin
   Result := edt_title.Text;
 end;
 
+procedure Tfrm_criar_atividades.pnl_ConcluidoClick(Sender: TObject);
+begin
+  FController.Save();
+  ShowMessage('A atividade foi criada com sucesso!');
+  Self.Close;
+end;
+
 function Tfrm_criar_atividades.GetDescricao: string;
 begin
   Result := edt_descricao.Text;
 end;
 
-function Tfrm_criar_atividades.GetTipo: string;
+function Tfrm_criar_atividades.GetTipo: Integer;
 begin
-  Result := cb_types.Text;
+  Result := cb_types.ItemIndex + 1;
 end;
 
 function Tfrm_criar_atividades.GetPergunta: string;
@@ -146,17 +169,11 @@ begin
   Result := edt_alternativa_d_quiz.Text;
 end;
 
-function Tfrm_criar_atividades.GetAlternativaCorreta: string;
+function Tfrm_criar_atividades.GetAlternativaCorreta: Integer;
 begin
-  case rg_alternativas_quiz.ItemIndex of
-    0: Result := 'A';
-    1: Result := 'B';
-    2: Result := 'C';
-    3: Result := 'D';
-  else
-    Result := '';
-  end;
+    Result := rg_alternativas_quiz.ItemIndex;
 end;
+
 
 { ----------------------- SETTERS ------------------------------- }
 
@@ -170,9 +187,9 @@ begin
   edt_descricao.Text := Value;
 end;
 
-procedure Tfrm_criar_atividades.SetTipo(const Value: string);
+procedure Tfrm_criar_atividades.SetTipo(const Value: Integer);
 begin
-  cb_types.Text := Value;
+  cb_types.ItemIndex := Value;
 end;
 
 procedure Tfrm_criar_atividades.SetPergunta(const Value: string);
@@ -200,13 +217,10 @@ begin
   edt_alternativa_d_quiz.Text := Value;
 end;
 
-procedure Tfrm_criar_atividades.SetAlternativaCorreta(const Value: string);
+procedure Tfrm_criar_atividades.SetAlternativaCorreta(const Value: Integer);
 begin
-  if Value = 'A' then rg_alternativas_quiz.ItemIndex := 0
-  else if Value = 'B' then rg_alternativas_quiz.ItemIndex := 1
-  else if Value = 'C' then rg_alternativas_quiz.ItemIndex := 2
-  else if Value = 'D' then rg_alternativas_quiz.ItemIndex := 3
-  else rg_alternativas_quiz.ItemIndex := -1;
+  rg_alternativas_quiz.ItemIndex := Value;
+
 end;
 
 end.

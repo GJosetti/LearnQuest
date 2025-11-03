@@ -1,7 +1,7 @@
 unit atividades_service;
 
 interface
-uses my_contracts, Data.DB, atividade_repository;
+uses my_contracts, Data.DB, atividade_repository, atividade_entity;
 
 type
 
@@ -14,6 +14,7 @@ public
 
 function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
 constructor Create;
+procedure Save(aModel: atividade_Model);
 
 
 end;
@@ -29,6 +30,11 @@ begin
     FRepo :=  TAtividadeRepository.Create;
 
   end;
+end;
+
+procedure TAtividadeService.Save(aModel : atividade_model);
+begin
+  FRepo.Save(aModel);
 end;
 
 function TAtividadeService.AtualizarTabelaAtividades(aID : Integer): TDataSet;

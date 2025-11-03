@@ -27,7 +27,11 @@ object frm_criar_atividades: Tfrm_criar_atividades
     Height = 23
     TabOrder = 1
     Text = 'cb_types'
+    OnChange = cb_typesChange
     OnSelect = cb_typesSelect
+    Items.Strings = (
+      'Quiz'#11
+      'Verdadeiro ou Falso')
   end
   object pnl_atividade_quiz: TPanel
     Left = 184
@@ -153,7 +157,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
       Left = 64
       Top = 183
       Width = 257
-      Height = 202
+      Height = 23
       Alignment = taCenter
       TabOrder = 1
     end
@@ -161,7 +165,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
       Left = 464
       Top = 183
       Width = 361
-      Height = 58
+      Height = 23
       Alignment = taCenter
       TabOrder = 2
     end
@@ -219,5 +223,6 @@ object frm_criar_atividades: Tfrm_criar_atividades
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
+    OnClick = pnl_ConcluidoClick
   end
 end

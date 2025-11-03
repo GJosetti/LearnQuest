@@ -1,18 +1,20 @@
 unit frm_create_atividade_controller;
 
 interface
-uses my_contracts, atividades_service, atividade_entity, professor_service;
+uses my_contracts, atividades_service, atividade_entity, professor_service, Sessao,System.JSON;
 
 type
 
 TCriarAtividadeController = class(TInterfacedObject, ITelaCreateAtividadesController)
 
 private
+  Fview : ITelaCreateAtividadesView;
   FAtividadeService: IAtividadesService;
   FProfessorService: IProfessorService;
 
 public
-  constructor Create;
+  constructor Create(aView : ITelaCreateAtividadesView);
+  procedure Save();
 
 
 end;
@@ -21,7 +23,7 @@ implementation
 
 { TCriarAtividadeController }
 
-constructor TCriarAtividadeController.Create;
+constructor TCriarAtividadeController.Create(aView : ITelaCreateAtividadesView);
 begin
   if not Assigned(FAtividadeService) then begin
     FAtividadeService := TAtividadeService.Create;
@@ -30,6 +32,53 @@ begin
   if not Assigned(FProfessorService) then begin
     FProfessorService := TProfessorService.Create;
   end;
+  if not Assigned(Fview) then begin
+    Fview := aView;
+  end;
 end;
+
+
+
+
+procedure TCriarAtividadeController.Save;
+var
+  FAtividade : atividade_Model;
+  LContent, LOptions : TJSONObject;
+  LOptionsArray : TJSONArray;
+begin
+  FAtividade := atividade_Model.Create;
+  try
+    FAtividade.SetTemplateID(Fview.GetTipo);
+    FAtividade.SetProfessorID(FProfessorService.GetIdByUserId(UsuarioLogado.ID));
+    FAtividade.SetTitle(Fview.GetTitulo);
+
+    // --- Monta o JSON content_json (sem array de perguntas) ---
+    LContent := TJSONObject.Create;
+    LContent.AddPair('title', Fview.GetTitulo);
+    LContent.AddPair('description', Fview.GetDescricao);
+    LContent.AddPair('question', Fview.GetPergunta);
+
+    // Opções da pergunta
+    LOptionsArray := TJSONArray.Create;
+    LOptionsArray.Add(Fview.GetAlternativaA);
+    LOptionsArray.Add(Fview.GetAlternativaB);
+    LOptionsArray.Add(Fview.GetAlternativac);
+    LOptionsArray.Add(Fview.GetAlternativaD);
+
+    LContent.AddPair('options', LOptionsArray);
+    LContent.AddPair('correct_index', Fview.GetAlternativaCorreta);
+
+    // Define o JSON no model
+    FAtividade.SetContent_JSON(LContent);
+
+    // --- Salva no banco via serviço ---
+    FAtividadeService.Save(FAtividade);
+
+  finally
+    FAtividade.Free;
+  end;
+end;
+
+
 
 end.

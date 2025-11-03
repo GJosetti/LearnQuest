@@ -18,6 +18,7 @@ type
     FDQueryEscolas: TFDQuery;
     FDQueryTurmas: TFDQuery;
     FDQueryParticipantes: TFDQuery;
+    FDQueryAtividades: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

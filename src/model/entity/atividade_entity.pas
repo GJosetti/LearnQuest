@@ -12,12 +12,14 @@ type
     FTemplateID: Integer;
     FProfessorID: Integer;
     FTitle: String;
+    FDescricao : String;
     FContent_JSON: TJSONObject;
 
   public
     // --- Getters (Funções para obter o valor) ---
     function GetID: Integer;
     function GetTemplateID: Integer;
+    function GetDescricao: string;
     function GetProfessorID: Integer;
     function GetTitle: String;
     function GetContent_JSON: TJSONObject;
@@ -25,12 +27,18 @@ type
     // --- Setters (Procedimentos para definir o valor) ---
     procedure SetID(const Value: Integer);
     procedure SetTemplateID(const Value: Integer);
+    procedure SetDescricao(aDescricao : String);
     procedure SetProfessorID(const Value: Integer);
     procedure SetTitle(const Value: String);
     procedure SetContent_JSON(const Value: TJSONObject);
   end;
 
 implementation
+
+function atividade_Model.GetDescricao: string;
+begin
+  Result := Self.FDescricao;
+end;
 
 // --- Implementação dos Getters ---
 
@@ -84,6 +92,11 @@ end;
 procedure atividade_Model.SetContent_JSON(const Value: TJSONObject);
 begin
   FContent_JSON := Value;
+end;
+
+procedure atividade_Model.SetDescricao(aDescricao: String);
+begin
+  Self.FDescricao := aDescricao;
 end;
 
 end.

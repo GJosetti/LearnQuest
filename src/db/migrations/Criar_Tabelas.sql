@@ -68,6 +68,7 @@ CREATE TABLE atividades (
     template_id BIGINT REFERENCES public.activity_template(id),
     professor_id BIGINT REFERENCES professores(id),
     title VARCHAR(100),
+    descricao VARCHAR(100),
     content_json JSONB NOT NULL,   -- conteúdo preenchido pelo professor
     created_at TIMESTAMP DEFAULT NOW()
 );

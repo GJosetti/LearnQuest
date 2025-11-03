@@ -9,6 +9,8 @@ const
   ROLE_PROFESSOR = 3;
   ROLE_ALUNO = 4;
 
+  TEMPLATE_QUIZ = 0;
+  TEMPLATE_VF = 1;
 
 
 

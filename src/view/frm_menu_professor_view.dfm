@@ -359,6 +359,11 @@ object frm_menu_professor: Tfrm_menu_professor
           Title.Caption = 'Tipo'
           Width = 200
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'id'
+          Visible = True
         end>
     end
     object pnl_adicionar_atividades: TPanel
@@ -371,6 +376,17 @@ object frm_menu_professor: Tfrm_menu_professor
       ParentBackground = False
       TabOrder = 1
       OnClick = pnl_adicionar_atividadesClick
+    end
+    object Panel1: TPanel
+      Left = 520
+      Top = 487
+      Width = 41
+      Height = 29
+      Caption = 'Edit'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      OnClick = Panel1Click
     end
   end
   object d_src_turmas: TDataSource

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  frm_create_atividade_controller, my_contracts, atividade_entity;
+  frm_create_atividade_controller, my_contracts, atividade_entity, System.JSON;
 
 type
   TMode = (mCreate, mEdit);
@@ -35,14 +35,16 @@ type
     procedure cb_typesSelect(Sender: TObject);
     procedure pnl_ConcluidoClick(Sender: TObject);
     procedure cb_typesChange(Sender: TObject);
+    procedure btn_cancelClick(Sender: TObject);
 
   private
     FMode: TMode;
     FController: ITelaCreateAtividadesController;
+    FID: Integer;
 
 
   public
-    constructor Create(aMode: TMode);
+    constructor Create(aMode: TMode;  aID : Integer);
         // Getters
     function GetTitulo: string;
     function GetDescricao: string;
@@ -64,6 +66,8 @@ type
     procedure SetAlternativaC(const Value: string);
     procedure SetAlternativaD(const Value: string);
     procedure SetAlternativaCorreta(const Value: Integer);
+
+    procedure CarregarAtividade(FAtividade: atividade_Model);
   end;
 
 var
@@ -74,6 +78,11 @@ implementation
 {$R *.dfm}
 
 { ------------------------- FORM -------------------------------- }
+
+procedure Tfrm_criar_atividades.btn_cancelClick(Sender: TObject);
+begin
+  Self.Close;
+end;
 
 procedure Tfrm_criar_atividades.cb_typesChange(Sender: TObject);
 begin
@@ -96,17 +105,21 @@ begin
 
   end;
 
-constructor Tfrm_criar_atividades.Create(aMode: TMode);
+constructor Tfrm_criar_atividades.Create(aMode: TMode; aID : Integer);
 begin
   inherited Create(nil);
   FMode := aMode;
+  FID := aID;
 end;
 
 procedure Tfrm_criar_atividades.FormCreate(Sender: TObject);
+var
+FAtividade : atividade_Model;
 begin
   Self.Position := poScreenCenter;
 
-
+  cb_types.ItemIndex := -1;
+  cb_types.TextHint := 'Selecione um tipo: ';
   rg_alternativas_quiz.Items.Clear;
   rg_alternativas_quiz.Items.Add('Alternativa A');
   rg_alternativas_quiz.Items.Add('Alternativa B');
@@ -117,6 +130,15 @@ begin
   if not Assigned(FController) then begin
     FController := TCriarAtividadeController.Create(Self);
   end;
+
+  if(FMode = mEdit) then begin
+   FAtividade := FController.FindByID(FID);
+   CarregarAtividade(FAtividade);
+
+  end;
+
+
+
 
 end;
 
@@ -221,6 +243,63 @@ procedure Tfrm_criar_atividades.SetAlternativaCorreta(const Value: Integer);
 begin
   rg_alternativas_quiz.ItemIndex := Value;
 
+end;
+
+procedure Tfrm_criar_atividades.CarregarAtividade(FAtividade: atividade_Model);
+var
+LContent: TJSONObject;
+LQuestion: string;
+LOptions: TJSONArray;
+I: Integer;
+LStatement: string;
+LIsTrue: Boolean;
+begin
+if not Assigned(FAtividade) then
+Exit;
+
+
+cb_types.ItemIndex := FAtividade.GetTemplateID -1;
+edt_title.Text := FAtividade.GetTitle;
+edt_descricao.Text := FAtividade.GetDescricao;
+
+LContent := FAtividade.GetContent_JSON;
+if not Assigned(LContent) then
+Exit;
+
+
+
+if cb_types.ItemIndex = 0 then
+begin
+
+LQuestion := LContent.GetValue('question', '');
+LOptions := LContent.GetValue('options') as TJSONArray;
+if Assigned(LOptions) then
+begin
+
+edt_alternativa_a_quiz.Text := LOptions.Items[0].Value;
+edt_alternativa_b_quiz.Text := LOptions.Items[1].Value;
+edt_alternativa_c_quiz.Text := LOptions.Items[2].Value;
+edt_alternativa_d_quiz.Text := LOptions.Items[3].Value;
+
+edt_pergunta_quiz.Text := LQuestion;
+
+end;
+
+rg_alternativas_quiz.ItemIndex := LContent.GetValue<Integer>('correct_index', -1);
+// Pode preencher outros campos específicos do quiz aqui
+
+end else if cb_types.ItemIndex = 1 then
+begin
+LStatement := LContent.GetValue('statement', '');
+LIsTrue := LContent.GetValue('is_true', False);
+
+edt_descricao.Text := LStatement;
+if LIsTrue then
+  rg_alternativas_quiz.ItemIndex := 0 // exemplo: 0 = True
+else
+  rg_alternativas_quiz.ItemIndex := 1; // 1 = False
+
+end;
 end;
 
 end.

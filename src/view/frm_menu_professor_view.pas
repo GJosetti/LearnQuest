@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller, frm_create_atividade_view;
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller, frm_create_atividade_view, atividade_entity;
 
 type
   Tfrm_menu_professor = class(TForm, ITelaProfessorView)
@@ -42,10 +42,12 @@ type
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
     pnl_adicionar_atividades: TPanel;
+    Panel1: TPanel;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnl_adicionar_atividadesClick(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -70,7 +72,7 @@ begin
 
 
  if Assigned(d_src_atividades) then begin
-   d_src_atividades.DataSet := nil; // limpa antes
+   d_src_atividades.DataSet := nil;
  end;
   d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
   dbg_atividades.DataSource := d_src_atividades;
@@ -82,6 +84,7 @@ end;
 
 procedure Tfrm_menu_professor.FormCreate(Sender: TObject);
 begin
+  dbg_atividades.Columns[2].Visible := False;
  if not Assigned(FController) then begin
 
    FController := TMenuProfessorController.Create;
@@ -89,9 +92,21 @@ begin
  Self.Position := poScreenCenter;
 end;
 
+procedure Tfrm_menu_professor.Panel1Click(Sender: TObject);
+var
+FID : Integer;
+FAtividade : atividade_Model;
+
+begin
+  FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
+  ShowMessage(FID.ToString);
+  frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID);
+  frm_criar_atividades.ShowModal;
+end;
+
 procedure Tfrm_menu_professor.pnl_adicionar_atividadesClick(Sender: TObject);
 begin
-    frm_criar_atividades := Tfrm_criar_atividades.Create(mCreate);
+    frm_criar_atividades := Tfrm_criar_atividades.Create(mCreate, 0);
     frm_criar_atividades.ShowModal;
 
 

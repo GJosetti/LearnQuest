@@ -15,6 +15,7 @@ private
 public
   constructor Create(aView : ITelaCreateAtividadesView);
   procedure Save();
+  function FindByID(aID : Integer): atividade_Model;
 
 
 end;
@@ -34,11 +35,17 @@ begin
   end;
   if not Assigned(Fview) then begin
     Fview := aView;
+
   end;
 end;
 
 
 
+
+function TCriarAtividadeController.FindByID(aID: Integer): atividade_Model;
+begin
+  Result := FAtividadeService.FindByID(aID);
+end;
 
 procedure TCriarAtividadeController.Save;
 var
@@ -51,6 +58,7 @@ begin
     FAtividade.SetTemplateID(Fview.GetTipo);
     FAtividade.SetProfessorID(FProfessorService.GetIdByUserId(UsuarioLogado.ID));
     FAtividade.SetTitle(Fview.GetTitulo);
+    FAtividade.SetDescricao(Fview.GetDescricao);
 
     // --- Monta o JSON content_json (sem array de perguntas) ---
     LContent := TJSONObject.Create;

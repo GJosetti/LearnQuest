@@ -13,12 +13,16 @@ object frm_criar_atividades: Tfrm_criar_atividades
   OnCreate = FormCreate
   TextHeight = 15
   object btn_cancel: TPanel
-    Left = 8
-    Top = 8
-    Width = 153
-    Height = 33
-    Caption = 'btn_cancel'
+    Left = 0
+    Top = 0
+    Width = 161
+    Height = 41
+    BevelOuter = bvNone
+    Caption = 'Cancelar'
+    Color = clRed
+    ParentBackground = False
     TabOrder = 0
+    OnClick = btn_cancelClick
   end
   object cb_types: TComboBox
     Left = 544
@@ -26,7 +30,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
     Width = 169
     Height = 23
     TabOrder = 1
-    Text = 'cb_types'
+    TextHint = 'Selecione um tipo: '
     OnChange = cb_typesChange
     OnSelect = cb_typesSelect
     Items.Strings = (
@@ -156,8 +160,8 @@ object frm_criar_atividades: Tfrm_criar_atividades
     object edt_descricao: TEdit
       Left = 64
       Top = 183
-      Width = 257
-      Height = 23
+      Width = 265
+      Height = 74
       Alignment = taCenter
       TabOrder = 1
     end

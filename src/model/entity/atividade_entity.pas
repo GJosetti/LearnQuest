@@ -27,7 +27,7 @@ type
     // --- Setters (Procedimentos para definir o valor) ---
     procedure SetID(const Value: Integer);
     procedure SetTemplateID(const Value: Integer);
-    procedure SetDescricao(aDescricao : String);
+    procedure SetDescricao(const aDescricao : String);
     procedure SetProfessorID(const Value: Integer);
     procedure SetTitle(const Value: String);
     procedure SetContent_JSON(const Value: TJSONObject);
@@ -94,9 +94,9 @@ begin
   FContent_JSON := Value;
 end;
 
-procedure atividade_Model.SetDescricao(aDescricao: String);
+procedure atividade_Model.SetDescricao(const aDescricao: String);
 begin
-  Self.FDescricao := aDescricao;
+  FDescricao := aDescricao;
 end;
 
 end.

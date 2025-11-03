@@ -82,6 +82,8 @@ type
   IAtividadeRepository = interface
     function GetAtividadeDataSet(aID : Integer) : TDataSet;
     procedure Save(aModel : atividade_Model);
+    procedure Update (aModel : atividade_Model);
+    function FindByID(aID : Integer): atividade_Model;
   end;
 
 
@@ -163,11 +165,12 @@ type
 
         function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
         procedure Save(aModel: atividade_Model);
+        function FindByID(aID : Integer): atividade_Model;
 
       end;
 
 
-
+  //-------------------------------------------//
 
   //--------------Login-----------------------//
 
@@ -187,7 +190,7 @@ type
 
 
 
-  //------------------------------------------//
+
 
   //---------------Tela Admin-----------------//
 
@@ -291,11 +294,14 @@ type
     procedure SetAlternativaD(const Value: string);
     procedure SetAlternativaCorreta(const Value: Integer);
 
+    procedure CarregarAtividade(FAtividade: atividade_Model);
+
 
   end;
 
   ITelaCreateAtividadesController = interface
     procedure Save();
+    function FindByID(aID : Integer): atividade_Model;
 
   end;
 

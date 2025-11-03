@@ -16,6 +16,7 @@ function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
 constructor Create;
 procedure Save(aModel: atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
+procedure Update (aModel : atividade_Model);
 
 
 end;
@@ -41,6 +42,11 @@ end;
 procedure TAtividadeService.Save(aModel : atividade_model);
 begin
   FRepo.Save(aModel);
+end;
+
+procedure TAtividadeService.Update (aModel : atividade_Model);
+begin
+  FRepo.Update(aModel);
 end;
 
 function TAtividadeService.AtualizarTabelaAtividades(aID : Integer): TDataSet;

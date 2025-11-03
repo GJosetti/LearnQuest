@@ -75,6 +75,7 @@ var
 
 implementation
 
+
 {$R *.dfm}
 
 { ------------------------- FORM -------------------------------- }
@@ -133,8 +134,11 @@ begin
 
   if(FMode = mEdit) then begin
    FAtividade := FController.FindByID(FID);
+   pnl_Concluido.Caption := 'Atualizar';
    CarregarAtividade(FAtividade);
 
+  end else begin
+    pnl_Concluido.Caption := 'Criar';
   end;
 
 
@@ -151,9 +155,17 @@ end;
 
 procedure Tfrm_criar_atividades.pnl_ConcluidoClick(Sender: TObject);
 begin
-  FController.Save();
-  ShowMessage('A atividade foi criada com sucesso!');
-  Self.Close;
+  if(FMode = mCreate) then begin
+    FController.Save();
+    ShowMessage('A atividade foi criada com sucesso!');
+    Self.Close;
+  end else begin
+    FController.Update(FID);
+    ShowMessage('A atividade foi editada');
+    Self.Close;
+  end;
+
+
 end;
 
 function Tfrm_criar_atividades.GetDescricao: string;
@@ -301,6 +313,7 @@ else
 
 end;
 end;
+
 
 end.
 

@@ -166,6 +166,7 @@ type
         function AtualizarTabelaAtividades(aID : Integer) : TDataSet ;
         procedure Save(aModel: atividade_Model);
         function FindByID(aID : Integer): atividade_Model;
+        procedure Update (aModel : atividade_Model);
 
       end;
 
@@ -302,6 +303,7 @@ type
   ITelaCreateAtividadesController = interface
     procedure Save();
     function FindByID(aID : Integer): atividade_Model;
+    procedure Update(aID : Integer);
 
   end;
 

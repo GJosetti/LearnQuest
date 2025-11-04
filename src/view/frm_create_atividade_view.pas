@@ -41,10 +41,11 @@ type
     FMode: TMode;
     FController: ITelaCreateAtividadesController;
     FID: Integer;
+    FProfessorview : ITelaProfessorView;
 
 
   public
-    constructor Create(aMode: TMode;  aID : Integer);
+    constructor Create(aMode: TMode; aID : Integer; IForm : ITelaProfessorView );
         // Getters
     function GetTitulo: string;
     function GetDescricao: string;
@@ -74,7 +75,7 @@ var
   frm_criar_atividades: Tfrm_criar_atividades;
 
 implementation
-
+uses frm_menu_professor_controller;
 
 {$R *.dfm}
 
@@ -106,11 +107,12 @@ begin
 
   end;
 
-constructor Tfrm_criar_atividades.Create(aMode: TMode; aID : Integer);
+constructor Tfrm_criar_atividades.Create(aMode: TMode; aID : Integer; IForm: ITelaProfessorView);
 begin
   inherited Create(nil);
   FMode := aMode;
   FID := aID;
+  FProfessorView := IForm;
 end;
 
 procedure Tfrm_criar_atividades.FormCreate(Sender: TObject);
@@ -158,13 +160,12 @@ begin
   if(FMode = mCreate) then begin
     FController.Save();
     ShowMessage('A atividade foi criada com sucesso!');
-    Self.Close;
   end else begin
     FController.Update(FID);
     ShowMessage('A atividade foi editada');
-    Self.Close;
   end;
-
+  FProfessorview.AtualizarTabelaAtividades;
+  Self.Close;
 
 end;
 

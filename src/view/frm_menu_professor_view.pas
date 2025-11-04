@@ -52,7 +52,7 @@ type
     { Private declarations }
     FController : ITelaProfessorController;
   public
-    { Public declarations }
+   procedure AtualizarTabelaAtividades;
   end;
 
 var
@@ -64,6 +64,15 @@ implementation
 uses frm_login_view;
 
 {$R *.dfm}
+
+procedure Tfrm_menu_professor.AtualizarTabelaAtividades;
+begin
+  if Assigned(d_src_atividades) then
+    d_src_atividades.DataSet := nil;
+
+  d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
+  dbg_atividades.DataSource := d_src_atividades;
+end;
 
 procedure Tfrm_menu_professor.btn_minhas_atividadesClick(Sender: TObject);
 begin
@@ -100,13 +109,13 @@ FAtividade : atividade_Model;
 begin
   FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
   ShowMessage(FID.ToString);
-  frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID);
+  frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
   frm_criar_atividades.ShowModal;
 end;
 
 procedure Tfrm_menu_professor.pnl_adicionar_atividadesClick(Sender: TObject);
 begin
-    frm_criar_atividades := Tfrm_criar_atividades.Create(mCreate, 0);
+    frm_criar_atividades := Tfrm_criar_atividades.Create(mCreate, 0,Self);
     frm_criar_atividades.ShowModal;
 
 

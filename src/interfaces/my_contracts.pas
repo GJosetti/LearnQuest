@@ -261,7 +261,7 @@ type
 
   //-----------------Tela Professores---------------------//
   ITelaProfessorView = interface
-
+       procedure AtualizarTabelaAtividades;
   end;
 
   ITelaProfessorController = interface

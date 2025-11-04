@@ -117,6 +117,7 @@ uses frm_login_view;
 
 procedure Tfrm_menuEscola.btn_AdicionarTurmaMenuClick(Sender: TObject);
 begin
+  Fmode := m_Add;
   pnl_addNEdit_Turma_EscolaMenu.Visible := true;
   PopularCBProfessores;
 end;
@@ -197,6 +198,7 @@ var
   FName: String;
   FDTO : TTurmaDTO;
 begin
+  FMode := m_Edit;
   // validação: há turma selecionada?
   if (dbg_turmasEscola.DataSource = nil) or
      (dbg_turmasEscola.DataSource.DataSet = nil) or

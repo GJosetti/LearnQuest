@@ -1,41 +1,47 @@
-  unit user_repository;
+﻿unit user_repository;
 
 interface
-uses my_contracts, users_entity, FireDAC.Comp.Client, DMConnection,Sessao, VCL.Dialogs, Data.DB, System.Generics.Collections;
+
+uses
+  my_contracts, users_entity,
+  FireDAC.Comp.Client, FireDAC.Stan.Param, DMConnection, Sessao,
+  System.Generics.Collections, Data.DB, System.SysUtils;
 
 type
-TUserRepository = class(TInterfacedObject,IUserRepository)
-
+  TUserRepository = class(TInterfacedObject, IUserRepository)
   private
-
-  FConnection : TFDConnection;
-  function RowToUser(aQuery: TFDQuery): TUserModel;
-
+    FConnection: TFDConnection;
+    function RowToUser(aQuery: TFDQuery): TUserModel;
   public
-    function FindByID(aID: Integer) : TUserModel;
-    function FindByIDEscola(aID: Integer) : TUserModel;
-    function FindByNome(aNome: String) : TUserModel;
-    function Save (aModel : TUserModel) : Integer;
-    constructor Create();
-    procedure Update(aModel: TUserModel);
-    procedure Delete (aID: Integer);
-    procedure SetPathSchema (aID : Integer);
-    function GetUsersDataSet: TDataSet;
-    function GetAll : TObjectList<TUserModel>;
-    function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
-end;
+    constructor Create;
 
+    function FindByID(aID: Integer): TUserModel;
+    function FindByIDEscola(aID: Integer): TUserModel;
+    function FindByNome(aNome: String): TUserModel;
+
+    function Save(aModel: TUserModel): Integer;
+    procedure Update(aModel: TUserModel);
+    procedure Delete(aID: Integer);
+
+    procedure SetPathSchema(aID: Integer);
+
+    function GetUsersDataSet: TDataSet;
+    function GetAll: TObjectList<TUserModel>;
+    function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
+  end;
 
 implementation
 
+{ TUserRepository }
 
-constructor TUserRepository.Create();
+constructor TUserRepository.Create;
 begin
-    FConnection := DataModule1.FDConnection1;
+  FConnection := DataModule1.FDConnection1;
 end;
 
 function TUserRepository.RowToUser(aQuery: TFDQuery): TUserModel;
-var FUserRepo : TUserModel;
+var
+  FUserRepo: TUserModel;
 begin
   FUserRepo := TUserModel.Create;
   FUserRepo.SetID(aQuery.FieldByName('id').AsInteger);
@@ -45,34 +51,31 @@ begin
   FUserRepo.SetRole(aQuery.FieldByName('user_role_id').AsInteger);
   FUserRepo.SetEscola(aQuery.FieldByName('user_escola_id').AsInteger);
   Result := FUserRepo;
-
-
 end;
 
 function TUserRepository.GetAll: TObjectList<TUserModel>;
 var
-lst : TObjectList<TUserModel>;
-Qry : TFDQuery;
+  lst: TObjectList<TUserModel>;
+  Qry: TFDQuery;
 begin
+  lst := TObjectList<TUserModel>.Create(True);
   Qry := TFDQuery.Create(nil);
-  lst := TObjectList<TUserModel>.Create;
-try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'SELECT * FROM users u JOIN estudante e ON u.id = e.user_id';
-  Qry.Open();
-  while not Qry.Eof do begin
-    lst.Add(RowToUser(Qry));
-    Qry.Next;
-  end;
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM users u JOIN estudante e ON u.id = e.user_id';
+    Qry.Open;
 
-  Result := lst;
+    while not Qry.Eof do
+    begin
+      lst.Add(RowToUser(Qry));
+      Qry.Next;
+    end;
 
-finally
-  Qry.Free;
+    Result := lst;
+  finally
+    Qry.Free;
   end;
 end;
-
-
 
 function TUserRepository.GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
 var
@@ -92,7 +95,6 @@ begin
       '  WHERE te.estudante_id = e.id ' +
       '  AND te.turma_id = :IDTurma ' +
       ')';
-
     Qry.ParamByName('IDTurma').AsInteger := aIDTurma;
     Qry.Open;
 
@@ -108,33 +110,27 @@ begin
   end;
 end;
 
-
-function TUserRepository.Save(aModel: TUserModel) : Integer;
-var Qry : TFDQuery;
-FID : Integer;
-SchemaName : String;
-SQL : String;
+function TUserRepository.Save(aModel: TUserModel): Integer;
+var
+  Qry: TFDQuery;
 begin
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'insert into users (user_name,user_role_id, password, email, user_escola_id)' + 'values (:NAME ,:ROLE,:SENHA ,:EMAIL ,:ESCOLA ) RETURNING id';
-  Qry.ParamByName('NAME').AsString := aModel.GetNome;
-  Qry.ParamByName('ROLE').AsInteger := aModel.GetRole;
-  Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
-  Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
-  Qry.ParamByName('ESCOLA').AsInteger := aModel.GetEscola;
-  Qry.Open;
-  FID := Qry.FieldByName('id').AsInteger;
-  Qry.SQL.Clear;
-  Qry.Close;
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'INSERT INTO users (user_name, user_role_id, password, email, user_escola_id) ' +
+      'VALUES (:NAME, :ROLE, :SENHA, :EMAIL, :ESCOLA) RETURNING id';
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('ROLE').AsInteger := aModel.GetRole;
+    Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
+    Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
+    Qry.ParamByName('ESCOLA').AsInteger := aModel.GetEscola;
+    Qry.Open;
 
-  Result := FID;
- finally
-  Qry.Free;
- end;
-
-
+    Result := Qry.FieldByName('id').AsInteger;
+  finally
+    Qry.Free;
+  end;
 end;
 
 procedure TUserRepository.SetPathSchema(aID: Integer);
@@ -147,28 +143,16 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Text :=
       'SELECT t.schema_name ' +
-      '  FROM users u ' +
-      '  JOIN tenants t ON t.id = u.user_escola_id ' +
-      ' WHERE u.id = :users_id';
+      'FROM users u ' +
+      'JOIN tenants t ON t.id = u.user_escola_id ' +
+      'WHERE u.id = :users_id';
     Qry.ParamByName('users_id').AsInteger := aID;
     Qry.Open;
 
     if not Qry.IsEmpty then
     begin
       SchemaName := Qry.FieldByName('schema_name').AsString;
-
-
-      FConnection.ExecSQL(
-        'SET search_path TO ' + SchemaName + ', public'
-      );
-
-    //Teste de Schema
-  //      Qry.Close;
-  //      Qry.SQL.Text := 'SHOW search_path';
-  //      Qry.Open;
-  //      ShowMessage(Qry.Fields[0].AsString);
-
-      //Guarda na sess�o atual
+      FConnection.ExecSQL('SET search_path TO ' + SchemaName + ', public');
       FPathSchema := SchemaName;
     end;
   finally
@@ -183,16 +167,15 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Text := 'UPDATE users SET user_name = :NAME, password = :SENHA, email = :EMAIL where id = :ID';
-
+    Qry.SQL.Text :=
+      'UPDATE users SET user_name = :NAME, password = :SENHA, email = :EMAIL WHERE id = :ID';
     Qry.ParamByName('NAME').AsString := aModel.GetNome;
     Qry.ParamByName('SENHA').AsString := aModel.GetPassword;
-    Qry.ParamByName('ID').AsInteger := aModel.GetID;
     Qry.ParamByName('EMAIL').AsString := aModel.GetEmail;
+    Qry.ParamByName('ID').AsInteger := aModel.GetID;
     Qry.ExecSQL;
   finally
     Qry.Free;
-    aModel.Free;
   end;
 end;
 
@@ -203,7 +186,7 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Text := 'delete from users where id = :ID';
+    Qry.SQL.Text := 'DELETE FROM users WHERE id = :ID';
     Qry.ParamByName('ID').AsInteger := aID;
     Qry.ExecSQL;
   finally
@@ -211,81 +194,78 @@ begin
   end;
 end;
 
-{ TLoginRepository }
-
 function TUserRepository.FindByID(aID: Integer): TUserModel;
-var Qry : TFDQuery;
+var
+  Qry: TFDQuery;
 begin
   Result := nil;
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'Select * From users WHERE id = :ID';
-  Qry.ParamByName('ID').AsInteger := aID;
-  Qry.Open();
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM users WHERE id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.Open;
 
-  if not Qry.IsEmpty then begin
-    Result := RowToUser(Qry);
+    if not Qry.IsEmpty then
+      Result := RowToUser(Qry);
+  finally
+    Qry.Free;
   end;
-
- finally
-  Qry.Free;
- end;
-
 end;
 
-
 function TUserRepository.FindByIDEscola(aID: Integer): TUserModel;
-var Qry : TFDQuery;
+var
+  Qry: TFDQuery;
 begin
   Result := nil;
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'Select * From users WHERE user_escola_id = :ID';
-  Qry.ParamByName('ID').AsInteger := aID;
-  Qry.Open();
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM users WHERE user_escola_id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.Open;
 
-  if not Qry.IsEmpty then begin
-    Result := RowToUser(Qry);
+    if not Qry.IsEmpty then
+      Result := RowToUser(Qry);
+  finally
+    Qry.Free;
   end;
-
- finally
-  Qry.Free;
- end;
-
 end;
 
 function TUserRepository.FindByNome(aNome: String): TUserModel;
-var Qry : TFDQuery;
+var
+  Qry: TFDQuery;
 begin
   Result := nil;
-  Qry:= TFDQuery.Create(nil);
- try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'Select * From users WHERE user_name = :NAME';
-  Qry.ParamByName('NAME').AsString := aNome;
-  Qry.Open();
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM users WHERE user_name = :NAME';
+    Qry.ParamByName('NAME').AsString := aNome;
+    Qry.Open;
 
-  if not Qry.IsEmpty then begin
-    Result := RowToUser(Qry);
+    if not Qry.IsEmpty then
+      Result := RowToUser(Qry);
+  finally
+    Qry.Free;
   end;
-
- finally
-  Qry.Free;
- end;
-
 end;
 
-
-
 function TUserRepository.GetUsersDataSet: TDataSet;
+var
+  Qry: TFDQuery;
 begin
-  DataModule1.FDQuery1.Close;
-  DataModule1.FDQuery1.SQL.Text := 'SELECT u.user_name, u.email, r.descricao FROM users u join roles r ON u.user_role_id = r.id WHERE user_escola_id = :ESCOLA ';
-  DataModule1.FDQuery1.ParamByName('ESCOLA').AsInteger := UsuarioLogado.Escola;
-  DataModule1.FDQuery1.Open;
-  Result := DataModule1.FDQuery1;
+  Qry := TFDQuery.Create(nil);
+  Qry.Connection := FConnection;
+  Qry.SQL.Text :=
+    'SELECT u.user_name, u.email, r.descricao ' +
+    'FROM users u ' +
+    'JOIN roles r ON u.user_role_id = r.id ' +
+    'WHERE user_escola_id = :ESCOLA';
+  Qry.ParamByName('ESCOLA').AsInteger := UsuarioLogado.Escola;
+  Qry.Open;
+  Result := Qry; // ⚠️ Chamador deve liberar este dataset após o uso
 end;
 
 end.
+

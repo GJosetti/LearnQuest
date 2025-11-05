@@ -1,3 +1,4 @@
+﻿
 unit DMConnection;
 
 interface
@@ -38,16 +39,29 @@ implementation
 
 procedure TDataModule1.DataModuleCreate(Sender: TObject);
 begin
-FDPhysPgDriverLink1.VendorLib :=
+  // ✅ Configura o caminho da DLL
+  FDPhysPgDriverLink1.VendorLib :=
     ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\infra\lib\libpq.dll');
+
+  // ✅ CONECTA o banco de dados
+  try
+    if not FDConnection1.Connected then
+    begin
+      FDConnection1.Connected := True;
+    end;
+  except
+    on E: Exception do
+    begin
+      raise Exception.Create('Erro ao conectar no banco de dados: ' + E.Message);
+    end;
+  end;
 end;
 
 procedure TDataModule1.DataModuleDestroy(Sender: TObject);
 begin
-  if FDConnection1.Connected then begin
-
+  if FDConnection1.Connected then
+  begin
     FDConnection1.Connected := false;
-
   end;
 end;
 

@@ -4,7 +4,9 @@ interface
 
 uses
   my_contracts, turma_DTO, turma_entity,
-  DMConnection, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB, vcl.Dialogs, FireDAC.Stan.Def,FireDAC.Stan.Async,FireDAC.Phys,FireDAC.DApt,FireDAC.Stan.Intf,FireDAC.UI.Intf,FireDAC.VCLUI.Wait, System.SysUtils;
+  DMConnection, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB, vcl.Dialogs,
+  FireDAC.Stan.Def, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.DApt,
+  FireDAC.Stan.Intf, FireDAC.UI.Intf, FireDAC.VCLUI.Wait, System.SysUtils;
 
 type
   TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
@@ -33,7 +35,24 @@ implementation
 
 constructor TTurmaRepository.Create;
 begin
+  if not Assigned(DataModule1) then
+    raise Exception.Create('DataModule1 não existe');
+
+  if not Assigned(DataModule1.FDConnection1) then
+    raise Exception.Create('FDConnection1 não existe');
+
   FConnection := DataModule1.FDConnection1;
+
+  // ✅ Garante que está conectado
+  if not FConnection.Connected then
+  begin
+    try
+      FConnection.Connected := True;
+    except
+      on E: Exception do
+        raise Exception.Create('Erro ao conectar banco: ' + E.Message);
+    end;
+  end;
 end;
 
 procedure TTurmaRepository.Delete(aID: Integer);
@@ -119,30 +138,27 @@ begin
 end;
 
 procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
+var
+  Qry: TFDQuery;
 begin
-  if not Assigned(DataModule1) then
-    raise Exception.Create('DataModule1 não foi criado.');
+  // ✅ Garante conexão ativa
+  if not FConnection.Connected then
+    FConnection.Connected := True;
 
-  if not Assigned(DataModule1.FDConnection1) then
-    raise Exception.Create('FDConnection1 é nula.');
-
-  if not DataModule1.FDConnection1.Connected then
-    raise Exception.Create('Conexão FireDAC não está ativa.');
-
-  with DataModule1.FDQueryTurmas do
-  begin
-    Close;
-    SQL.Text :=
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
       'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
       'VALUES (:NAME, :DESCR, :PID)';
-    ParamByName('NAME').AsString := aModel.GetNome;
-    ParamByName('DESCR').AsString := aModel.GetDescricao;
-    ParamByName('PID').AsInteger := aModel.GetProfessorID;
-    ExecSQL;
+    Qry.ParamByName('NAME').AsString := aModel.GetNome;
+    Qry.ParamByName('DESCR').AsString := aModel.GetDescricao;
+    Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
   end;
 end;
-
-
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
 var
@@ -192,7 +208,7 @@ begin
     'JOIN professores p ON t.professor_id = p.id ' +
     'JOIN users u ON p.user_id = u.id';
   Qry.Open;
-  Result := Qry; // ⚠️ não liberar aqui — o chamador deve liberar
+  Result := Qry;
 end;
 
 function TTurmaRepository.GetParticipantesDataSet(aID: Integer): TDataSet;
@@ -210,7 +226,7 @@ begin
     'WHERE t.turma_id = :ID';
   Qry.ParamByName('ID').AsInteger := aID;
   Qry.Open;
-  Result := Qry; // ⚠️ o chamador deve liberar depois
+  Result := Qry;
 end;
 
 function TTurmaRepository.GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
@@ -219,4 +235,3 @@ begin
 end;
 
 end.
-

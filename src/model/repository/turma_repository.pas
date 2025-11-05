@@ -4,9 +4,10 @@ interface
 
 uses
   my_contracts, turma_DTO, turma_entity,
-  DMConnection, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB, vcl.Dialogs,
+  DMConnection, FireDAC.Stan.Param, Data.DB, vcl.Dialogs,
   FireDAC.Stan.Def, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.DApt,
-  FireDAC.Stan.Intf, FireDAC.UI.Intf, FireDAC.VCLUI.Wait, System.SysUtils;
+  FireDAC.Stan.Intf, FireDAC.UI.Intf, FireDAC.VCLUI.Wait, System.SysUtils,
+  FireDAC.Comp.Client, Sessao;
 
 type
   TTurmaRepository = class(TInterfacedObject, ITurmaRepository)
@@ -38,21 +39,13 @@ begin
   if not Assigned(DataModule1) then
     raise Exception.Create('DataModule1 não existe');
 
-  if not Assigned(DataModule1.FDConnection1) then
-    raise Exception.Create('FDConnection1 não existe');
-
   FConnection := DataModule1.FDConnection1;
 
-  // ✅ Garante que está conectado
   if not FConnection.Connected then
-  begin
-    try
-      FConnection.Connected := True;
-    except
-      on E: Exception do
-        raise Exception.Create('Erro ao conectar banco: ' + E.Message);
-    end;
-  end;
+    FConnection.Connected := True;
+
+
+  
 end;
 
 procedure TTurmaRepository.Delete(aID: Integer);
@@ -141,9 +134,8 @@ procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
 var
   Qry: TFDQuery;
 begin
-  // ✅ Garante conexão ativa
-  if not FConnection.Connected then
-    FConnection.Connected := True;
+  FConnection.ExecSQL('SET search_path TO ' + FPathSchema + ', public');
+
 
   Qry := TFDQuery.Create(nil);
   try
@@ -159,6 +151,7 @@ begin
     Qry.Free;
   end;
 end;
+
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
 var
@@ -200,6 +193,7 @@ function TTurmaRepository.GetTurmaDataSet: TDataSet;
 var
   Qry: TFDQuery;
 begin
+  // ✅ CRIA query temporária que será liberada pelo chamador
   Qry := TFDQuery.Create(nil);
   Qry.Connection := FConnection;
   Qry.SQL.Text :=
@@ -209,12 +203,14 @@ begin
     'JOIN users u ON p.user_id = u.id';
   Qry.Open;
   Result := Qry;
+  // ⚠️ ATENÇÃO: O chamador DEVE liberar esta query!
 end;
 
 function TTurmaRepository.GetParticipantesDataSet(aID: Integer): TDataSet;
 var
   Qry: TFDQuery;
 begin
+  // ✅ CRIA query temporária ao invés de usar a do DataModule
   Qry := TFDQuery.Create(nil);
   Qry.Connection := FConnection;
   Qry.SQL.Text :=
@@ -227,6 +223,7 @@ begin
   Qry.ParamByName('ID').AsInteger := aID;
   Qry.Open;
   Result := Qry;
+  // ⚠️ ATENÇÃO: O chamador DEVE liberar esta query!
 end;
 
 function TTurmaRepository.GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;

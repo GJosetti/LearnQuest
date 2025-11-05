@@ -167,22 +167,25 @@ begin
   end;
 end;
 
-procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(
-  Sender: TObject);
+procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TObject);
 begin
   if CamposValidosTurma then
   begin
+    // ✅ FECHE EXPLICITAMENTE a query ANTES de salvar
+    if Assigned(d_Src_turmasEscola.DataSet) then
+    begin
+      if d_Src_turmasEscola.DataSet.Active then
+        d_Src_turmasEscola.DataSet.Close;  // ← FORÇA fechamento
+
+      d_Src_turmasEscola.DataSet.Free;
+      d_Src_turmasEscola.DataSet := nil;
+    end;
+
+    // Agora sim, salva
     if (Fmode = m_Add) then
       FController.AdicionarTurma
     else
       FController.UpdateTurma(FID);
-
-    // Garante que o DataSource e DataSet anterior não estão pendurados
-    if Assigned(d_Src_turmasEscola.DataSet) then
-    begin
-      d_Src_turmasEscola.DataSet.Free;
-      d_Src_turmasEscola.DataSet := nil;
-    end;
 
     // Atualiza a tabela de turmas
     d_Src_turmasEscola.DataSet := FController.AtualizarTabelaTurmas;
@@ -192,6 +195,7 @@ begin
     ClearAllEdits;
   end;
 end;
+
 
 procedure Tfrm_menuEscola.btn_editarTurma_EscolaMenuClick(Sender: TObject);
 var
@@ -538,7 +542,10 @@ end;
 procedure Tfrm_menuEscola.FormCreate(Sender: TObject);
 begin
   if not Assigned(FController) then
+  begin
     FController := TMenuAdminController.Create(Self);
+  end;
+
 
   Self.Position := poScreenCenter;
 

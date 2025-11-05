@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
   FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, Vcl.Dialogs;
 
 type
   TDataModule1 = class(TDataModule)
@@ -20,6 +20,7 @@ type
     FDQueryTurmas: TFDQuery;
     FDQueryParticipantes: TFDQuery;
     FDQueryAtividades: TFDQuery;
+    QRTurmas: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -49,6 +50,7 @@ begin
     begin
       FDConnection1.Connected := True;
     end;
+    FDConnection1.ExecSQL('SET search_path TO public');
   except
     on E: Exception do
     begin
@@ -63,6 +65,7 @@ begin
   begin
     FDConnection1.Connected := false;
   end;
+  ShowMessage('DataModule destruído');
 end;
 
 end.

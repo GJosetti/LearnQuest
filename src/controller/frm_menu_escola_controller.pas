@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB, user_DTO, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -76,7 +76,9 @@ begin
   TurmaDTO.Nome := Fview.GetNomeTurma;
   TurmaDTO.Descricao := Fview.GetDescTurma;
   TurmaDTO.ProfessorID := Fview.GetIDProfessorTurma;
-
+  //ShowMessage(UsuarioLogado.Escola.ToString);
+  //FServiceUser.SetPathByEscola(UsuarioLogado.Escola);
+  ShowMessage(UsuarioLogado.Escola.ToString);
   FServiceTurma.Salvar(TurmaDTO);
 
 

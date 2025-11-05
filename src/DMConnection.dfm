@@ -11,21 +11,22 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
-    Left = 176
-    Top = 184
+    Connected = True
+    Left = 56
+    Top = 64
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
-    Left = 352
-    Top = 256
+    Left = 152
+    Top = 368
   end
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
       'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
       'ra\lib\libpq.dll'
-    Left = 464
-    Top = 192
+    Left = 168
+    Top = 88
   end
   object FDQueryEscolas: TFDQuery
     Connection = FDConnection1
@@ -34,17 +35,22 @@ object DataModule1: TDataModule1
   end
   object FDQueryTurmas: TFDQuery
     Connection = FDConnection1
-    Left = 504
-    Top = 376
+    Left = 448
+    Top = 360
   end
   object FDQueryParticipantes: TFDQuery
     Connection = FDConnection1
-    Left = 512
-    Top = 288
+    Left = 568
+    Top = 360
   end
   object FDQueryAtividades: TFDQuery
     Connection = FDConnection1
-    Left = 216
-    Top = 400
+    Left = 256
+    Top = 368
+  end
+  object QRTurmas: TFDQuery
+    Connection = FDConnection1
+    Left = 56
+    Top = 368
   end
 end

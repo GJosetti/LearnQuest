@@ -65,30 +65,32 @@ begin
 end;
 function TProfessorRepository.GetAllNames: TStringList;
 var
-Qry : TFDQuery;
-SQL : String;
-sL : TStringList;
+  Qry : TFDQuery;
+  sL  : TStringList;
 begin
-  Qry := DataModule1.FDQueryProfessores;
   sL := TStringList.Create;
-try
-  Qry.Connection := FConnection;
-  Qry.SQL.Text := 'SELECT u.user_name FROM professores p JOIN users u ON u.id = p.user_id';
-  Qry.Open();
-  while not Qry.Eof do begin
-    sL.Add(Qry.FieldByName('user_name').AsString);
-    Qry.Next;
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'SELECT u.user_name ' +
+      'FROM professores p ' +
+      'JOIN users u ON u.id = p.user_id';
+    Qry.Open;
+    while not Qry.Eof do
+    begin
+      sL.Add(Qry.FieldByName('user_name').AsString);
+      Qry.Next;
+    end;
+    Result := sL;
+  finally
+    Qry.Free;
   end;
-
-  Result := sL;
-
-finally
-
 end;
 
 
 
-end;
+
 
 
 function TProfessorRepository.GetByID(aID: Integer): TProfessorModel;

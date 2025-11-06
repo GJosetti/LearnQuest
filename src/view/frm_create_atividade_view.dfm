@@ -38,8 +38,8 @@ object frm_criar_atividades: Tfrm_criar_atividades
       'Verdadeiro ou Falso')
   end
   object pnl_atividade_quiz: TPanel
-    Left = 184
-    Top = 112
+    Left = 176
+    Top = 105
     Width = 937
     Height = 457
     Color = clWhite
@@ -161,7 +161,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
       Left = 64
       Top = 183
       Width = 265
-      Height = 74
+      Height = 23
       Alignment = taCenter
       TabOrder = 1
     end

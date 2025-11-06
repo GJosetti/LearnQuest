@@ -21,6 +21,7 @@ type
     FDQueryParticipantes: TFDQuery;
     FDQueryAtividades: TFDQuery;
     QRTurmas: TFDQuery;
+    FDQueryProfessores: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

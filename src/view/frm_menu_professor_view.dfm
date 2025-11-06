@@ -36,6 +36,7 @@ object frm_menu_professor: Tfrm_menu_professor
       Height = 49
       Caption = 'Minhas Turmas'
       TabOrder = 0
+      OnClick = btn_minhas_turmasClick
     end
     object btn_home: TButton
       Left = 48
@@ -44,6 +45,7 @@ object frm_menu_professor: Tfrm_menu_professor
       Height = 49
       Caption = 'Home'
       TabOrder = 1
+      OnClick = btn_homeClick
     end
     object pnl_back: TPanel
       Left = 0

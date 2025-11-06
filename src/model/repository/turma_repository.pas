@@ -164,7 +164,7 @@ begin
     Qry.ParamByName('ID').AsInteger := aModel.GetID;
     Qry.ExecSQL;
   finally
-    Qry.Free;
+
   end;
 end;
 
@@ -190,7 +190,7 @@ var
   Qry: TFDQuery;
 begin
   // ✅ CRIA query temporária que será liberada pelo chamador
-  Qry := DataModule1.FDQueryTurmas;
+  Qry := TFDQuery.Create(nil);
   Qry.Connection := FConnection;
   Qry.SQL.Text :=
     'SELECT t.turma_name, t.descricao, u.user_name ' +

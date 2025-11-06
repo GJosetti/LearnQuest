@@ -48,6 +48,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure pnl_adicionar_atividadesClick(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
+    procedure btn_minhas_turmasClick(Sender: TObject);
+    procedure btn_homeClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -74,20 +76,33 @@ begin
   dbg_atividades.DataSource := d_src_atividades;
 end;
 
+procedure Tfrm_menu_professor.btn_homeClick(Sender: TObject);
+begin
+  pnl_minhas_turmas.Visible := false;
+  pnl_home_adminMenu.Visible := false;
+  pnl_home_adminMenu.Visible := true;
+end;
+
 procedure Tfrm_menu_professor.btn_minhas_atividadesClick(Sender: TObject);
 begin
   pnl_minhas_turmas.Visible := false;
   pnl_home_adminMenu.Visible := false;
 
 
- if Assigned(d_src_atividades) then begin
-   d_src_atividades.DataSet := nil;
- end;
+
   d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
   dbg_atividades.DataSource := d_src_atividades;
 
 
   pnl_minhas_atividades.Visible := true;
+
+end;
+
+procedure Tfrm_menu_professor.btn_minhas_turmasClick(Sender: TObject);
+begin
+    pnl_minhas_atividades.Visible := false;
+    pnl_minhas_turmas.Visible := true;
+    pnl_home_adminMenu.Visible := false;
 
 end;
 

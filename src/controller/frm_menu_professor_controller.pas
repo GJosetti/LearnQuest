@@ -1,7 +1,7 @@
 unit frm_menu_professor_controller;
 
 interface
-uses my_contracts, Data.DB, atividades_service, professor_service, Sessao;
+uses my_contracts, Data.DB, atividades_service, professor_service,turma_service, Sessao;
 
 type
 
@@ -11,6 +11,7 @@ private
 
 FAtividadeService : IAtividadesService;
 FProfessorService : IProfessorService;
+FTurmaService : TTurmaService;
 
 public
   function AtualizarTabelaTurmas : TDataSet ;
@@ -32,6 +33,9 @@ begin
   end;
   if not Assigned(FProfessorService) then begin
     FProfessorService := TProfessorService.Create;
+  end;
+  if not Assigned(FTurmaService) then begin
+    FTurmaService := TTurmaService.Create;
   end;
 end;
 

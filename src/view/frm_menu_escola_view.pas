@@ -146,19 +146,15 @@ procedure Tfrm_menuEscola.btn_concluir_addNEdit_EscolaMenuClick(
 begin
   if CamposValidosUsuario then
   begin
-    if Fmode = m_Add then
-      FController.AdicionarUsuario
-    else if Fmode = m_Edit then
+    if Fmode = m_Add then begin
+      FController.AdicionarUsuario;
+     end else if Fmode = m_Edit then begin
       FController.Update(FID);
+    end;
+
 
     pnl_addNEdit_EscolaMenu.Visible := false;
 
-    // Reatribui DataSet de membros atualizando a grid (libera antigo se existir)
-    if Assigned(d_Src_membros_escola.DataSet) then
-    begin
-      d_Src_membros_escola.DataSet.Free;
-      d_Src_membros_escola.DataSet := nil;
-    end;
 
     d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
     dbg_membrosEscola.DataSource := d_Src_membros_escola;
@@ -174,12 +170,15 @@ begin
     // Agora sim, salva
     if (Fmode = m_Add) then
       FController.AdicionarTurma
-    else
+    else begin
       FController.UpdateTurma(FID);
+    end;
+
 
     // Atualiza a tabela de turmas
     d_Src_turmasEscola.DataSet := FController.AtualizarTabelaTurmas;
     dbg_turmasEscola.DataSource := d_Src_turmasEscola;
+
 
     pnl_addNEdit_Turma_EscolaMenu.Visible := false;
     ClearAllEdits;
@@ -522,7 +521,6 @@ begin
   dbg_turmasEscola.DataSource := nil;
   dbg_participantes_turma.DataSource := nil;
 
- 
 end;
 
 function Tfrm_menuEscola.GetDescTurma: String;

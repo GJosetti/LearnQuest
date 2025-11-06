@@ -59,7 +59,7 @@ begin
   end;
 
  finally
-  Qry.Free;
+
  end;
 
 end;
@@ -69,7 +69,7 @@ Qry : TFDQuery;
 SQL : String;
 sL : TStringList;
 begin
-  Qry := TFDQuery.Create(nil);
+  Qry := DataModule1.FDQueryProfessores;
   sL := TStringList.Create;
 try
   Qry.Connection := FConnection;
@@ -83,7 +83,7 @@ try
   Result := sL;
 
 finally
-  Qry.Free;
+
 end;
 
 

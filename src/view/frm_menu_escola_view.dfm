@@ -212,7 +212,7 @@ object frm_menuEscola: Tfrm_menuEscola
       object lbl_role_addNEdit_EscolaAdmin: TLabel
         Left = 168
         Top = 313
-        Width = 82
+        Width = 81
         Height = 15
         Caption = 'Tipo de usu'#225'rio'
       end
@@ -398,7 +398,7 @@ object frm_menuEscola: Tfrm_menuEscola
       object lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel
         Left = 160
         Top = 122
-        Width = 87
+        Width = 86
         Height = 15
         Caption = 'Nome da Turma'
       end

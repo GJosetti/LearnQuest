@@ -171,16 +171,6 @@ procedure Tfrm_menuEscola.btn_concluir_addNEdit_Turma_EscolaMenuClick(Sender: TO
 begin
   if CamposValidosTurma then
   begin
-    // ✅ FECHE EXPLICITAMENTE a query ANTES de salvar
-    if Assigned(d_Src_turmasEscola.DataSet) then
-    begin
-      if d_Src_turmasEscola.DataSet.Active then
-        d_Src_turmasEscola.DataSet.Close;  // ← FORÇA fechamento
-
-      d_Src_turmasEscola.DataSet.Free;
-      d_Src_turmasEscola.DataSet := nil;
-    end;
-
     // Agora sim, salva
     if (Fmode = m_Add) then
       FController.AdicionarTurma
@@ -314,13 +304,6 @@ begin
 
   pnl_participantes_Turma.Visible := True;
 
-  // --- Fecha/Libera dataset anterior, se existir
-  if Assigned(d_Src_participantes_turma.DataSet) then
-  begin
-    d_Src_participantes_turma.DataSet.Free;
-    d_Src_participantes_turma.DataSet := nil;
-  end;
-
   // --- Atualiza o dataset de participantes
   d_Src_participantes_turma.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
 
@@ -351,12 +334,6 @@ begin
   begin
     FController.DeleteTurma(FName);
 
-    // Atualiza grid de turmas
-    if Assigned(d_Src_turmasEscola.DataSet) then
-    begin
-      d_Src_turmasEscola.DataSet.Free;
-      d_Src_turmasEscola.DataSet := nil;
-    end;
     d_Src_turmasEscola.DataSet := FController.AtualizarTabelaTurmas;
     dbg_turmasEscola.DataSource := d_Src_turmasEscola;
 
@@ -386,12 +363,6 @@ begin
     IDEstudante := FController.GetEstudanteIDByUser(user.ID);
     FController.RemoverEstudanteDaTurma(IDEstudante,FIDTurmaSelected);
 
-    // Atualiza participantes na UI
-    if Assigned(d_Src_participantes_turma.DataSet) then
-    begin
-      d_Src_participantes_turma.DataSet.Free;
-      d_Src_participantes_turma.DataSet := nil;
-    end;
     d_Src_participantes_turma.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
 
     ClearAllEdits;
@@ -435,11 +406,7 @@ begin
     FController.Delete(FDTO.ID);
 
     // Atualiza grid de membros
-    if Assigned(d_Src_membros_escola.DataSet) then
-    begin
-      d_Src_membros_escola.DataSet.Free;
-      d_Src_membros_escola.DataSet := nil;
-    end;
+
     d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
     dbg_membrosEscola.DataSource := d_Src_membros_escola;
 
@@ -467,12 +434,7 @@ begin
     IDEstudante := FController.GetEstudanteIDByUser(user.GetID);
     FController.LinkEstudante(IDEstudante, FIDTurmaSelected);
 
-    // Atualiza participantes na UI
-    if Assigned(d_Src_participantes_turma.DataSet) then
-    begin
-      d_Src_participantes_turma.DataSet.Free;
-      d_Src_participantes_turma.DataSet := nil;
-    end;
+
     d_Src_participantes_turma.DataSet := FController.AtualizarTabelaParticipantes(FIDTurmaSelected);
 
     ClearAllEdits;
@@ -560,24 +522,7 @@ begin
   dbg_turmasEscola.DataSource := nil;
   dbg_participantes_turma.DataSource := nil;
 
-  // libera datasets criados dinamicamente (se houver)
-  if Assigned(d_Src_membros_escola.DataSet) then
-  begin
-    d_Src_membros_escola.DataSet.Free;
-    d_Src_membros_escola.DataSet := nil;
-  end;
-
-  if Assigned(d_Src_turmasEscola.DataSet) then
-  begin
-    d_Src_turmasEscola.DataSet.Free;
-    d_Src_turmasEscola.DataSet := nil;
-  end;
-
-  if Assigned(d_Src_participantes_turma.DataSet) then
-  begin
-    d_Src_participantes_turma.DataSet.Free;
-    d_Src_participantes_turma.DataSet := nil;
-  end;
+ 
 end;
 
 function Tfrm_menuEscola.GetDescTurma: String;
@@ -643,12 +588,7 @@ begin
   pnl_addNEdit_EscolaMenu.Visible := false;
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
 
-  // libera dataset antigo (se criado dinamicamente)
-  if Assigned(d_Src_membros_escola.DataSet) then
-  begin
-    d_Src_membros_escola.DataSet.Free;
-    d_Src_membros_escola.DataSet := nil;
-  end;
+
 
   d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
   dbg_membrosEscola.DataSource := d_Src_membros_escola;
@@ -703,12 +643,7 @@ begin
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
 
   // libera dataset antigo (se criado dinamicamente)
-  if Assigned(d_Src_turmasEscola.DataSet) then
-  begin
-    d_Src_turmasEscola.DataSet.Free;
-    d_Src_turmasEscola.DataSet := nil;
-  end;
-
+ 
   d_Src_turmasEscola.DataSet := FController.AtualizarTabelaTurmas;
   dbg_turmasEscola.DataSource := d_Src_turmasEscola;
 end;

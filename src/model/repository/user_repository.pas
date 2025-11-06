@@ -138,8 +138,14 @@ var
   Qry: TFDQuery;
   SchemaName: string;
 begin
-  Qry := TFDQuery.Create(nil);
+
+  Qry := DataModule1.FDQuery1;
   try
+     if not Assigned(FConnection) then
+  raise Exception.Create('FConnection não está atribuído.');
+
+if not FConnection.Connected then
+  raise Exception.Create('FConnection não está conectado.');
     Qry.Connection := FConnection;
     Qry.SQL.Text :=
       'SELECT t.schema_name ' +
@@ -156,7 +162,7 @@ begin
       FPathSchema := SchemaName;
     end;
   finally
-    Qry.Free;
+ //   Qry.Free;
   end;
 end;
 
@@ -255,7 +261,7 @@ function TUserRepository.GetUsersDataSet: TDataSet;
 var
   Qry: TFDQuery;
 begin
-  Qry := TFDQuery.Create(nil);
+  Qry := DataModule1.FDQuery1;
   Qry.Connection := FConnection;
   Qry.SQL.Text :=
     'SELECT u.user_name, u.email, r.descricao ' +

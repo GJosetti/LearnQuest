@@ -134,12 +134,9 @@ procedure TTurmaRepository.Salvar(aModel: TTurmaModel);
 var
   Qry: TFDQuery;
 begin
-  FConnection.ExecSQL('SET search_path TO ' + FPathSchema + ', public');
-
-
-  Qry := TFDQuery.Create(nil);
+  Qry := DataModule1.FDQuery1;
   try
-    Qry.Connection := FConnection;
+    Qry.Connection := FConnection; // mesma instância usada no SetPathSchema
     Qry.SQL.Text :=
       'INSERT INTO turmas (turma_name, descricao, professor_id) ' +
       'VALUES (:NAME, :DESCR, :PID)';
@@ -148,10 +145,9 @@ begin
     Qry.ParamByName('PID').AsInteger := aModel.GetProfessorID;
     Qry.ExecSQL;
   finally
-    Qry.Free;
+
   end;
 end;
-
 
 procedure TTurmaRepository.Update(aModel: TTurmaModel);
 var
@@ -194,7 +190,7 @@ var
   Qry: TFDQuery;
 begin
   // ✅ CRIA query temporária que será liberada pelo chamador
-  Qry := TFDQuery.Create(nil);
+  Qry := DataModule1.FDQueryTurmas;
   Qry.Connection := FConnection;
   Qry.SQL.Text :=
     'SELECT t.turma_name, t.descricao, u.user_name ' +

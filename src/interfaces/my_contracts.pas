@@ -307,7 +307,7 @@ type
     procedure Save();
     function FindByID(aID : Integer): atividade_Model;
     procedure Update(aID : Integer);
-    function AtualizarTabelaTurmas : TTurmaModel;
+
 
   end;
 

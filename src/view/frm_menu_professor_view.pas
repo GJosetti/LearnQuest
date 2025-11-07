@@ -89,7 +89,7 @@ begin
     pnl_home_adminMenu.Visible := false;
 
     if(Assigned(d_src_turmas)) then begin
-      d_src_turmas := nil;
+     // d_src_turmas := nil;
     end;
     d_src_turmas.DataSet := FController.AtualizarTabelaTurmas;
     dbg_turmas.DataSource := d_src_turmas;

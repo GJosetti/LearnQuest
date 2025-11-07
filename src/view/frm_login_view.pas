@@ -13,14 +13,17 @@ type
     edt_nome_login: TEdit;
     edt_senha_login: TEdit;
     pnl_login: TPanel;
-    s: TImage;
+    btn_password: TImage;
     btn_login: TImage;
     Timer: TTimer;
     caption_btn_login: TLabel;
     Title: TImage;
+    img_bg: TImage;
+    img_arbustos: TImage;
+    img_table: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
-    procedure sClick(Sender: TObject);
+    procedure btn_passwordClick(Sender: TObject);
     
     procedure btn_loginMouseEnter(Sender: TObject);
     procedure btn_loginMouseLeave(Sender: TObject);
@@ -106,17 +109,24 @@ end;
 
 
 
-procedure Tfrm_login.sClick(Sender: TObject);
+procedure Tfrm_login.btn_passwordClick(Sender: TObject);
 begin
   isPasswordVisible := not isPasswordVisible;
 
   if(isPasswordVisible) then begin
     edt_senha_login.PasswordChar := #0;
+    btn_password.Picture.LoadFromFile(
+  ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\assets\asd1.png')
+  );
+
   end else begin
     edt_senha_login.PasswordChar := '*';
+   btn_password.Picture.LoadFromFile(
+  ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\assets\asd.png')
+  );
   end;
 
-
+ Title.Center := false;
 end;
 
 procedure Tfrm_login.TrocarTela(aDTO: TUserDTO);

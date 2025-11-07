@@ -11,25 +11,9 @@ type
   Tfrm_menu_professor = class(TForm, ITelaProfessorView)
     d_src_turmas: TDataSource;
     pnl_minhas_turmas: TPanel;
-    dbg_escolas: TDBGrid;
+    dbg_turmas: TDBGrid;
     btn_adicionar_adminMenu: TPanel;
-    btn_remover_adminMenu: TPanel;
     btn_editar_adminMenu: TPanel;
-    pnl_addNEdit_adminMenu: TPanel;
-    pnl_title_addNEdit_adminMenu: TLabel;
-    lbl_nome_edit_addNEdit_adminMenu: TLabel;
-    lbl_CEP_addNEdit_adminMenu: TLabel;
-    lbl_nomeAdmin_addNEdit_adminMenu: TLabel;
-    lbl_passwordAdmin_addNEdit_adminMenu: TLabel;
-    lbl_title_UserAdmin_pnl_AddNEdit_adminMenu: TLabel;
-    lbl_email_addNEdit_adminMenu: TLabel;
-    edt_nome_addNEdit_adminMenu: TEdit;
-    btn_concluir_addNEdit_adminMenu: TPanel;
-    btn_cancelar_addNEdit_adminMenu: TPanel;
-    edt_nomeUsurario_addNEdit_adminMenu: TEdit;
-    edt_password_addNEdit__adminMenu: TEdit;
-    edt_email_addNEdit_adminMenu: TEdit;
-    edt_CEP_addNEdit_adminMenu: TMaskEdit;
     pnl_home_adminMenu: TPanel;
     pnl_sideMenu: TPanel;
     btn_minhas_turmas: TButton;
@@ -79,7 +63,7 @@ end;
 procedure Tfrm_menu_professor.btn_homeClick(Sender: TObject);
 begin
   pnl_minhas_turmas.Visible := false;
-  pnl_home_adminMenu.Visible := false;
+  pnl_minhas_atividades.Visible := false;
   pnl_home_adminMenu.Visible := true;
 end;
 
@@ -103,6 +87,12 @@ begin
     pnl_minhas_atividades.Visible := false;
     pnl_minhas_turmas.Visible := true;
     pnl_home_adminMenu.Visible := false;
+
+    if(Assigned(d_src_turmas)) then begin
+      d_src_turmas := nil;
+    end;
+    d_src_turmas.DataSet := FController.AtualizarTabelaTurmas;
+    dbg_turmas.DataSource := d_src_turmas;
 
 end;
 

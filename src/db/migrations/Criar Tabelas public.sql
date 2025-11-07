@@ -1,33 +1,99 @@
+insert into users (user_name,user_role_id, password, email) values('admin',1,'1592916','administrador@gmail.com');
+insert into roles (descricao) values('Cargo de Administrador');
+insert into roles (descricao) values('Escola');
+insert into roles (descricao) values ('Professor');
+insert into roles (descricao) values ('Estudante');
+
+select * from roles
+
+delete from users  where id = 3;
+select *from users; 
+select user_name, roles.descricao from users inner join roles on user_role_id = roles.id;
+
+DROP TABLE IF EXISTS atividade_fase CASCADE;
+DROP TABLE IF EXISTS fase_trilha CASCADE;
+DROP TABLE IF EXISTS turma_trilha CASCADE;
+DROP TABLE IF EXISTS estudante_turma CASCADE;
+DROP TABLE IF EXISTS atividades CASCADE;
+DROP TABLE IF EXISTS turmas CASCADE;
+DROP TABLE IF EXISTS professores CASCADE;
+DROP TABLE IF EXISTS estudante CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS role_permissoes CASCADE;
+DROP TABLE IF EXISTS fase CASCADE;
+DROP TABLE IF EXISTS trilhas CASCADE;
+DROP TABLE IF EXISTS permissoes CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
 
 
-CREATE TABLE roles (
-    id BIGSERIAL PRIMARY KEY,
-    descricao VARCHAR(100) NOT NULL
+drop table tenants;
+drop table users ;
+
+select * from tenants;
+select *from users; 
+
+
+delete from tenants where id = 3; 
+delete from users  where id = 16;
+
+delete from escola_4.professores where id = 6;
+select * from escola_4.estudante e ;
+select * from escola_4.professores;
+
+delete from escola_4.estudante where id = 1;
+delete from escola_4.professores where id = 5;
+
+update users set password = 1592916 where id = 3;  
+
+insert into tenants (nome,endereco, membros_qtd) values ('UFPR','Não Sei', 2 );
+insert into tenants (nome, endereco, membros_qtd) values ('PUCPR' ,'senhaBacana', 'Prado Velho', 3 );
+
+insert into tenants (nome, endereco, membros_qtd) values ('UTFPR' ,'senhaOriginal', 'Nome de endereço bem grande pra ver o que  DBGrid vai fazer', 2 );
+
+INSERT INTO public.activity_template (name, description, structure_json)
+VALUES (
+  'Quiz de múltipla escolha',
+  'Atividade de perguntas com múltiplas opções e apenas uma resposta correta.',
+  '{
+    "type": "quiz",
+    "fields": {
+      "title": "string",
+      "description": "string",
+      "questions": [
+        {
+          "question": "string",
+          "options": ["string"],
+          "correct_index": "integer"
+        }
+      ]
+    },
+    "rules": {
+      "min_questions": 1,
+      "max_questions": 10
+    }
+  }'::jsonb
+);INSERT INTO public.activity_template (name, description, structure_json)
+VALUES (
+  'Verdadeiro ou Falso',
+  'Atividade onde o aluno deve marcar se as afirmações são verdadeiras ou falsas.',
+  '{
+    "type": "true_false",
+    "fields": {
+      "title": "string",
+      "description": "string",
+      "statements": [
+        {
+          "statement": "string",
+          "is_true": "boolean"
+        }
+      ]
+    },
+    "rules": {
+      "min_statements": 1,
+      "max_statements": 10
+    }
+  }'::jsonb
 );
 
-CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
-    user_role_id BIGINT NOT NULL REFERENCES roles(id),
-    user_escola_id int references tenants (id) on delete cascade,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL
-);
 
-create table tenants(	
-	id bigserial primary key,
-	nome varchar not null,
-	endereco varchar not null,
-	membros_qtd int not null,
-	schema_name varchar
-);
-
-CREATE TABLE activity_template (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    description TEXT,
-    structure_json JSONB NOT NULL,  -- descreve os campos do template
-    created_at TIMESTAMP DEFAULT NOW()
-);
-
-
+  

@@ -46,7 +46,7 @@ end;
 
 function TMenuProfessorController.AtualizarTabelaTurmas: TDataSet;
 begin
-
+  Result := FTurmaService.GetTurmaByProfessor() ;
 end;
 
 

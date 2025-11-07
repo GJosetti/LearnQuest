@@ -76,6 +76,8 @@ type
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function GetParticipantesDataSet(aID : Integer): TDataSet;
 
+      function GetTurmaByProfessor: TDataSet;
+
 
   end;
 
@@ -153,6 +155,7 @@ type
 
       function FindByName (aNome : String) : TTUrmaDTO;
       function AtualizarTabelaTurmas : TDataSet;
+      function GetTurmaByProfessor : TDataSet;
 
       procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
       function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
@@ -304,6 +307,7 @@ type
     procedure Save();
     function FindByID(aID : Integer): atividade_Model;
     procedure Update(aID : Integer);
+    function AtualizarTabelaTurmas : TTurmaModel;
 
   end;
 

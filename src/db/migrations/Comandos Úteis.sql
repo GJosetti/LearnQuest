@@ -49,3 +49,51 @@ insert into tenants (nome,endereco, membros_qtd) values ('UFPR','Não Sei', 2 );
 insert into tenants (nome, endereco, membros_qtd) values ('PUCPR' ,'senhaBacana', 'Prado Velho', 3 );
 
 insert into tenants (nome, endereco, membros_qtd) values ('UTFPR' ,'senhaOriginal', 'Nome de endereço bem grande pra ver o que  DBGrid vai fazer', 2 );
+
+INSERT INTO public.activity_template (name, description, structure_json)
+VALUES (
+  'Quiz de múltipla escolha',
+  'Atividade de perguntas com múltiplas opções e apenas uma resposta correta.',
+  '{
+    "type": "quiz",
+    "fields": {
+      "title": "string",
+      "description": "string",
+      "questions": [
+        {
+          "question": "string",
+          "options": ["string"],
+          "correct_index": "integer"
+        }
+      ]
+    },
+    "rules": {
+      "min_questions": 1,
+      "max_questions": 10
+    }
+  }'::jsonb
+);INSERT INTO public.activity_template (name, description, structure_json)
+VALUES (
+  'Verdadeiro ou Falso',
+  'Atividade onde o aluno deve marcar se as afirmações são verdadeiras ou falsas.',
+  '{
+    "type": "true_false",
+    "fields": {
+      "title": "string",
+      "description": "string",
+      "statements": [
+        {
+          "statement": "string",
+          "is_true": "boolean"
+        }
+      ]
+    },
+    "rules": {
+      "min_statements": 1,
+      "max_statements": 10
+    }
+  }'::jsonb
+);
+
+
+  

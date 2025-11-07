@@ -28,6 +28,8 @@ type
     procedure Delete(aID: Integer);
     procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
+
+    function GetTurmaByProfessor: TDataSet;
   end;
 
 implementation
@@ -183,6 +185,27 @@ begin
   finally
     Qry.Free;
   end;
+end;
+
+function TTurmaRepository.GetTurmaByProfessor: TDataSet;
+var
+  Qry: TFDQuery;
+  aModel: TTurmaModel;
+begin
+  // ✅ CRIA query temporária que será liberada pelo chamador
+  Qry := TFDQuery.Create(nil);
+  Qry.Connection := FConnection;
+  Qry.SQL.Text :=
+    'SELECT t.* ' +
+    'FROM turmas t ' +
+    'JOIN professores p ON t.professor_id = p.id ' +
+    'JOIN users u ON p.user_id = u.id WHERE u.id = :ID';
+  Qry.ParamByName('ID').AsInteger := UsuarioLogado.ID;
+  Qry.Open;
+  
+
+  Result := Qry;
+  // ⚠️ ATENÇÃO: O chamador DEVE liberar esta query!
 end;
 
 function TTurmaRepository.GetTurmaDataSet: TDataSet;

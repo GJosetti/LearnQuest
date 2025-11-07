@@ -29,6 +29,8 @@ public
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
 
+      function GetTurmaByProfessor : TDataSet;
+
 end;
 
 implementation
@@ -82,6 +84,11 @@ end;
 function TTurmaService.GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
 begin
 
+end;
+
+function TTurmaService.GetTurmaByProfessor: TDataSet;
+begin
+  Result := FTurmaRepo.GetTurmaByProfessor();
 end;
 
 procedure TTurmaService.LinkEstudante(aEstudanteID, aTurmaID: Integer);

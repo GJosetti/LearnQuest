@@ -1,7 +1,7 @@
 unit atividades_service;
 
 interface
-uses my_contracts, Data.DB, atividade_repository, atividade_entity;
+uses my_contracts, Data.DB, atividade_repository, atividade_entity, Sessao,Vcl.Dialogs;
 
 type
 
@@ -17,6 +17,7 @@ constructor Create;
 procedure Save(aModel: atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
 procedure Update (aModel : atividade_Model);
+function GetAtividadesByUserID(AUserID: Integer): TDataSet;
 
 
 end;
@@ -37,6 +38,12 @@ end;
 function TAtividadeService.FindByID(aID: Integer): atividade_Model;
 begin
  Result := FRepo.FindByID(aID);
+end;
+
+function TAtividadeService.GetAtividadesByUserID(AUserID: Integer): TDataSet;
+begin
+
+  Result := FRepo.GetAtividadesByUserID(AUserID);
 end;
 
 procedure TAtividadeService.Save(aModel : atividade_model);

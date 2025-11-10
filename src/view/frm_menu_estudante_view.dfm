@@ -10,6 +10,7 @@ object frm_estudante_view: Tfrm_estudante_view
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   TextHeight = 15
   object pnl_sideMenu: TPanel
     Left = -16
@@ -19,13 +20,14 @@ object frm_estudante_view: Tfrm_estudante_view
     Color = clBtnHighlight
     ParentBackground = False
     TabOrder = 0
-    object btn_minhas_turmas: TButton
+    object btn_atividades: TButton
       Left = 48
       Top = 310
       Width = 161
       Height = 49
-      Caption = 'Minhas Turmas'
+      Caption = 'Atividades'
       TabOrder = 0
+      OnClick = btn_atividadesClick
     end
     object btn_home: TButton
       Left = 48
@@ -34,6 +36,7 @@ object frm_estudante_view: Tfrm_estudante_view
       Height = 49
       Caption = 'Home'
       TabOrder = 1
+      OnClick = btn_homeClick
     end
     object pnl_back: TPanel
       Left = 0
@@ -50,14 +53,67 @@ object frm_estudante_view: Tfrm_estudante_view
       ParentBackground = False
       ParentFont = False
       TabOrder = 2
+      OnClick = pnl_backClick
     end
     object btn_minhas_atividades: TButton
       Left = 48
-      Top = 504
+      Top = 488
       Width = 161
       Height = 49
       Caption = 'Minhas Atividades'
       TabOrder = 3
     end
+  end
+  object pnl_home: TPanel
+    Left = 256
+    Top = 0
+    Width = 1025
+    Height = 720
+    Color = clCoral
+    ParentBackground = False
+    TabOrder = 1
+  end
+  object pnl_atividades: TPanel
+    Left = 256
+    Top = 0
+    Width = 1025
+    Height = 720
+    Color = 12615935
+    ParentBackground = False
+    TabOrder = 2
+    Visible = False
+    object dbg_atividades: TDBGrid
+      Left = 392
+      Top = 167
+      Width = 257
+      Height = 377
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'title'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 120
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'turma_name'
+          Title.Alignment = taCenter
+          Title.Caption = 'Turma'
+          Width = 120
+          Visible = True
+        end>
+    end
+  end
+  object d_src_atividades: TDataSource
+    Left = 552
+    Top = 632
   end
 end

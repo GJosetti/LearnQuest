@@ -87,6 +87,7 @@ type
     procedure Save(aModel : atividade_Model);
     procedure Update (aModel : atividade_Model);
     function FindByID(aID : Integer): atividade_Model;
+    function GetAtividadesByUserID(AUserID: Integer): TDataSet;
   end;
 
 
@@ -172,6 +173,7 @@ type
         procedure Save(aModel: atividade_Model);
         function FindByID(aID : Integer): atividade_Model;
         procedure Update (aModel : atividade_Model);
+        function GetAtividadesByUserID(AUserID: Integer): TDataSet;
 
       end;
 
@@ -328,7 +330,7 @@ type
 
   ITelaEstudantesController = interface
 
-
+  function AtualizarTabelaAtividades : TDataSet;
 
 
 

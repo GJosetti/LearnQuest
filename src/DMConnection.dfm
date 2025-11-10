@@ -34,8 +34,8 @@ object DataModule1: TDataModule1
   end
   object FDQueryTurmas: TFDQuery
     Connection = FDConnection1
-    Left = 448
-    Top = 360
+    Left = 464
+    Top = 320
   end
   object FDQueryParticipantes: TFDQuery
     Connection = FDConnection1
@@ -56,5 +56,10 @@ object DataModule1: TDataModule1
     Connection = FDConnection1
     Left = 216
     Top = 432
+  end
+  object FDQueryAtividadesParaEstudante: TFDQuery
+    Connection = FDConnection1
+    Left = 456
+    Top = 472
   end
 end

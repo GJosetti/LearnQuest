@@ -1,7 +1,7 @@
-unit atividade_repository;
+﻿unit atividade_repository;
 
 interface
-uses my_contracts,Data.DB, DMConnection, Sessao, Vcl.Dialogs, atividade_entity, System.JSON, System.SysUtils;
+uses my_contracts,Data.DB, DMConnection, Sessao, Vcl.Dialogs, atividade_entity, System.JSON, System.SysUtils, FireDAC.Comp.Client;
 type
 
 TAtividadeRepository = class(TInterfacedObject, IAtividadeRepository)
@@ -14,6 +14,7 @@ function GetAtividadeDataSet(aID : Integer) : TDataSet;
 procedure Save(aModel: atividade_Model);
 procedure Update (aModel : atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
+function GetAtividadesByUserID(AUserID: Integer): TDataSet;
 
 end;
 
@@ -119,11 +120,42 @@ begin
       );
     end
     else
-      FreeAndNil(LModel); // n�o encontrou, retorna nil
+      FreeAndNil(LModel); // não encontrou, retorna nil
   end;
 
   Result := LModel;
 end;
 
+function TAtividadeRepository.GetAtividadesByUserID(AUserID: Integer): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := DataModule1.FDQueryAtividadesParaEstudante;
+
+    Qry.Connection := DataModule1.FDConnection1;
+    Qry.SQL.Text :=
+      'SELECT a.id AS atividade_id, ' +
+      '       a.title, ' +
+      '       a.descricao, ' +
+      '       a.created_at, ' +
+      '       t.turma_name, ' +
+      '       p.id AS professor_id ' +
+      'FROM atividades a ' +
+      'JOIN atividade_turma at ON at.atividade_id = a.id ' +
+      'JOIN turmas t ON t.id = at.turma_id ' +
+      'JOIN professores p ON p.id = t.professor_id ' +
+      'JOIN estudante_turma et ON et.turma_id = t.id ' +
+      'JOIN estudante e ON e.id = et.estudante_id ' +
+      'JOIN public.users u ON u.id = e.user_id ' +
+      'WHERE u.id = :USER_ID ' +
+      'ORDER BY a.created_at DESC;';
+
+    Qry.ParamByName('USER_ID').AsInteger := AUserID;
+    Qry.Open; // abre e executa o dataset
+   
+
+    Result := Qry; // devolve o dataset pronto
+
+end;
 
 end.

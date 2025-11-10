@@ -20,7 +20,7 @@ type
   end;
 
 var
-  Frm_estudante_view: TFrm_estudante_view;
+  frm_estudante_view: TFrm_estudante_view;
 
 implementation
 

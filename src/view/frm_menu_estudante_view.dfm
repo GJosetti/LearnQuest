@@ -83,8 +83,8 @@ object frm_estudante_view: Tfrm_estudante_view
     TabOrder = 2
     Visible = False
     object dbg_atividades: TDBGrid
-      Left = 392
-      Top = 167
+      Left = 344
+      Top = 159
       Width = 257
       Height = 377
       TabOrder = 0
@@ -95,6 +95,7 @@ object frm_estudante_view: Tfrm_estudante_view
       TitleFont.Style = []
       Columns = <
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'title'
           Title.Alignment = taCenter
@@ -103,13 +104,31 @@ object frm_estudante_view: Tfrm_estudante_view
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'turma_name'
           Title.Alignment = taCenter
           Title.Caption = 'Turma'
           Width = 120
           Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'atividade_id'
+          Visible = False
         end>
+    end
+    object btn_fazer: TPanel
+      Left = 376
+      Top = 568
+      Width = 185
+      Height = 41
+      Caption = 'Resolver Atividade!'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      OnClick = btn_fazerClick
     end
   end
   object d_src_atividades: TDataSource

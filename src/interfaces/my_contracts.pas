@@ -331,6 +331,7 @@ type
   ITelaEstudantesController = interface
 
   function AtualizarTabelaAtividades : TDataSet;
+  function GetAtividade(aID : Integer):atividade_Model;
 
 
 

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, my_contracts,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller, atividade_entity;
 
 type
   Tfrm_estudante_view = class(TForm, ITelaEstudantesView)
@@ -18,10 +18,12 @@ type
     pnl_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
+    btn_fazer: TPanel;
     procedure btn_homeClick(Sender: TObject);
     procedure btn_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnl_backClick(Sender: TObject);
+    procedure btn_fazerClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaEstudantesController;
@@ -44,6 +46,21 @@ begin
 
   d_src_atividades.DataSet := FController.AtualizarTabelaAtividades();
   dbg_atividades.DataSource := d_src_atividades;
+end;
+
+procedure Tfrm_estudante_view.btn_fazerClick(Sender: TObject);
+var
+FID : Integer;
+FAtividade : atividade_Model;
+
+begin
+
+FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
+FController.GetAtividade(FID);
+//FAZER UM NOVO FORM E COLOCAR O SELF NO CONSTRUTOR
+//frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
+  //frm_criar_atividades.ShowModal;
+
 end;
 
 procedure Tfrm_estudante_view.btn_homeClick(Sender: TObject);

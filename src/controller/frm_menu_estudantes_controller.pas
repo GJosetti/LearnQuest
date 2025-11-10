@@ -1,7 +1,7 @@
 unit frm_menu_estudantes_controller;
 
 interface
-uses my_contracts, Data.DB, turma_service, atividades_service,user_service,Sessao;
+uses my_contracts, Data.DB, turma_service, atividades_service,user_service,Sessao,atividade_entity;
 type
   Tfrm_estudante_controler = class(TInterfacedObject,ITelaEstudantesController)
 
@@ -11,7 +11,7 @@ type
   public
    function AtualizarTabelaAtividades : TDataSet;
    constructor Create();
-
+   function GetAtividade(aID : Integer):atividade_Model;
 
 
 end;
@@ -27,6 +27,12 @@ begin
   if not Assigned(FAtividadeService) then begin
     FAtividadeService := TAtividadeService.Create;
   end;
+end;
+
+function Tfrm_estudante_controler.GetAtividade(aID: Integer): atividade_Model;
+begin
+  Result := FAtividadeService.FindByID(aID);
+
 end;
 
 function Tfrm_estudante_controler.AtualizarTabelaAtividades: TDataSet;

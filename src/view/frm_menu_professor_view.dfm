@@ -74,77 +74,6 @@ object frm_menu_professor: Tfrm_menu_professor
       OnClick = btn_minhas_atividadesClick
     end
   end
-  object pnl_minhas_atividades: TPanel
-    Left = 263
-    Top = -1
-    Width = 1017
-    Height = 721
-    Color = 16744576
-    ParentBackground = False
-    TabOrder = 3
-    Visible = False
-    object dbg_atividades: TDBGrid
-      Left = 304
-      Top = 134
-      Width = 449
-      Height = 344
-      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -12
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'atividade_nome'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Nome'
-          Width = 200
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'template_nome'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo'
-          Width = 200
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'id'
-          Visible = True
-        end>
-    end
-    object pnl_adicionar_atividades: TPanel
-      Left = 383
-      Top = 504
-      Width = 66
-      Height = 29
-      Caption = 'Criar'
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 1
-      OnClick = pnl_adicionar_atividadesClick
-    end
-    object pnL_edit_atividade: TPanel
-      Left = 583
-      Top = 504
-      Width = 66
-      Height = 29
-      Caption = 'Edit'
-      Color = clWhite
-      ParentBackground = False
-      TabOrder = 2
-      OnClick = pnL_edit_atividadeClick
-    end
-  end
   object pnl_minhas_turmas: TPanel
     Left = 263
     Top = -1
@@ -265,6 +194,78 @@ object frm_menu_professor: Tfrm_menu_professor
         TabOrder = 2
         OnClick = btn_cancel_link_atividadeClick
       end
+    end
+  end
+  object pnl_minhas_atividades: TPanel
+    Left = 263
+    Top = -1
+    Width = 1017
+    Height = 721
+    Color = 16744576
+    ParentBackground = False
+    TabOrder = 3
+    Visible = False
+    object dbg_atividades: TDBGrid
+      Left = 304
+      Top = 134
+      Width = 417
+      Height = 344
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'atividade_nome'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 200
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'template_nome'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo'
+          Width = 200
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'id'
+          Visible = False
+        end>
+    end
+    object pnl_adicionar_atividades: TPanel
+      Left = 383
+      Top = 504
+      Width = 66
+      Height = 29
+      Caption = 'Criar'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 1
+      OnClick = pnl_adicionar_atividadesClick
+    end
+    object pnL_edit_atividade: TPanel
+      Left = 583
+      Top = 504
+      Width = 66
+      Height = 29
+      Caption = 'Edit'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      OnClick = pnL_edit_atividadeClick
     end
   end
   object d_src_turmas: TDataSource

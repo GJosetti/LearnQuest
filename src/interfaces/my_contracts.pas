@@ -314,6 +314,26 @@ type
 
   end;
 
+
+  //-------------------Tela Estudantes---------------------//
+  ITelaEstudantesView = interface
+
+
+
+
+
+
+
+  end;
+
+  ITelaEstudantesController = interface
+
+
+
+
+
+  end;
+
 implementation
 
 end.

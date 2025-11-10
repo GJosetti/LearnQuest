@@ -12,8 +12,6 @@ type
     d_src_turmas: TDataSource;
     pnl_minhas_turmas: TPanel;
     dbg_turmas: TDBGrid;
-    btn_adicionar_adminMenu: TPanel;
-    btn_editar_adminMenu: TPanel;
     pnl_home_adminMenu: TPanel;
     pnl_sideMenu: TPanel;
     btn_minhas_turmas: TButton;
@@ -30,6 +28,7 @@ type
     pnl_link_atividade_turma: TPanel;
     lbl_nome_turma: TLabel;
     btn_link: TPanel;
+    btn_cancel_link_atividade: TPanel;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -39,6 +38,7 @@ type
     procedure btn_homeClick(Sender: TObject);
     procedure btn_atribuir_atividadeClick(Sender: TObject);
     procedure btn_linkClick(Sender: TObject);
+    procedure btn_cancel_link_atividadeClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -75,6 +75,11 @@ begin
   dbg_atividadesToLink.DataSource := d_src_atividades;
   lbl_nome_turma.Caption := Fnome;
 
+end;
+
+procedure Tfrm_menu_professor.btn_cancel_link_atividadeClick(Sender: TObject);
+begin
+  pnl_link_atividade_turma.Visible := false;
 end;
 
 procedure Tfrm_menu_professor.btn_homeClick(Sender: TObject);
@@ -116,6 +121,7 @@ begin
     pnl_minhas_atividades.Visible := false;
     pnl_minhas_turmas.Visible := true;
     pnl_home_adminMenu.Visible := false;
+    pnl_link_atividade_turma.Visible := false;
 
     if(Assigned(d_src_turmas)) then begin
      // d_src_turmas := nil;

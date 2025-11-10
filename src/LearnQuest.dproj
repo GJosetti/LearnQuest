@@ -192,6 +192,11 @@
         </DCCReference>
         <DCCReference Include="model\entity\atividade_entity.pas"/>
         <DCCReference Include="controller\frm_create_atividade_controller.pas"/>
+        <DCCReference Include="view\frm_menu_estudante_view.pas">
+            <Form>Frm_estudante_view</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="controller\frm_menu_estudantes_controller.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

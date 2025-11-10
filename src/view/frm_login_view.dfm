@@ -22,7 +22,6 @@ object frm_login: Tfrm_login
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 713
     object img_bg: TImage
       Left = 0
       Top = 0

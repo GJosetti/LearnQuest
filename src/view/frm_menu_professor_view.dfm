@@ -155,8 +155,8 @@ object frm_menu_professor: Tfrm_menu_professor
     TabOrder = 0
     Visible = False
     object dbg_turmas: TDBGrid
-      Left = 288
-      Top = 73
+      Left = 360
+      Top = 113
       Width = 321
       Height = 344
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -177,45 +177,25 @@ object frm_menu_professor: Tfrm_menu_professor
           Visible = True
         end>
     end
-    object btn_adicionar_adminMenu: TPanel
-      Left = 304
-      Top = 453
-      Width = 105
-      Height = 25
-      Caption = 'Adicionar'
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 1
-    end
-    object btn_editar_adminMenu: TPanel
-      Left = 496
-      Top = 453
-      Width = 105
-      Height = 25
-      Caption = 'Editar'
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 2
-    end
     object btn_atribuir_atividade: TPanel
-      Left = 400
-      Top = 492
+      Left = 464
+      Top = 493
       Width = 105
       Height = 25
       Caption = 'Atribuir Atividade'
       Color = clBtnHighlight
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 1
       OnClick = btn_atribuir_atividadeClick
     end
     object pnl_link_atividade_turma: TPanel
-      Left = 288
-      Top = 18
+      Left = 360
+      Top = 53
       Width = 321
       Height = 480
       Color = clBrown
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 2
       Visible = False
       object lbl_nome_turma: TLabel
         Left = 80
@@ -264,7 +244,7 @@ object frm_menu_professor: Tfrm_menu_professor
       end
       object btn_link: TPanel
         Left = 64
-        Top = 416
+        Top = 400
         Width = 185
         Height = 41
         Caption = 'Atribuir'
@@ -272,6 +252,18 @@ object frm_menu_professor: Tfrm_menu_professor
         ParentBackground = False
         TabOrder = 1
         OnClick = btn_linkClick
+      end
+      object btn_cancel_link_atividade: TPanel
+        Left = 288
+        Top = 7
+        Width = 25
+        Height = 23
+        BevelOuter = bvNone
+        Caption = 'X'
+        Color = clRed
+        ParentBackground = False
+        TabOrder = 2
+        OnClick = btn_cancel_link_atividadeClick
       end
     end
   end

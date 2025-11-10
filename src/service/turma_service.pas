@@ -25,6 +25,7 @@ public
       constructor Create;
 
       procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
+      procedure LinkAtividade(aAtividadeID: Integer; aTurmaID: Integer);
       function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
@@ -89,6 +90,11 @@ end;
 function TTurmaService.GetTurmaByProfessor: TDataSet;
 begin
   Result := FTurmaRepo.GetTurmaByProfessor();
+end;
+
+procedure TTurmaService.LinkAtividade(aAtividadeID, aTurmaID: Integer);
+begin
+  FTurmaRepo.LinkAtividade(aAtividadeID,aTurmaID);
 end;
 
 procedure TTurmaService.LinkEstudante(aEstudanteID, aTurmaID: Integer);

@@ -212,7 +212,7 @@ object frm_menuEscola: Tfrm_menuEscola
       object lbl_role_addNEdit_EscolaAdmin: TLabel
         Left = 168
         Top = 313
-        Width = 81
+        Width = 82
         Height = 15
         Caption = 'Tipo de usu'#225'rio'
       end
@@ -369,8 +369,8 @@ object frm_menuEscola: Tfrm_menuEscola
       OnClick = btn_editarTurma_EscolaMenuClick
     end
     object pnl_addNEdit_Turma_EscolaMenu: TPanel
-      Left = 160
-      Top = 68
+      Left = 176
+      Top = 70
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -398,7 +398,7 @@ object frm_menuEscola: Tfrm_menuEscola
       object lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel
         Left = 160
         Top = 122
-        Width = 86
+        Width = 87
         Height = 15
         Caption = 'Nome da Turma'
       end
@@ -464,8 +464,8 @@ object frm_menuEscola: Tfrm_menuEscola
       end
     end
     object pnl_participantes_Turma: TPanel
-      Left = 176
-      Top = 74
+      Left = 192
+      Top = 76
       Width = 417
       Height = 428
       Caption = 'pnl_participantes_Turma'

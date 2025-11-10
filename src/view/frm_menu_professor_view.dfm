@@ -31,7 +31,7 @@ object frm_menu_professor: Tfrm_menu_professor
     TabOrder = 2
     object btn_minhas_turmas: TButton
       Left = 48
-      Top = 190
+      Top = 310
       Width = 161
       Height = 49
       Caption = 'Minhas Turmas'
@@ -40,7 +40,7 @@ object frm_menu_professor: Tfrm_menu_professor
     end
     object btn_home: TButton
       Left = 48
-      Top = 104
+      Top = 144
       Width = 161
       Height = 49
       Caption = 'Home'
@@ -66,28 +66,12 @@ object frm_menu_professor: Tfrm_menu_professor
     end
     object btn_minhas_atividades: TButton
       Left = 48
-      Top = 280
+      Top = 504
       Width = 161
       Height = 49
       Caption = 'Minhas Atividades'
       TabOrder = 3
       OnClick = btn_minhas_atividadesClick
-    end
-    object btn_minhas_fases: TButton
-      Left = 48
-      Top = 368
-      Width = 161
-      Height = 49
-      Caption = 'Minhas Fases'
-      TabOrder = 4
-    end
-    object btn_minhas_trilhas: TButton
-      Left = 48
-      Top = 445
-      Width = 161
-      Height = 49
-      Caption = 'Minhas Trilhas'
-      TabOrder = 5
     end
   end
   object pnl_minhas_atividades: TPanel
@@ -100,8 +84,8 @@ object frm_menu_professor: Tfrm_menu_professor
     TabOrder = 3
     Visible = False
     object dbg_atividades: TDBGrid
-      Left = 256
-      Top = 116
+      Left = 304
+      Top = 134
       Width = 449
       Height = 344
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -139,26 +123,26 @@ object frm_menu_professor: Tfrm_menu_professor
         end>
     end
     object pnl_adicionar_atividades: TPanel
-      Left = 343
-      Top = 484
-      Width = 29
+      Left = 383
+      Top = 504
+      Width = 66
       Height = 29
-      Caption = '+'
+      Caption = 'Criar'
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
       OnClick = pnl_adicionar_atividadesClick
     end
-    object Panel1: TPanel
-      Left = 520
-      Top = 487
-      Width = 41
+    object pnL_edit_atividade: TPanel
+      Left = 583
+      Top = 504
+      Width = 66
       Height = 29
       Caption = 'Edit'
       Color = clWhite
       ParentBackground = False
       TabOrder = 2
-      OnClick = Panel1Click
+      OnClick = pnL_edit_atividadeClick
     end
   end
   object pnl_minhas_turmas: TPanel
@@ -204,14 +188,91 @@ object frm_menu_professor: Tfrm_menu_professor
       TabOrder = 1
     end
     object btn_editar_adminMenu: TPanel
-      Left = 472
-      Top = 456
+      Left = 496
+      Top = 453
       Width = 105
       Height = 25
       Caption = 'Editar'
       Color = clBtnHighlight
       ParentBackground = False
       TabOrder = 2
+    end
+    object btn_atribuir_atividade: TPanel
+      Left = 400
+      Top = 492
+      Width = 105
+      Height = 25
+      Caption = 'Atribuir Atividade'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 3
+      OnClick = btn_atribuir_atividadeClick
+    end
+    object pnl_link_atividade_turma: TPanel
+      Left = 288
+      Top = 18
+      Width = 321
+      Height = 480
+      Color = clBrown
+      ParentBackground = False
+      TabOrder = 4
+      Visible = False
+      object lbl_nome_turma: TLabel
+        Left = 80
+        Top = 17
+        Width = 169
+        Height = 32
+        Alignment = taCenter
+        Caption = 'Nome da turma'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -24
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object dbg_atividadesToLink: TDBGrid
+        Left = 40
+        Top = 73
+        Width = 241
+        Height = 268
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'atividade_nome'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome'
+            Width = 220
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'id'
+            Visible = True
+          end>
+      end
+      object btn_link: TPanel
+        Left = 64
+        Top = 416
+        Width = 185
+        Height = 41
+        Caption = 'Atribuir'
+        Color = clWhite
+        ParentBackground = False
+        TabOrder = 1
+        OnClick = btn_linkClick
+      end
     end
   end
   object d_src_turmas: TDataSource

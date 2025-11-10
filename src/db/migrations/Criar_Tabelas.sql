@@ -72,7 +72,12 @@ CREATE TABLE atividades (
     content_json JSONB NOT NULL,   -- conteúdo preenchido pelo professor
     created_at TIMESTAMP DEFAULT NOW()
 );
-
+create table atividade_turma(
+	
+	id BIGSERIAL PRIMARY KEY,
+    atividade_id BIGINT NOT NULL REFERENCES atividades(id) ON DELETE CASCADE,
+    turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE
+);
 -- Liga atividades às fases (N:N possível)
 CREATE TABLE atividade_fase (
     id BIGSERIAL PRIMARY KEY,

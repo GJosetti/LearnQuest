@@ -27,6 +27,7 @@ type
     procedure Update(aModel: TTurmaModel);
     procedure Delete(aID: Integer);
     procedure LinkEstudante(aEstudanteID, aTurmaID: Integer);
+    procedure LinkAtividade(aAtividadeID, aTurmaID: Integer);
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
 
     function GetTurmaByProfessor: TDataSet;
@@ -169,6 +170,24 @@ begin
 
   end;
 end;
+
+procedure TTurmaRepository.LinkAtividade(aAtividadeID, aTurmaID: Integer);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+      'INSERT INTO atividade_turma (atividade_id, turma_id) VALUES (:AID, :TID)';
+    Qry.ParamByName('AID').AsInteger := aAtividadeID;
+    Qry.ParamByName('TID').AsInteger := aTurmaID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
 
 procedure TTurmaRepository.LinkEstudante(aEstudanteID, aTurmaID: Integer);
 var

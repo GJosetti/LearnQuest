@@ -20,20 +20,25 @@ type
     btn_home: TButton;
     pnl_back: TPanel;
     btn_minhas_atividades: TButton;
-    btn_minhas_fases: TButton;
-    btn_minhas_trilhas: TButton;
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
     pnl_adicionar_atividades: TPanel;
-    Panel1: TPanel;
+    pnL_edit_atividade: TPanel;
+    btn_atribuir_atividade: TPanel;
+    dbg_atividadesToLink: TDBGrid;
+    pnl_link_atividade_turma: TPanel;
+    lbl_nome_turma: TLabel;
+    btn_link: TPanel;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnl_adicionar_atividadesClick(Sender: TObject);
-    procedure Panel1Click(Sender: TObject);
+    procedure pnL_edit_atividadeClick(Sender: TObject);
     procedure btn_minhas_turmasClick(Sender: TObject);
     procedure btn_homeClick(Sender: TObject);
+    procedure btn_atribuir_atividadeClick(Sender: TObject);
+    procedure btn_linkClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -60,11 +65,35 @@ begin
   dbg_atividades.DataSource := d_src_atividades;
 end;
 
+procedure Tfrm_menu_professor.btn_atribuir_atividadeClick(Sender: TObject);
+var
+Fnome : String;
+begin
+  FNome := dbg_turmas.DataSource.DataSet.FieldByName('turma_name').AsString;
+  pnl_link_atividade_turma.Visible := true;
+  d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
+  dbg_atividadesToLink.DataSource := d_src_atividades;
+  lbl_nome_turma.Caption := Fnome;
+
+end;
+
 procedure Tfrm_menu_professor.btn_homeClick(Sender: TObject);
 begin
   pnl_minhas_turmas.Visible := false;
   pnl_minhas_atividades.Visible := false;
   pnl_home_adminMenu.Visible := true;
+end;
+
+procedure Tfrm_menu_professor.btn_linkClick(Sender: TObject);
+var
+FIDAtividade : Integer;
+FIDTurma : Integer;
+begin
+  FIDTurma := dbg_turmas.DataSource.DataSet.FieldByName('id').AsInteger;
+  FIDAtividade := dbg_atividadesToLink.DataSource.DataSet.FieldByName('id').AsInteger;
+  FController.LinkAtividades(FIDAtividade,FIDTurma);
+  ShowMessage('Atividade atribuída com sucesso');
+  pnl_link_atividade_turma.Visible := false;
 end;
 
 procedure Tfrm_menu_professor.btn_minhas_atividadesClick(Sender: TObject);
@@ -106,7 +135,7 @@ begin
  Self.Position := poScreenCenter;
 end;
 
-procedure Tfrm_menu_professor.Panel1Click(Sender: TObject);
+procedure Tfrm_menu_professor.pnL_edit_atividadeClick(Sender: TObject);
 var
 FID : Integer;
 FAtividade : atividade_Model;

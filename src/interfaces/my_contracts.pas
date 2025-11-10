@@ -72,6 +72,7 @@ type
       function FindByName (aNome : String): TTurmaModel;
 
       procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
+      procedure LinkAtividade(aAtividadeID, aTurmaID: Integer);
       function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function GetParticipantesDataSet(aID : Integer): TDataSet;
@@ -158,6 +159,7 @@ type
       function GetTurmaByProfessor : TDataSet;
 
       procedure LinkEstudante(aEstudanteID: Integer; aTurmaID: Integer);
+      procedure LinkAtividade(aAtividadeID: Integer; aTurmaID: Integer);
       function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
       procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
       function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
@@ -269,7 +271,8 @@ type
 
   ITelaProfessorController = interface
     function AtualizarTabelaTurmas : TDataSet ;
-    function AtualizarTabelaAtividades : TDataSet ;
+    function AtualizarTabelaAtividades : TDataSet;
+    procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
   end;
 
   //-----------------Tela Professores---------------------//

@@ -17,6 +17,7 @@ public
   function AtualizarTabelaTurmas : TDataSet ;
   function AtualizarTabelaAtividades : TDataSet ;
   constructor Create;
+  procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
 
 
 end;
@@ -37,6 +38,11 @@ begin
   if not Assigned(FTurmaService) then begin
     FTurmaService := TTurmaService.Create;
   end;
+end;
+
+procedure TMenuProfessorController.LinkAtividades(aAtividadeID, aTurmaID: Integer);
+begin
+  FTurmaService.LinkAtividade(aAtividadeID,aTurmaID);
 end;
 
 function TMenuProfessorController.AtualizarTabelaAtividades: TDataSet;

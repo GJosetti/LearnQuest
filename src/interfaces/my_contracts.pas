@@ -88,6 +88,7 @@ type
     procedure Update (aModel : atividade_Model);
     function FindByID(aID : Integer): atividade_Model;
     function GetAtividadesByUserID(AUserID: Integer): TDataSet;
+    procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
   end;
 
 
@@ -174,6 +175,7 @@ type
         function FindByID(aID : Integer): atividade_Model;
         procedure Update (aModel : atividade_Model);
         function GetAtividadesByUserID(AUserID: Integer): TDataSet;
+        procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
 
       end;
 

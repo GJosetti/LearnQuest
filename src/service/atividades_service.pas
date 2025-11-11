@@ -18,6 +18,7 @@ procedure Save(aModel: atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
 procedure Update (aModel : atividade_Model);
 function GetAtividadesByUserID(AUserID: Integer): TDataSet;
+procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
 
 
 end;
@@ -44,6 +45,12 @@ function TAtividadeService.GetAtividadesByUserID(AUserID: Integer): TDataSet;
 begin
 
   Result := FRepo.GetAtividadesByUserID(AUserID);
+end;
+
+procedure TAtividadeService.SalvarRegistro(AEstudanteID,
+  AAtividadeTurmaID: Integer; AResult: Boolean);
+begin
+  FRepo.SalvarRegistro(AEstudanteID,AAtividadeTurmaID,AResult);
 end;
 
 procedure TAtividadeService.Save(aModel : atividade_model);

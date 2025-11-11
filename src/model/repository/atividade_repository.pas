@@ -15,6 +15,7 @@ procedure Save(aModel: atividade_Model);
 procedure Update (aModel : atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
 function GetAtividadesByUserID(AUserID: Integer): TDataSet;
+procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
 
 end;
 
@@ -47,6 +48,34 @@ begin
   end;
 end;
 
+
+procedure TAtividadeRepository.SalvarRegistro(
+  AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := DataModule1.FDConnection1;
+
+    Qry.SQL.Text :=
+      'INSERT INTO atividade_estudante ' +
+      '  (estudante_id, atividade_turma_id, sucess, completed_at) ' +
+      'VALUES (:ESTUDANTE_ID, :ATIVIDADE_TURMA_ID, :SUCESS, NOW())';
+
+    Qry.ParamByName('ESTUDANTE_ID').AsInteger := AEstudanteID;
+    Qry.ParamByName('ATIVIDADE_TURMA_ID').AsInteger := AAtividadeTurmaID;
+    Qry.ParamByName('SUCESS').AsBoolean := AResult;
+
+    Qry.ExecSQL;
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao salvar registro da atividade: ' + E.Message);
+  end;
+
+  FreeAndNil(Qry);
+end;
 
 procedure TAtividadeRepository.Save(aModel: atividade_Model);
 begin

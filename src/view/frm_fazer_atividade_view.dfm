@@ -43,8 +43,6 @@
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 480
-    ExplicitTop = 56
     ExplicitWidth = 341
   end
   object OpçãoA: TPanel
@@ -82,8 +80,6 @@
       OnClick = LabelClick
       OnMouseEnter = lbl_optionAMouseEnter
       OnMouseLeave = lbl_optionAMouseLeave
-      ExplicitLeft = 1
-      ExplicitTop = 1
       ExplicitWidth = 110
       ExplicitHeight = 30
     end
@@ -123,8 +119,6 @@
       OnClick = LabelClick
       OnMouseEnter = lbl_optionBMouseEnter
       OnMouseLeave = lbl_optionBMouseLeave
-      ExplicitLeft = 31
-      ExplicitTop = 81
       ExplicitWidth = 110
       ExplicitHeight = 30
     end
@@ -164,8 +158,6 @@
       OnClick = LabelClick
       OnMouseEnter = lbl_optionCMouseEnter
       OnMouseLeave = lbl_optionCMouseLeave
-      ExplicitLeft = 31
-      ExplicitTop = 81
       ExplicitWidth = 110
       ExplicitHeight = 30
     end
@@ -205,8 +197,6 @@
       OnClick = LabelClick
       OnMouseEnter = lbl_optionDMouseEnter
       OnMouseLeave = lbl_optionDMouseLeave
-      ExplicitLeft = 31
-      ExplicitTop = 81
       ExplicitWidth = 110
       ExplicitHeight = 30
     end

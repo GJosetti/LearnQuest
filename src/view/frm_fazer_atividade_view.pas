@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Vcl.Controls, Vcl.ExtCtrls, System.Classes,
   Vcl.StdCtrls, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Graphics,
-  Vcl.Forms, Vcl.Dialogs, my_contracts, atividade_entity, System.JSON, Math,
+  Vcl.Forms, Vcl.Dialogs, frm_fazer_atividade_controller, atividade_entity, System.JSON, Math, my_contracts,
   Winapi.UxTheme, System.UITypes;
 
 type
@@ -48,6 +48,10 @@ type
 
   private
     var
+      FController : ITelaProfessorController;
+
+
+
       FAnimStep,
       FStartWidth,
       FEndWidth,
@@ -69,6 +73,8 @@ type
 
       // Cor alvo do texto (visível)
       FLabelTargetColor: TColor;
+
+
 
     procedure ResetOpcoes;
     procedure SaveOriginalCenters;
@@ -135,6 +141,14 @@ end;
 
 procedure Tfrm_fazer_atividade_view.FormCreate(Sender: TObject);
 begin
+
+  if not Assigned(FController) then begin
+    //FController := //TFAZERATIVIDADEController.Create();
+  end;
+
+
+
+
   Self.Position := poScreenCenter;
 
   // Configura animação
@@ -197,6 +211,7 @@ begin
      //ACERTOU
       (Sender as TPanel).Color := clGreen;
        FIsAnimatingRun := True;
+
 
 
     end else begin

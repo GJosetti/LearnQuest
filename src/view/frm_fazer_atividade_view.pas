@@ -16,6 +16,7 @@ type
     OpçãoC: TPanel;
     OpçãoD: TPanel;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
 
     FFormEstudante : ITelaEstudantesView;
@@ -41,9 +42,16 @@ uses frm_menu_estudante_view;
 
 
 
+procedure Tfrm_fazer_atividade_view.FormCreate(Sender: TObject);
+begin
+   Self.Position := poScreenCenter;
+end;
+
 procedure Tfrm_fazer_atividade_view.FormShow(Sender: TObject);
 begin
  RenderizarAtividade;
+ lbl_title.Alignment := TAlignment.taCenter;
+
 end;
 
 procedure Tfrm_fazer_atividade_view.RenderizarAtividade();

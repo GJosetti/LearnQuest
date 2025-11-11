@@ -55,8 +55,9 @@ FAtividade : atividade_Model;
 
 begin
 
-FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
-FController.GetAtividade(FID);
+FID := dbg_atividades.DataSource.DataSet.FieldByName('atividade_id').AsInteger;
+FAtividade := FController.GetAtividade(FID);
+
 //FAZER UM NOVO FORM E COLOCAR O SELF NO CONSTRUTOR
 //frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
   //frm_criar_atividades.ShowModal;
@@ -71,9 +72,9 @@ end;
 
 procedure Tfrm_estudante_view.FormCreate(Sender: TObject);
 begin
-  if not Assigned(FController) then begin
     FController := Tfrm_estudante_controler.Create;
-  end;
+    Self.Position := poScreenCenter;
+
 end;
 
 procedure Tfrm_estudante_view.pnl_backClick(Sender: TObject);

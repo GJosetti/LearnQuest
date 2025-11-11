@@ -86,6 +86,17 @@ CREATE TABLE atividade_fase (
     ordem INT
 );
 
+CREATE TABLE atividade_estudante (
+    id BIGSERIAL PRIMARY KEY,
+    estudante_id BIGINT NOT NULL REFERENCES estudante(id) ON DELETE CASCADE,
+    atividade_turma_id BIGINT NOT NULL REFERENCES atividade_turma(id) ON DELETE CASCADE,
+
+    
+    sucess bool,              
+
+    completed_at TIMESTAMP DEFAULT NOW()
+);
+
 
 
 

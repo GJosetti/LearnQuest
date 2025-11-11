@@ -350,7 +350,7 @@ type
 
   ITelaFazerAtividadesController = interface
 
-
+  procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
 
 
 

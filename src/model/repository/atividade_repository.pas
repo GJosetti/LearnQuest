@@ -131,31 +131,36 @@ var
   Qry: TFDQuery;
 begin
   Qry := DataModule1.FDQueryAtividadesParaEstudante;
+  Qry.Close;
+  Qry.SQL.Clear;
+  Qry.Connection := DataModule1.FDConnection1;
 
-    Qry.Connection := DataModule1.FDConnection1;
-    Qry.SQL.Text :=
-      'SELECT a.id AS atividade_id, ' +
-      '       a.title, ' +
-      '       a.descricao, ' +
-      '       a.created_at, ' +
-      '       t.turma_name, ' +
-      '       p.id AS professor_id ' +
-      'FROM atividades a ' +
-      'JOIN atividade_turma at ON at.atividade_id = a.id ' +
-      'JOIN turmas t ON t.id = at.turma_id ' +
-      'JOIN professores p ON p.id = t.professor_id ' +
-      'JOIN estudante_turma et ON et.turma_id = t.id ' +
-      'JOIN estudante e ON e.id = et.estudante_id ' +
-      'JOIN public.users u ON u.id = e.user_id ' +
-      'WHERE u.id = :USER_ID ' +
-      'ORDER BY a.created_at DESC;';
+  Qry.SQL.Text :=
+    'SELECT a.id AS atividade_id, ' +
+    '       a.title, ' +
+    '       a.descricao, ' +
+    '       a.created_at, ' +
+    '       t.turma_name, ' +
+    '       p.id AS professor_id ' +
+    'FROM atividades a ' +
+    'JOIN atividade_turma at ON at.atividade_id = a.id ' +
+    'JOIN turmas t ON t.id = at.turma_id ' +
+    'JOIN professores p ON p.id = t.professor_id ' +
+    'JOIN estudante_turma et ON et.turma_id = t.id ' +
+    'JOIN estudante e ON e.id = et.estudante_id ' +
+    'JOIN public.users u ON u.id = e.user_id ' +
+    'WHERE u.id = :USER_ID ' +
+    '  AND NOT EXISTS ( ' +
+    '      SELECT 1 FROM atividade_estudante ae ' +
+    '      WHERE ae.estudante_id = e.id ' +
+    '        AND ae.atividade_turma_id = at.id ' +
+    '  ) ' +
+    'ORDER BY a.created_at DESC;';
 
-    Qry.ParamByName('USER_ID').AsInteger := AUserID;
-    Qry.Open; // abre e executa o dataset
-   
+  Qry.ParamByName('USER_ID').AsInteger := AUserID;
+  Qry.Open;
 
-    Result := Qry; // devolve o dataset pronto
-
+  Result := Qry;
 end;
 
 end.

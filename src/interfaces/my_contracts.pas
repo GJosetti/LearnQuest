@@ -333,9 +333,30 @@ type
   function AtualizarTabelaAtividades : TDataSet;
   function GetAtividade(aID : Integer):atividade_Model;
 
+  end;
+
+
+
+  //FazerAtividades------------//
+
+  ITelaFazerAtividadesView = interface
+
+  procedure RenderizarAtividade();
+
+
 
 
   end;
+
+  ITelaFazerAtividadesController = interface
+
+
+
+
+
+  end;
+
+
 
 implementation
 

@@ -1,0 +1,73 @@
+﻿object frm_fazer_atividade_view: Tfrm_fazer_atividade_view
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 720
+  ClientWidth = 1280
+  Color = clGoldenrod
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object lbl_title: TLabel
+    Left = 8
+    Top = 8
+    Width = 72
+    Height = 40
+    Caption = 'T'#237'tulo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -29
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbl_pergunta: TLabel
+    Left = 320
+    Top = 64
+    Width = 561
+    Height = 249
+    Alignment = taCenter
+    Caption = 'PERGUNTA?'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -64
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object OpçãoA: TPanel
+    Left = 152
+    Top = 360
+    Width = 353
+    Height = 137
+    Caption = 'A'
+    TabOrder = 0
+  end
+  object OpçãoB: TPanel
+    Left = 736
+    Top = 360
+    Width = 353
+    Height = 137
+    Caption = 'B'
+    TabOrder = 1
+  end
+  object OpçãoC: TPanel
+    Left = 152
+    Top = 528
+    Width = 353
+    Height = 137
+    Caption = 'C'
+    TabOrder = 2
+  end
+  object OpçãoD: TPanel
+    Left = 736
+    Top = 528
+    Width = 353
+    Height = 137
+    Caption = 'D'
+    TabOrder = 3
+  end
+end

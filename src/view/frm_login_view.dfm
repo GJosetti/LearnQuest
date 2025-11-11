@@ -5569,7 +5569,7 @@ object frm_login: Tfrm_login
     end
     object img_arbustos: TImage
       Left = 0
-      Top = 0
+      Top = 16
       Width = 1148
       Height = 718
       Picture.Data = {

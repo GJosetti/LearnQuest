@@ -197,6 +197,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controller\frm_menu_estudantes_controller.pas"/>
+        <DCCReference Include="view\frm_fazer_atividade_view.pas">
+            <Form>frm_fazer_atividade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

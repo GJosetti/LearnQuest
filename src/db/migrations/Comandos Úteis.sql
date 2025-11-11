@@ -95,5 +95,6 @@ VALUES (
   }'::jsonb
 );
 
+select * from escola_25.atividades a ; 
 
   

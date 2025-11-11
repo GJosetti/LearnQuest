@@ -29,8 +29,8 @@
   object lbl_pergunta: TLabel
     Left = 320
     Top = 64
-    Width = 561
-    Height = 249
+    Width = 341
+    Height = 86
     Alignment = taCenter
     Caption = 'PERGUNTA?'
     Font.Charset = DEFAULT_CHARSET
@@ -79,5 +79,12 @@
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
+  end
+  object timer: TTimer
+    Enabled = False
+    Interval = 30
+    OnTimer = timerTimer
+    Left = 1136
+    Top = 480
   end
 end

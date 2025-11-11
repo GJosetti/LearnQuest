@@ -1,23 +1,31 @@
-unit frm_fazer_atividade_view;
+Ôªøunit frm_fazer_atividade_view;
 
 interface
 
 uses
   Winapi.Windows, Vcl.Controls, Vcl.ExtCtrls, System.Classes,
   Vcl.StdCtrls, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Graphics,
-  Vcl.Forms, Vcl.Dialogs, my_contracts,atividade_entity, System.JSON;
+  Vcl.Forms, Vcl.Dialogs, my_contracts,atividade_entity, System.JSON, Math;
 
 type
   Tfrm_fazer_atividade_view = class(TForm, ITelaFazerAtividadesView)
     lbl_title: TLabel;
     lbl_pergunta: TLabel;
-    OpÁ„oA: TPanel;
-    OpÁ„oB: TPanel;
-    OpÁ„oC: TPanel;
-    OpÁ„oD: TPanel;
+    Op√ß√£oA: TPanel;
+    Op√ß√£oB: TPanel;
+    Op√ß√£oC: TPanel;
+    Op√ß√£oD: TPanel;
+    timer: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure timerTimer(Sender: TObject);
   private
+    var
+    FAnimStep,
+    FStartWidth,
+    FEndWidth,
+    FStartHeight,
+    FEndHeight: Double;
 
     FFormEstudante : ITelaEstudantesView;
     FAtividade : atividade_Model;
@@ -25,6 +33,7 @@ type
 
      procedure RenderizarAtividade();
      procedure SetAtividade (aModel : atividade_Model);
+     procedure PopUp;
 
 
 
@@ -45,12 +54,49 @@ uses frm_menu_estudante_view;
 procedure Tfrm_fazer_atividade_view.FormCreate(Sender: TObject);
 begin
    Self.Position := poScreenCenter;
+
+   // Valores iniciais e finais
+  FAnimStep := 0;
+  FStartWidth := 0;
+  FEndWidth := 300;
+  FStartHeight := 0;
+  FEndHeight := 150;
+
+  // Define o intervalo do timer (ms)
+  Timer.Interval := 6; // ~60 FPS
+  Timer.Enabled := false;
+
+
+
+
+
+
+
+
+
+
+
+
+   Op√ß√£oA.Width := 0  ;
+   Op√ß√£oB.Width := 0  ;
+   Op√ß√£oC.Width := 0  ;
+   Op√ß√£oD.Width := 0  ;
+
+   Op√ß√£oA.Height := 0  ;
+   Op√ß√£oB.Height := 0  ;
+   Op√ß√£oC.Height := 0  ;
+   Op√ß√£oD.Height := 0  ;
 end;
 
 procedure Tfrm_fazer_atividade_view.FormShow(Sender: TObject);
 begin
  RenderizarAtividade;
  lbl_title.Alignment := TAlignment.taCenter;
+ timer.Enabled := true;
+end;
+
+procedure Tfrm_fazer_atividade_view.PopUp;
+begin
 
 end;
 
@@ -60,10 +106,10 @@ var
   LJSON: TJSONObject;
   LOptions: TJSONArray;
 begin
-  // Garante que o JSON n„o È nulo
+  // Garante que o JSON n√£o √© nulo
   JSON := FAtividade.GetContent_JSON;
   if not Assigned(JSON) then begin
-    ShowMessage('Erro: JSON da atividade est· vazio.');
+    ShowMessage('Erro: JSON da atividade est√° vazio.');
     Exit;
   end;
 
@@ -73,25 +119,25 @@ begin
   lbl_title.Caption := LJSON.GetValue<string>('title', '');
   lbl_pergunta.Caption := LJSON.GetValue<string>('question', '');
 
-  // --- Pega as opÁıes (array) ---
+  // --- Pega as op√ß√µes (array) ---
   LOptions := LJSON.GetValue<TJSONArray>('options');
   if Assigned(LOptions) then
   begin
     if LOptions.Count > 0 then
-      OpÁ„oA.Caption := LOptions.Items[0].Value;
+      Op√ß√£oA.Caption := LOptions.Items[0].Value;
     if LOptions.Count > 1 then
-      OpÁ„oB.Caption := LOptions.Items[1].Value;
+      Op√ß√£oB.Caption := LOptions.Items[1].Value;
     if LOptions.Count > 2 then
-      OpÁ„oC.Caption := LOptions.Items[2].Value;
+      Op√ß√£oC.Caption := LOptions.Items[2].Value;
     if LOptions.Count > 3 then
-      OpÁ„oD.Caption := LOptions.Items[3].Value;
+      Op√ß√£oD.Caption := LOptions.Items[3].Value;
   end
   else
   begin
-    OpÁ„oA.Caption := '';
-    OpÁ„oB.Caption := '';
-    OpÁ„oC.Caption := '';
-    OpÁ„oD.Caption := '';
+    Op√ß√£oA.Caption := '';
+    Op√ß√£oB.Caption := '';
+    Op√ß√£oC.Caption := '';
+    Op√ß√£oD.Caption := '';
   end;
 end;
 
@@ -100,5 +146,44 @@ procedure Tfrm_fazer_atividade_view.SetAtividade(aModel: atividade_Model);
 begin
   FAtividade := aModel;
 end;
+
+procedure Tfrm_fazer_atividade_view.timerTimer(Sender: TObject);
+var
+  t, te: Double;
+  CenterX, CenterY: Integer;
+begin
+  // Normaliza tempo
+  FAnimStep := FAnimStep + 0.02;
+  if FAnimStep > 1 then
+  begin
+    FAnimStep := 1;
+    Timer.Enabled := False;
+  end;
+
+  t := FAnimStep;
+  te := 1 - Power(1 - t, 2); // ease-out (r√°pido e suaviza no fim)
+
+  // calcula nova largura/altura
+  var NewW := Round(FStartWidth  + (FEndWidth  - FStartWidth)  * te);
+  var NewH := Round(FStartHeight + (FEndHeight - FStartHeight) * te);
+
+  // atualiza cada painel crescendo a partir do centro
+  for var P in [Op√ß√£oA, Op√ß√£oB, Op√ß√£oC, Op√ß√£oD] do
+  begin
+    // Calcula o centro atual
+    CenterX := P.Left + P.Width div 2;
+    CenterY := P.Top  + P.Height div 2;
+
+    // Atualiza tamanho
+    P.Width  := NewW;
+    P.Height := NewH;
+
+    // Reposiciona para manter o centro fixo
+    P.Left := CenterX - P.Width div 2;
+    P.Top  := CenterY - P.Height div 2;
+  end;
+end;
+
+
 
 end.

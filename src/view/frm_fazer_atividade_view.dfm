@@ -48,125 +48,167 @@
     ExplicitWidth = 341
   end
   object OpçãoA: TPanel
+    Tag = 1
     Left = 156
     Top = 288
     Width = 353
     Height = 137
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    OnClick = OpcaoClick
     OnMouseEnter = OpçãoAMouseEnter
     OnMouseLeave = OpçãoAMouseLeave
     object lbl_optionA: TLabel
       AlignWithMargins = True
-      Left = 31
-      Top = 81
-      Width = 291
-      Height = 52
+      Left = 30
+      Top = 80
+      Width = 293
+      Height = 54
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
       Align = alClient
       Alignment = taCenter
       Caption = 'lbl_optionA'
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 61
-      ExplicitHeight = 15
+      Transparent = True
+      OnClick = LabelClick
+      OnMouseEnter = lbl_optionAMouseEnter
+      OnMouseLeave = lbl_optionAMouseLeave
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 110
+      ExplicitHeight = 30
     end
   end
   object OpçãoB: TPanel
+    Tag = 2
     Left = 758
     Top = 288
     Width = 353
     Height = 137
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
+    OnClick = OpcaoClick
+    OnMouseEnter = OpçãoBMouseEnter
+    OnMouseLeave = OpçãoBMouseLeave
     object lbl_optionB: TLabel
       AlignWithMargins = True
-      Left = 31
-      Top = 81
-      Width = 291
-      Height = 52
+      Left = 30
+      Top = 80
+      Width = 293
+      Height = 54
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
       Align = alClient
       Alignment = taCenter
       Caption = 'lbl_optionA'
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 61
-      ExplicitHeight = 15
+      Transparent = True
+      OnClick = LabelClick
+      OnMouseEnter = lbl_optionBMouseEnter
+      OnMouseLeave = lbl_optionBMouseLeave
+      ExplicitLeft = 31
+      ExplicitTop = 81
+      ExplicitWidth = 110
+      ExplicitHeight = 30
     end
   end
   object OpçãoC: TPanel
+    Tag = 3
     Left = 156
     Top = 534
     Width = 353
     Height = 137
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
+    OnClick = OpcaoClick
+    OnMouseEnter = OpçãoCMouseEnter
+    OnMouseLeave = OpçãoCMouseLeave
     object lbl_optionC: TLabel
       AlignWithMargins = True
-      Left = 31
-      Top = 81
-      Width = 291
-      Height = 52
+      Left = 30
+      Top = 80
+      Width = 293
+      Height = 54
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
       Align = alClient
       Alignment = taCenter
       Caption = 'lbl_optionA'
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 61
-      ExplicitHeight = 15
+      Transparent = True
+      OnClick = LabelClick
+      OnMouseEnter = lbl_optionCMouseEnter
+      OnMouseLeave = lbl_optionCMouseLeave
+      ExplicitLeft = 31
+      ExplicitTop = 81
+      ExplicitWidth = 110
+      ExplicitHeight = 30
     end
   end
   object OpçãoD: TPanel
+    Tag = 4
     Left = 758
     Top = 534
     Width = 353
     Height = 137
+    BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 3
+    OnClick = OpcaoClick
+    OnMouseEnter = OpçãoDMouseEnter
+    OnMouseLeave = OpçãoDMouseLeave
     object lbl_optionD: TLabel
       AlignWithMargins = True
-      Left = 31
-      Top = 81
-      Width = 291
-      Height = 52
+      Left = 30
+      Top = 80
+      Width = 293
+      Height = 54
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
       Align = alClient
       Alignment = taCenter
       Caption = 'lbl_optionA'
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 61
-      ExplicitHeight = 15
+      Transparent = True
+      OnClick = LabelClick
+      OnMouseEnter = lbl_optionDMouseEnter
+      OnMouseLeave = lbl_optionDMouseLeave
+      ExplicitLeft = 31
+      ExplicitTop = 81
+      ExplicitWidth = 110
+      ExplicitHeight = 30
     end
   end
   object timer: TTimer
@@ -175,5 +217,11 @@
     OnTimer = timerTimer
     Left = 1136
     Top = 480
+  end
+  object timerClose: TTimer
+    Interval = 600
+    OnTimer = timerCloseTimer
+    Left = 616
+    Top = 408
   end
 end

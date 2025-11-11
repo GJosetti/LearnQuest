@@ -17,16 +17,35 @@ type
     OpçãoC: TPanel;
     OpçãoD: TPanel;
     Timer: TTimer;
-    lbl_optionA: TLabel;
     lbl_optionB: TLabel;
     lbl_optionC: TLabel;
     lbl_optionD: TLabel;
+    lbl_optionA: TLabel;
+    timerClose: TTimer;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure OpçãoAMouseEnter(Sender: TObject);
     procedure OpçãoAMouseLeave(Sender: TObject);
+    procedure lbl_optionAMouseEnter(Sender: TObject);
+    procedure OpçãoAMouseEnter(Sender: TObject);
+    procedure lbl_optionAMouseLeave(Sender: TObject);
+    procedure OpçãoBMouseEnter(Sender: TObject);
+    procedure OpçãoBMouseLeave(Sender: TObject);
+    procedure lbl_optionBMouseEnter(Sender: TObject);
+    procedure lbl_optionBMouseLeave(Sender: TObject);
+    procedure OpçãoCMouseEnter(Sender: TObject);
+    procedure OpçãoCMouseLeave(Sender: TObject);
+    procedure lbl_optionCMouseLeave(Sender: TObject);
+    procedure lbl_optionCMouseEnter(Sender: TObject);
+    procedure lbl_optionDMouseEnter(Sender: TObject);
+    procedure lbl_optionDMouseLeave(Sender: TObject);
+    procedure OpçãoDMouseEnter(Sender: TObject);
+    procedure OpçãoDMouseLeave(Sender: TObject);
+    procedure OpcaoClick(Sender: TObject);
+    procedure LabelClick(Sender: TObject);
+    procedure timerCloseTimer(Sender: TObject);
+
   private
     var
       FAnimStep,
@@ -36,6 +55,8 @@ type
       FEndHeight,
       FLabelAlpha: Double;
       FIsAnimatingRun : Boolean;
+
+      FRightOption : Integer;
 
       FFormEstudante: ITelaEstudantesView;
       FAtividade: atividade_Model;
@@ -125,6 +146,15 @@ begin
   FLabelAlpha := 0;
   FIsAnimatingRun := False;
 
+  timerClose.Enabled := false;
+
+
+  //Tags
+  OpçãoA.Tag := 0;
+  OpçãoB.Tag := 1;
+  OpçãoC.Tag := 2;
+  OpçãoD.Tag := 3;
+
   // Cor alvo para os labels (visível). Ajuste se necessário.
   FLabelTargetColor := clBlack;
 
@@ -148,15 +178,118 @@ begin
   FIsAnimatingRun := True;
   SetLabelFadeFrac(0.0); // labels invisíveis no início
 
+  timerClose.Enabled := false;
+
   RenderizarAtividade;
   lbl_title.Alignment := TAlignment.taCenter;
 
   Timer.Enabled := True;
 end;
 
-procedure Tfrm_fazer_atividade_view.OpçãoAMouseEnter(Sender: TObject);
+  {---------------------------------- HOVERS E CLICK-------------------------------------}
+
+procedure Tfrm_fazer_atividade_view.OpcaoClick(Sender: TObject);
+var
+  P : TPanel;
+begin
+  if not FIsAnimatingRun then begin
+    if((Sender as TPanel).Tag = FRightOption) then begin
+     //ACERTOU
+      (Sender as TPanel).Color := clGreen;
+       FIsAnimatingRun := True;
+
+
+    end else begin
+      //ERROU
+      for P in [OpçãoA, OpçãoB, OpçãoC, OpçãoD] do
+        begin
+          if(P.Tag = FRightOption ) then begin
+            P.Color := clGreen;
+          end;
+          (Sender as TPanel).Color := clRed;
+          FIsAnimatingRun := True;
+        end;
+
+
+
+
+    end;
+  end;
+   timerClose.Enabled := True;
+end;
+
+procedure Tfrm_fazer_atividade_view.LabelClick(Sender: TObject);
+var
+  P: TPanel;
+begin
+  P := (Sender as TLabel).Parent as TPanel;
+  if Assigned(P.OnClick) then
+    P.OnClick(P);
+end;
+
+
+
+procedure Tfrm_fazer_atividade_view.lbl_optionAMouseEnter(Sender: TObject);
+begin
+   if not (FIsAnimatingRun) then begin
+    OpçãoA.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionAMouseLeave(Sender: TObject);
+begin
+   if not (FIsAnimatingRun) then begin
+    OpçãoA.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionBMouseEnter(Sender: TObject);
+begin
+if not (FIsAnimatingRun) then begin
+    OpçãoB.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionBMouseLeave(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
+    OpçãoB.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionCMouseEnter(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoC.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionCMouseLeave(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoC.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionDMouseEnter(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoD.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.lbl_optionDMouseLeave(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoD.Color := clWhite;
+  end;
+end;
+
+
+
+procedure Tfrm_fazer_atividade_view.OpçãoAMouseEnter(Sender: TObject);
+begin
+ if not (FIsAnimatingRun) then begin
     OpçãoA.Color := clBlue;
   end;
 end;
@@ -165,6 +298,48 @@ procedure Tfrm_fazer_atividade_view.OpçãoAMouseLeave(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
     OpçãoA.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoBMouseEnter(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoB.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoBMouseLeave(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoB.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoCMouseEnter(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoC.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoCMouseLeave(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoC.Color := clWhite;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoDMouseEnter(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoD.Color := clBlue;
+  end;
+end;
+
+procedure Tfrm_fazer_atividade_view.OpçãoDMouseLeave(Sender: TObject);
+begin
+  if not (FIsAnimatingRun) then begin
+    OpçãoD.Color := clWhite;
   end;
 end;
 
@@ -217,6 +392,8 @@ begin
   begin
     P.Width := 0;
     P.Height := 0;
+    P.Color := clWhite;
+
   end;
 end;
 
@@ -248,6 +425,13 @@ begin
   lbl_optionD.Font.Color := LerpColor(cDFrom, FLabelTargetColor, frac);
 end;
 
+{------------------------TimerClose----------------------------------------}
+procedure Tfrm_fazer_atividade_view.timerCloseTimer(Sender: TObject);
+begin
+  ModalResult := mrOK;   // ou mrCancel, mrYes, etc.
+  Self.CloseModal;
+end;
+
 { ------------------------ Renderização ------------------------ }
 
 procedure Tfrm_fazer_atividade_view.RenderizarAtividade;
@@ -266,6 +450,7 @@ begin
 
   lbl_title.Caption := LJSON.GetValue<string>('title', '');
   lbl_pergunta.Caption := LJSON.GetValue<string>('question', '');
+  FRightOption := StrToInt(LJSON.GetValue<string>('correct_index', ''));
 
   LOptions := LJSON.GetValue<TJSONArray>('options');
   if Assigned(LOptions) then

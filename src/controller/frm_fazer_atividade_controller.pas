@@ -9,6 +9,7 @@ TFazerAtividadeController = class(TInterfacedObject, ITelaFazerAtividadesControl
 
 private
 FService: IAtividadesService;
+
 public
 
 constructor Create;

@@ -3,9 +3,9 @@ unit frm_fazer_atividade_view;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts,atividade_entity,
-  Vcl.StdCtrls, Vcl.ExtCtrls;
+  Winapi.Windows, Vcl.Controls, Vcl.ExtCtrls, System.Classes,
+  Vcl.StdCtrls, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Graphics,
+  Vcl.Forms, Vcl.Dialogs, my_contracts,atividade_entity, System.JSON;
 
 type
   Tfrm_fazer_atividade_view = class(TForm, ITelaFazerAtividadesView)
@@ -15,13 +15,15 @@ type
     OpçãoB: TPanel;
     OpçãoC: TPanel;
     OpçãoD: TPanel;
+    procedure FormShow(Sender: TObject);
   private
 
     FFormEstudante : ITelaEstudantesView;
     FAtividade : atividade_Model;
   public
-    constructor Create(aModel: atividade_model; aForm : ITelaEstudantesView);
+
      procedure RenderizarAtividade();
+     procedure SetAtividade (aModel : atividade_Model);
 
 
 
@@ -37,18 +39,58 @@ uses frm_menu_estudante_view;
 
 { frm_fazer_atividade_view }
 
-constructor Tfrm_fazer_atividade_view.Create(aModel: atividade_model; aForm: ITelaEstudantesView);
+
+
+procedure Tfrm_fazer_atividade_view.FormShow(Sender: TObject);
 begin
-  FFormEstudante := aForm;
-  FAtividade := aModel;
+ RenderizarAtividade;
+end;
+
+procedure Tfrm_fazer_atividade_view.RenderizarAtividade();
+var
+  JSON : TJSONObject;
+  LJSON: TJSONObject;
+  LOptions: TJSONArray;
+begin
+  // Garante que o JSON não é nulo
+  JSON := FAtividade.GetContent_JSON;
+  if not Assigned(JSON) then begin
+    ShowMessage('Erro: JSON da atividade está vazio.');
+    Exit;
+  end;
+
+  LJSON := FAtividade.GetContent_JSON;
+
+  // --- Preenche os textos principais ---
+  lbl_title.Caption := LJSON.GetValue<string>('title', '');
+  lbl_pergunta.Caption := LJSON.GetValue<string>('question', '');
+
+  // --- Pega as opções (array) ---
+  LOptions := LJSON.GetValue<TJSONArray>('options');
+  if Assigned(LOptions) then
+  begin
+    if LOptions.Count > 0 then
+      OpçãoA.Caption := LOptions.Items[0].Value;
+    if LOptions.Count > 1 then
+      OpçãoB.Caption := LOptions.Items[1].Value;
+    if LOptions.Count > 2 then
+      OpçãoC.Caption := LOptions.Items[2].Value;
+    if LOptions.Count > 3 then
+      OpçãoD.Caption := LOptions.Items[3].Value;
+  end
+  else
+  begin
+    OpçãoA.Caption := '';
+    OpçãoB.Caption := '';
+    OpçãoC.Caption := '';
+    OpçãoD.Caption := '';
+  end;
 end;
 
 
-
-procedure Tfrm_fazer_atividade_view.RenderizarAtividade();
+procedure Tfrm_fazer_atividade_view.SetAtividade(aModel: atividade_Model);
 begin
-
-
+  FAtividade := aModel;
 end;
 
 end.

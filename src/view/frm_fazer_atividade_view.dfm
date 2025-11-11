@@ -10,6 +10,7 @@
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnShow = FormShow
   TextHeight = 15
   object lbl_title: TLabel
     Left = 8
@@ -44,6 +45,8 @@
     Width = 353
     Height = 137
     Caption = 'A'
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 0
   end
   object OpçãoB: TPanel
@@ -52,6 +55,8 @@
     Width = 353
     Height = 137
     Caption = 'B'
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 1
   end
   object OpçãoC: TPanel
@@ -60,6 +65,8 @@
     Width = 353
     Height = 137
     Caption = 'C'
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 2
   end
   object OpçãoD: TPanel
@@ -68,6 +75,8 @@
     Width = 353
     Height = 137
     Caption = 'D'
+    Color = clWhite
+    ParentBackground = False
     TabOrder = 3
   end
 end

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, my_contracts,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller, atividade_entity;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller, atividade_entity, frm_fazer_atividade_view;
 
 type
   Tfrm_estudante_view = class(TForm, ITelaEstudantesView)
@@ -55,12 +55,12 @@ FAtividade : atividade_Model;
 
 begin
 
-FID := dbg_atividades.DataSource.DataSet.FieldByName('atividade_id').AsInteger;
-FAtividade := FController.GetAtividade(FID);
+  FID := dbg_atividades.DataSource.DataSet.FieldByName('atividade_id').AsInteger;
+  FAtividade := FController.GetAtividade(FID);
 
-//FAZER UM NOVO FORM E COLOCAR O SELF NO CONSTRUTOR
-//frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
-  //frm_criar_atividades.ShowModal;
+
+  frm_fazer_atividade.SetAtividade(FAtividade);
+  frm_fazer_atividade.ShowModal;
 
 end;
 

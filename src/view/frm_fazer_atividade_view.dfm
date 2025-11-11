@@ -41,8 +41,8 @@
     ParentFont = False
   end
   object OpçãoA: TPanel
-    Left = 152
-    Top = 360
+    Left = 364
+    Top = 408
     Width = 353
     Height = 137
     Caption = 'A'
@@ -51,8 +51,8 @@
     TabOrder = 0
   end
   object OpçãoB: TPanel
-    Left = 736
-    Top = 360
+    Left = 904
+    Top = 408
     Width = 353
     Height = 137
     Caption = 'B'
@@ -61,8 +61,8 @@
     TabOrder = 1
   end
   object OpçãoC: TPanel
-    Left = 152
-    Top = 528
+    Left = 364
+    Top = 591
     Width = 353
     Height = 137
     Caption = 'C'
@@ -71,8 +71,8 @@
     TabOrder = 2
   end
   object OpçãoD: TPanel
-    Left = 736
-    Top = 528
+    Left = 904
+    Top = 591
     Width = 353
     Height = 137
     Caption = 'D'

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Vcl.Controls, Vcl.ExtCtrls, System.Classes,
   Vcl.StdCtrls, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Graphics,
   Vcl.Forms, Vcl.Dialogs, frm_fazer_atividade_controller, atividade_entity, System.JSON, Math, my_contracts,
-  Winapi.UxTheme, System.UITypes;
+  Winapi.UxTheme, System.UITypes,Sessao, Data.DB;
 
 type
   Tfrm_fazer_atividade_view = class(TForm, ITelaFazerAtividadesView)
@@ -48,7 +48,7 @@ type
 
   private
     var
-      FController : ITelaProfessorController;
+      FController : ITelaFazerAtividadesController;
 
 
 
@@ -62,7 +62,7 @@ type
 
       FRightOption : Integer;
 
-      FFormEstudante: ITelaEstudantesView;
+
       FAtividade: atividade_Model;
 
       // Centros originais dos painéis
@@ -84,6 +84,8 @@ type
     procedure SetLabelFadeFrac(const AFrac: Double);
 
   public
+    FFormEstudante: ITelaEstudantesView;
+    FAtividadeTurmaID : Integer;
     procedure RenderizarAtividade;
     procedure SetAtividade(aModel: atividade_Model);
     procedure PopUp;
@@ -143,7 +145,7 @@ procedure Tfrm_fazer_atividade_view.FormCreate(Sender: TObject);
 begin
 
   if not Assigned(FController) then begin
-    //FController := //TFAZERATIVIDADEController.Create();
+  FController := TFAZERATIVIDADEController.Create();
   end;
 
 
@@ -204,33 +206,43 @@ end;
 
 procedure Tfrm_fazer_atividade_view.OpcaoClick(Sender: TObject);
 var
-  P : TPanel;
+  P: TPanel;
 begin
-  if not FIsAnimatingRun then begin
-    if((Sender as TPanel).Tag = FRightOption) then begin
-     //ACERTOU
+  if not FIsAnimatingRun then
+  begin
+  
+
+    if (Sender as TPanel).Tag = FRightOption then
+    begin
       (Sender as TPanel).Color := clGreen;
-       FIsAnimatingRun := True;
-
-
-
-    end else begin
-      //ERROU
+      FIsAnimatingRun := True;
+      FController.SalvarRegistro(
+        FController.GetEstudanteIDByUserUD(UsuarioLogado.ID),
+        FAtividadeTurmaID,
+        True
+      );
+    end
+    else
+    begin
       for P in [OpçãoA, OpçãoB, OpçãoC, OpçãoD] do
-        begin
-          if(P.Tag = FRightOption ) then begin
-            P.Color := clGreen;
-          end;
-          (Sender as TPanel).Color := clRed;
-          FIsAnimatingRun := True;
-        end;
+      begin
+        if (P.Tag = FRightOption) then
+          P.Color := clGreen;
+      end;
 
+      (Sender as TPanel).Color := clRed;
+      FIsAnimatingRun := True;
 
-
-
+      FController.SalvarRegistro(
+        FController.GetEstudanteIDByUserUD(UsuarioLogado.ID),
+        FAtividadeTurmaID,
+        False
+      );
     end;
   end;
-   timerClose.Enabled := True;
+
+  FFormEstudante.AtualizarTabelaAtividades;
+  timerClose.Enabled := True;
 end;
 
 procedure Tfrm_fazer_atividade_view.LabelClick(Sender: TObject);

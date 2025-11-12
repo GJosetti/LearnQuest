@@ -322,7 +322,7 @@ type
   //-------------------Tela Estudantes---------------------//
   ITelaEstudantesView = interface
 
-
+  procedure AtualizarTabelaAtividades;
 
 
 
@@ -353,7 +353,7 @@ type
   ITelaFazerAtividadesController = interface
 
   procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
-
+  function GetEstudanteIDByUserUD(aID : Integer) : Integer;
 
 
   end;

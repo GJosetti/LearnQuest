@@ -166,6 +166,7 @@ begin
 
   Qry.SQL.Text :=
     'SELECT a.id AS atividade_id, ' +
+    '       at.id AS atividade_turma_id, ' +  // ✅ ADICIONA ESSA LINHA
     '       a.title, ' +
     '       a.descricao, ' +
     '       a.created_at, ' +
@@ -191,5 +192,6 @@ begin
 
   Result := Qry;
 end;
+
 
 end.

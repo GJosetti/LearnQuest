@@ -38,7 +38,8 @@ delete from users  where id = 16;
 
 delete from escola_4.professores where id = 6;
 select * from escola_4.estudante e ;
-select * from escola_4.professores;
+select * from escola_27.atividade_estudante ae ;
+select * from public.users u where id = 71;
 
 delete from escola_4.estudante where id = 1;
 delete from escola_4.professores where id = 5;

@@ -29,6 +29,7 @@ type
     FController : ITelaEstudantesController;
   public
     { Public declarations }
+    procedure AtualizarTabelaAtividades;
   end;
 
 var
@@ -39,27 +40,34 @@ uses frm_login_view;
 
 {$R *.dfm}
 
+procedure Tfrm_estudante_view.AtualizarTabelaAtividades;
+begin
+  d_src_atividades.DataSet := FController.AtualizarTabelaAtividades();
+  dbg_atividades.DataSource := d_src_atividades;
+end;
+
 procedure Tfrm_estudante_view.btn_atividadesClick(Sender: TObject);
 begin
   pnl_home.Visible := false;
   pnl_atividades.Visible := true;
 
-  d_src_atividades.DataSet := FController.AtualizarTabelaAtividades();
-  dbg_atividades.DataSource := d_src_atividades;
+  AtualizarTabelaAtividades;
 end;
 
 procedure Tfrm_estudante_view.btn_fazerClick(Sender: TObject);
 var
 FID : Integer;
 FAtividade : atividade_Model;
-
+FAtividadeTurmaID : Integer;
 begin
 
   FID := dbg_atividades.DataSource.DataSet.FieldByName('atividade_id').AsInteger;
   FAtividade := FController.GetAtividade(FID);
-
+  FAtividadeTurmaID := dbg_atividades.DataSource.DataSet.FieldByName('atividade_turma_id').AsInteger;
 
   frm_fazer_atividade.SetAtividade(FAtividade);
+  frm_fazer_atividade.FFormEstudante := Self;
+  frm_fazer_atividade.FAtividadeTurmaID := FAtividadeTurmaID;
   frm_fazer_atividade.ShowModal;
 
 end;

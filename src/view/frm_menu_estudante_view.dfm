@@ -85,7 +85,7 @@ object frm_estudante_view: Tfrm_estudante_view
     object dbg_atividades: TDBGrid
       Left = 232
       Top = 159
-      Width = 489
+      Width = 473
       Height = 377
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -116,6 +116,11 @@ object frm_estudante_view: Tfrm_estudante_view
           Alignment = taCenter
           Expanded = False
           FieldName = 'atividade_id'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'atividade_turma_id'
           Visible = False
         end>
     end

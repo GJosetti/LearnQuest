@@ -53,6 +53,7 @@ begin
 
    UsuarioLogado:= ResultadoDTO;
    FService.SetPathByEscola(ResultadoDTO.ID);
+   FService.UpdateLastAcess;
 
    Fview.TrocarTela(ResultadoDTO);
 

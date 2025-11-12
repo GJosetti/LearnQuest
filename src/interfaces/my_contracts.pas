@@ -21,6 +21,7 @@ type
     function GetUsersDataSet: TDataSet;
     function GetAll : TObjectList<TUserModel>;
     function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
+    procedure UpdateLastAcess;
   end;
 
 
@@ -122,6 +123,7 @@ type
       function GetByNome (aString : String) : TUserDTO;
       function GetAll : TObjectList<TUserModel>;
       function GetAllForTurmas(aID :Integer) : TObjectList<TUserModel>;
+      procedure UpdateLastAcess;
   end;
 
   IEscolaService = interface

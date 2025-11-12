@@ -1,4 +1,4 @@
-unit frm_create_atividade_view;
+﻿unit frm_create_atividade_view;
 
 interface
 
@@ -42,7 +42,7 @@ type
     FController: ITelaCreateAtividadesController;
     FID: Integer;
     FProfessorview : ITelaProfessorView;
-
+    function ValidarCampos: Boolean;
 
   public
     constructor Create(aMode: TMode; aID : Integer; IForm : ITelaProfessorView );
@@ -89,10 +89,10 @@ end;
 procedure Tfrm_criar_atividades.cb_typesChange(Sender: TObject);
 begin
   if (cb_types.SelText = 'Verdadeiro ou Falso') then begin
-    //Mostra formul�rio de Quiz
+    //Mostra formulário de Quiz
 
   end else begin
-    //Mostra Formul�rio de Quiz
+    //Mostra Formulário de Quiz
   end;
 
 
@@ -157,6 +157,7 @@ end;
 
 procedure Tfrm_criar_atividades.pnl_ConcluidoClick(Sender: TObject);
 begin
+  ValidarCampos;
   if(FMode = mCreate) then begin
     FController.Save();
     ShowMessage('A atividade foi criada com sucesso!');
@@ -299,7 +300,7 @@ edt_pergunta_quiz.Text := LQuestion;
 end;
 
 rg_alternativas_quiz.ItemIndex := LContent.GetValue<Integer>('correct_index', -1);
-// Pode preencher outros campos espec�ficos do quiz aqui
+// Pode preencher outros campos específicos do quiz aqui
 
 end else if cb_types.ItemIndex = 1 then
 begin
@@ -313,6 +314,46 @@ else
   rg_alternativas_quiz.ItemIndex := 1; // 1 = False
 
 end;
+end;
+
+//Validar os Campos
+function Tfrm_criar_atividades.ValidarCampos: Boolean;
+begin
+  // 🔹 Título
+  if Trim(edt_title.Text) = '' then
+    raise Exception.Create('O título da atividade é obrigatório.');
+
+  // 🔹 Descrição
+  if Trim(edt_descricao.Text) = '' then
+    raise Exception.Create('A descrição da atividade é obrigatória.');
+
+  // 🔹 Tipo
+  if cb_types.ItemIndex = -1 then
+    raise Exception.Create('Selecione um tipo de atividade.');
+
+  // 🔹 Validação para tipo "Quiz" (ItemIndex = 0)
+  if cb_types.ItemIndex = 0 then
+  begin
+    if Trim(edt_pergunta_quiz.Text) = '' then
+      raise Exception.Create('A pergunta do quiz é obrigatória.');
+
+    if (Trim(edt_alternativa_a_quiz.Text) = '') or
+       (Trim(edt_alternativa_b_quiz.Text) = '') or
+       (Trim(edt_alternativa_c_quiz.Text) = '') or
+       (Trim(edt_alternativa_d_quiz.Text) = '') then
+      raise Exception.Create('Todas as alternativas devem ser preenchidas.');
+
+    if rg_alternativas_quiz.ItemIndex = -1 then
+      raise Exception.Create('Selecione a alternativa correta.');
+  end;
+
+  // 🔹 Validação para tipo "Verdadeiro ou Falso" (ItemIndex = 1)
+  if cb_types.ItemIndex = 1 then
+  begin
+     raise Exception.Create('O template de Verdadeiro ou falso ainda está em desenvolvimento!');
+  end;
+
+  Result := True; // passou em tudo
 end;
 
 

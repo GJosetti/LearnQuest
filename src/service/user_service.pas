@@ -23,6 +23,7 @@ public
   function GetByNome (aString : String) : TUserDTO;
   function GetAll : TObjectList<TUserModel>;
   function GetAllForTurmas(aID : Integer) : TObjectList<TUserModel>;
+  procedure UpdateLastAcess;
 end;
 
 
@@ -186,6 +187,11 @@ begin
   FUserRepository.Update(FUsuario);
 
   Logger.Log(FPathSchema,'Atualizou as informações do usuário '+aDTO.Name+'(de ID '+ aDto.ID.ToString+') no sistema',UsuarioLogado);
+end;
+
+procedure TUserService.UpdateLastAcess;
+begin
+  FUserRepository.UpdateLastAcess;
 end;
 
 function TUserService.ValidarLogin(aDTO: TUserDTO): TUserDTO;

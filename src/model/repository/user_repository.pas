@@ -28,6 +28,8 @@ type
     function GetUsersDataSet: TDataSet;
     function GetAll: TObjectList<TUserModel>;
     function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
+
+    procedure UpdateLastAcess;
   end;
 
 implementation
@@ -184,6 +186,26 @@ begin
     Qry.Free;
   end;
 end;
+
+procedure TUserRepository.UpdateLastAcess;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := DataModule1.FDConnection1; // usa sua conexão principal
+    Qry.SQL.Text :=
+      'UPDATE users ' +
+      'SET last_access = NOW() ' +
+      'WHERE id = :id';
+    Qry.ParamByName('id').AsInteger := UsuarioLogado.ID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+
 
 procedure TUserRepository.Delete(aID: Integer);
 var

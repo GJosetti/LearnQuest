@@ -52,6 +52,11 @@ begin
   FDPhysPgDriverLink1.VendorLib :=
     ExpandFileName(ExtractFilePath(ParamStr(0)) + '..\..\infra\lib\libpq.dll');
 
+
+  //Ajeitando o TimeZone
+  FDConnection1.ExecSQL('SET TIMEZONE TO ''America/Sao_Paulo'';');
+
+
   // ✅ CONECTA o banco de dados
   try
     if not FDConnection1.Connected then

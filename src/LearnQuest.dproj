@@ -202,6 +202,8 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controller\frm_fazer_atividade_controller.pas"/>
+        <DCCReference Include="model\repository\report_repository.pas"/>
+        <DCCReference Include="service\report_service.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

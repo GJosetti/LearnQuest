@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
   FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.Dialogs;
+  FireDAC.Comp.Client, Vcl.Dialogs, frxSmartMemo, frxClass, frCoreClasses,
+  frxDBSet;
 
 type
   TDataModule1 = class(TDataModule)
@@ -23,6 +24,11 @@ type
     QRTurmas: TFDQuery;
     FDQueryProfessores: TFDQuery;
     FDQueryAtividadesParaEstudante: TFDQuery;
+    FDQueryRelatorio1: TFDQuery;
+    frxDBDataset1: TfrxDBDataset;
+    frxReport1: TfrxReport;
+    FDQueryRelatorio1user_name: TWideStringField;
+    FDQueryRelatorio1porcentagem_acertos: TFMTBCDField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

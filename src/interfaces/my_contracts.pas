@@ -91,6 +91,13 @@ type
     procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
   end;
 
+  IReportRepository = interface
+    procedure ShowReport();
+
+
+
+  end;
+
 
   //Services
 
@@ -176,6 +183,13 @@ type
         procedure Update (aModel : atividade_Model);
         function GetAtividadesByUserID(AUserID: Integer): TDataSet;
         procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+
+      end;
+
+      IReportService = interface
+      procedure ShowReport();
+
+
 
       end;
 
@@ -266,6 +280,10 @@ type
     function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
     function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
+
+
+    //Reports
+    procedure ShowReport();
    end;
 
   //-----------------Tela Professores---------------------//

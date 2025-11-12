@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO,report_service, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -14,6 +14,7 @@ private
  FServiceProfessor : IProfessorService;
  FServiceEstudante : IEstudanteService;
  FServiceTurma : ITurmaService;
+ FServiceReport : IReportService;
 
 public
    function AtualizarTabelaMembros : TDataSet ;
@@ -37,6 +38,9 @@ public
     function GetEstudantesPorTurma(aTurmaID: Integer): TDataSet;
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
     function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
+
+
+    procedure ShowReport();
 
 
 end;
@@ -65,6 +69,9 @@ if not Assigned(FServiceEscola) then begin
   end;
   if not Assigned(Fview) then begin
     Fview := aView ;
+  end;
+  if not Assigned(FServiceReport) then begin
+    FServiceReport := TReportService.Create;
   end;
 end;
 
@@ -194,6 +201,11 @@ end;
 function TMenuAdminController.RetornarMembro(aID: Integer): TUserDTO;
 begin
 
+end;
+
+procedure TMenuAdminController.ShowReport;
+begin
+  FServiceReport.ShowReport;
 end;
 
 procedure TMenuAdminController.Update(aID : Integer);

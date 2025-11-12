@@ -74,6 +74,15 @@ object frm_menuEscola: Tfrm_menuEscola
       TabOrder = 3
       OnClick = pnl_back_EscolaMenuClick
     end
+    object btn_relatorio_desempenho_escola: TButton
+      Left = 48
+      Top = 432
+      Width = 161
+      Height = 49
+      Caption = 'Desempenho'
+      TabOrder = 4
+      OnClick = btn_relatorio_desempenho_escolaClick
+    end
   end
   object pnl_membros_EscolaMenu: TPanel
     Left = 263
@@ -549,6 +558,41 @@ object frm_menuEscola: Tfrm_menuEscola
         Text = 'Alunos'
         TextHint = 'Alunos'
       end
+    end
+  end
+  object pnl_desempenho: TPanel
+    Left = 263
+    Top = -1
+    Width = 1017
+    Height = 721
+    Color = clGreen
+    ParentBackground = False
+    TabOrder = 4
+    Visible = False
+    object pnl_desempenho_escola: TPanel
+      Left = 68
+      Top = 266
+      Width = 213
+      Height = 69
+      Caption = 'Escola'
+      TabOrder = 0
+      OnClick = pnl_desempenho_escolaClick
+    end
+    object Panel2: TPanel
+      Left = 352
+      Top = 266
+      Width = 213
+      Height = 69
+      Caption = 'Turmas'
+      TabOrder = 1
+    end
+    object Panel3: TPanel
+      Left = 631
+      Top = 263
+      Width = 213
+      Height = 69
+      Caption = 'Turma'
+      TabOrder = 2
     end
   end
   object d_Src_membros_escola: TDataSource

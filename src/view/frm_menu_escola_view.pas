@@ -58,6 +58,11 @@ type
     btn_back_participantes_Escola_Menu: TPanel;
     cb_alunos_participantes_EscolaMenu: TComboBox;
     d_Src_participantes_turma: TDataSource;
+    btn_relatorio_desempenho_escola: TButton;
+    pnl_desempenho: TPanel;
+    pnl_desempenho_escola: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -80,6 +85,8 @@ type
     procedure btn_Vincular_AlunoClick(Sender: TObject);
     procedure btn_remover_alunoClick(Sender: TObject);
     procedure pnl_back_EscolaMenuClick(Sender: TObject);
+    procedure btn_relatorio_desempenho_escolaClick(Sender: TObject);
+    procedure pnl_desempenho_escolaClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -311,6 +318,19 @@ begin
 
   // --- Atualiza o combo com participantes disponíveis
   PopularCBParticipantes;
+end;
+
+procedure Tfrm_menuEscola.btn_relatorio_desempenho_escolaClick(Sender: TObject);
+begin
+  pnl_membros_EscolaMenu.Visible := false;
+  pnl_home_EscolaMenu.Visible := false;
+  pnl_turmas_EscolaMenu.Visible := false;
+  pnl_desempenho.Visible := true;
+
+
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+
 end;
 
 procedure Tfrm_menuEscola.btn_RemoverTurmaMenuClick(Sender: TObject);
@@ -574,6 +594,7 @@ begin
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := true;
   pnl_membros_EscolaMenu.Visible := false;
+  pnl_desempenho.Visible := false;
 end;
 
 procedure Tfrm_menuEscola.MembrosClick(Sender: TObject);
@@ -581,6 +602,7 @@ begin
   // Muda de tela para membros
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
+  pnl_desempenho.Visible := false;
   pnl_membros_EscolaMenu.Visible := true;
 
   pnl_addNEdit_EscolaMenu.Visible := false;
@@ -599,6 +621,11 @@ begin
   frm_login.ShowModal;
   Self.Close;
 
+end;
+
+procedure Tfrm_menuEscola.pnl_desempenho_escolaClick(Sender: TObject);
+begin
+  FController.ShowReport;
 end;
 
 procedure Tfrm_menuEscola.PopularCBParticipantes;
@@ -635,6 +662,7 @@ procedure Tfrm_menuEscola.TurmasClick(Sender: TObject);
 begin
   pnl_membros_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
+  pnl_desempenho.Visible := false;
   pnl_turmas_EscolaMenu.Visible := true;
 
   pnl_addNEdit_EscolaMenu.Visible := false;

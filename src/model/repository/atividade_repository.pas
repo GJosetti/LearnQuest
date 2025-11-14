@@ -31,11 +31,13 @@ begin
      DataModule1.FDQuery1.SQL.Text :=
       'SELECT ' +
       '  a.id, ' +
+      '  m.name, ' +
       '  a.title AS atividade_nome, ' +
       '  t.name AS template_nome, ' +
       '  a.created_at ' +
       'FROM atividades a ' +
       'LEFT JOIN public.activity_template t ON a.template_id = t.id ' +
+      'INNER JOIN materias m ON a.materia_id = m.id ' +
       'WHERE a.professor_id = :PROF ' +
       'ORDER BY a.created_at DESC;';
 
@@ -83,14 +85,15 @@ begin
   begin
     Close;
     SQL.Text :=
-      'INSERT INTO atividades (template_id, professor_id,descricao, title, content_json) ' +
-      'VALUES (:TEMPLATE_ID, :PROFESSOR_ID,:DESCRICAO, :TITLE, CAST(:CONTENT_JSON AS JSONB));';
+      'INSERT INTO atividades (template_id, professor_id,descricao, title, content_json, materia_id) ' +
+      'VALUES (:TEMPLATE_ID, :PROFESSOR_ID,:DESCRICAO, :TITLE, CAST(:CONTENT_JSON AS JSONB), :MATERIA_ID);';
 
     ParamByName('TEMPLATE_ID').AsInteger := aModel.GetTemplateID;
     ParamByName('PROFESSOR_ID').AsInteger := aModel.GetProfessorID;
     ParamByName('TITLE').AsString := aModel.GetTitle;
     ParamByName('DESCRICAO').AsString := aModel.GetDescricao;
     ParamByName('CONTENT_JSON').AsString := aModel.GetContent_JSON.ToJSON;
+    ParamByName('MATERIA_ID').AsInteger := aModel.GetMateriaID;
 
     ExecSQL;
   end;
@@ -108,7 +111,7 @@ begin
       '    professor_id = :PROFESSOR_ID, ' +
       '    descricao = :DESCRICAO, ' +
       '    title = :TITLE, ' +
-      '    content_json = CAST(:CONTENT_JSON AS JSONB) ' +
+      '    content_json = CAST(:CONTENT_JSON AS JSONB), materia_id = :MATERIA_ID ' +
       'WHERE id = :ID;';
 
     ParamByName('ID').AsInteger := aModel.GetID;
@@ -117,6 +120,7 @@ begin
     ParamByName('TITLE').AsString := aModel.GetTitle;
     ParamByName('DESCRICAO').AsString := aModel.GetDescricao;
     ParamByName('CONTENT_JSON').AsString := aModel.GetContent_JSON.ToJSON;
+    ParamByName('MATERIA_ID').AsInteger := aModel.GetMateriaID;
 
     ExecSQL;
   end;

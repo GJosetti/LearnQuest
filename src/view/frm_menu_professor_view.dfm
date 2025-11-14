@@ -206,9 +206,9 @@ object frm_menu_professor: Tfrm_menu_professor
     TabOrder = 3
     Visible = False
     object dbg_atividades: TDBGrid
-      Left = 304
-      Top = 134
-      Width = 417
+      Left = 216
+      Top = 143
+      Width = 545
       Height = 344
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
@@ -243,6 +243,14 @@ object frm_menu_professor: Tfrm_menu_professor
           Expanded = False
           FieldName = 'id'
           Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'name'
+          Title.Alignment = taCenter
+          Title.Caption = 'Mat'#233'ria'
+          Width = 120
+          Visible = True
         end>
     end
     object pnl_adicionar_atividades: TPanel

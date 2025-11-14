@@ -150,6 +150,7 @@ begin
   FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
   ShowMessage(FID.ToString);
   frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
+  frm_criar_atividades.FMateriaName := dbg_atividades.DataSource.DataSet.FieldByName('name').AsString;
   frm_criar_atividades.ShowModal;
 end;
 

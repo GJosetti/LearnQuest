@@ -49,6 +49,10 @@ type
     procedure PopularCBMaterias;
 
   public
+    FMateriaName : String;
+
+
+
     constructor Create(aMode: TMode; aID : Integer; IForm : ITelaProfessorView );
         // Getters
     function GetTitulo: string;
@@ -161,7 +165,10 @@ end;
 
 procedure Tfrm_criar_atividades.FormShow(Sender: TObject);
 begin
+  cb_materias.Clear;
   PopularCBMaterias;
+  cb_materias.ItemIndex := cb_materias.Items.IndexOf(FMateriaName);
+
 end;
 
 { ----------------------- GETTERS ------------------------------- }
@@ -193,7 +200,7 @@ end;
 
 function Tfrm_criar_atividades.GetMateria: String;
 begin
-  Result := cb_materias.SelText;
+  Result := cb_materias.Items[cb_materias.ItemIndex]
 end;
 
 function Tfrm_criar_atividades.GetTipo: Integer;

@@ -132,6 +132,8 @@ GROUP BY
     u.user_name;
 
 
+select * from escola_33.atividades; 
+
 
 INSERT INTO escola_73.atividades (
     template_id,

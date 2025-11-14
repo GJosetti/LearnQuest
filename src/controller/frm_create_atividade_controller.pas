@@ -1,7 +1,7 @@
 unit frm_create_atividade_controller;
 
 interface
-uses my_contracts, atividades_service, atividade_entity, professor_service, Sessao,System.JSON;
+uses my_contracts, atividades_service, atividade_entity, professor_service, Sessao,System.JSON, System.Generics.Collections, materia_entity, materia_service;
 
 type
 
@@ -11,13 +11,14 @@ private
   Fview : ITelaCreateAtividadesView;
   FAtividadeService: IAtividadesService;
   FProfessorService: IProfessorService;
+  FMateriaService : IMateriaService;
 
 public
   constructor Create(aView : ITelaCreateAtividadesView);
   procedure Save();
   function FindByID(aID : Integer): atividade_Model;
-   procedure Update(aID : Integer);
-
+  procedure Update(aID : Integer);
+  function PopularCBMaterias : TObjectList<TMateria>;
 
 end;
 
@@ -38,6 +39,9 @@ begin
     Fview := aView;
 
   end;
+   if not Assigned(FMateriaService) then begin
+    FMateriaService := TMateriaService.Create;
+  end;
 end;
 
 
@@ -46,6 +50,11 @@ end;
 function TCriarAtividadeController.FindByID(aID: Integer): atividade_Model;
 begin
   Result := FAtividadeService.FindByID(aID);
+end;
+
+function TCriarAtividadeController.PopularCBMaterias : TObjectList<TMateria>;
+begin
+  Result := FMateriaService.GetAll;
 end;
 
 procedure TCriarAtividadeController.Save;
@@ -60,6 +69,7 @@ begin
     FAtividade.SetProfessorID(FProfessorService.GetIdByUserId(UsuarioLogado.ID));
     FAtividade.SetTitle(Fview.GetTitulo);
     FAtividade.SetDescricao(Fview.GetDescricao);
+    FAtividade.SetMateriaID(FMateriaService.FindByNome(FView.GetMateria).GetID);
 
     // --- Monta o JSON content_json (sem array de perguntas) ---
     LContent := TJSONObject.Create;
@@ -103,6 +113,7 @@ begin
     FAtividade.SetProfessorID(FProfessorService.GetIdByUserId(UsuarioLogado.ID));
     FAtividade.SetTitle(Fview.GetTitulo);
     FAtividade.SetDescricao(Fview.GetDescricao);
+    FAtividade.SetMateriaID(FMateriaService.FindByNome(FView.GetMateria).GetID);
 
     // --- Monta o JSON content_json (sem array de perguntas) ---
     LContent := TJSONObject.Create;
@@ -132,5 +143,8 @@ begin
     FAtividade.Free;
   end;
 end;
+
+
+
 
 end.

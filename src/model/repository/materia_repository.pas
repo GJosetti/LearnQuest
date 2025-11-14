@@ -4,7 +4,7 @@ interface
 
 uses
   my_contracts, materia_entity, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  Data.DB, DMConnection, System.SysUtils;
+  Data.DB, DMConnection, System.SysUtils, System.Generics.Collections;
 
 type
   TMateriaRepository = class(TInterfacedObject, IMateriaRepository)
@@ -18,6 +18,7 @@ type
     procedure Salvar(aModel: TMateria);
     procedure Update(aModel: TMateria);
     function GetMateriasDataSet: TDataSet;
+    function GetAll : TObjectList<TMateria>;
   end;
 
 implementation
@@ -119,6 +120,35 @@ begin
     Q.ExecSQL;
   finally
     Q.Free;
+  end;
+end;
+
+function TMateriaRepository.GetAll: TObjectList<TMateria>;
+var
+  lst: TObjectList<TMateria>;
+  Qry: TFDQuery;
+  FModel : TMateria;
+begin
+  lst := TObjectList<TMateria>.Create(True);
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM materias';
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      FModel := TMateria.Create;
+      FModel.SetID(Qry.FieldByName('id').AsInteger);
+      FModel.SetName(Qry.FieldByName('name').AsString);
+      FModel.SetDescricao(Qry.FieldByName('descricao').AsString);
+      lst.Add(FModel);
+      Qry.Next;
+    end;
+
+    Result := lst;
+  finally
+    Qry.Free;
   end;
 end;
 

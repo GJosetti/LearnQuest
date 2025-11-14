@@ -1,7 +1,7 @@
 unit materia_service;
 
 interface
-uses my_contracts, materia_repository, materia_entity, Data.DB;
+uses my_contracts, materia_repository, materia_entity, Data.DB, System.Generics.Collections;
 type
 TMateriaService = class(TInterfacedObject, IMateriaService)
 
@@ -17,6 +17,7 @@ function FindByNome(aNome: String): TMateria;
 procedure Salvar(aModel: TMateria);
 procedure Update(aModel: TMateria);
 function GetMateriasDataSet: TDataSet;
+function GetAll : TObjectList<TMateria>;
 
 end;
 
@@ -39,6 +40,11 @@ end;
 function TMateriaService.FindByNome(aNome: String): TMateria;
 begin
   Result := FRepo.FindByNome(aNome);
+end;
+
+function TMateriaService.GetAll: TObjectList<TMateria>;
+begin
+  Result := FRepo.GetAll;
 end;
 
 function TMateriaService.GetMateriasDataSet: TDataSet;

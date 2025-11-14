@@ -11,6 +11,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object btn_cancel: TPanel
     Left = 0
@@ -46,7 +47,7 @@ object frm_criar_atividades: Tfrm_criar_atividades
     ParentBackground = False
     TabOrder = 2
     object lbl_title: TLabel
-      Left = 280
+      Left = 296
       Top = 19
       Width = 319
       Height = 47
@@ -149,6 +150,19 @@ object frm_criar_atividades: Tfrm_criar_atividades
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object lbl_materia: TLabel
+      Left = 136
+      Top = 308
+      Width = 76
+      Height = 30
+      Caption = 'Materia:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
     object edt_title: TEdit
       Left = 280
       Top = 72
@@ -216,6 +230,17 @@ object frm_criar_atividades: Tfrm_criar_atividades
         ''
         '')
       TabOrder = 7
+    end
+    object cb_materias: TComboBox
+      Left = 88
+      Top = 344
+      Width = 169
+      Height = 23
+      TabOrder = 8
+      TextHint = 'Selecione um tipo: '
+      Items.Strings = (
+        'Quiz'#11
+        'Verdadeiro ou Falso')
     end
   end
   object pnl_Concluido: TPanel

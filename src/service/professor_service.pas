@@ -10,7 +10,7 @@ private
 FProfessorRepo : IProfessorRepository;
 
 public
- function GetByID (aID : Integer): TProfessorDTO;
+ function GetByID(aID: Integer): TProfessorModel;
  procedure Salvar(aDTO: TProfessorDTO);
  function GetUserByID (aID: Integer): TProfessorDTO;
  procedure Update(aDto : TProfessorDTO);
@@ -57,9 +57,9 @@ begin
   Result := FProfessorRepo.GetAllNames;
 end;
 
-function TProfessorService.GetByID(aID: Integer): TProfessorDTO;
+function TProfessorService.GetByID(aID: Integer): TProfessorModel;
 begin
-
+  Result := FProfessorRepo.GetByID(aID);
 end;
 
 function TProfessorService.GetIdByUserId(AUserId: Integer): Integer;

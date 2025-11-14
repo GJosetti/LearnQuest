@@ -94,9 +94,33 @@ end;
 
 
 function TProfessorRepository.GetByID(aID: Integer): TProfessorModel;
+var
+  Qry: TFDQuery;
+  Model: TProfessorModel;
 begin
+  Result := nil;
 
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text := 'SELECT * FROM professores WHERE id = :id';
+    Qry.ParamByName('id').AsInteger := aID;
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+    begin
+      Model := TProfessorModel.Create;
+      Model.SetID(Qry.FieldByName('id').AsInteger);
+      Model.SetUserID(Qry.FieldByName('user_id').AsInteger);
+
+      Result := Model;
+    end;
+
+  finally
+    Qry.Free;
+  end;
 end;
+
 
 function TProfessorRepository.GetIdByUserId(AUserId: Integer): Integer;
 var

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  frm_create_atividade_controller, my_contracts, atividade_entity, System.JSON;
+  frm_create_atividade_controller, my_contracts, atividade_entity, System.JSON, materia_entity, System.Generics.Collections;
 
 type
   TMode = (mCreate, mEdit);
@@ -31,11 +31,14 @@ type
     lbl_alternativa_d_quiz: TLabel;
     pnl_Concluido: TPanel;
     rg_alternativas_quiz: TRadioGroup;
+    cb_materias: TComboBox;
+    lbl_materia: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure cb_typesSelect(Sender: TObject);
     procedure pnl_ConcluidoClick(Sender: TObject);
     procedure cb_typesChange(Sender: TObject);
     procedure btn_cancelClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     FMode: TMode;
@@ -43,6 +46,7 @@ type
     FID: Integer;
     FProfessorview : ITelaProfessorView;
     function ValidarCampos: Boolean;
+    procedure PopularCBMaterias;
 
   public
     constructor Create(aMode: TMode; aID : Integer; IForm : ITelaProfessorView );
@@ -56,6 +60,7 @@ type
     function GetAlternativaC: string;
     function GetAlternativaD: string;
     function GetAlternativaCorreta: Integer;
+    function GetMateria : String;
 
     // Setters
     procedure SetTitulo(const Value: string);
@@ -67,6 +72,7 @@ type
     procedure SetAlternativaC(const Value: string);
     procedure SetAlternativaD(const Value: string);
     procedure SetAlternativaCorreta(const Value: Integer);
+    procedure SetMateria (aString : String);
 
     procedure CarregarAtividade(FAtividade: atividade_Model);
   end;
@@ -130,6 +136,11 @@ begin
   rg_alternativas_quiz.Items.Add('Alternativa D');
   rg_alternativas_quiz.ItemIndex := -1;
 
+
+
+
+
+
   if not Assigned(FController) then begin
     FController := TCriarAtividadeController.Create(Self);
   end;
@@ -146,6 +157,11 @@ begin
 
 
 
+end;
+
+procedure Tfrm_criar_atividades.FormShow(Sender: TObject);
+begin
+  PopularCBMaterias;
 end;
 
 { ----------------------- GETTERS ------------------------------- }
@@ -173,6 +189,11 @@ end;
 function Tfrm_criar_atividades.GetDescricao: string;
 begin
   Result := edt_descricao.Text;
+end;
+
+function Tfrm_criar_atividades.GetMateria: String;
+begin
+  Result := cb_materias.SelText;
 end;
 
 function Tfrm_criar_atividades.GetTipo: Integer;
@@ -221,6 +242,11 @@ end;
 procedure Tfrm_criar_atividades.SetDescricao(const Value: string);
 begin
   edt_descricao.Text := Value;
+end;
+
+procedure Tfrm_criar_atividades.SetMateria(aString: String);
+begin
+
 end;
 
 procedure Tfrm_criar_atividades.SetTipo(const Value: Integer);
@@ -354,6 +380,18 @@ begin
   end;
 
   Result := True; // passou em tudo
+end;
+
+procedure Tfrm_criar_atividades.PopularCBMaterias;
+var
+  lst : TObjectList<TMateria>;
+  I : Integer;
+begin
+  lst := FController.PopularCBMaterias;
+  cb_materias.Clear;
+  cb_materias.TextHint := 'Selecione uma matéria';
+  for I := 0 to (lst.Count -1) do
+    cb_materias.Items.AddObject(lst[i].GetName, lst[i]);
 end;
 
 

@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO,report_service,materia_entity, user_service,System.Classes,users_entity,System.Generics.Collections,materia_service, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB,Vcl.Dialogs,professor_entity, user_DTO,report_service,materia_entity, user_service,System.Classes,users_entity,System.Generics.Collections,materia_service, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -28,8 +28,10 @@ public
    function PopularCBProfessores : TStringList;
    function PopularCBParticipantes : TObjectList<TUserModel>;
    function FindByName (aString : String) : TUserDTO;
+   function GetUserByProfessorID (aID: Integer) : TUserModel;
    function FindByNameProfessores (aString : String): TProfessorDTO;
    function FindByNameTurmas (aString : String): TTurmaDTO;
+
    function AtualizarTabelaTurmas : TDataSet;
    procedure DeleteTurma(aNome: String);
    procedure UpdateTurma (aID : Integer);
@@ -209,6 +211,11 @@ function TMenuAdminController.GetEstudantesPorTurma(
   aTurmaID: Integer): TDataSet;
 begin
 
+end;
+
+function TMenuAdminController.GetUserByProfessorID (aID: Integer): TUserModel;
+begin
+  FServiceProfessor.GetUserByID(aID);
 end;
 
 procedure TMenuAdminController.LinkEstudante(aEstudanteID, aTurmaID: Integer);

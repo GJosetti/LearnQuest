@@ -107,6 +107,7 @@ type
     procedure Update(aModel : TMateria);
 
     function GetMateriasDataSet() : TDataSet;
+    function GetAll : TObjectList<TMateria>;
   end;
 
 
@@ -146,7 +147,7 @@ type
 
   IProfessorService = interface
     ['{F2F1842F-6E80-442E-9640-40B27CEA182D}']
-      function GetByID (aID : Integer): TProfessorDTO;
+      function GetByID(aID: Integer): TProfessorModel;
       procedure Salvar(aDTO: TProfessorDTO);
       function GetUserByID (aID: Integer): TProfessorDTO;
       procedure Update(aDto : TProfessorDTO);
@@ -209,7 +210,7 @@ type
       function FindByNome(aNome: String) : TMateria;
       procedure Salvar(aModel :TMateria);
       procedure Update(aModel : TMateria);
-
+      function GetAll : TObjectList<TMateria>;
       function GetMateriasDataSet() : TDataSet;
 
 
@@ -297,6 +298,7 @@ type
     function FindByName (aString : String) : TUserDTO;
     function AtualizarTabelaTurmas : TDataSet;
     function FindByNameProfessores (aString : String): TProfessorDTO;
+
     function FindByNameTurmas (aString : String): TTurmaDTO;
     procedure UpdateTurma (aID : Integer);
     function GetEstudanteIDByUser(aID : Integer) : Integer;
@@ -342,6 +344,8 @@ type
     function GetAlternativaD: string;
     function GetAlternativaCorreta: Integer;
 
+    function GetMateria : String;
+
     // Setters
     procedure SetTitulo(const Value: string);
     procedure SetDescricao(const Value: string);
@@ -353,6 +357,8 @@ type
     procedure SetAlternativaD(const Value: string);
     procedure SetAlternativaCorreta(const Value: Integer);
 
+    procedure SetMateria (aString : String);
+
     procedure CarregarAtividade(FAtividade: atividade_Model);
 
 
@@ -362,7 +368,7 @@ type
     procedure Save();
     function FindByID(aID : Integer): atividade_Model;
     procedure Update(aID : Integer);
-
+    function PopularCBMaterias : TObjectList<TMateria>;
 
   end;
 
@@ -376,12 +382,14 @@ type
 
 
 
+
   end;
 
   ITelaEstudantesController = interface
 
   function AtualizarTabelaAtividades : TDataSet;
   function GetAtividade(aID : Integer):atividade_Model;
+
 
   end;
 

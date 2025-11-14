@@ -279,7 +279,10 @@ begin
   edt_Nome_Turma_EscolaMenu.Text := FDTO.Nome;
   edt_Descricao_addNEdit_Turma_EscolaMenu.Text := FDTO.Descricao;
   PopularCBProfessores;
-  cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := FDTO.ProfessorID - 1;
+
+
+
+  cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.ItemIndex := cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Items.IndexOf(dbg_turmasEscola.DataSource.DataSet.FieldByName('user_name').AsString);
   FID := FDTO.ID;
 end;
 
@@ -783,7 +786,7 @@ begin
     for I := 0 to (sL.Count -1) do
       cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu.Items.Add(sL[I]);
   finally
-    sL.Free;
+
   end;
 end;
 

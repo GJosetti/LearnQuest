@@ -2,7 +2,7 @@ unit my_contracts;
 
 interface
 uses user_DTO, users_entity, Vcl.Forms,Datasnap.DBClient,Data.DB, escolas_DTO, escola_entity,professor_entity,professores_DTO, estudante_entity, estudantes_DTO,
-turma_DTO,turma_entity, System.Classes,System.Generics.Collections,atividade_entity;
+turma_DTO,turma_entity, System.Classes,System.Generics.Collections,atividade_entity,materia_entity;
 
 type
 
@@ -93,10 +93,20 @@ type
   end;
 
   IReportRepository = interface
-    procedure ShowReport();
+    procedure ShowReportDesempenho();
+    procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
 
 
 
+  end;
+
+  IMateriaRepository = interface
+    function FindByID(aID: Integer) : TMateria;
+    function FindByNome(aNome: String) : TMateria;
+    procedure Salvar(aModel :TMateria);
+    procedure Update(aModel : TMateria);
+
+    function GetMateriasDataSet() : TDataSet;
   end;
 
 
@@ -189,8 +199,18 @@ type
       end;
 
       IReportService = interface
-      procedure ShowReport();
+      procedure ShowReportDesempenho();
+      procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
 
+      end;
+
+      IMateriaService = interface
+      function FindByID(aID: Integer) : TMateria;
+      function FindByNome(aNome: String) : TMateria;
+      procedure Salvar(aModel :TMateria);
+      procedure Update(aModel : TMateria);
+
+      function GetMateriasDataSet() : TDataSet;
 
 
       end;
@@ -252,11 +272,14 @@ type
     function GetRole: Integer;
     function CamposValidosUsuario: Boolean;
     function CamposValidosTurma: Boolean;
+    function CamposValidosMaterias: Boolean;
     function GetNomeTurma : String;
     function GetIDTurmaSelecionada : Integer;
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;
     procedure PopularCBProfessores();
+    function GetNomeMateria() : String ;
+    function GetDescricaoMateria() : String;
 
   end;
 
@@ -283,9 +306,14 @@ type
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
     function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
 
+    procedure AdicionarMateria();
+    procedure UpdateMateria(aID : Integer);
+    function FindByNameMateria(aNome: String) : TMateria;
+    function AtualizarTabelaMaterias() : TDataSet;
+
 
     //Reports
-    procedure ShowReport();
+   procedure ShowReportDesempenho();
    end;
 
   //-----------------Tela Professores---------------------//

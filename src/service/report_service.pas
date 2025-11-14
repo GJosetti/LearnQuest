@@ -12,7 +12,8 @@ FRepo : IReportRepository;
 
 public
   constructor Create;
-  procedure ShowReport();
+  procedure ShowReportDesempenho();
+  procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
 
 
 
@@ -31,9 +32,14 @@ begin
   end;
 end;
 
-procedure TReportService.ShowReport;
+procedure TReportService.ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
 begin
-  FRepo.ShowReport;
+  FRepo.ShowRelatorioUltimosAcessos(AEscolaID);
+end;
+
+procedure TReportService.ShowReportDesempenho;
+begin
+  FRepo.ShowReportDesempenho;
 end;
 
 end.

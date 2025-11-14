@@ -1,7 +1,7 @@
 unit frm_menu_escola_controller;
 
 interface
-uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO,report_service, user_service,System.Classes,users_entity,System.Generics.Collections, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
+uses my_contracts, Data.DB,Vcl.Dialogs, user_DTO,report_service,materia_entity, user_service,System.Classes,users_entity,System.Generics.Collections,materia_service, escola_service, professor_service,turma_service, professores_DTO,turma_DTO, Sessao, estudante_service, estudantes_DTO, App_Consts, System.SysUtils;
 
 type
 
@@ -15,6 +15,7 @@ private
  FServiceEstudante : IEstudanteService;
  FServiceTurma : ITurmaService;
  FServiceReport : IReportService;
+ FServiceMateria : IMateriaService;
 
 public
    function AtualizarTabelaMembros : TDataSet ;
@@ -39,8 +40,13 @@ public
     procedure RemoverEstudanteDaTurma(aEstudanteID, aTurmaID: Integer);
     function AtualizarTabelaParticipantes(aID : Integer) : TDataSet;
 
+    function AtualizarTabelaMaterias() : TDataSet;
+    procedure AdicionarMateria();
+    procedure UpdateMateria(aID : Integer);
+    function FindByNameMateria (aNome: String) : TMateria;
 
-    procedure ShowReport();
+
+    procedure ShowReportDesempenho();
 
 
 end;
@@ -73,6 +79,13 @@ if not Assigned(FServiceEscola) then begin
   if not Assigned(FServiceReport) then begin
     FServiceReport := TReportService.Create;
   end;
+  if not Assigned(FServiceMateria) then begin
+    FServiceMateria := TMateriaService.Create;
+  end;
+
+
+
+
 end;
 
 procedure TMenuAdminController.AdicionarTurma;
@@ -122,6 +135,21 @@ begin
 
 end;
 
+procedure TMenuAdminController.AdicionarMateria;
+var
+  aModel : TMateria;
+begin
+  aModel := TMateria.Create;
+  aModel.SetName(Fview.GetNomeMateria);
+  aModel.SetDescricao(Fview.GetDescricaoMateria);
+  FServiceMateria.Salvar(aModel);
+end;
+
+function TMenuAdminController.AtualizarTabelaMaterias: TDataSet;
+begin
+  Result :=  FServiceMateria.GetMateriasDataSet;
+end;
+
 function TMenuAdminController.AtualizarTabelaMembros: TDataSet;
 begin
   Result := FServiceUser.AtualizarTabelaUsuarios;
@@ -154,6 +182,12 @@ end;
 function TMenuAdminController.FindByName(aString: String): TUserDTO;
 begin
   Result := FServiceUser.GetByNome(aString);
+end;
+
+function TMenuAdminController.FindByNameMateria(aNome: String): TMateria;
+
+begin
+  Result := FServiceMateria.FindByNome(aNome);
 end;
 
 function TMenuAdminController.FindByNameProfessores(aString: String): TProfessorDTO;
@@ -203,9 +237,9 @@ begin
 
 end;
 
-procedure TMenuAdminController.ShowReport;
+procedure TMenuAdminController.ShowReportDesempenho;
 begin
-  FServiceReport.ShowReport;
+  FServiceReport.ShowReportDesempenho;
 end;
 
 procedure TMenuAdminController.Update(aID : Integer);
@@ -223,6 +257,17 @@ begin
 
   FServiceUser.Update(UsuarioDTO);
 
+end;
+
+procedure TMenuAdminController.UpdateMateria(aID: Integer);
+var
+  aModel : TMateria;
+begin
+  aModel := TMateria.Create;
+  aModel.SetID(aID);
+  aModel.SetName(Fview.GetNomeMateria);
+  aModel.SetDescricao(Fview.GetDescricaoMateria);
+  FServiceMateria.Update(aModel);
 end;
 
 procedure TMenuAdminController.UpdateTurma(aID: Integer);

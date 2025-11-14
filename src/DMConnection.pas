@@ -24,11 +24,16 @@ type
     QRTurmas: TFDQuery;
     FDQueryProfessores: TFDQuery;
     FDQueryAtividadesParaEstudante: TFDQuery;
-    FDQueryRelatorio1: TFDQuery;
-    frxDBDataset1: TfrxDBDataset;
-    frxReport1: TfrxReport;
-    FDQueryRelatorio1user_name: TWideStringField;
-    FDQueryRelatorio1porcentagem_acertos: TFMTBCDField;
+    FDQueryRelatorioDesempenho: TFDQuery;
+    frxDBDatasetDesempenho: TfrxDBDataset;
+    frxReportDesempenho: TfrxReport;
+    FDQueryRelatorioDesempenhouser_name: TWideStringField;
+    FDQueryRelatorioDesempenhoporcentagem_acertos: TFMTBCDField;
+    frxDBDatasetLastAccess: TfrxDBDataset;
+    FDQueryRelatorioLastAccess: TFDQuery;
+    WideStringField1: TWideStringField;
+    FMTBCDField1: TFMTBCDField;
+    frxReportLastAccess: TfrxReport;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

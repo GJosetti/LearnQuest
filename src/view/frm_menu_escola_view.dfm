@@ -1,4 +1,4 @@
-object frm_menuEscola: Tfrm_menuEscola
+﻿object frm_menuEscola: Tfrm_menuEscola
   Left = 0
   Top = 0
   Caption = 'frm_menuEscola'
@@ -41,7 +41,7 @@ object frm_menuEscola: Tfrm_menuEscola
     end
     object Home: TButton
       Left = 48
-      Top = 104
+      Top = 95
       Width = 161
       Height = 49
       Caption = 'Home'
@@ -76,209 +76,21 @@ object frm_menuEscola: Tfrm_menuEscola
     end
     object btn_relatorio_desempenho_escola: TButton
       Left = 48
-      Top = 432
+      Top = 520
       Width = 161
       Height = 49
       Caption = 'Desempenho'
       TabOrder = 4
       OnClick = btn_relatorio_desempenho_escolaClick
     end
-  end
-  object pnl_membros_EscolaMenu: TPanel
-    Left = 263
-    Top = -1
-    Width = 1017
-    Height = 721
-    Color = clTeal
-    ParentBackground = False
-    TabOrder = 0
-    Visible = False
-    object dbg_membrosEscola: TDBGrid
-      Left = 112
-      Top = 93
-      Width = 513
-      Height = 344
-      DataSource = d_Src_membros_escola
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -12
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
-      OnColumnMoved = dbg_membrosEscolaColumnMoved
-      Columns = <
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'user_name'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Nome'
-          Width = 150
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'email'
-          ReadOnly = True
-          Title.Alignment = taCenter
-          Title.Caption = 'Email'
-          Width = 150
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'descricao'
-          Title.Alignment = taCenter
-          Title.Caption = 'Cargo'
-          Width = 100
-          Visible = True
-        end>
-    end
-    object btn_adicionar_EscolaMenu: TPanel
-      Left = 112
-      Top = 456
-      Width = 105
-      Height = 25
-      Caption = 'Adicionar'
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 1
-      OnClick = btn_adicionar_EscolaMenuClick
-    end
-    object btn_remover_EscolaMenu: TPanel
-      Left = 320
-      Top = 456
-      Width = 105
-      Height = 25
-      Caption = 'Remover'
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 2
-      OnClick = btn_remover_EscolaMenuClick
-    end
-    object btn_editar_EscolaMenu: TPanel
-      Left = 520
-      Top = 456
-      Width = 105
-      Height = 25
-      Caption = 'Editar'
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 3
-      OnClick = btn_editar_EscolaMenuClick
-    end
-    object pnl_addNEdit_EscolaMenu: TPanel
-      Left = 160
-      Top = 55
-      Width = 449
-      Height = 456
-      Color = clBtnHighlight
-      ParentBackground = False
-      TabOrder = 4
-      Visible = False
-      object pnl_title_addNEdit_EscolaMenu: TLabel
-        AlignWithMargins = True
-        Left = 4
-        Top = 13
-        Width = 441
-        Height = 21
-        Margins.Top = 12
-        Align = alTop
-        Alignment = taCenter
-        Caption = 'Adicionar Usu'#225'rio'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ExplicitWidth = 137
-      end
-      object lbl_nome_edit_addNEdit_EscolaMenu: TLabel
-        Left = 160
-        Top = 122
-        Width = 95
-        Height = 15
-        Caption = 'Nome do usu'#225'rio:'
-      end
-      object lbl_passwordAdmin_addNEdit_EscolaMenu: TLabel
-        Left = 184
-        Top = 188
-        Width = 35
-        Height = 15
-        Caption = 'Senha:'
-      end
-      object lbl_email_addNEdit_EscolaMenu: TLabel
-        Left = 184
-        Top = 250
-        Width = 32
-        Height = 15
-        Caption = 'Email:'
-      end
-      object lbl_role_addNEdit_EscolaAdmin: TLabel
-        Left = 168
-        Top = 313
-        Width = 82
-        Height = 15
-        Caption = 'Tipo de usu'#225'rio'
-      end
-      object edt_nome_addNEdit_EscolaMenu: TEdit
-        Left = 32
-        Top = 143
-        Width = 353
-        Height = 23
-        TabOrder = 0
-        TextHint = 'Insira um nome'
-      end
-      object btn_concluir_addNEdit_EscolaMenu: TPanel
-        Left = 151
-        Top = 414
-        Width = 126
-        Height = 26
-        Caption = 'Concluir'
-        Color = clBtnHighlight
-        ParentBackground = False
-        TabOrder = 1
-        OnClick = btn_concluir_addNEdit_EscolaMenuClick
-      end
-      object btn_cancelar_addNEdit_EscolaMenu: TPanel
-        Left = 383
-        Top = 13
-        Width = 58
-        Height = 26
-        Caption = 'Sair'
-        Color = clBtnHighlight
-        ParentBackground = False
-        TabOrder = 2
-        OnClick = btn_cancelar_addNEdit_EscolaMenuClick
-      end
-      object edt_password_addNEdit__EscolaMenu: TEdit
-        Left = 32
-        Top = 209
-        Width = 353
-        Height = 23
-        TabOrder = 3
-        TextHint = 'XXXXX-XXX'
-      end
-      object edt_email_addNEdit_EscolaMenu: TEdit
-        Left = 32
-        Top = 271
-        Width = 353
-        Height = 23
-        TabOrder = 4
-        TextHint = 'XXXXX-XXX'
-      end
-      object cb_role_addNEdit_EscolaMenu: TComboBox
-        Left = 136
-        Top = 350
-        Width = 145
-        Height = 23
-        TabOrder = 5
-        Text = 'Selecione um tipo:'
-      end
+    object Matérias: TButton
+      Left = 48
+      Top = 423
+      Width = 161
+      Height = 49
+      Caption = 'Mat'#233'rias'
+      TabOrder = 5
+      OnClick = MatériasClick
     end
   end
   object pnl_turmas_EscolaMenu: TPanel
@@ -594,17 +406,384 @@ object frm_menuEscola: Tfrm_menuEscola
       Caption = 'Turma'
       TabOrder = 2
     end
+    object Panel1: TPanel
+      Left = 68
+      Top = 426
+      Width = 213
+      Height = 69
+      Caption = 'Escola'
+      TabOrder = 3
+      OnClick = Panel1Click
+    end
+  end
+  object pnl_membros_EscolaMenu: TPanel
+    Left = 263
+    Top = -1
+    Width = 1017
+    Height = 721
+    Color = clTeal
+    ParentBackground = False
+    TabOrder = 0
+    Visible = False
+    object dbg_membrosEscola: TDBGrid
+      Left = 112
+      Top = 93
+      Width = 513
+      Height = 344
+      DataSource = d_Src_membros_escola
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      OnColumnMoved = dbg_membrosEscolaColumnMoved
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'user_name'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 150
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'email'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Email'
+          Width = 150
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'descricao'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cargo'
+          Width = 100
+          Visible = True
+        end>
+    end
+    object btn_adicionar_EscolaMenu: TPanel
+      Left = 112
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Adicionar'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 1
+      OnClick = btn_adicionar_EscolaMenuClick
+    end
+    object btn_remover_EscolaMenu: TPanel
+      Left = 320
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Remover'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 2
+      OnClick = btn_remover_EscolaMenuClick
+    end
+    object btn_editar_EscolaMenu: TPanel
+      Left = 520
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Editar'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 3
+      OnClick = btn_editar_EscolaMenuClick
+    end
+    object pnl_addNEdit_EscolaMenu: TPanel
+      Left = 160
+      Top = 55
+      Width = 449
+      Height = 456
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 4
+      Visible = False
+      object pnl_title_addNEdit_EscolaMenu: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 13
+        Width = 441
+        Height = 21
+        Margins.Top = 12
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Adicionar Usu'#225'rio'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 137
+      end
+      object lbl_nome_edit_addNEdit_EscolaMenu: TLabel
+        Left = 160
+        Top = 122
+        Width = 95
+        Height = 15
+        Caption = 'Nome do usu'#225'rio:'
+      end
+      object lbl_passwordAdmin_addNEdit_EscolaMenu: TLabel
+        Left = 184
+        Top = 188
+        Width = 35
+        Height = 15
+        Caption = 'Senha:'
+      end
+      object lbl_email_addNEdit_EscolaMenu: TLabel
+        Left = 184
+        Top = 250
+        Width = 32
+        Height = 15
+        Caption = 'Email:'
+      end
+      object lbl_role_addNEdit_EscolaAdmin: TLabel
+        Left = 168
+        Top = 313
+        Width = 82
+        Height = 15
+        Caption = 'Tipo de usu'#225'rio'
+      end
+      object edt_nome_addNEdit_EscolaMenu: TEdit
+        Left = 32
+        Top = 143
+        Width = 353
+        Height = 23
+        TabOrder = 0
+        TextHint = 'Insira um nome'
+      end
+      object btn_concluir_addNEdit_EscolaMenu: TPanel
+        Left = 151
+        Top = 414
+        Width = 126
+        Height = 26
+        Caption = 'Concluir'
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 1
+        OnClick = btn_concluir_addNEdit_EscolaMenuClick
+      end
+      object btn_cancelar_addNEdit_EscolaMenu: TPanel
+        Left = 383
+        Top = 13
+        Width = 58
+        Height = 26
+        Caption = 'Sair'
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 2
+        OnClick = btn_cancelar_addNEdit_EscolaMenuClick
+      end
+      object edt_password_addNEdit__EscolaMenu: TEdit
+        Left = 32
+        Top = 209
+        Width = 353
+        Height = 23
+        TabOrder = 3
+        TextHint = 'XXXXX-XXX'
+      end
+      object edt_email_addNEdit_EscolaMenu: TEdit
+        Left = 32
+        Top = 271
+        Width = 353
+        Height = 23
+        TabOrder = 4
+        TextHint = 'XXXXX-XXX'
+      end
+      object cb_role_addNEdit_EscolaMenu: TComboBox
+        Left = 136
+        Top = 350
+        Width = 145
+        Height = 23
+        TabOrder = 5
+        Text = 'Selecione um tipo:'
+      end
+    end
+  end
+  object pnl_materias: TPanel
+    Left = 263
+    Top = -1
+    Width = 1017
+    Height = 721
+    Color = clOlive
+    ParentBackground = False
+    TabOrder = 5
+    Visible = False
+    object dbg_materias: TDBGrid
+      Left = 112
+      Top = 93
+      Width = 513
+      Height = 344
+      DataSource = d_Src_materias
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      OnColumnMoved = dbg_membrosEscolaColumnMoved
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'name'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'Nome'
+          Width = 200
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'descricao'
+          Title.Alignment = taCenter
+          Title.Caption = 'Descricao'
+          Width = 200
+          Visible = True
+        end>
+    end
+    object btn_adicionar_materias: TPanel
+      Left = 112
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Adicionar'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 1
+      OnClick = btn_adicionar_materiasClick
+    end
+    object btn_remover_materias: TPanel
+      Left = 320
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Remover'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 2
+      OnClick = btn_remover_EscolaMenuClick
+    end
+    object btn_editar_materias: TPanel
+      Left = 520
+      Top = 456
+      Width = 105
+      Height = 25
+      Caption = 'Editar'
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 3
+      OnClick = btn_editar_materiasClick
+    end
+    object pnl_addNEdit_materias: TPanel
+      Left = 311
+      Top = -26
+      Width = 449
+      Height = 456
+      Color = clBtnHighlight
+      ParentBackground = False
+      TabOrder = 4
+      Visible = False
+      object lbl_title_pnl_addNEdit_Materias: TLabel
+        AlignWithMargins = True
+        Left = 4
+        Top = 13
+        Width = 441
+        Height = 21
+        Margins.Top = 12
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Adicionar Mat'#233'ria'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 137
+      end
+      object lbl_nome_pnl_addNEdit_materias: TLabel
+        Left = 160
+        Top = 137
+        Width = 92
+        Height = 15
+        Caption = 'Nome da Mat'#233'ria'
+      end
+      object lbl_descricao_pnl_addNEdit_materias: TLabel
+        Left = 184
+        Top = 248
+        Width = 51
+        Height = 15
+        Caption = 'Descri'#231#227'o'
+      end
+      object edt_nome_pnl_addNEdit_materias: TEdit
+        Left = 32
+        Top = 158
+        Width = 353
+        Height = 23
+        TabOrder = 0
+        TextHint = 'Insira um nome'
+      end
+      object btn_concluir_pnl_addNEdit_materias: TPanel
+        Left = 143
+        Top = 385
+        Width = 126
+        Height = 26
+        Caption = 'Concluir'
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 1
+        OnClick = btn_concluir_pnl_addNEdit_materiasClick
+      end
+      object btn_sair_pnl_addNEdit_materias: TPanel
+        Left = 383
+        Top = 13
+        Width = 58
+        Height = 26
+        Caption = 'Sair'
+        Color = clBtnHighlight
+        ParentBackground = False
+        TabOrder = 2
+        OnClick = btn_cancelar_addNEdit_EscolaMenuClick
+      end
+      object edt_descricao_pnl_addNEdit_materias: TEdit
+        Left = 32
+        Top = 269
+        Width = 353
+        Height = 56
+        TabOrder = 3
+        TextHint = 'XXXXX-XXX'
+      end
+    end
   end
   object d_Src_membros_escola: TDataSource
     Left = 735
     Top = 655
   end
   object d_Src_participantes_turma: TDataSource
-    Left = 1103
-    Top = 439
+    Left = 1007
+    Top = 663
   end
   object d_Src_turmasEscola: TDataSource
-    Left = 1111
-    Top = 447
+    Left = 1135
+    Top = 639
+  end
+  object d_Src_materias: TDataSource
+    Left = 855
+    Top = 671
   end
 end

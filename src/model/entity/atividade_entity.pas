@@ -14,6 +14,7 @@ type
     FTitle: String;
     FDescricao : String;
     FContent_JSON: TJSONObject;
+    MateriaID : Integer;
 
   public
     // --- Getters (Funções para obter o valor) ---
@@ -23,6 +24,7 @@ type
     function GetProfessorID: Integer;
     function GetTitle: String;
     function GetContent_JSON: TJSONObject;
+    function GetMateriaID : Integer;
 
     // --- Setters (Procedimentos para definir o valor) ---
     procedure SetID(const Value: Integer);
@@ -31,6 +33,7 @@ type
     procedure SetProfessorID(const Value: Integer);
     procedure SetTitle(const Value: String);
     procedure SetContent_JSON(const Value: TJSONObject);
+    function SetMateriaID(aID : Integer) : Integer;
   end;
 
 implementation
@@ -45,6 +48,11 @@ end;
 function atividade_Model.GetID: Integer;
 begin
   Result := FID;
+end;
+
+function atividade_Model.GetMateriaID: Integer;
+begin
+  Result := Self.MateriaID;
 end;
 
 function atividade_Model.GetTemplateID: Integer;
@@ -72,6 +80,11 @@ end;
 procedure atividade_Model.SetID(const Value: Integer);
 begin
   FID := Value;
+end;
+
+function atividade_Model.SetMateriaID(aID : Integer): Integer;
+begin
+  Self.MateriaID := aID;
 end;
 
 procedure atividade_Model.SetTemplateID(const Value: Integer);

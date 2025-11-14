@@ -47,7 +47,10 @@ uses
   frm_fazer_atividade_view in 'view\frm_fazer_atividade_view.pas' {frm_fazer_atividade},
   frm_fazer_atividade_controller in 'controller\frm_fazer_atividade_controller.pas',
   report_repository in 'model\repository\report_repository.pas',
-  report_service in 'service\report_service.pas';
+  report_service in 'service\report_service.pas',
+  materia_entity in 'model\entity\materia_entity.pas',
+  materia_service in 'service\materia_service.pas',
+  materia_repository in 'model\repository\materia_repository.pas';
 
 {$R *.res}
 

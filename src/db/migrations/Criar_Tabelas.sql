@@ -37,6 +37,12 @@ CREATE TABLE fase (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
+create table materias(
+	id BIGSERIAL primary key,
+	name varchar(100),
+	descricao varchar(100)
+);
+
 -- =========== ESTRUTURA DE TURMAS ===========
 
 CREATE TABLE turmas (
@@ -66,8 +72,9 @@ CREATE TABLE turma_trilha (
 CREATE TABLE atividades (
     id BIGSERIAL PRIMARY KEY,
     template_id BIGINT REFERENCES public.activity_template(id),
-    professor_id BIGINT REFERENCES professores(id),
+    professor_id BIGINT REFERENCES professores(id) on delete cascade,
     title VARCHAR(100),
+    materia_id BIGINT references materias(id) on delete cascade,
     descricao VARCHAR(100),
     content_json JSONB NOT NULL,   -- conteúdo preenchido pelo professor
     created_at TIMESTAMP DEFAULT NOW()

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections, App_Consts;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections, App_Consts, materia_entity;
 
 type
   TMode = (m_Add,m_Edit);
@@ -63,6 +63,22 @@ type
     pnl_desempenho_escola: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel1: TPanel;
+    Matérias: TButton;
+    pnl_materias: TPanel;
+    dbg_materias: TDBGrid;
+    btn_adicionar_materias: TPanel;
+    btn_remover_materias: TPanel;
+    btn_editar_materias: TPanel;
+    pnl_addNEdit_materias: TPanel;
+    lbl_title_pnl_addNEdit_Materias: TLabel;
+    lbl_nome_pnl_addNEdit_materias: TLabel;
+    lbl_descricao_pnl_addNEdit_materias: TLabel;
+    edt_nome_pnl_addNEdit_materias: TEdit;
+    btn_concluir_pnl_addNEdit_materias: TPanel;
+    btn_sair_pnl_addNEdit_materias: TPanel;
+    edt_descricao_pnl_addNEdit_materias: TEdit;
+    d_Src_materias: TDataSource;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -87,9 +103,15 @@ type
     procedure pnl_back_EscolaMenuClick(Sender: TObject);
     procedure btn_relatorio_desempenho_escolaClick(Sender: TObject);
     procedure pnl_desempenho_escolaClick(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
+    procedure MatériasClick(Sender: TObject);
+    procedure btn_adicionar_materiasClick(Sender: TObject);
+    procedure btn_concluir_pnl_addNEdit_materiasClick(Sender: TObject);
+    procedure btn_editar_materiasClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
+    FIDMateria : Integer;
     FController : IMenuEscolaController;
     Fmode : TMode;
     FPreventColumnMove : Boolean;
@@ -104,11 +126,15 @@ type
     function GetRole: Integer;
     function CamposValidosUsuario: Boolean;
     function CamposValidosTurma: Boolean;
+    function CamposValidosMaterias: Boolean;
     function GetNomeTurma : String;
     function GetDescTurma : String;
     function GetIDProfessorTurma: Integer;
     procedure PopularCBProfessores();
     procedure PopularCBParticipantes();
+
+    function GetNomeMateria() : String ;
+    function GetDescricaoMateria() : String;
   end;
 
 var
@@ -132,6 +158,12 @@ end;
 procedure Tfrm_menuEscola.btn_adicionar_EscolaMenuClick(Sender: TObject);
 begin
   pnl_addNEdit_EscolaMenu.Visible := true;
+  Fmode := m_Add;
+end;
+
+procedure Tfrm_menuEscola.btn_adicionar_materiasClick(Sender: TObject);
+begin
+  pnl_addNEdit_materias.Visible := true;
   Fmode := m_Add;
 end;
 
@@ -192,6 +224,28 @@ begin
   end;
 end;
 
+
+procedure Tfrm_menuEscola.btn_concluir_pnl_addNEdit_materiasClick(
+  Sender: TObject);
+begin
+   if CamposValidosMaterias then
+  begin
+    if Fmode = m_Add then begin
+      FController.AdicionarMateria;
+     end else if Fmode = m_Edit then begin
+      FController.UpdateMateria(FIDMateria);
+    end;
+
+
+    pnl_addNEdit_materias.Visible := false;
+
+
+    d_Src_materias.DataSet := FController.AtualizarTabelaMaterias;
+    dbg_materias.DataSource := d_Src_materias;
+
+    ClearAllEdits;
+  end;
+end;
 
 procedure Tfrm_menuEscola.btn_editarTurma_EscolaMenuClick(Sender: TObject);
 var
@@ -278,6 +332,26 @@ begin
   FID := FDTO.ID;
 end;
 
+procedure Tfrm_menuEscola.btn_editar_materiasClick(Sender: TObject);
+var
+FName: String;
+FModel: TMateria;
+begin
+
+Fmode := m_Edit;
+
+FName := dbg_materias.DataSource.DataSet.FieldByName('name').AsString;
+FModel := FController.FindByNameMateria(FName);
+
+FIDMateria := FmODEL.GetID;
+
+pnl_addNEdit_materias.Visible := true;
+
+edt_nome_pnl_addNEdit_materias.Text := FModel.GetName;
+edt_descricao_pnl_addNEdit_materias.Text := FModel.GetDescricao;
+
+end;
+
 procedure Tfrm_menuEscola.btn_ListarMembrosClick(Sender: TObject);
 var
   FName: String;
@@ -322,6 +396,7 @@ end;
 
 procedure Tfrm_menuEscola.btn_relatorio_desempenho_escolaClick(Sender: TObject);
 begin
+  pnl_materias.Visible := false;
   pnl_membros_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
   pnl_turmas_EscolaMenu.Visible := false;
@@ -330,6 +405,7 @@ begin
 
   pnl_addNEdit_EscolaMenu.Visible := false;
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+   pnl_addNEdit_materias.Visible := false;
 
 end;
 
@@ -463,6 +539,16 @@ begin
     raise Exception.Create('Um Aluno deve ser selecionado!');
 end;
 
+function Tfrm_menuEscola.CamposValidosMaterias: Boolean;
+begin
+  if (Trim(edt_nome_pnl_addNEdit_materias.Text) = '') or
+     (Trim(edt_descricao_pnl_addNEdit_materias.Text) = '') then
+    raise Exception.Create('Todos os campos precisam ser preenchidos')
+  else
+    Result := True;
+end;
+
+
 function Tfrm_menuEscola.CamposValidosTurma: Boolean;
 begin
   //Valida todos os campos
@@ -543,6 +629,11 @@ begin
 
 end;
 
+function Tfrm_menuEscola.GetDescricaoMateria: String;
+begin
+  Result := edt_descricao_pnl_addNEdit_materias.Text;
+end;
+
 function Tfrm_menuEscola.GetDescTurma: String;
 begin
   Result := edt_Descricao_addNEdit_Turma_EscolaMenu.Text;
@@ -573,6 +664,11 @@ begin
   Result := edt_nome_addNEdit_EscolaMenu.Text;
 end;
 
+function Tfrm_menuEscola.GetNomeMateria: String;
+begin
+  Result := edt_nome_pnl_addNEdit_materias.Text;
+end;
+
 function Tfrm_menuEscola.GetNomeTurma: String;
 begin
   Result := edt_Nome_Turma_EscolaMenu.Text;
@@ -591,15 +687,42 @@ end;
 
 procedure Tfrm_menuEscola.HomeClick(Sender: TObject);
 begin
+  pnl_materias.Visible := false;
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := true;
   pnl_membros_EscolaMenu.Visible := false;
   pnl_desempenho.Visible := false;
+
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+  pnl_addNEdit_materias.Visible := false;
+
+end;
+
+procedure Tfrm_menuEscola.MatériasClick(Sender: TObject);
+begin
+    // Muda de tela para membros
+  pnl_materias.Visible := true;
+  pnl_turmas_EscolaMenu.Visible := false;
+  pnl_home_EscolaMenu.Visible := false;
+  pnl_desempenho.Visible := false;
+  pnl_membros_EscolaMenu.Visible := false;
+
+  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+
+
+
+
+  d_Src_materias.DataSet := FController.AtualizarTabelaMaterias;
+  dbg_materias.DataSource := d_Src_materias;
+
 end;
 
 procedure Tfrm_menuEscola.MembrosClick(Sender: TObject);
 begin
   // Muda de tela para membros
+  pnl_materias.Visible := false;
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
   pnl_desempenho.Visible := false;
@@ -607,11 +730,17 @@ begin
 
   pnl_addNEdit_EscolaMenu.Visible := false;
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+   pnl_addNEdit_materias.Visible := false;
 
 
 
   d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
   dbg_membrosEscola.DataSource := d_Src_membros_escola;
+end;
+
+procedure Tfrm_menuEscola.Panel1Click(Sender: TObject);
+begin
+  //FController.ShowLastAccess
 end;
 
 procedure Tfrm_menuEscola.pnl_back_EscolaMenuClick(Sender: TObject);
@@ -625,7 +754,7 @@ end;
 
 procedure Tfrm_menuEscola.pnl_desempenho_escolaClick(Sender: TObject);
 begin
-  FController.ShowReport;
+  FController.ShowReportDesempenho;
 end;
 
 procedure Tfrm_menuEscola.PopularCBParticipantes;
@@ -660,6 +789,7 @@ end;
 
 procedure Tfrm_menuEscola.TurmasClick(Sender: TObject);
 begin
+  pnl_materias.Visible := false;
   pnl_membros_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
   pnl_desempenho.Visible := false;
@@ -667,6 +797,7 @@ begin
 
   pnl_addNEdit_EscolaMenu.Visible := false;
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
+   pnl_addNEdit_materias.Visible := false;
 
   // libera dataset antigo (se criado dinamicamente)
  

@@ -24,6 +24,7 @@ public
   function GetAll : TObjectList<TUserModel>;
   function GetAllForTurmas(aID : Integer) : TObjectList<TUserModel>;
   procedure UpdateLastAcess;
+  procedure RegisterLogin;
 end;
 
 
@@ -143,6 +144,11 @@ begin
   FUserDTO.Email := FUser.GetEmail;
   Result := FUserDTO;
 
+end;
+
+procedure TUserService.RegisterLogin;
+begin
+  FUserRepository.RegisterLogin;
 end;
 
 function TUserService.Salvar(aDTO: TUserDTO) : Integer;

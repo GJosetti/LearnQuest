@@ -136,6 +136,7 @@ type
       function GetAll : TObjectList<TUserModel>;
       function GetAllForTurmas(aID :Integer) : TObjectList<TUserModel>;
       procedure UpdateLastAcess;
+      procedure RegisterLogin;
   end;
 
   IEscolaService = interface

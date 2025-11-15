@@ -1,4 +1,4 @@
-﻿unit frm_menu_escola_view;
+unit frm_menu_escola_view;
 
 interface
 
@@ -103,7 +103,7 @@ type
     procedure btn_back_participantes_Escola_MenuClick(Sender: TObject);
     procedure btn_Vincular_AlunoClick(Sender: TObject);
     procedure btn_remover_alunoClick(Sender: TObject);
-    procedure pnl_back_EscolaMenuClick(Sender: TObject);
+
     procedure btn_relatorio_desempenho_escolaClick(Sender: TObject);
     procedure pnl_desempenho_escolaClick(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
@@ -112,6 +112,7 @@ type
     procedure btn_concluir_pnl_addNEdit_materiasClick(Sender: TObject);
     procedure btn_editar_materiasClick(Sender: TObject);
     procedure pnl_back_adminMenuClick(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -748,6 +749,11 @@ end;
 procedure Tfrm_menuEscola.Panel1Click(Sender: TObject);
 begin
   //FController.ShowLastAccess
+end;
+
+procedure Tfrm_menuEscola.Panel2Click(Sender: TObject);
+begin
+  FController.S
 end;
 
 procedure Tfrm_menuEscola.pnl_back_adminMenuClick(Sender: TObject);

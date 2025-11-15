@@ -30,6 +30,7 @@ type
     function GetAllAvailableForTurma(aIDTurma: Integer): TObjectList<TUserModel>;
 
     procedure UpdateLastAcess;
+    procedure RegisterLogin;
   end;
 
 implementation
@@ -39,6 +40,22 @@ implementation
 constructor TUserRepository.Create;
 begin
   FConnection := DataModule1.FDConnection1;
+end;
+
+procedure TUserRepository.RegisterLogin;
+var
+Qry : TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Text :=
+    'INSERT INTO login_logs (user_id) VALUES (:user_id)';
+    Qry.ParamByName('user_id').AsInteger := UsuarioLogado.ID;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
 end;
 
 function TUserRepository.RowToUser(aQuery: TFDQuery): TUserModel;

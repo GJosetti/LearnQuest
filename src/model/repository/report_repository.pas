@@ -32,15 +32,20 @@ begin
     Qry.SQL.Text :=
       'SELECT ' +
       '  u.user_name, ' +
-      '  ROUND(100.0 * SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentagem_acertos ' +
-      'FROM ' +
-      '  public.users u ' +
-      '  INNER JOIN estudante e ON e.user_id = u.id ' +
-      '  INNER JOIN atividade_estudante ae ON ae.estudante_id = e.id ' +
-      'GROUP BY ' +
-      '  u.user_name ' +
-      'ORDER BY ' +
-      '  porcentagem_acertos DESC;';
+      '  ROUND(100.0 * SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END) ' +
+      '        / NULLIF(COUNT(ae.id), 0), 2) AS porcentagem_acertos, ' +
+      '  COUNT(ae.id)::varchar || ''/'' || ' +
+      '  ( ' +
+      '      SELECT COUNT(DISTINCT at2.id)::varchar ' +
+      '      FROM atividade_turma at2 ' +
+      '      INNER JOIN estudante_turma et2 ON et2.turma_id = at2.turma_id ' +
+      '      WHERE et2.estudante_id = e.id ' +
+      '  ) AS progresso ' +
+      'FROM users u ' +
+      'INNER JOIN estudante e ON e.user_id = u.id ' +
+      'LEFT JOIN atividade_estudante ae ON ae.estudante_id = e.id ' +
+      'GROUP BY u.user_name, e.id ' +
+      'ORDER BY porcentagem_acertos DESC';
 
     Qry.Open;
     DataModule1.frxDBDatasetDesempenho.DataSet := Qry;
@@ -65,25 +70,16 @@ begin
     Qry.SQL.Text :=
       'SELECT ' +
       '  u.user_name, ' +
-      '  t.nome AS escola, ' +
-      '  CAST( ' +
-      '    CASE ' +
-      '      WHEN u.last_access IS NULL THEN ''Nunca acessou'' ' +
-      '      WHEN u.last_access > NOW() - INTERVAL ''1 minute'' THEN ''Há alguns segundos'' ' +
-      '      WHEN u.last_access > NOW() - INTERVAL ''1 hour'' THEN CONCAT(EXTRACT(MINUTE FROM AGE(NOW(), u.last_access))::INT, '' minutos atrás'') ' +
-      '      WHEN u.last_access > NOW() - INTERVAL ''1 day'' THEN CONCAT(EXTRACT(HOUR FROM AGE(NOW(), u.last_access))::INT, '' horas atrás'') ' +
-      '      WHEN u.last_access > NOW() - INTERVAL ''30 day'' THEN CONCAT(EXTRACT(DAY FROM AGE(NOW(), u.last_access))::INT, '' dias atrás'') ' +
-      '      WHEN u.last_access > NOW() - INTERVAL ''365 day'' THEN CONCAT(EXTRACT(MONTH FROM AGE(NOW(), u.last_access))::INT, '' meses atrás'') ' +
-      '      ELSE CONCAT(EXTRACT(YEAR FROM AGE(NOW(), u.last_access))::INT, '' anos atrás'') ' +
-      '    END AS VARCHAR(50) ' +
-      '  ) AS ultimo_acesso, ' +
-      '  u.last_access ' +
-      'FROM users u ' +
-      'INNER JOIN tenants t ON t.id = u.user_escola_id ' +
-      'WHERE t.id = :EscolaID ' +
-      'ORDER BY u.last_access DESC NULLS LAST;';
+      '  COUNT(DISTINCT DATE(ll.login_time)) AS dias_acessou_no_mes, ' +
+      '  TO_CHAR(ll.login_time, ''MM'') AS mes_numero, ' +
+      '  TO_CHAR(ll.login_time, ''TMMonth'') AS mes_nome ' +
+      'FROM login_logs ll ' +
+      'INNER JOIN users u ON u.id = ll.user_id ' +
+      'WHERE u.user_escola_id = :ESCOLA ' +
+      'GROUP BY u.user_name, mes_numero, mes_nome ' +
+      'ORDER BY mes_numero DESC, u.user_name;';
 
-    Qry.ParamByName('EscolaID').AsInteger := AEscolaID;
+    Qry.ParamByName('ESCOLA').AsInteger := AEscolaID;
     Qry.Open;
 
     // Vincula ao FastReport

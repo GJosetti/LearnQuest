@@ -67,17 +67,16 @@ begin
   try
     Qry.Connection := DataModule1.FDConnection1;
 
-    Qry.SQL.Text :=
+   Qry.SQL.Text :=
       'SELECT ' +
       '  u.user_name, ' +
-      '  COUNT(DISTINCT DATE(ll.login_time)) AS dias_acessou_no_mes, ' +
-      '  TO_CHAR(ll.login_time, ''MM'') AS mes_numero, ' +
-      '  TO_CHAR(ll.login_time, ''TMMonth'') AS mes_nome ' +
+      '  COUNT(DISTINCT DATE(ll.data_login)) AS dias_acessados, ' +
+      '  TO_CHAR(ll.data_login, ''MM/YYYY'')::VARCHAR AS mes_do_registro ' +
       'FROM login_logs ll ' +
       'INNER JOIN users u ON u.id = ll.user_id ' +
       'WHERE u.user_escola_id = :ESCOLA ' +
-      'GROUP BY u.user_name, mes_numero, mes_nome ' +
-      'ORDER BY mes_numero DESC, u.user_name;';
+      'GROUP BY u.user_name, TO_CHAR(ll.data_login, ''MM/YYYY'') ' +
+      'ORDER BY mes_do_registro, u.user_name';
 
     Qry.ParamByName('ESCOLA').AsInteger := AEscolaID;
     Qry.Open;
@@ -88,7 +87,7 @@ begin
     DataModule1.frxReportLastAccess.DataSets.Add(DataModule1.frxDBDatasetLastAccess);
 
     // Mostra o relatório
-    DataModule1.frxReportDesempenho.ShowReport();
+    DataModule1.frxReportLastAccess.ShowReport();
 
   except
     on E: Exception do

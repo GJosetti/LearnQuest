@@ -30,6 +30,9 @@ type
     frxDBDatasetLastAccess: TfrxDBDataset;
     FDQueryRelatorioLastAccess: TFDQuery;
     frxReportLastAccess: TfrxReport;
+    FDQueryRelatorioLastAccessuser_name: TWideStringField;
+    FDQueryRelatorioLastAccessdias_acessados: TLargeintField;
+    FDQueryRelatorioLastAccessmes_do_registro: TWideStringField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

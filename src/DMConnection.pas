@@ -27,13 +27,12 @@ type
     FDQueryRelatorioDesempenho: TFDQuery;
     frxDBDatasetDesempenho: TfrxDBDataset;
     frxReportDesempenho: TfrxReport;
-    FDQueryRelatorioDesempenhouser_name: TWideStringField;
-    FDQueryRelatorioDesempenhoporcentagem_acertos: TFMTBCDField;
     frxDBDatasetLastAccess: TfrxDBDataset;
     FDQueryRelatorioLastAccess: TFDQuery;
-    WideStringField1: TWideStringField;
-    FMTBCDField1: TFMTBCDField;
     frxReportLastAccess: TfrxReport;
+    FDQueryRelatorioLastAccessuser_name: TWideStringField;
+    FDQueryRelatorioLastAccessdias_acessados: TLargeintField;
+    FDQueryRelatorioLastAccessmes_do_registro: TWideStringField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

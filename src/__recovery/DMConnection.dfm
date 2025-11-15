@@ -462,29 +462,55 @@ object DataModule1: TDataModule1
         FieldName = 'dias_acessados'
       end
       item
-        FieldName = 'mes_do_registro'
+        FieldName = 'mes_ano'
+        FieldType = fftString
+        Size = 8190
       end>
   end
   object FDQueryRelatorioLastAccess: TFDQuery
-    Active = True
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT '
+      'SELECT'
       '    u.user_name,'
-      '    COUNT(DISTINCT DATE(l.data_login)) AS dias_acessados,'
-      '    TO_CHAR(l.data_login, '#39'MM/YYYY'#39') AS mes_do_registro'
-      'FROM '
-      '    public.users u'
-      'LEFT JOIN '
-      '    public.login_logs l ON l.user_id = u.id'
-      'GROUP BY '
+      '    COUNT(DISTINCT DATE(ll.data_login)) AS dias_acessados,'
+      ''
+      
+        '    TO_CHAR(ll.data_login, '#39'MM/YYYY'#39')::VARCHAR AS mes_do_registr' +
+        'o'
+      ''
+      'FROM login_logs ll'
+      'INNER JOIN users u ON u.id = ll.user_id'
+      ''
+      'WHERE u.user_escola_id = 33'
+      ''
+      'GROUP BY'
       '    u.user_name,'
-      '    mes_do_registro'
-      'ORDER BY '
-      '    mes_do_registro DESC,'
-      '    dias_acessados DESC;')
+      '    TO_CHAR(ll.data_login, '#39'MM/YYYY'#39')'
+      ''
+      'ORDER BY'
+      '    mes_do_registro,'
+      '    u.user_name;'
+      '')
     Left = 560
     Top = 8
+    object FDQueryRelatorioLastAccessuser_name: TWideStringField
+      FieldName = 'user_name'
+      Origin = 'user_name'
+      Size = 255
+    end
+    object FDQueryRelatorioLastAccessdias_acessados: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'dias_acessados'
+      Origin = 'dias_acessados'
+      ReadOnly = True
+    end
+    object FDQueryRelatorioLastAccessmes_do_registro: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'mes_do_registro'
+      Origin = 'mes_do_registro'
+      ReadOnly = True
+      Size = 8190
+    end
   end
   object frxReportLastAccess: TfrxReport
     Version = '2026.1.1'
@@ -494,8 +520,8 @@ object DataModule1: TDataModule1
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45976.778352592590000000
-    ReportOptions.LastChange = 45976.778352592590000000
+    ReportOptions.CreateDate = 45976.778352592600000000
+    ReportOptions.LastChange = 45976.778995474540000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -591,14 +617,14 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 26.456710815429690000
-        Top = 18.897649765014650000
-        Width = 718.110717773437500000
+        Height = 26.456710000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
           Width = 718.110717773437500000
-          Height = 22.677179336547850000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -621,13 +647,13 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 22.677179336547850000
-        Top = 68.031539916992190000
-        Width = 718.110717773437500000
+        Height = 22.677180000000000000
+        Top = 68.031540000000000000
+        Width = 718.110700000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
-          Width = 718.110229492187500000
-          Height = 22.677179336547850000
+          Width = 718.110236220472000000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -640,8 +666,8 @@ object DataModule1: TDataModule1
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Width = 612.110229492187500000
-          Height = 22.677179336547850000
+          Width = 612.110236220472000000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -656,9 +682,9 @@ object DataModule1: TDataModule1
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 612.110229492187500000
+          Left = 612.110236220472000000
           Width = 106.000000000000000000
-          Height = 22.677179336547850000
+          Height = 22.677180000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -679,16 +705,18 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 26.456710815429690000
-        Top = 151.181198120117200000
-        Width = 718.110717773437500000
+        Height = 26.456710000000000000
+        Top = 151.181200000000000000
+        Width = 718.110700000000000000
         KeepWithData = False
         Condition = 'frxDBDataset1."mes_do_registro"'
         object Memo5: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
           Width = 718.110717773437500000
-          Height = 22.677179336547850000
+          Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataField = 'mes_do_registro'
           DataSet = frxDBDatasetLastAccess
           DataSetName = 'frxDBDataset1'
@@ -700,7 +728,7 @@ object DataModule1: TDataModule1
           Frame.Typ = []
           Fill.BackColor = 15790320
           Memo.UTF8W = (
-            '11/2025')
+            '[frxDBDataset1."mes_do_registro"]')
           ParentFont = False
           Style = 'Group header'
           VAlign = vaCenter
@@ -713,16 +741,16 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 18.897649765014650000
-        Top = 200.315093994140600000
-        Width = 718.110717773437500000
+        Height = 18.897650000000000000
+        Top = 200.315090000000000000
+        Width = 718.110700000000000000
         DataSet = frxDBDatasetLastAccess
         DataSetName = 'frxDBDataset1'
         RowCount = 0
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Width = 612.110229492187500000
-          Height = 18.897649765014650000
+          Width = 612.110236220472000000
+          Height = 18.897650000000000000
           DataField = 'user_name'
           DataSet = frxDBDatasetLastAccess
           DataSetName = 'frxDBDataset1'
@@ -733,15 +761,15 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            'a')
+            '[frxDBDataset1."user_name"]')
           ParentFont = False
           Style = 'Data'
         end
         object Memo7: TfrxMemoView
           AllowVectorExport = True
-          Left = 612.110229492187500000
+          Left = 612.110236220472000000
           Width = 106.000000000000000000
-          Height = 18.897649765014650000
+          Height = 18.897650000000000000
           DataField = 'dias_acessados'
           DataSet = frxDBDatasetLastAccess
           DataSetName = 'frxDBDataset1'
@@ -752,7 +780,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '1')
+            '[frxDBDataset1."dias_acessados"]')
           ParentFont = False
           Style = 'Data'
         end
@@ -764,8 +792,8 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Top = 241.889923095703100000
-        Width = 718.110717773437500000
+        Top = 241.889920000000000000
+        Width = 718.110700000000000000
         KeepWithData = False
       end
       object PageFooter1: TfrxPageFooter
@@ -775,9 +803,9 @@ object DataModule1: TDataModule1
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 26.456710815429690000
-        Top = 302.362396240234400000
-        Width = 718.110717773437500000
+        Height = 26.456710000000000000
+        Top = 302.362400000000000000
+        Width = 718.110700000000000000
         object Memo8: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
@@ -788,7 +816,7 @@ object DataModule1: TDataModule1
         object Memo9: TfrxMemoView
           AllowVectorExport = True
           Top = 1.000000000000000000
-          Height = 22.677179336547850000
+          Height = 22.677180000000000000
           AutoWidth = True
           Frame.Typ = []
           Memo.UTF8W = (
@@ -797,10 +825,10 @@ object DataModule1: TDataModule1
         object Memo10: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 642.520141601562500000
+          Left = 642.520117773437500000
           Top = 1.000000000000000000
-          Width = 75.590599060058590000
-          Height = 22.677179336547850000
+          Width = 75.590600000000000000
+          Height = 22.677180000000000000
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (

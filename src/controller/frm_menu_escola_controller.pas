@@ -49,6 +49,7 @@ public
 
 
     procedure ShowReportDesempenho();
+    procedure ShowReporFrequencia();
 
 
 end;
@@ -242,6 +243,11 @@ end;
 function TMenuAdminController.RetornarMembro(aID: Integer): TUserDTO;
 begin
 
+end;
+
+procedure TMenuAdminController.ShowReporFrequencia;
+begin
+  FServiceReport.ShowRelatorioUltimosAcessos(UsuarioLogado.Escola);
 end;
 
 procedure TMenuAdminController.ShowReportDesempenho;

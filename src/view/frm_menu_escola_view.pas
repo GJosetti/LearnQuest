@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections, App_Consts, materia_entity;
+  Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, Sessao, frm_menu_escola_controller, user_DTO,turma_DTO,users_entity, System.Generics.Collections, App_Consts, materia_entity,
+  Vcl.Imaging.pngimage;
 
 type
   TMode = (m_Add,m_Edit);
@@ -49,7 +50,6 @@ type
     btn_Sair_addNEdit_Turma_EscolaMenu: TPanel;
     edt_Descricao_addNEdit_Turma_EscolaMenu: TEdit;
     cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu: TComboBox;
-    pnl_back_EscolaMenu: TPanel;
     pnl_participantes_Turma: TPanel;
     dbg_participantes_turma: TDBGrid;
     btn_ListarMembros: TPanel;
@@ -79,6 +79,9 @@ type
     btn_sair_pnl_addNEdit_materias: TPanel;
     edt_descricao_pnl_addNEdit_materias: TEdit;
     d_Src_materias: TDataSource;
+    BG: TImage;
+    SideMenu: TImage;
+    pnl_back_adminMenu: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

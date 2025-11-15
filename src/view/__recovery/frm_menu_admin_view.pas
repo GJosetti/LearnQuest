@@ -11,7 +11,6 @@ uses
 type
   TMode = (m_ADD,m_EDIT);
   Tfrm_menuAdmin_view = class(TForm, IMenuAdminView)
-    Escolas: TButton;
     pnl_home_adminMenu: TPanel;
     Home: TButton;
     pnl_escolas_adminMenu: TPanel;
@@ -35,9 +34,11 @@ type
     lbl_title_UserAdmin_pnl_AddNEdit_adminMenu: TLabel;
     edt_email_addNEdit_adminMenu: TEdit;
     lbl_email_addNEdit_adminMenu: TLabel;
-    pnl_back_adminMenu: TPanel;
     edt_CEP_addNEdit_adminMenu: TMaskEdit;
     BG: TImage;
+    pnl_SideMenu: TPanel;
+    pnl_back_adminMenu: TImage;
+    Escolas: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
@@ -126,7 +127,7 @@ begin
   FPreventColumnMove := True;
 
     try
-      // recoloca a coluna de volta à posição original (FromIndex)
+      // recoloca a coluna de volta Ã  posiÃ§Ã£o original (FromIndex)
       col.Index := FromIndex;
     finally
       FPreventColumnMove := False;
@@ -136,7 +137,7 @@ end;
 
 procedure Tfrm_menuAdmin_view.btn_adicionar_adminMenuClick(Sender: TObject);
 begin
-// 1 - DEIXA O PANEL VISIVEL; 2- VERIFICA SE É UM ADD OU EDIT; 3- FAZ AS DEVIDAS ALTERAÇÕES;
+// 1 - DEIXA O PANEL VISIVEL; 2- VERIFICA SE Ã‰ UM ADD OU EDIT; 3- FAZ AS DEVIDAS ALTERAÃ‡Ã•ES;
   pnl_addNEdit_adminMenu.Visible := true;
   Fmode := m_ADD;
   ClearAllEdits;
@@ -219,13 +220,13 @@ procedure Tfrm_menuAdmin_view.btn_remover_adminMenuClick(Sender: TObject);
 begin
 
 FID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
-//Confirmação de exclusão
+//ConfirmaÃ§Ã£o de exclusÃ£o
 if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
               [mbYes, mbNo], 0) = mrYes then
 begin
   FController.Delete(FID);
   FController.AtualizarTabelaEscolas;
-  ShowMessage('Registro excluído!');
+  ShowMessage('Registro excluÃ­do!');
 end;
 
 
@@ -292,7 +293,7 @@ procedure Tfrm_menuAdmin_view.HomeClick(Sender: TObject);
 begin
   pnl_home_adminMenu.Visible := true;
   pnl_escolas_adminMenu.Visible := false;
-  //Limpar Lista na memória
+  //Limpar Lista na memÃ³ria
 end;
 
 procedure Tfrm_menuAdmin_view.pnl_back_adminMenuClick(Sender: TObject);

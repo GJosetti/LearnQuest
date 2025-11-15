@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 573
-  Width = 640
+  Height = 563
+  Width = 799
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=postgres'
@@ -78,8 +78,8 @@ object DataModule1: TDataModule1
       '    escola_74.atividade_estudante ae ON ae.estudante_id = e.id'
       'GROUP BY '
       '    u.user_name;')
-    Left = 448
-    Top = 208
+    Left = 456
+    Top = 192
     object FDQueryRelatorioDesempenhouser_name: TWideStringField
       FieldName = 'user_name'
       Origin = 'user_name'
@@ -100,13 +100,21 @@ object DataModule1: TDataModule1
     DataSet = FDQueryRelatorioDesempenho
     BCDToCurrency = False
     DataSetOptions = []
-    Left = 503
-    Top = 192
+    Left = 527
+    Top = 184
+    FieldDefs = <
+      item
+        FieldName = 'user_name'
+        FieldType = fftString
+        Size = 255
+      end
+      item
+        FieldName = 'porcentagem_acertos'
+        Size = 64
+      end>
   end
   object frxReportDesempenho: TfrxReport
     Version = '2026.1.1'
-    DataSet = frxDBDatasetDesempenho
-    DataSetName = 'frxDBDatasetDesempenho'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection, pbWatermarks]
@@ -114,15 +122,15 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45973.636955613400000000
-    ReportOptions.LastChange = 45973.641663599530000000
+    ReportOptions.LastChange = 45975.966604594910000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
       'begin'
       ''
       'end.')
-    Left = 568
-    Top = 96
+    Left = 600
+    Top = 152
     Datasets = <
       item
         DataSet = frxDBDatasetDesempenho
@@ -322,7 +330,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDataset1."user_name"]')
+            '[frxDBDatasetDesempenho."user_name"]')
           ParentFont = False
           Style = 'Data'
         end
@@ -342,7 +350,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDataset1."porcentagem_acertos"]%')
+            '[frxDBDataset1."porcentagem_acertos"] %')
           ParentFont = False
           Style = 'Data'
         end
@@ -394,8 +402,8 @@ object DataModule1: TDataModule1
     DataSet = FDQueryRelatorioDesempenho
     BCDToCurrency = False
     DataSetOptions = []
-    Left = 447
-    Top = 32
+    Left = 487
+    Top = 24
   end
   object FDQueryRelatorioLastAccess: TFDQuery
     Connection = FDConnection1
@@ -447,8 +455,8 @@ object DataModule1: TDataModule1
       'begin'
       ''
       'end.')
-    Left = 496
-    Top = 24
+    Left = 568
+    Top = 16
     Datasets = <
       item
         DataSet = frxDBDatasetDesempenho

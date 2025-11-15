@@ -11,6 +11,7 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
+    Connected = True
     Left = 56
     Top = 64
   end
@@ -122,7 +123,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45973.636955613400000000
-    ReportOptions.LastChange = 45975.966604594910000000
+    ReportOptions.LastChange = 45975.966604594900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -350,7 +351,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDataset1."porcentagem_acertos"] %')
+            '[frxDBDatasetDesempenho."porcentagem_acertos"] %')
           ParentFont = False
           Style = 'Data'
         end

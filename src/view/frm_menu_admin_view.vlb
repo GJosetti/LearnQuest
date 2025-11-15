@@ -31,9 +31,6 @@ Coordinates=294,214,200,58
 [btn_editar_adminMenu]
 Coordinates=165,146,146,58
 
-[Escolas]
-Coordinates=10,214,60,58
-
 [lbl_nomeAdmin_addNEdit_adminMenu]
 Coordinates=464,78,237,58
 
@@ -54,9 +51,6 @@ Coordinates=177,418,49,58
 
 [btn_cancelar_addNEdit_adminMenu]
 Coordinates=321,146,222,58
-
-[pnl_back_adminMenu]
-Coordinates=10,282,140,58
 
 [edt_nomeUsurario_addNEdit_adminMenu]
 Coordinates=553,146,254,58
@@ -81,5 +75,5 @@ Coordinates=241,10,72,58
 Visible=True
 
 []
-Coordinates=803,365,91,36
+Coordinates=10,214,60,58
 

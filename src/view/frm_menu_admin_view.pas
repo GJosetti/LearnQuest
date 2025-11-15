@@ -11,7 +11,6 @@ uses
 type
   TMode = (m_ADD,m_EDIT);
   Tfrm_menuAdmin_view = class(TForm, IMenuAdminView)
-    Escolas: TButton;
     pnl_home_adminMenu: TPanel;
     Home: TButton;
     pnl_escolas_adminMenu: TPanel;
@@ -35,9 +34,11 @@ type
     lbl_title_UserAdmin_pnl_AddNEdit_adminMenu: TLabel;
     edt_email_addNEdit_adminMenu: TEdit;
     lbl_email_addNEdit_adminMenu: TLabel;
-    pnl_back_adminMenu: TPanel;
     edt_CEP_addNEdit_adminMenu: TMaskEdit;
     BG: TImage;
+    pnl_SideMenu: TPanel;
+    pnl_back_adminMenu: TImage;
+    Escolas: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);

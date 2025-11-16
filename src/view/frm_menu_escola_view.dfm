@@ -19,6 +19,7 @@
     Width = 1073
     Height = 720
     BevelOuter = bvNone
+    Color = 4210688
     DoubleBuffered = True
     ParentBackground = False
     ParentDoubleBuffered = False
@@ -1538,6 +1539,7 @@
     Width = 1064
     Height = 720
     BevelOuter = bvNone
+    Color = 4210688
     DoubleBuffered = True
     ParentBackground = False
     ParentDoubleBuffered = False
@@ -2869,6 +2871,7 @@
     Width = 1064
     Height = 720
     BevelOuter = bvNone
+    Color = 4210688
     DoubleBuffered = True
     ParentBackground = False
     ParentDoubleBuffered = False
@@ -4348,6 +4351,7 @@
     Width = 1064
     Height = 720
     BevelOuter = bvNone
+    Color = 4210688
     DoubleBuffered = True
     ParentBackground = False
     ParentDoubleBuffered = False
@@ -5949,6 +5953,7 @@
     Width = 1073
     Height = 728
     BevelOuter = bvNone
+    Color = 4210688
     DoubleBuffered = True
     ParentBackground = False
     ParentDoubleBuffered = False
@@ -8289,7 +8294,7 @@
     end
     object pnl_back_adminMenu: TImage
       Left = 10
-      Top = 24
+      Top = 20
       Width = 191
       Height = 89
       Picture.Data = {

@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller, frm_create_atividade_view, atividade_entity;
+  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, my_contracts, frm_menu_professor_controller, frm_create_atividade_view, atividade_entity,
+  Vcl.Imaging.pngimage;
 
 type
   Tfrm_menu_professor = class(TForm, ITelaProfessorView)
@@ -16,7 +17,6 @@ type
     pnl_sideMenu: TPanel;
     btn_minhas_turmas: TButton;
     btn_home: TButton;
-    pnl_back: TPanel;
     btn_minhas_atividades: TButton;
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
@@ -30,6 +30,11 @@ type
     btn_link: TPanel;
     btn_cancel_link_atividade: TPanel;
     pnl_desempenho_turmas: TPanel;
+    bg_atividades: TImage;
+    bg_turmas: TImage;
+    SideMenu: TImage;
+    pnl_back: TImage;
+    Image1: TImage;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

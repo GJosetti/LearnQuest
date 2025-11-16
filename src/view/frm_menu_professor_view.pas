@@ -29,6 +29,7 @@ type
     lbl_nome_turma: TLabel;
     btn_link: TPanel;
     btn_cancel_link_atividade: TPanel;
+    pnl_desempenho_turmas: TPanel;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -39,6 +40,7 @@ type
     procedure btn_atribuir_atividadeClick(Sender: TObject);
     procedure btn_linkClick(Sender: TObject);
     procedure btn_cancel_link_atividadeClick(Sender: TObject);
+    procedure pnl_desempenho_turmasClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -168,6 +170,11 @@ begin
   frm_login := Tfrm_login.Create(nil);
   frm_login.ShowModal;
   Self.Close;
+end;
+
+procedure Tfrm_menu_professor.pnl_desempenho_turmasClick(Sender: TObject);
+begin
+  FController.ShowReportAtividades;
 end;
 
 end.

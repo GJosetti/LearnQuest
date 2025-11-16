@@ -254,7 +254,7 @@ object frm_menu_professor: Tfrm_menu_professor
         end>
     end
     object pnl_adicionar_atividades: TPanel
-      Left = 383
+      Left = 240
       Top = 504
       Width = 66
       Height = 29
@@ -265,7 +265,7 @@ object frm_menu_professor: Tfrm_menu_professor
       OnClick = pnl_adicionar_atividadesClick
     end
     object pnL_edit_atividade: TPanel
-      Left = 583
+      Left = 663
       Top = 504
       Width = 66
       Height = 29
@@ -274,6 +274,17 @@ object frm_menu_professor: Tfrm_menu_professor
       ParentBackground = False
       TabOrder = 2
       OnClick = pnL_edit_atividadeClick
+    end
+    object pnl_desempenho_turmas: TPanel
+      Left = 336
+      Top = 555
+      Width = 273
+      Height = 29
+      Caption = 'Desempenho das turmas'
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 3
+      OnClick = pnl_desempenho_turmasClick
     end
   end
   object d_src_turmas: TDataSource

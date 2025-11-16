@@ -588,6 +588,8 @@ begin
   edt_nome_addNEdit_EscolaMenu.Clear;
   edt_password_addNEdit__EscolaMenu.Clear;
   edt_email_addNEdit_EscolaMenu.Clear;
+  edt_nome_pnl_addNEdit_materias.Clear;
+  edt_descricao_pnl_addNEdit_materias.Clear;
   cb_role_addNEdit_EscolaMenu.ItemIndex := -1;
   cb_role_addNEdit_EscolaMenu.TextHint := 'Selecione um tipo:';
 

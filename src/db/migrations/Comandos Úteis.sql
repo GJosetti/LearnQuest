@@ -113,6 +113,8 @@ JOIN public.users u ON u.id = e.user_id
 WHERE u.id = :user_id;
 
 
+select * from login_logs;
+
 ALTER TABLE users ADD COLUMN last_access TIMESTAMP;
 
 select *from  users u;

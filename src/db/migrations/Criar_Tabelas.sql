@@ -104,11 +104,7 @@ CREATE TABLE atividade_estudante (
     completed_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE login_logs (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
-    data_login TIMESTAMP NOT NULL DEFAULT NOW()
-);
+
 
 
 

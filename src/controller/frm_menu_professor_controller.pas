@@ -1,7 +1,7 @@
 unit frm_menu_professor_controller;
 
 interface
-uses my_contracts, Data.DB, atividades_service, professor_service,turma_service, Sessao;
+uses my_contracts, Data.DB, atividades_service, professor_service,turma_service,report_service, Sessao;
 
 type
 
@@ -12,13 +12,14 @@ private
 FAtividadeService : IAtividadesService;
 FProfessorService : IProfessorService;
 FTurmaService : TTurmaService;
+FRelatorioService : IReportService;
 
 public
   function AtualizarTabelaTurmas : TDataSet ;
   function AtualizarTabelaAtividades : TDataSet ;
   constructor Create;
   procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
-
+  procedure ShowReportAtividades;
 
 end;
 
@@ -38,11 +39,19 @@ begin
   if not Assigned(FTurmaService) then begin
     FTurmaService := TTurmaService.Create;
   end;
+  if not Assigned(FRelatorioService) then begin
+    FRelatorioService := TReportService.Create;
+  end;
 end;
 
 procedure TMenuProfessorController.LinkAtividades(aAtividadeID, aTurmaID: Integer);
 begin
   FTurmaService.LinkAtividade(aAtividadeID,aTurmaID);
+end;
+
+procedure TMenuProfessorController.ShowReportAtividades;
+begin
+  FRelatorioService.ShowReportAtividades(UsuarioLogado.Escola);
 end;
 
 function TMenuProfessorController.AtualizarTabelaAtividades: TDataSet;

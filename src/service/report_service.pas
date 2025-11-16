@@ -14,7 +14,7 @@ public
   constructor Create;
   procedure ShowReportDesempenho();
   procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
-
+  procedure ShowReportAtividades(const AEscolaID : Integer);
 
 
 
@@ -35,6 +35,11 @@ end;
 procedure TReportService.ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
 begin
   FRepo.ShowRelatorioUltimosAcessos(AEscolaID);
+end;
+
+procedure TReportService.ShowReportAtividades(const AEscolaID: Integer);
+begin
+  FRepo.ShowReportAtividades(AEscolaID);
 end;
 
 procedure TReportService.ShowReportDesempenho;

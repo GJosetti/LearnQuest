@@ -102,7 +102,7 @@ type
   IReportRepository = interface
     procedure ShowReportDesempenho();
     procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
-
+    procedure ShowReportAtividades(const AEscolaID : Integer);
 
 
   end;
@@ -210,6 +210,7 @@ type
       IReportService = interface
       procedure ShowReportDesempenho();
       procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
+      procedure ShowReportAtividades(const AEscolaID : Integer);
 
       end;
 
@@ -337,6 +338,7 @@ type
     function AtualizarTabelaTurmas : TDataSet ;
     function AtualizarTabelaAtividades : TDataSet;
     procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
+    procedure ShowReportAtividades;
   end;
 
   //-----------------Tela Professores---------------------//

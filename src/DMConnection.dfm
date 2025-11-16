@@ -462,7 +462,9 @@ object DataModule1: TDataModule1
         FieldName = 'dias_acessados'
       end
       item
-        FieldName = 'mes_do_registro'
+        FieldName = 'mes_ano'
+        FieldType = fftString
+        Size = 8190
       end>
   end
   object FDQueryRelatorioLastAccess: TFDQuery

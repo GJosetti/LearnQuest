@@ -163,6 +163,8 @@ end;
 procedure Tfrm_menuEscola.btn_adicionar_EscolaMenuClick(Sender: TObject);
 begin
   pnl_addNEdit_EscolaMenu.Visible := true;
+  lbl_role_addNEdit_EscolaAdmin.Visible := true;
+  cb_role_addNEdit_EscolaMenu.Visible := true;
   Fmode := m_Add;
 end;
 
@@ -328,7 +330,8 @@ begin
   pnl_addNEdit_EscolaMenu.Visible := True;
   pnl_addNEdit_Turma_EscolaMenu.Visible := False;
   pnl_participantes_Turma.Visible := False;
-
+  cb_role_addNEdit_EscolaMenu.Visible := false;
+  lbl_role_addNEdit_EscolaAdmin.Visible := false;
   // define modo
   FMode := m_Edit;
 

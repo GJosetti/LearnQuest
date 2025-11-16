@@ -30,8 +30,6 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     ParentBackground = False
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 1281
-    ExplicitHeight = 721
     object BG: TImage
       Left = 1
       Top = 1

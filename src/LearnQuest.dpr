@@ -50,7 +50,8 @@ uses
   report_service in 'service\report_service.pas',
   materia_entity in 'model\entity\materia_entity.pas',
   materia_service in 'service\materia_service.pas',
-  materia_repository in 'model\repository\materia_repository.pas';
+  materia_repository in 'model\repository\materia_repository.pas',
+  ViaCepAPI in 'ViaCepAPI.pas';
 
 {$R *.res}
 

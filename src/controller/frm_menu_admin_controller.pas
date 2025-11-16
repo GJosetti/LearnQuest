@@ -2,7 +2,7 @@ unit frm_menu_admin_controller;
 
 
 interface
-uses my_contracts, Data.DB, escola_service, user_DTO, escolas_DTO, App_Consts,System.SysUtils, user_service, AdminService,DMConnection;
+uses my_contracts, Data.DB, escola_service, user_DTO, escolas_DTO, App_Consts,System.SysUtils, user_service, AdminService,DMConnection, ViaCepAPI;
 
 
 
@@ -16,6 +16,7 @@ private
  FServiceEscola : IEscolaService;
  FServiceUser: IUserService;
  FAdminService : IAdminService;
+ FCepAPI : ICepApi;
 
 public
 constructor Create(aView: IMenuAdminView);
@@ -26,6 +27,7 @@ function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
 function RetornarEscola(aID : Integer) : TEscolaDTO;
 procedure Update;
 procedure Delete(aID: Integer);
+function ValidarCep(aString : String) : Boolean;
 
 end;
 
@@ -46,6 +48,9 @@ begin
   end;
   if not Assigned(FAdminService) then begin
     FAdminService := TAdminService.Create(DataModule1.FDConnection1,FServiceEscola,FServiceUser);
+  end;
+  if not Assigned(FCepAPI) then begin
+    FCepAPI := TCepAPI.Create;
   end;
 
 end;
@@ -91,6 +96,11 @@ begin
 
   FServiceUser.Update(UsuarioDTO);
   FServiceEscola.Update(EscolaDTO);
+end;
+
+function TMenuAdminController.ValidarCep(aString : String): Boolean;
+begin
+  Result := FCepAPI.CEPValido(aString);
 end;
 
 procedure TMenuAdminController.AdicionarEscola;

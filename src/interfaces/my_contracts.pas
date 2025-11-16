@@ -7,6 +7,12 @@ turma_DTO,turma_entity, System.Classes,System.Generics.Collections,atividade_ent
 type
 
 
+//API
+  ICepApi = interface
+  function CEPValido(const ACEP: string): Boolean;
+  end;
+
+
 
 //User Repo
  IUserRepository = interface
@@ -262,6 +268,7 @@ type
     function RetornarUsuarioAdmin (aID : Integer) : TUserDTO;
     procedure Update;
     procedure Delete(aID : Integer);
+    function ValidarCep(aString : String) : Boolean;
   end;
 
 

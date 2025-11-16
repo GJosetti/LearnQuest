@@ -156,6 +156,9 @@ procedure Tfrm_menuAdmin_view.btn_concluir_addNEdit_adminMenuClick(
   Sender: TObject);
 begin
 
+  if(FController.ValidarCep(edt_CEP_addNEdit_adminMenu.Text) = False) then begin
+    raise Exception.Create('O CEP inserido é inválido');
+  end;
 
   if CamposValidos then begin
     if Fmode = m_ADD then begin
@@ -168,6 +171,7 @@ begin
     FController.AtualizarTabelaEscolas;
     pnl_addNEdit_adminMenu.Visible := false;
     ClearAllEdits;
+
 
   end;
 

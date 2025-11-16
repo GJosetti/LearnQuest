@@ -207,6 +207,7 @@
         <DCCReference Include="model\entity\materia_entity.pas"/>
         <DCCReference Include="service\materia_service.pas"/>
         <DCCReference Include="model\repository\materia_repository.pas"/>
+        <DCCReference Include="ViaCepAPI.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

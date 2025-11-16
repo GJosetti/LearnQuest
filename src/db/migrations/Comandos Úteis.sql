@@ -136,6 +136,7 @@ GROUP BY
 
 select * from escola_33.atividades; 
 
+select * from escola_37.atividade_turma at2 ;
 
 INSERT INTO escola_73.atividades (
     template_id,

@@ -33,6 +33,17 @@ type
     FDQueryRelatorioLastAccessuser_name: TWideStringField;
     FDQueryRelatorioLastAccessdias_acessados: TLargeintField;
     FDQueryRelatorioLastAccessmes_do_registro: TWideStringField;
+    FDQueryRelatorioAtividades: TFDQuery;
+    frxDBDatasetAtividades: TfrxDBDataset;
+    frxReportAtividades: TfrxReport;
+    FDQueryRelatorioAtividadesatividade_id: TLargeintField;
+    FDQueryRelatorioAtividadesatividade_nome: TWideStringField;
+    FDQueryRelatorioAtividadesmateria_nome: TWideStringField;
+    FDQueryRelatorioAtividadesturma_nome: TWideStringField;
+    FDQueryRelatorioAtividadesprofessor_id: TLargeintField;
+    FDQueryRelatorioAtividadestotal_tentativas: TLargeintField;
+    FDQueryRelatorioAtividadestotal_acertos: TLargeintField;
+    FDQueryRelatorioAtividadesporcentagem_acerto: TFMTBCDField;
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private

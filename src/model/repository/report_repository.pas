@@ -39,12 +39,12 @@ begin
       '    SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END) AS total_acertos, ' +
       '    ROUND( (SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END)::decimal / ' +
       '           NULLIF(COUNT(ae.id), 0)) * 100, 2 ) AS porcentagem_acerto ' +
-      'FROM escola_37_atividade_estudante ae ' +
-      'JOIN escola_37_atividade_turma at ON ae.atividade_turma_id = at.id ' +
-      'JOIN escola_37_atividades a ON at.atividade_id = a.id ' +
-      'LEFT JOIN escola_37_materias m ON a.materia_id = m.id ' +
-      'LEFT JOIN escola_37_turmas t ON at.turma_id = t.id ' +
-      'LEFT JOIN escola_37_professores p ON a.professor_id = p.id ' +
+      'FROM atividade_estudante ae ' +
+      'JOIN atividade_turma at ON ae.atividade_turma_id = at.id ' +
+      'JOIN atividades a ON at.atividade_id = a.id ' +
+      'LEFT JOIN materias m ON a.materia_id = m.id ' +
+      'LEFT JOIN turmas t ON at.turma_id = t.id ' +
+      'LEFT JOIN professores p ON a.professor_id = p.id ' +
       'LEFT JOIN users u ON u.id = p.user_id ' + // para filtrar pela escola
       'WHERE u.user_escola_id = :ESCOLA ' +
       'GROUP BY a.id, a.title, m.name, t.turma_name, p.id ' +
@@ -114,13 +114,13 @@ begin
   try
     Qry.Connection := DataModule1.FDConnection1;
 
-   Qry.SQL.Text :=
+    Qry.SQL.Text :=
       'SELECT ' +
       '  u.user_name, ' +
-      '  COUNT(DISTINCT DATE(ll.data_login)) AS dias_acessados, ' +
-      '  TO_CHAR(ll.data_login, ''MM/YYYY'')::VARCHAR AS mes_do_registro ' +
-      'FROM login_logs ll ' +
-      'INNER JOIN users u ON u.id = ll.user_id ' +
+      '  COALESCE(COUNT(DISTINCT DATE(ll.data_login)), 0) AS dias_acessados, ' +
+      '  COALESCE(TO_CHAR(ll.data_login, ''MM/YYYY'')::VARCHAR, ''Sem Acessos'') AS mes_do_registro ' +
+      'FROM users u ' +
+      'LEFT JOIN login_logs ll ON ll.user_id = u.id ' +
       'WHERE u.user_escola_id = :ESCOLA ' +
       'GROUP BY u.user_name, TO_CHAR(ll.data_login, ''MM/YYYY'') ' +
       'ORDER BY mes_do_registro, u.user_name';
@@ -133,13 +133,17 @@ begin
     DataModule1.frxReportLastAccess.DataSets.Clear;
     DataModule1.frxReportLastAccess.DataSets.Add(DataModule1.frxDBDatasetLastAccess);
 
-    // Mostra o relatório
+    // Exibe o relatório
     DataModule1.frxReportLastAccess.ShowReport();
 
   except
     on E: Exception do
-      raise Exception.CreateFmt('Erro ao gerar relatório de últimos acessos: %s', [E.Message]);
+      raise Exception.CreateFmt(
+        'Erro ao gerar relatório de últimos acessos: %s',
+        [E.Message]
+      );
   end;
 end;
+
 
 end.

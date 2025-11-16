@@ -79,9 +79,13 @@ type
     btn_sair_pnl_addNEdit_materias: TPanel;
     edt_descricao_pnl_addNEdit_materias: TEdit;
     d_Src_materias: TDataSource;
-    BG: TImage;
     SideMenu: TImage;
     pnl_back_adminMenu: TImage;
+    img_panel_back: TImage;
+    bg_enabled: TImage;
+    bg_home: TImage;
+    bg_materias: TImage;
+    bg_turmas: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -170,6 +174,7 @@ end;
 
 procedure Tfrm_menuEscola.btn_adicionar_materiasClick(Sender: TObject);
 begin
+  lbl_title_pnl_addNEdit_Materias.Caption := 'Adicionar Matéria';
   pnl_addNEdit_materias.Visible := true;
   Fmode := m_Add;
 end;
@@ -183,7 +188,7 @@ end;
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
-  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_materias.Visible := false;
   ClearAllEdits;
 end;
 
@@ -355,7 +360,7 @@ FName := dbg_materias.DataSource.DataSet.FieldByName('name').AsString;
 FModel := FController.FindByNameMateria(FName);
 
 FIDMateria := FmODEL.GetID;
-
+lbl_title_pnl_addNEdit_Materias.Caption := 'Editar Matéria';
 pnl_addNEdit_materias.Visible := true;
 
 edt_nome_pnl_addNEdit_materias.Text := FModel.GetName;

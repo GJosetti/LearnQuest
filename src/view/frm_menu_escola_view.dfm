@@ -8630,7 +8630,7 @@
     end
     object btn_relatorio_desempenho_escola: TButton
       Left = 16
-      Top = 478
+      Top = 493
       Width = 161
       Height = 49
       Caption = 'Desempenho'

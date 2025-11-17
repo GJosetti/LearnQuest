@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, my_contracts, Vcl.StdCtrls, Vcl.ExtCtrls,
   Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_admin_controller, user_DTO, Sessao,
-  Vcl.Mask, Vcl.Imaging.pngimage;
+  Vcl.Mask, Vcl.Imaging.pngimage, VclTee.TeeGDIPlus, VCLTee.TeEngine,
+  VCLTee.Series, VCLTee.TeeData, VCLTee.TeeProcs, VCLTee.Chart, VCLTee.DBChart;
 
 type
   TMode = (m_ADD,m_EDIT);
@@ -39,6 +40,10 @@ type
     pnl_SideMenu: TPanel;
     pnl_back_adminMenu: TImage;
     Escolas: TImage;
+    bg_home: TImage;
+    ChartDataSet1: TChartDataSet;
+    DBChart1: TDBChart;
+    Series1: TBarSeries;
 
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);
@@ -51,6 +56,7 @@ type
     procedure dbg_escolasColumnMoved(Sender: TObject; FromIndex,
       ToIndex: LongInt);
     procedure pnl_back_adminMenuClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
 
   private
@@ -76,6 +82,7 @@ type
     function GetEmail: String;
     function CamposValidos: Boolean;
     function GetID : Integer;
+    procedure AtualizarDashBoard;
 
   end;
 
@@ -134,6 +141,13 @@ begin
     end;
 end;
 
+
+procedure Tfrm_menuAdmin_view.AtualizarDashBoard;
+begin
+  DBChart1.Series[0].DataSource := FController.AtualizarTabelaEscolas;
+  DBChart1.Series[0].XLabelsSource := 'nome';
+  DBChart1.Series[0].YValues.ValueSource := 'membros_qtd';
+end;
 
 procedure Tfrm_menuAdmin_view.btn_adicionar_adminMenuClick(Sender: TObject);
 begin
@@ -257,11 +271,17 @@ procedure Tfrm_menuAdmin_view.FormCreate(Sender: TObject);
 begin
   FController := TMenuAdminController.Create(Self);
   Self.Position := poScreenCenter;
-
+  DBChart1.Title.Text.Clear;
+  DBChart1.Title.Text.Add('Dashboard de Escolas');
 
 end;
 
 
+
+procedure Tfrm_menuAdmin_view.FormShow(Sender: TObject);
+begin
+  AtualizarDashBoard;
+end;
 
 function Tfrm_menuAdmin_view.GetCEP: String;
 begin
@@ -295,9 +315,10 @@ end;
 
 procedure Tfrm_menuAdmin_view.HomeClick(Sender: TObject);
 begin
+  AtualizarDashBoard;
   pnl_home_adminMenu.Visible := true;
   pnl_escolas_adminMenu.Visible := false;
-  //Limpar Lista na memória
+
 end;
 
 procedure Tfrm_menuAdmin_view.pnl_back_adminMenuClick(Sender: TObject);

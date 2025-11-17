@@ -5569,7 +5569,7 @@ object frm_login: Tfrm_login
     end
     object img_arbustos: TImage
       Left = 0
-      Top = 16
+      Top = 24
       Width = 1148
       Height = 718
       Picture.Data = {
@@ -6342,7 +6342,7 @@ object frm_login: Tfrm_login
     end
     object btn_login: TImage
       Left = 449
-      Top = 515
+      Top = 516
       Width = 249
       Height = 124
       Center = True
@@ -6480,7 +6480,7 @@ object frm_login: Tfrm_login
     end
     object edt_nome_login: TEdit
       Left = 473
-      Top = 444
+      Top = 460
       Width = 209
       Height = 23
       BevelInner = bvNone
@@ -6492,7 +6492,7 @@ object frm_login: Tfrm_login
     end
     object edt_senha_login: TEdit
       Left = 473
-      Top = 502
+      Top = 500
       Width = 209
       Height = 23
       PasswordChar = '*'

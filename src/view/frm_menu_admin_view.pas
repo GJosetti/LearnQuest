@@ -17,9 +17,6 @@ type
     dbg_escolas: TDBGrid;
     d_Src_escolas: TDataSource;
     SideMenu: TImage;
-    btn_adicionar_adminMenu: TPanel;
-    btn_remover_adminMenu: TPanel;
-    btn_editar_adminMenu: TPanel;
     pnl_addNEdit_adminMenu: TPanel;
     pnl_title_addNEdit_adminMenu: TLabel;
     edt_nome_addNEdit_adminMenu: TEdit;
@@ -44,6 +41,9 @@ type
     DBChart1: TDBChart;
     Series1: TBarSeries;
     Home: TImage;
+    btn_adicionar_adminMenu: TImage;
+    btn_remover_adminMenu: TImage;
+    btn_editar_adminMenu: TImage;
 
     procedure FormCreate(Sender: TObject);
     procedure EscolasClick(Sender: TObject);

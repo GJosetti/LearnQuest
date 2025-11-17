@@ -7,9 +7,6 @@ Coordinates=236,418,87,36
 [pnl_home_adminMenu]
 Coordinates=10,146,145,58
 
-[btn_adicionar_adminMenu]
-Coordinates=330,282,166,58
-
 [lbl_nome_edit_addNEdit_adminMenu]
 Coordinates=10,78,229,58
 
@@ -27,9 +24,6 @@ Coordinates=509,350,218,58
 
 [edt_CEP_addNEdit_adminMenu]
 Coordinates=294,214,200,58
-
-[btn_editar_adminMenu]
-Coordinates=165,146,146,58
 
 [lbl_nomeAdmin_addNEdit_adminMenu]
 Coordinates=464,78,237,58
@@ -55,9 +49,6 @@ Coordinates=553,146,254,58
 [edt_email_addNEdit_adminMenu]
 Coordinates=80,214,204,58
 
-[btn_remover_adminMenu]
-Coordinates=160,282,160,58
-
 [edt_password_addNEdit__adminMenu]
 Coordinates=504,214,235,58
 
@@ -72,5 +63,5 @@ Coordinates=241,10,72,58
 Visible=True
 
 []
-Coordinates=177,418,49,58
+Coordinates=165,146,146,58
 

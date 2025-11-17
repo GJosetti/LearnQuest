@@ -13,9 +13,9 @@ object frm_menu_professor: Tfrm_menu_professor
   OnCreate = FormCreate
   TextHeight = 15
   object pnl_minhas_turmas: TPanel
-    Left = 207
+    Left = 206
     Top = -1
-    Width = 1073
+    Width = 1074
     Height = 721
     Color = clTeal
     ParentBackground = False
@@ -24,7 +24,7 @@ object frm_menu_professor: Tfrm_menu_professor
     object bg_turmas: TImage
       Left = 1
       Top = 1
-      Width = 1071
+      Width = 1072
       Height = 719
       Align = alClient
       Picture.Data = {
@@ -1455,9 +1455,9 @@ object frm_menu_professor: Tfrm_menu_professor
     end
   end
   object pnl_home_adminMenu: TPanel
-    Left = 207
+    Left = 206
     Top = -1
-    Width = 1073
+    Width = 1074
     Height = 721
     Color = 4210688
     ParentBackground = False
@@ -1465,7 +1465,7 @@ object frm_menu_professor: Tfrm_menu_professor
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 1071
+      Width = 1072
       Height = 719
       Align = alClient
       Picture.Data = {
@@ -2780,12 +2780,13 @@ object frm_menu_professor: Tfrm_menu_professor
         71AD0000000049454E44AE426082}
       Stretch = True
       ExplicitLeft = 0
+      ExplicitWidth = 1071
     end
   end
   object pnl_minhas_atividades: TPanel
-    Left = 216
+    Left = 206
     Top = -1
-    Width = 1064
+    Width = 1074
     Height = 721
     Color = 16744576
     ParentBackground = False
@@ -2794,7 +2795,7 @@ object frm_menu_professor: Tfrm_menu_professor
     object bg_atividades: TImage
       Left = 1
       Top = 1
-      Width = 1062
+      Width = 1072
       Height = 719
       Align = alClient
       Picture.Data = {
@@ -4110,6 +4111,7 @@ object frm_menu_professor: Tfrm_menu_professor
       Stretch = True
       ExplicitLeft = -10
       ExplicitTop = 33
+      ExplicitWidth = 1062
     end
     object pnl_adicionar_atividades: TImage
       Left = 280

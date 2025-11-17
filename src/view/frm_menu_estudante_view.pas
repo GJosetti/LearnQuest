@@ -5,20 +5,23 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, my_contracts,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller, atividade_entity, frm_fazer_atividade_view;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, frm_menu_estudantes_controller, atividade_entity, frm_fazer_atividade_view,
+  Vcl.Imaging.pngimage;
 
 type
   Tfrm_estudante_view = class(TForm, ITelaEstudantesView)
     pnl_sideMenu: TPanel;
     btn_atividades: TButton;
-    btn_home: TButton;
-    pnl_back: TPanel;
-    btn_minhas_atividades: TButton;
     pnl_home: TPanel;
     pnl_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
     btn_fazer: TPanel;
+    bg_atividades: TImage;
+    bg_Home: TImage;
+    SideMenu: TImage;
+    pnl_back: TImage;
+    btn_home: TImage;
     procedure btn_homeClick(Sender: TObject);
     procedure btn_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

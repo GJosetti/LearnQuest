@@ -100,7 +100,7 @@ VALUES (
 );
 
 select *from public.activity_template;
-select * from escola_73.atividades ;
+select * from escola_75.atividades;
 select * from escola_51.professores p; 
 
 SELECT a.*
@@ -134,7 +134,7 @@ GROUP BY
     u.user_name;
 
 
-select * from escola_33.atividades; 
+
 
 select * from escola_37.atividade_turma at2 ;
 

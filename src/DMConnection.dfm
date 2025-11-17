@@ -11,6 +11,7 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
+    Connected = True
     Left = 56
     Top = 64
   end
@@ -22,8 +23,8 @@ object DataModule1: TDataModule1
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
-      'C:\Users\User\Desktop\LearnQuest\LearnQuest\src\infra\lib\libpq.' +
-      'dll'
+      'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
+      'ra\lib\libpq.dll'
     Left = 168
     Top = 88
   end
@@ -435,20 +436,6 @@ object DataModule1: TDataModule1
     DataSetOptions = []
     Left = 719
     Top = 8
-    FieldDefs = <
-      item
-        FieldName = 'user_name'
-        FieldType = fftString
-        Size = 255
-      end
-      item
-        FieldName = 'dias_acessados'
-      end
-      item
-        FieldName = 'mes_do_registro'
-        FieldType = fftString
-        Size = 8190
-      end>
   end
   object FDQueryRelatorioLastAccess: TFDQuery
     Connection = FDConnection1
@@ -953,7 +940,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45977.646589351900000000
-    ReportOptions.LastChange = 45977.646589351900000000
+    ReportOptions.LastChange = 45978.709582060180000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -1057,6 +1044,8 @@ object DataModule1: TDataModule1
           AllowVectorExport = True
           Width = 718.110717773437500000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -1084,8 +1073,10 @@ object DataModule1: TDataModule1
         Width = 718.110700000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
-          Width = 718.110236220472000000
+          Width = 718.110236220000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -1098,87 +1089,92 @@ object DataModule1: TDataModule1
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Width = 181.431215299198000000
+          Width = 181.431215300000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'atividade_nome')
+            'Nome da Atividade')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 181.431215299198000000
-          Width = 171.755220603594000000
+          Left = 181.431215300000000000
+          Width = 171.755220600000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'materia_nome')
+            'Mat'#233'ria')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo5: TfrxMemoView
           AllowVectorExport = True
-          Left = 353.186435902792000000
+          Left = 307.832075900000000000
           Width = 102.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'total_tentativas')
+            'Tentativas')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 455.186435902792000000
+          Left = 455.186435900000000000
           Width = 87.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'total_acertos')
+            'Acertos')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo7: TfrxMemoView
           AllowVectorExport = True
-          Left = 542.186435902792000000
-          Width = 175.923800317681000000
+          Left = 617.777035900000000000
+          Width = 175.923800320000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'porcentagem_acerto')
+            '% de acertos')
           ParentFont = False
-          Style = 'Header'
         end
       end
       object GroupHeader1: TfrxGroupHeader
@@ -1192,13 +1188,14 @@ object DataModule1: TDataModule1
         Top = 151.181200000000000000
         Width = 718.110700000000000000
         KeepWithData = False
-        Condition = 'frxDBDatasetAtividades."turma_nome"'
+        Condition = 'frxDBDatasetAtividades."atividade_nome"'
         object Memo8: TfrxMemoView
           Align = baWidth
           AllowVectorExport = True
           Width = 718.110717773437500000
           Height = 22.677180000000000000
-          DataField = 'turma_nome'
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataSet = frxDBDatasetAtividades
           DataSetName = 'frxDBDatasetAtividades'
           Font.Charset = DEFAULT_CHARSET
@@ -1207,11 +1204,10 @@ object DataModule1: TDataModule1
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clTeal
           Memo.UTF8W = (
-            '[frxDBDatasetAtividades."turma_nome"]')
+            '[frxDBDatasetAtividades."atividade_nome"]')
           ParentFont = False
-          Style = 'Group header'
           VAlign = vaCenter
         end
       end
@@ -1230,9 +1226,10 @@ object DataModule1: TDataModule1
         RowCount = 0
         object Memo9: TfrxMemoView
           AllowVectorExport = True
-          Width = 181.431215299198000000
+          Width = 181.431215300000000000
           Height = 18.897650000000000000
-          DataField = 'atividade_nome'
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataSet = frxDBDatasetAtividades
           DataSetName = 'frxDBDatasetAtividades'
           Font.Charset = DEFAULT_CHARSET
@@ -1242,7 +1239,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDatasetAtividades."atividade_nome"]')
+            '[frxDBDatasetAtividades."turma_nome"]')
           ParentFont = False
           Style = 'Data'
         end
@@ -1286,9 +1283,11 @@ object DataModule1: TDataModule1
         end
         object Memo12: TfrxMemoView
           AllowVectorExport = True
-          Left = 455.186435902792000000
+          Left = 485.422675900000000000
           Width = 87.000000000000000000
           Height = 18.897650000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataField = 'total_acertos'
           DataSet = frxDBDatasetAtividades
           DataSetName = 'frxDBDatasetAtividades'
@@ -1305,10 +1304,12 @@ object DataModule1: TDataModule1
         end
         object Memo13: TfrxMemoView
           AllowVectorExport = True
-          Left = 542.186435902792000000
-          Width = 175.923800317681000000
+          Left = 617.777035900000000000
+          Top = 3.779530000000000000
+          Width = 175.923800320000000000
           Height = 18.897650000000000000
-          DataField = 'porcentagem_acerto'
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataSet = frxDBDatasetAtividades
           DataSetName = 'frxDBDatasetAtividades'
           Font.Charset = DEFAULT_CHARSET
@@ -1318,7 +1319,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDatasetAtividades."porcentagem_acerto"]')
+            '[frxDBDatasetAtividades."porcentagem_acerto"]%')
           ParentFont = False
           Style = 'Data'
         end

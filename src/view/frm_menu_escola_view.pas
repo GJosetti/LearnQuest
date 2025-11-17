@@ -117,6 +117,7 @@ type
     procedure btn_editar_materiasClick(Sender: TObject);
     procedure pnl_back_adminMenuClick(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
+    procedure btn_remover_materiasClick(Sender: TObject);
   private
     { Private declarations }
     FID : Integer;
@@ -520,6 +521,38 @@ begin
 
     d_Src_membros_escola.DataSet := FController.AtualizarTabelaMembros;
     dbg_membrosEscola.DataSource := d_Src_membros_escola;
+
+    ShowMessage('Registro excluído!');
+  end;
+end;
+
+procedure Tfrm_menuEscola.btn_remover_materiasClick(Sender: TObject);
+var
+  FID : Integer;
+  FMateria : TMateria;
+begin
+  if (dbg_materias.DataSource = nil) or
+     (dbg_materias.DataSource.DataSet = nil) or
+     (not dbg_materias.DataSource.DataSet.Active) or
+     (dbg_materias.DataSource.DataSet.IsEmpty) then
+  begin
+    ShowMessage('Nenhum usuário selecionado.');
+    Exit;
+  end;
+
+  FID := dbg_materias.DataSource.DataSet.FieldByName('id').AsInteger;
+  FMateria := FController.FindMateriaByID(FID);
+
+  //Confirmação de exclusão
+  if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+                [mbYes, mbNo], 0) = mrYes then
+  begin
+    FController.DeleteMateria(FID);
+
+    // Atualiza grid de membros
+
+    d_Src_materias.DataSet := FController.AtualizarTabelaMaterias;
+    dbg_materias.DataSource := d_Src_materias;
 
     ShowMessage('Registro excluído!');
   end;

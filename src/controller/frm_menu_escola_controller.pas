@@ -46,6 +46,8 @@ public
     procedure AdicionarMateria();
     procedure UpdateMateria(aID : Integer);
     function FindByNameMateria (aNome: String) : TMateria;
+    function FindMateriaByID(aID : Integer) : TMateria;
+    procedure DeleteMateria(aID : Integer);
 
 
     procedure ShowReportDesempenho();
@@ -174,6 +176,11 @@ begin
   FServiceUser.Delete(aID);
 end;
 
+procedure TMenuAdminController.DeleteMateria(aID: Integer);
+begin
+  FServiceMateria.DeleteMateria(aID);
+end;
+
 procedure TMenuAdminController.DeleteTurma(aNome: String);
 var
   FDTO : TTurmaDTO;
@@ -201,6 +208,11 @@ end;
 function TMenuAdminController.FindByNameTurmas(aString: String): TTurmaDTO;
 begin
   Result := FServiceTurma.FindByName(aString);
+end;
+
+function TMenuAdminController.FindMateriaByID(aID: Integer): TMateria;
+begin
+  FServiceMateria.FindByID(aID);
 end;
 
 function TMenuAdminController.GetEstudanteIDByUser(aId: Integer): Integer;

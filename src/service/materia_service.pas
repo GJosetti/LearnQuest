@@ -18,6 +18,7 @@ procedure Salvar(aModel: TMateria);
 procedure Update(aModel: TMateria);
 function GetMateriasDataSet: TDataSet;
 function GetAll : TObjectList<TMateria>;
+procedure DeleteMateria(aID : Integer);
 
 end;
 
@@ -30,6 +31,11 @@ begin
   if not Assigned(FRepo) then begin
     FRepo := TMateriaRepository.Create;
   end;
+end;
+
+procedure TMateriaService.DeleteMateria(aID: Integer);
+begin
+  FRepo.Delete(aID);
 end;
 
 function TMateriaService.FindByID(aID: Integer): TMateria;

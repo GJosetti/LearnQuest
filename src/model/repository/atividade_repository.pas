@@ -138,7 +138,7 @@ begin
     Qry.ParamByName('ID').AsInteger := aID;
     Qry.ExecSQL
   finally
-    Qry.Free;
+
   end;
 
 end;

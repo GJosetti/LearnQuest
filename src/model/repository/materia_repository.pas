@@ -19,6 +19,7 @@ type
     procedure Update(aModel: TMateria);
     function GetMateriasDataSet: TDataSet;
     function GetAll : TObjectList<TMateria>;
+    procedure Delete(aID : Integer);
   end;
 
 implementation
@@ -26,6 +27,23 @@ implementation
 constructor TMateriaRepository.Create;
 begin
   FConnection := DataModule1.FDConnection1;
+end;
+
+procedure TMateriaRepository.Delete(aID: Integer);
+var
+Qry : TFDQuery;
+
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := DataModule1.FDConnection1;
+    Qry.SQL.Text := 'Delete from materias WHERE id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.ExecSQL
+  finally
+    Qry.Free;
+  end;
+
 end;
 
 function TMateriaRepository.FindByID(aID: Integer): TMateria;

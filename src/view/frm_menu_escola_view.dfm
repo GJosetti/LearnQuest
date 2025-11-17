@@ -12256,7 +12256,7 @@
         D0539D1A5037B4CA5103EA8656396A40DDD02A470DA81B5AE5A8017543AB1CFD
         3F586E810968BF2FFF0000000049454E44AE426082}
       Stretch = True
-      OnClick = btn_remover_EscolaMenuClick
+      OnClick = btn_remover_materiasClick
     end
     object btn_editar_materias: TImage
       Left = 602
@@ -12568,7 +12568,7 @@
     object dbg_materias: TDBGrid
       Left = 308
       Top = 138
-      Width = 425
+      Width = 437
       Height = 344
       DataSource = d_Src_materias
       TabOrder = 0
@@ -12597,11 +12597,16 @@
           Title.Caption = 'Descricao'
           Width = 200
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'id'
+          Visible = False
         end>
     end
     object pnl_addNEdit_materias: TPanel
-      Left = 287
-      Top = 76
+      Left = 304
+      Top = 103
       Width = 449
       Height = 456
       Color = clBtnHighlight

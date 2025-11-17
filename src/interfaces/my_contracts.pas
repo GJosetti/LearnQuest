@@ -113,6 +113,7 @@ type
     function FindByNome(aNome: String) : TMateria;
     procedure Salvar(aModel :TMateria);
     procedure Update(aModel : TMateria);
+    procedure Delete(aID: Integer);
 
     function GetMateriasDataSet() : TDataSet;
     function GetAll : TObjectList<TMateria>;
@@ -223,6 +224,7 @@ type
       procedure Update(aModel : TMateria);
       function GetAll : TObjectList<TMateria>;
       function GetMateriasDataSet() : TDataSet;
+      procedure DeleteMateria(aID : Integer);
 
 
       end;
@@ -326,6 +328,8 @@ type
     procedure UpdateMateria(aID : Integer);
     function FindByNameMateria(aNome: String) : TMateria;
     function AtualizarTabelaMaterias() : TDataSet;
+    function FindMateriaByID(aID : Integer) : TMateria;
+    procedure DeleteMateria(aID : Integer);
 
 
     //Reports

@@ -100,7 +100,7 @@ VALUES (
 );
 
 select *from public.activity_template;
-select * from escola_75.atividades;
+select * from escola_76.atividades;
 select * from escola_51.professores p; 
 
 SELECT a.*

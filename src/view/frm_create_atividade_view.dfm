@@ -32,10 +32,9 @@ object frm_criar_atividades: Tfrm_criar_atividades
     Height = 23
     TabOrder = 1
     TextHint = 'Selecione um tipo: '
-    OnChange = cb_typesChange
     OnSelect = cb_typesSelect
     Items.Strings = (
-      'Quiz'#11
+      'Quiz'
       'Verdadeiro ou Falso')
   end
   object pnl_atividade_quiz: TPanel

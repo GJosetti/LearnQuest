@@ -36,7 +36,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure cb_typesSelect(Sender: TObject);
     procedure pnl_ConcluidoClick(Sender: TObject);
-    procedure cb_typesChange(Sender: TObject);
+
     procedure btn_cancelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
 
@@ -96,24 +96,14 @@ begin
   Self.Close;
 end;
 
-procedure Tfrm_criar_atividades.cb_typesChange(Sender: TObject);
-begin
-  if (cb_types.SelText = 'Verdadeiro ou Falso') then begin
-    //Mostra formulário de Quiz
 
-  end else begin
-    //Mostra Formulário de Quiz
-  end;
-
-
-end;
 
 procedure Tfrm_criar_atividades.cb_typesSelect(Sender: TObject);
 begin
   //////////////////////////////////////////////////////////
-  if cb_types.SelText = 'Quiz' then begin
-    pnl_atividade_quiz.Visible := true;
-  end;
+//  if cb_types.SelText = 'Quiz' then begin
+//    pnl_atividade_quiz.Visible := true;
+//  end;
 
   end;
 
@@ -165,9 +155,11 @@ end;
 
 procedure Tfrm_criar_atividades.FormShow(Sender: TObject);
 begin
+  edt_title.SetFocus;
   cb_materias.Clear;
   PopularCBMaterias;
   cb_materias.ItemIndex := cb_materias.Items.IndexOf(FMateriaName);
+  cb_types.TextHint := 'Selecione um Template';
 
 end;
 
@@ -359,6 +351,9 @@ begin
   // 🔹 Descrição
   if Trim(edt_descricao.Text) = '' then
     raise Exception.Create('A descrição da atividade é obrigatória.');
+
+  if cb_materias.ItemIndex = -1 then
+    raise Exception.Create('Selecione uma matéria');
 
   // 🔹 Tipo
   if cb_types.ItemIndex = -1 then

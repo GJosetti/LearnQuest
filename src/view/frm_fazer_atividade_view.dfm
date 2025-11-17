@@ -209,7 +209,6 @@
     Top = 480
   end
   object timerClose: TTimer
-    Interval = 600
     OnTimer = timerCloseTimer
     Left = 616
     Top = 408

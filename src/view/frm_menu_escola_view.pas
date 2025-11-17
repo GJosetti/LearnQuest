@@ -15,9 +15,6 @@ type
     d_Src_turmasEscola: TDataSource; // ADICIONADO: DataSource separado para turmas
     pnl_membros_EscolaMenu: TPanel;
     dbg_membrosEscola: TDBGrid;
-    btn_adicionar_EscolaMenu: TPanel;
-    btn_remover_EscolaMenu: TPanel;
-    btn_editar_EscolaMenu: TPanel;
     pnl_addNEdit_EscolaMenu: TPanel;
     pnl_title_addNEdit_EscolaMenu: TLabel;
     lbl_nome_edit_addNEdit_EscolaMenu: TLabel;
@@ -86,6 +83,9 @@ type
     Membros: TImage;
     Turmas: TImage;
     Matérias: TImage;
+    btn_adicionar_EscolaMenu: TImage;
+    btn_remover_EscolaMenu: TImage;
+    btn_editar_EscolaMenu: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -188,7 +188,7 @@ end;
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
-  pnl_addNEdit_materias.Visible := false;
+  pnl_addNEdit_EscolaMenu.Visible := false;
   ClearAllEdits;
 end;
 

@@ -1369,9 +1369,9 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     end
   end
   object pnl_escolas_adminMenu: TPanel
-    Left = 199
+    Left = 207
     Top = 0
-    Width = 1082
+    Width = 1074
     Height = 721
     Color = clTeal
     ParentBackground = False
@@ -1380,7 +1380,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
     object BG: TImage
       Left = 1
       Top = 1
-      Width = 1080
+      Width = 1072
       Height = 719
       Align = alClient
       Picture.Data = {
@@ -2699,9 +2699,9 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       ExplicitHeight = 718
     end
     object dbg_escolas: TDBGrid
-      Left = 496
-      Top = 136
-      Width = 513
+      Left = 321
+      Top = 163
+      Width = 432
       Height = 344
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
@@ -2750,7 +2750,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         end>
     end
     object btn_adicionar_adminMenu: TPanel
-      Left = 528
+      Left = 321
       Top = 520
       Width = 105
       Height = 25
@@ -2761,7 +2761,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       OnClick = btn_adicionar_adminMenuClick
     end
     object btn_remover_adminMenu: TPanel
-      Left = 696
+      Left = 488
       Top = 520
       Width = 105
       Height = 25
@@ -2772,7 +2772,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       OnClick = btn_remover_adminMenuClick
     end
     object btn_editar_adminMenu: TPanel
-      Left = 880
+      Left = 648
       Top = 520
       Width = 105
       Height = 25
@@ -2783,8 +2783,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       OnClick = btn_editar_adminMenuClick
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 536
-      Top = 117
+      Left = 304
+      Top = 109
       Width = 449
       Height = 456
       Color = clBtnHighlight

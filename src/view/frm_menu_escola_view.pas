@@ -30,11 +30,8 @@ type
     edt_email_addNEdit_EscolaMenu: TEdit;
     pnl_home_EscolaMenu: TPanel;
     pnl_sideMenu_EscolaMenu: TPanel;
-    Membros: TButton;
-    Home: TButton;
     cb_role_addNEdit_EscolaMenu: TComboBox;
     lbl_role_addNEdit_EscolaAdmin: TLabel;
-    Turmas: TButton;
     pnl_turmas_EscolaMenu: TPanel;
     dbg_turmasEscola: TDBGrid;
     btn_AdicionarTurmaMenu: TPanel;
@@ -64,7 +61,6 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel1: TPanel;
-    Matérias: TButton;
     pnl_materias: TPanel;
     dbg_materias: TDBGrid;
     btn_adicionar_materias: TPanel;
@@ -86,6 +82,10 @@ type
     bg_home: TImage;
     bg_materias: TImage;
     bg_turmas: TImage;
+    Home: TImage;
+    Membros: TImage;
+    Turmas: TImage;
+    Matérias: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

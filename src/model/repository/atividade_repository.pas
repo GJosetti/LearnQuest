@@ -16,6 +16,7 @@ procedure Update (aModel : atividade_Model);
 function FindByID(aID : Integer): atividade_Model;
 function GetAtividadesByUserID(AUserID: Integer): TDataSet;
 procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+procedure Delete(aID : Integer);
 
 end;
 
@@ -124,6 +125,22 @@ begin
 
     ExecSQL;
   end;
+end;
+
+procedure TAtividadeRepository.Delete(aID: Integer);
+var
+Qry : TFDQuery;
+
+begin
+  Qry := DataModule1.FDQueryAtividades;
+  try
+    Qry.SQL.Text := 'Delete from atividades WHERE id = :ID';
+    Qry.ParamByName('ID').AsInteger := aID;
+    Qry.ExecSQL
+  finally
+    Qry.Free;
+  end;
+
 end;
 
 function TAtividadeRepository.FindByID(aID: Integer): atividade_Model;

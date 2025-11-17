@@ -97,6 +97,7 @@ type
     function FindByID(aID : Integer): atividade_Model;
     function GetAtividadesByUserID(AUserID: Integer): TDataSet;
     procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+    procedure Delete(aID : Integer);
   end;
 
   IReportRepository = interface
@@ -204,6 +205,7 @@ type
         procedure Update (aModel : atividade_Model);
         function GetAtividadesByUserID(AUserID: Integer): TDataSet;
         procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+        procedure Delete(aID : Integer);
 
       end;
 
@@ -341,6 +343,8 @@ type
     function AtualizarTabelaAtividades : TDataSet;
     procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
     procedure ShowReportAtividades;
+    function FindByID (aID : Integer) : atividade_Model;
+    procedure DeleteAtividade (aID: Integer);
   end;
 
   //-----------------Tela Professores---------------------//

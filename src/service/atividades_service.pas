@@ -19,6 +19,7 @@ function FindByID(aID : Integer): atividade_Model;
 procedure Update (aModel : atividade_Model);
 function GetAtividadesByUserID(AUserID: Integer): TDataSet;
 procedure SalvarRegistro(AEstudanteID, AAtividadeTurmaID: Integer; AResult: Boolean);
+procedure Delete(aID : Integer);
 
 
 end;
@@ -34,6 +35,11 @@ begin
     FRepo :=  TAtividadeRepository.Create;
 
   end;
+end;
+
+procedure TAtividadeService.Delete(aID: Integer);
+begin
+  FRepo.Delete(aID);
 end;
 
 function TAtividadeService.FindByID(aID: Integer): atividade_Model;

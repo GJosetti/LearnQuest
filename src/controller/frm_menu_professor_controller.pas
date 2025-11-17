@@ -1,7 +1,7 @@
 unit frm_menu_professor_controller;
 
 interface
-uses my_contracts, Data.DB, atividades_service, professor_service,turma_service,report_service, Sessao;
+uses my_contracts, Data.DB, atividades_service, professor_service,turma_service,report_service, Sessao,atividade_entity;
 
 type
 
@@ -20,6 +20,8 @@ public
   constructor Create;
   procedure LinkAtividades(aAtividadeID, aTurmaID: Integer);
   procedure ShowReportAtividades;
+  function FindByID (aID : Integer) : atividade_Model;
+  procedure DeleteAtividade (aID: Integer);
 
 end;
 
@@ -42,6 +44,18 @@ begin
   if not Assigned(FRelatorioService) then begin
     FRelatorioService := TReportService.Create;
   end;
+end;
+
+
+
+procedure TMenuProfessorController.DeleteAtividade(aID: Integer);
+begin
+  FAtividadeService.Delete(aID);
+end;
+
+function TMenuProfessorController.FindByID(aID: Integer): atividade_Model;
+begin
+  Result := FAtividadeService.FindByID(aID);
 end;
 
 procedure TMenuProfessorController.LinkAtividades(aAtividadeID, aTurmaID: Integer);

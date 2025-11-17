@@ -12601,7 +12601,7 @@
     end
     object pnl_addNEdit_materias: TPanel
       Left = 287
-      Top = 99
+      Top = 76
       Width = 449
       Height = 456
       Color = clBtnHighlight

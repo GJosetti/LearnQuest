@@ -21,8 +21,6 @@ type
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
-    pnl_adicionar_atividades: TPanel;
-    pnL_edit_atividade: TPanel;
     btn_atribuir_atividade: TPanel;
     dbg_atividadesToLink: TDBGrid;
     pnl_link_atividade_turma: TPanel;
@@ -35,6 +33,9 @@ type
     SideMenu: TImage;
     pnl_back: TImage;
     Image1: TImage;
+    pnl_adicionar_atividades: TImage;
+    pnL_edit_atividade: TImage;
+    pbl_remover_atividades: TImage;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -46,6 +47,7 @@ type
     procedure btn_linkClick(Sender: TObject);
     procedure btn_cancel_link_atividadeClick(Sender: TObject);
     procedure pnl_desempenho_turmasClick(Sender: TObject);
+    procedure pbl_remover_atividadesClick(Sender: TObject);
   private
     { Private declarations }
     FController : ITelaProfessorController;
@@ -160,6 +162,39 @@ begin
   frm_criar_atividades.FMateriaName := dbg_atividades.DataSource.DataSet.FieldByName('name').AsString;
   frm_criar_atividades.ShowModal;
 end;
+
+procedure Tfrm_menu_professor.pbl_remover_atividadesClick(Sender: TObject);
+var
+  FID : Integer;
+  FAtividade : atividade_Model;
+begin
+  if (dbg_atividades.DataSource = nil) or
+     (dbg_atividades.DataSource.DataSet = nil) or
+     (not dbg_atividades.DataSource.DataSet.Active) or
+     (dbg_atividades.DataSource.DataSet.IsEmpty) then
+  begin
+    ShowMessage('Nenhum usuário selecionado.');
+    Exit;
+  end;
+
+  FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
+  FAtividade := FController.FindByID(FID);
+
+  //Confirmação de exclusão
+  if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
+                [mbYes, mbNo], 0) = mrYes then
+  begin
+    FController.DeleteAtividade(FID);
+
+    // Atualiza grid de membros
+
+    d_src_atividades.DataSet := FController.AtualizarTabelaAtividades;
+    dbg_atividades.DataSource := d_src_atividades;
+
+    ShowMessage('Registro excluído!');
+  end;
+end;
+
 
 procedure Tfrm_menu_professor.pnl_adicionar_atividadesClick(Sender: TObject);
 begin

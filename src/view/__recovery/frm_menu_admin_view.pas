@@ -134,7 +134,7 @@ begin
   FPreventColumnMove := True;
 
     try
-      // recoloca a coluna de volta ‡ posiÁ„o original (FromIndex)
+      // recoloca a coluna de volta √† posi√ß√£o original (FromIndex)
       col.Index := FromIndex;
     finally
       FPreventColumnMove := False;
@@ -151,7 +151,7 @@ end;
 
 procedure Tfrm_menuAdmin_view.btn_adicionar_adminMenuClick(Sender: TObject);
 begin
-// 1 - DEIXA O PANEL VISIVEL; 2- VERIFICA SE … UM ADD OU EDIT; 3- FAZ AS DEVIDAS ALTERA«’ES;
+// 1 - DEIXA O PANEL VISIVEL; 2- VERIFICA SE √â UM ADD OU EDIT; 3- FAZ AS DEVIDAS ALTERA√á√ïES;
   pnl_addNEdit_adminMenu.Visible := true;
   Fmode := m_ADD;
   ClearAllEdits;
@@ -171,7 +171,7 @@ procedure Tfrm_menuAdmin_view.btn_concluir_addNEdit_adminMenuClick(
 begin
 
   if(FController.ValidarCep(edt_CEP_addNEdit_adminMenu.Text) = False) then begin
-    raise Exception.Create('O CEP inserido È inv·lido');
+    raise Exception.Create('O CEP inserido √© inv√°lido');
   end;
 
   if CamposValidos then begin
@@ -238,13 +238,13 @@ procedure Tfrm_menuAdmin_view.btn_remover_adminMenuClick(Sender: TObject);
 begin
 
 FID := dbg_escolas.DataSource.DataSet.FieldByName('ID').AsInteger;
-//ConfirmaÁ„o de exclus„o
+//Confirma√ß√£o de exclus√£o
 if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation,
               [mbYes, mbNo], 0) = mrYes then
 begin
   FController.Delete(FID);
   FController.AtualizarTabelaEscolas;
-  ShowMessage('Registro excluÌdo!');
+  ShowMessage('Registro exclu√≠do!');
 end;
 
 

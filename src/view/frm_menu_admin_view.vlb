@@ -46,9 +46,6 @@ Coordinates=323,10,200,58
 [d_Src_escolas]
 Coordinates=185,1,99,36
 
-[Home]
-Coordinates=177,418,49,58
-
 [btn_cancelar_addNEdit_adminMenu]
 Coordinates=321,146,222,58
 
@@ -75,5 +72,5 @@ Coordinates=241,10,72,58
 Visible=True
 
 []
-Coordinates=10,214,60,58
+Coordinates=177,418,49,58
 

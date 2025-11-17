@@ -31,9 +31,6 @@ type
     lbl_role_addNEdit_EscolaAdmin: TLabel;
     pnl_turmas_EscolaMenu: TPanel;
     dbg_turmasEscola: TDBGrid;
-    btn_AdicionarTurmaMenu: TPanel;
-    btn_RemoverTurmaMenu: TPanel;
-    btn_EditarTurmaMenu: TPanel;
     pnl_addNEdit_Turma_EscolaMenu: TPanel;
     lbl_title_addNEdit_Turma_EscolaMenu: TLabel;
     lbl_Nome_Turma_addNEdit_Escola_Menu: TLabel;
@@ -60,9 +57,6 @@ type
     Panel1: TPanel;
     pnl_materias: TPanel;
     dbg_materias: TDBGrid;
-    btn_adicionar_materias: TPanel;
-    btn_remover_materias: TPanel;
-    btn_editar_materias: TPanel;
     pnl_addNEdit_materias: TPanel;
     lbl_title_pnl_addNEdit_Materias: TLabel;
     lbl_nome_pnl_addNEdit_materias: TLabel;
@@ -86,6 +80,12 @@ type
     btn_adicionar_EscolaMenu: TImage;
     btn_remover_EscolaMenu: TImage;
     btn_editar_EscolaMenu: TImage;
+    btn_AdicionarTurmaMenu: TImage;
+    btn_RemoverTurmaMenu: TImage;
+    btn_EditarTurmaMenu: TImage;
+    btn_adicionar_materias: TImage;
+    btn_remover_materias: TImage;
+    btn_editar_materias: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

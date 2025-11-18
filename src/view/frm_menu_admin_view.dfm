@@ -5357,8 +5357,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         end>
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 304
-      Top = 133
+      Left = 305
+      Top = 77
       Width = 449
       Height = 456
       Color = clBtnHighlight

@@ -11,17 +11,17 @@ uses
 type
   Tfrm_estudante_view = class(TForm, ITelaEstudantesView)
     pnl_sideMenu: TPanel;
-    btn_atividades: TButton;
     pnl_home: TPanel;
     pnl_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
-    btn_fazer: TPanel;
     bg_atividades: TImage;
     bg_Home: TImage;
     SideMenu: TImage;
     pnl_back: TImage;
     btn_home: TImage;
+    btn_atividades: TImage;
+    btn_fazer: TImage;
     procedure btn_homeClick(Sender: TObject);
     procedure btn_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

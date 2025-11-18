@@ -43,7 +43,6 @@ type
     cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu: TComboBox;
     pnl_participantes_Turma: TPanel;
     dbg_participantes_turma: TDBGrid;
-    btn_ListarMembros: TPanel;
     btn_Vincular_Aluno: TPanel;
     btn_remover_aluno: TPanel;
     btn_back_participantes_Escola_Menu: TPanel;
@@ -81,6 +80,7 @@ type
     btn_editar_materias: TImage;
     pnl_desempenho_escola: TImage;
     Panel2: TImage;
+    btn_ListarMembros: TImage;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

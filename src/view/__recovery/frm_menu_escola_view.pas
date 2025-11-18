@@ -1,4 +1,4 @@
-﻿unit frm_menu_escola_view;
+unit frm_menu_escola_view;
 
 interface
 

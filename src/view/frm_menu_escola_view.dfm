@@ -12289,7 +12289,6 @@
         Width = 353
         Height = 23
         TabOrder = 3
-        Text = '...'
         TextHint = '...'
       end
       object cb_ProfessorResponsavel_AddNEdit_Turma_EscolaMenu: TComboBox

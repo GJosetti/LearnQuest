@@ -103,7 +103,7 @@ begin
   TurmaDTO.ProfessorID := Fview.GetIDProfessorTurma;
   //ShowMessage(UsuarioLogado.Escola.ToString);
   //FServiceUser.SetPathByEscola(UsuarioLogado.Escola);
-  ShowMessage(UsuarioLogado.Escola.ToString);
+
   FServiceTurma.Salvar(TurmaDTO);
 
 

@@ -259,7 +259,7 @@ end;
 procedure Tfrm_fazer_atividade_view.lbl_optionAMouseEnter(Sender: TObject);
 begin
    if not (FIsAnimatingRun) then begin
-    OpçãoA.Color := clBlue;
+    OpçãoA.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -273,7 +273,7 @@ end;
 procedure Tfrm_fazer_atividade_view.lbl_optionBMouseEnter(Sender: TObject);
 begin
 if not (FIsAnimatingRun) then begin
-    OpçãoB.Color := clBlue;
+    OpçãoB.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -287,7 +287,7 @@ end;
 procedure Tfrm_fazer_atividade_view.lbl_optionCMouseEnter(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
-    OpçãoC.Color := clBlue;
+    OpçãoC.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -301,7 +301,7 @@ end;
 procedure Tfrm_fazer_atividade_view.lbl_optionDMouseEnter(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
-    OpçãoD.Color := clBlue;
+    OpçãoD.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -317,7 +317,7 @@ end;
 procedure Tfrm_fazer_atividade_view.OpçãoAMouseEnter(Sender: TObject);
 begin
  if not (FIsAnimatingRun) then begin
-    OpçãoA.Color := clBlue;
+    OpçãoA.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -331,7 +331,7 @@ end;
 procedure Tfrm_fazer_atividade_view.OpçãoBMouseEnter(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
-    OpçãoB.Color := clBlue;
+    OpçãoB.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -345,7 +345,7 @@ end;
 procedure Tfrm_fazer_atividade_view.OpçãoCMouseEnter(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
-    OpçãoC.Color := clBlue;
+    OpçãoC.Color := clWebLightSteelBlue;
   end;
 end;
 
@@ -359,7 +359,7 @@ end;
 procedure Tfrm_fazer_atividade_view.OpçãoDMouseEnter(Sender: TObject);
 begin
   if not (FIsAnimatingRun) then begin
-    OpçãoD.Color := clBlue;
+    OpçãoD.Color := clWebLightSteelBlue;
   end;
 end;
 

@@ -29,21 +29,21 @@
   end
   object lbl_pergunta: TLabel
     AlignWithMargins = True
-    Left = 3
-    Top = 50
-    Width = 1274
-    Height = 86
+    Left = 86
+    Top = 63
+    Width = 1121
+    Height = 202
     Margins.Top = 50
-    Align = alTop
     Alignment = taCenter
+    AutoSize = False
     Caption = 'PERGUNTA?'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -64
-    Font.Name = 'Segoe UI'
-    Font.Style = []
+    Font.Height = -37
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
     ParentFont = False
-    ExplicitWidth = 341
+    WordWrap = True
   end
   object OpçãoA: TPanel
     Tag = 1

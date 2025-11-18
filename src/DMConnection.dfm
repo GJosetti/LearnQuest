@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 563
-  Width = 799
+  Height = 560
+  Width = 846
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=postgres'
@@ -11,6 +11,7 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
+    Connected = True
     Left = 56
     Top = 64
   end
@@ -22,8 +23,8 @@ object DataModule1: TDataModule1
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
-      'C:\Users\User\Desktop\LearnQuest\LearnQuest\src\infra\lib\libpq.' +
-      'dll'
+      'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
+      'ra\lib\libpq.dll'
     Left = 168
     Top = 88
   end
@@ -81,8 +82,8 @@ object DataModule1: TDataModule1
       '        || '#39'/'#39' || '
       '        CAST(('
       '            SELECT COUNT(DISTINCT at2.id)'
-      '            FROM escola_33.atividade_turma at2'
-      '            INNER JOIN escola_33.estudante_turma et2 '
+      '            FROM escola_78.atividade_turma at2'
+      '            INNER JOIN escola_78.estudante_turma et2 '
       '                ON et2.turma_id = at2.turma_id'
       '            WHERE et2.estudante_id = e.id'
       '        ) AS VARCHAR(10))'
@@ -90,9 +91,9 @@ object DataModule1: TDataModule1
       ''
       'FROM '
       '    public.users u'
-      'INNER JOIN escola_33.estudante e ON e.user_id = u.id'
+      'INNER JOIN escola_78.estudante e ON e.user_id = u.id'
       
-        'LEFT JOIN escola_33.atividade_estudante ae ON ae.estudante_id = ' +
+        'LEFT JOIN escola_78.atividade_estudante ae ON ae.estudante_id = ' +
         'e.id'
       ''
       'GROUP BY '
@@ -121,7 +122,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45976.744986504600000000
-    ReportOptions.LastChange = 45976.744986504600000000
+    ReportOptions.LastChange = 45979.614295578700000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -225,6 +226,8 @@ object DataModule1: TDataModule1
           AllowVectorExport = True
           Width = 718.110717773437500000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -234,7 +237,7 @@ object DataModule1: TDataModule1
           Fill.BackColor = 14211288
           HAlign = haCenter
           Memo.UTF8W = (
-            'Report')
+            'Relat'#243'rio de Desempenho')
           ParentFont = False
           Style = 'Title'
           VAlign = vaCenter
@@ -266,53 +269,57 @@ object DataModule1: TDataModule1
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Width = 426.218810463724000000
+          Left = 60.472480000000000000
+          Width = 426.218810460000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'user_name')
+            'Nome do usu'#225'rio')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Left = 426.218810463724000000
-          Width = 206.908059703608000000
+          Left = 309.053380460000000000
+          Width = 206.908059700000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'porcentagem_acertos')
+            '% de Acertos')
           ParentFont = False
-          Style = 'Header'
         end
         object Memo5: TfrxMemoView
           AllowVectorExport = True
-          Left = 633.126870167332000000
-          Width = 84.983366053140700000
+          Left = 576.433920170000000000
+          Width = 122.778666050000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = 15790320
+          Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'progresso')
+            'Atividades Feitas')
           ParentFont = False
-          Style = 'Header'
         end
       end
       object MasterData1: TfrxMasterData
@@ -330,8 +337,11 @@ object DataModule1: TDataModule1
         RowCount = 0
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Width = 426.218810463724000000
+          Left = -90.708720000000000000
+          Width = 426.218810460000000000
           Height = 18.897650000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataField = 'user_name'
           DataSet = frxDBDatasetDesempenho
           DataSetName = 'frxDBDatasetDesempenho'
@@ -341,6 +351,7 @@ object DataModule1: TDataModule1
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDatasetDesempenho."user_name"]')
           ParentFont = False
@@ -348,7 +359,7 @@ object DataModule1: TDataModule1
         end
         object Memo7: TfrxMemoView
           AllowVectorExport = True
-          Left = 426.218810460000000000
+          Left = 248.580900460000000000
           Width = 206.908059700000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -361,6 +372,7 @@ object DataModule1: TDataModule1
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDatasetDesempenho."porcentagem_acertos"]%')
           ParentFont = False
@@ -368,9 +380,11 @@ object DataModule1: TDataModule1
         end
         object Memo8: TfrxMemoView
           AllowVectorExport = True
-          Left = 633.126870167332000000
-          Width = 84.983366053140700000
+          Left = 595.331570170000000000
+          Width = 84.983366050000000000
           Height = 18.897650000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataField = 'progresso'
           DataSet = frxDBDatasetDesempenho
           DataSetName = 'frxDBDatasetDesempenho'
@@ -380,6 +394,7 @@ object DataModule1: TDataModule1
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = []
+          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDatasetDesempenho."progresso"]')
           ParentFont = False

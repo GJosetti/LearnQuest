@@ -93,7 +93,7 @@ begin
   begin
     FDConnection1.Connected := false;
   end;
-  ShowMessage('DataModule destruído');
+
 end;
 
 end.

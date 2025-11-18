@@ -15,9 +15,6 @@ type
     dbg_turmas: TDBGrid;
     pnl_home_adminMenu: TPanel;
     pnl_sideMenu: TPanel;
-    btn_minhas_turmas: TButton;
-    btn_home: TButton;
-    btn_minhas_atividades: TButton;
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
@@ -27,7 +24,6 @@ type
     lbl_nome_turma: TLabel;
     btn_link: TPanel;
     btn_cancel_link_atividade: TPanel;
-    pnl_desempenho_turmas: TPanel;
     bg_atividades: TImage;
     bg_turmas: TImage;
     SideMenu: TImage;
@@ -36,6 +32,10 @@ type
     pnl_adicionar_atividades: TImage;
     pnL_edit_atividade: TImage;
     pbl_remover_atividades: TImage;
+    btn_minhas_atividades: TImage;
+    btn_home: TImage;
+    btn_minhas_turmas: TImage;
+    pnl_desempenho_turmas: TImage;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -157,7 +157,7 @@ FAtividade : atividade_Model;
 
 begin
   FID := dbg_atividades.DataSource.DataSet.FieldByName('id').AsInteger;
-  ShowMessage(FID.ToString);
+
   frm_criar_atividades := Tfrm_criar_atividades.Create(mEdit, FID, Self);
   frm_criar_atividades.FMateriaName := dbg_atividades.DataSource.DataSet.FieldByName('name').AsString;
   frm_criar_atividades.ShowModal;

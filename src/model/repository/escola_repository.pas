@@ -86,7 +86,7 @@ begin
     Qry.Open;
     FSchemaName := Qry.FieldByName('schema_name').AsString;
 
-    ShowMessage(FSchemaName);
+
     Qry.sql.Text := 'DROP SCHEMA ' + FSchemaName +' CASCADE';
 
     Qry.ExecSQL;

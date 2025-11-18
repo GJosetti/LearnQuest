@@ -11,7 +11,6 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
-    Connected = True
     Left = 56
     Top = 64
   end
@@ -23,8 +22,8 @@ object DataModule1: TDataModule1
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
     VendorLib = 
-      'C:\Users\Guilherme Josetti\Desktop\LearnQuest\LearnQuest\src\inf' +
-      'ra\lib\libpq.dll'
+      'C:\Users\User\Desktop\LearnQuest\LearnQuest\src\infra\lib\libpq.' +
+      'dll'
     Left = 168
     Top = 88
   end
@@ -898,38 +897,6 @@ object DataModule1: TDataModule1
     DataSetOptions = []
     Left = 711
     Top = 168
-    FieldDefs = <
-      item
-        FieldName = 'atividade_id'
-      end
-      item
-        FieldName = 'atividade_nome'
-        FieldType = fftString
-        Size = 100
-      end
-      item
-        FieldName = 'materia_nome'
-        FieldType = fftString
-        Size = 100
-      end
-      item
-        FieldName = 'turma_nome'
-        FieldType = fftString
-        Size = 255
-      end
-      item
-        FieldName = 'professor_id'
-      end
-      item
-        FieldName = 'total_tentativas'
-      end
-      item
-        FieldName = 'total_acertos'
-      end
-      item
-        FieldName = 'porcentagem_acerto'
-        Size = 64
-      end>
   end
   object frxReportAtividades: TfrxReport
     Version = '2026.1.1'

@@ -5,13 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  frm_create_atividade_controller, my_contracts, atividade_entity, System.JSON, materia_entity, System.Generics.Collections;
+  frm_create_atividade_controller, my_contracts, atividade_entity, System.JSON, materia_entity, System.Generics.Collections,
+  Vcl.Imaging.pngimage;
 
 type
   TMode = (mCreate, mEdit);
 
   Tfrm_criar_atividades = class(TForm, ITelaCreateAtividadesView)
-    btn_cancel: TPanel;
     edt_title: TEdit;
     edt_descricao: TEdit;
     cb_types: TComboBox;
@@ -29,10 +29,12 @@ type
     lbl_alternativa_c_quiz: TLabel;
     edt_alternativa_d_quiz: TEdit;
     lbl_alternativa_d_quiz: TLabel;
-    pnl_Concluido: TPanel;
     rg_alternativas_quiz: TRadioGroup;
     cb_materias: TComboBox;
     lbl_materia: TLabel;
+    btn_cancel: TImage;
+    pnl_Concluido: TImage;
+    bg: TImage;
     procedure FormCreate(Sender: TObject);
     procedure cb_typesSelect(Sender: TObject);
     procedure pnl_ConcluidoClick(Sender: TObject);
@@ -139,14 +141,28 @@ begin
     FController := TCriarAtividadeController.Create(Self);
   end;
 
-  if(FMode = mEdit) then begin
-   FAtividade := FController.FindByID(FID);
-   pnl_Concluido.Caption := 'Atualizar';
-   CarregarAtividade(FAtividade);
+ if (FMode = mEdit) then
+begin
+  FAtividade := FController.FindByID(FID);
 
-  end else begin
-    pnl_Concluido.Caption := 'Criar';
-  end;
+  // Caminho relativo correto
+  var ImgPath := ExpandFileName(
+                   ExtractFilePath(ParamStr(0)) +
+                   '..\..\assets\botão_editar_criar.png'
+                 );
+
+  pnl_Concluido.Picture.LoadFromFile(ImgPath);
+
+  CarregarAtividade(FAtividade);
+end
+else
+begin
+   var ImgPath := ExpandFileName(
+                   ExtractFilePath(ParamStr(0)) +
+                   '..\..\assets\botão_criar.png'
+                 );
+   pnl_Concluido.Picture.LoadFromFile(ImgPath);
+end;
 
 
 

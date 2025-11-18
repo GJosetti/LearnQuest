@@ -5357,8 +5357,8 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         end>
     end
     object pnl_addNEdit_adminMenu: TPanel
-      Left = 305
-      Top = 77
+      Left = 304
+      Top = 123
       Width = 449
       Height = 456
       Color = clBtnHighlight
@@ -5470,6 +5470,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Width = 145
         Height = 23
         TabOrder = 3
+        TextHint = 'Insira um nome'
       end
       object edt_password_addNEdit__adminMenu: TEdit
         Left = 32
@@ -5478,6 +5479,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Height = 23
         PasswordChar = '*'
         TabOrder = 4
+        TextHint = 'Insira uma senha'
       end
       object edt_email_addNEdit_adminMenu: TEdit
         Left = 241

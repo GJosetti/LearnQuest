@@ -81,6 +81,7 @@ type
     pnl_desempenho_escola: TImage;
     Panel2: TImage;
     btn_ListarMembros: TImage;
+    lbl_nome_turma: TLabel;
     procedure MembrosClick(Sender: TObject);
     procedure HomeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -388,6 +389,8 @@ begin
     ShowMessage('Turma não encontrada.');
     Exit;
   end;
+
+  lbl_nome_turma.Caption := FTurmaDTO.Nome;
 
   FIDTurmaSelected := FTurmaDTO.ID;
 
@@ -736,6 +739,7 @@ begin
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := true;
   pnl_membros_EscolaMenu.Visible := false;
+  pnl_participantes_Turma.Visible := false;
 
 
   pnl_addNEdit_EscolaMenu.Visible := false;
@@ -750,6 +754,7 @@ begin
   pnl_materias.Visible := true;
   pnl_turmas_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
+  pnl_participantes_Turma.Visible := false;
 
   pnl_membros_EscolaMenu.Visible := false;
 
@@ -776,6 +781,7 @@ begin
   pnl_addNEdit_EscolaMenu.Visible := false;
   pnl_addNEdit_Turma_EscolaMenu.Visible := false;
    pnl_addNEdit_materias.Visible := false;
+   pnl_participantes_Turma.Visible := false;
 
 
 
@@ -843,6 +849,7 @@ begin
   pnl_materias.Visible := false;
   pnl_membros_EscolaMenu.Visible := false;
   pnl_home_EscolaMenu.Visible := false;
+  pnl_participantes_Turma.Visible := false;
 
   pnl_turmas_EscolaMenu.Visible := true;
 

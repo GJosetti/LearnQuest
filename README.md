@@ -1,7 +1,7 @@
 # LearnQuest
 
 ![STATUS](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=flat)
-![LICENSE](http://img.shields.io/static/v1?label=LICENSE&message=MIT&color=BLUE&style=flat)
+
 
 > Sistema de gestão escolar multi-tenancy e gameficação educacional.
 

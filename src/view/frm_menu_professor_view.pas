@@ -18,7 +18,6 @@ type
     pnl_minhas_atividades: TPanel;
     dbg_atividades: TDBGrid;
     d_src_atividades: TDataSource;
-    btn_atribuir_atividade: TPanel;
     dbg_atividadesToLink: TDBGrid;
     pnl_link_atividade_turma: TPanel;
     lbl_nome_turma: TLabel;
@@ -36,6 +35,7 @@ type
     btn_home: TImage;
     btn_minhas_turmas: TImage;
     pnl_desempenho_turmas: TImage;
+    btn_atribuir_atividade: TImage;
     procedure pnl_backClick(Sender: TObject);
     procedure btn_minhas_atividadesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

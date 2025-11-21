@@ -266,7 +266,7 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Text := 'SELECT * FROM users WHERE user_escola_id = :ID';
+    Qry.SQL.Text := 'SELECT * FROM users WHERE user_escola_id = :ID and user_role_id = 2';
     Qry.ParamByName('ID').AsInteger := aID;
     Qry.Open;
 

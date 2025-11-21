@@ -11,6 +11,7 @@ object DataModule1: TDataModule1
       'Port=5433'
       'DriverID=PG'
       'Server=localhost')
+    Connected = True
     Left = 56
     Top = 64
   end
@@ -111,21 +112,6 @@ object DataModule1: TDataModule1
     DataSetOptions = []
     Left = 711
     Top = 88
-    FieldDefs = <
-      item
-        FieldName = 'user_name'
-        FieldType = fftString
-        Size = 255
-      end
-      item
-        FieldName = 'porcentagem_acertos'
-        Size = 64
-      end
-      item
-        FieldName = 'progresso'
-        FieldType = fftString
-        Size = 20
-      end>
   end
   object frxReportDesempenho: TfrxReport
     Version = '2026.1.1'
@@ -8303,20 +8289,6 @@ object DataModule1: TDataModule1
     DataSetOptions = []
     Left = 719
     Top = 8
-    FieldDefs = <
-      item
-        FieldName = 'user_name'
-        FieldType = fftString
-        Size = 255
-      end
-      item
-        FieldName = 'dias_acessados'
-      end
-      item
-        FieldName = 'mes_do_registro'
-        FieldType = fftString
-        Size = 8190
-      end>
   end
   object FDQueryRelatorioLastAccess: TFDQuery
     Connection = FDConnection1
@@ -16661,7 +16633,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45977.646589351900000000
-    ReportOptions.LastChange = 45978.709582060200000000
+    ReportOptions.LastChange = 45982.711287951390000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -16822,7 +16794,7 @@ object DataModule1: TDataModule1
           Frame.Typ = []
           Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'Nome da Atividade')
+            'Nome da Turma')
           ParentFont = False
         end
         object Memo4: TfrxMemoView
@@ -16840,7 +16812,7 @@ object DataModule1: TDataModule1
           Frame.Typ = []
           Fill.BackColor = clWhite
           Memo.UTF8W = (
-            'Mat'#233'ria')
+            'Atividade')
           ParentFont = False
         end
         object Memo5: TfrxMemoView
@@ -16910,27 +16882,6 @@ object DataModule1: TDataModule1
         Width = 718.110700000000000000
         KeepWithData = False
         Condition = 'frxDBDatasetAtividades."atividade_nome"'
-        object Memo8: TfrxMemoView
-          Align = baWidth
-          AllowVectorExport = True
-          Width = 718.110717773437500000
-          Height = 22.677180000000000000
-          ContentScaleOptions.Constraints.MaxIterationValue = 0
-          ContentScaleOptions.Constraints.MinIterationValue = 0
-          DataSet = frxDBDatasetAtividades
-          DataSetName = 'frxDBDatasetAtividades'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Fill.BackColor = clTeal
-          Memo.UTF8W = (
-            '[frxDBDatasetAtividades."atividade_nome"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
@@ -16966,10 +16917,11 @@ object DataModule1: TDataModule1
         end
         object Memo10: TfrxMemoView
           AllowVectorExport = True
-          Left = 181.431215299198000000
-          Width = 171.755220603594000000
+          Left = 181.431215300000000000
+          Width = 171.755220600000000000
           Height = 18.897650000000000000
-          DataField = 'materia_nome'
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           DataSet = frxDBDatasetAtividades
           DataSetName = 'frxDBDatasetAtividades'
           Font.Charset = DEFAULT_CHARSET
@@ -16979,7 +16931,7 @@ object DataModule1: TDataModule1
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[frxDBDatasetAtividades."materia_nome"]')
+            '[frxDBDatasetAtividades."atividade_nome"]')
           ParentFont = False
           Style = 'Data'
         end

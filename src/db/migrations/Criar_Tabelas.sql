@@ -18,24 +18,7 @@ CREATE TABLE estudante (
 
 -- =========== ESTRUTURA DE TRILHAS ===========
 
--- Trilhas = conjuntos de fases
-CREATE TABLE trilhas (
-    id BIGSERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    descricao TEXT,
-    created_at TIMESTAMP DEFAULT NOW()
-);
 
--- Fases pertencem a trilhas
-CREATE TABLE fase (
-    id BIGSERIAL PRIMARY KEY,
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) ON DELETE CASCADE,
-    teacher_id BIGINT REFERENCES professores(id),
-    nome VARCHAR(100),
-    descricao TEXT,
-    order_index INT,
-    created_at TIMESTAMP DEFAULT NOW()
-);
 
 create table materias(
 	id BIGSERIAL primary key,
@@ -59,13 +42,6 @@ CREATE TABLE estudante_turma (
     turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE
 );
 
--- Liga turmas às trilhas (as turmas seguem trilhas)
-CREATE TABLE turma_trilha (
-    id BIGSERIAL PRIMARY KEY,
-    turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE,
-    trilha_id BIGINT NOT NULL REFERENCES trilhas(id) ON DELETE CASCADE
-);
-
 -- =========== ATIVIDADES ===========
 
 -- Atividades criadas pelos professores
@@ -84,13 +60,6 @@ create table atividade_turma(
 	id BIGSERIAL PRIMARY KEY,
     atividade_id BIGINT NOT NULL REFERENCES atividades(id) ON DELETE CASCADE,
     turma_id BIGINT NOT NULL REFERENCES turmas(id) ON DELETE CASCADE
-);
--- Liga atividades às fases (N:N possível)
-CREATE TABLE atividade_fase (
-    id BIGSERIAL PRIMARY KEY,
-    atividade_id BIGINT NOT NULL REFERENCES atividades(id) ON DELETE CASCADE,
-    fase_id BIGINT NOT NULL REFERENCES fase(id) ON DELETE CASCADE,
-    ordem INT
 );
 
 CREATE TABLE atividade_estudante (

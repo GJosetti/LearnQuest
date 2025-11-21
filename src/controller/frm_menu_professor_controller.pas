@@ -65,7 +65,7 @@ end;
 
 procedure TMenuProfessorController.ShowReportAtividades;
 begin
-  FRelatorioService.ShowReportAtividades(UsuarioLogado.Escola);
+  FRelatorioService.ShowReportAtividades(UsuarioLogado.Escola, FProfessorService.GetIdByUserId(UsuarioLogado.ID));
 end;
 
 function TMenuProfessorController.AtualizarTabelaAtividades: TDataSet;

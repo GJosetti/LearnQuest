@@ -77,6 +77,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
+      WordWrap = True
       OnClick = LabelClick
       OnMouseEnter = lbl_optionAMouseEnter
       OnMouseLeave = lbl_optionAMouseLeave
@@ -116,6 +117,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
+      WordWrap = True
       OnClick = LabelClick
       OnMouseEnter = lbl_optionBMouseEnter
       OnMouseLeave = lbl_optionBMouseLeave
@@ -155,6 +157,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
+      WordWrap = True
       OnClick = LabelClick
       OnMouseEnter = lbl_optionCMouseEnter
       OnMouseLeave = lbl_optionCMouseLeave
@@ -194,6 +197,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
+      WordWrap = True
       OnClick = LabelClick
       OnMouseEnter = lbl_optionDMouseEnter
       OnMouseLeave = lbl_optionDMouseLeave

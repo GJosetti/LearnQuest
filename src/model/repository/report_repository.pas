@@ -1,4 +1,4 @@
-unit report_repository;
+锘縰nit report_repository;
 interface
 uses my_contracts, Data.DB, FireDAC.Comp.Client, DMConnection, System.SysUtils, Vcl.Dialogs;
 type
@@ -11,7 +11,7 @@ private
 public
   procedure ShowReportDesempenho();
   procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
-  procedure ShowReportAtividades(const AEscolaID : Integer);
+ procedure ShowReportAtividades(const AEscolaID: Integer; const AProfessorID: Integer);
 
 
 end;
@@ -20,7 +20,10 @@ implementation
 
 { TReportRepository }
 
-procedure TReportRepository.ShowReportAtividades(const AEscolaID: Integer);
+procedure TReportRepository.ShowReportAtividades(
+  const AEscolaID: Integer;
+  const AProfessorID: Integer
+);
 var
   Qry: TFDQuery;
 begin
@@ -45,12 +48,15 @@ begin
       'LEFT JOIN materias m ON a.materia_id = m.id ' +
       'LEFT JOIN turmas t ON at.turma_id = t.id ' +
       'LEFT JOIN professores p ON a.professor_id = p.id ' +
-      'LEFT JOIN users u ON u.id = p.user_id ' + // para filtrar pela escola
+      'LEFT JOIN users u ON u.id = p.user_id ' +
       'WHERE u.user_escola_id = :ESCOLA ' +
+      '  AND p.id = :PROFESSOR ' +   // 馃敟 FILTRO DO PROFESSOR LOGADO
       'GROUP BY a.id, a.title, m.name, t.turma_name, p.id ' +
       'ORDER BY porcentagem_acerto ASC';
 
     Qry.ParamByName('ESCOLA').AsInteger := AEscolaID;
+    Qry.ParamByName('PROFESSOR').AsInteger := AProfessorID;
+
     Qry.Open;
 
     // Vincula ao FastReport
@@ -58,12 +64,14 @@ begin
     DataModule1.frxReportAtividades.DataSets.Clear;
     DataModule1.frxReportAtividades.DataSets.Add(DataModule1.frxDBDatasetAtividades);
 
-    // Exibe o relat髍io
     DataModule1.frxReportAtividades.ShowReport();
 
   except
     on E: Exception do
-      raise Exception.CreateFmt('Erro ao gerar relat髍io de dificuldade das atividades: %s', [E.Message]);
+      raise Exception.CreateFmt(
+        'Erro ao gerar relat贸rio de dificuldade das atividades: %s',
+        [E.Message]
+      );
   end;
 end;
 
@@ -101,7 +109,7 @@ begin
     DataModule1.frxReportDesempenho.ShowReport();
   except
     on E: Exception do
-      ShowMessage('Erro ao gerar relat髍io: ' + E.Message);
+      ShowMessage('Erro ao gerar relat贸rio: ' + E.Message);
   end;
 end;
 
@@ -133,13 +141,13 @@ begin
     DataModule1.frxReportLastAccess.DataSets.Clear;
     DataModule1.frxReportLastAccess.DataSets.Add(DataModule1.frxDBDatasetLastAccess);
 
-    // Exibe o relat髍io
+    // Exibe o relat贸rio
     DataModule1.frxReportLastAccess.ShowReport();
 
   except
     on E: Exception do
       raise Exception.CreateFmt(
-        'Erro ao gerar relat髍io de 鷏timos acessos: %s',
+        'Erro ao gerar relat贸rio de 煤ltimos acessos: %s',
         [E.Message]
       );
   end;

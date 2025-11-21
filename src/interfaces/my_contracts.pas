@@ -103,7 +103,7 @@ type
   IReportRepository = interface
     procedure ShowReportDesempenho();
     procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
-    procedure ShowReportAtividades(const AEscolaID : Integer);
+    procedure ShowReportAtividades(const AEscolaID: Integer; const AProfessorID: Integer);
 
 
   end;
@@ -213,7 +213,7 @@ type
       IReportService = interface
       procedure ShowReportDesempenho();
       procedure ShowRelatorioUltimosAcessos(const AEscolaID: Integer);
-      procedure ShowReportAtividades(const AEscolaID : Integer);
+      procedure ShowReportAtividades(const AEscolaID: Integer; const AProfessorID: Integer);
 
       end;
 

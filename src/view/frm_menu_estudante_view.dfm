@@ -2675,6 +2675,7 @@ object frm_estudante_view: Tfrm_estudante_view
       Top = 552
       Width = 184
       Height = 95
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000026834944415478DAED9D09A0644575F7CFEDF7
@@ -4012,6 +4013,7 @@ object frm_estudante_view: Tfrm_estudante_view
       Top = 25
       Width = 184
       Height = 96
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000027854944415478DAED9D09B85C4595C7CFED97
@@ -4339,6 +4341,7 @@ object frm_estudante_view: Tfrm_estudante_view
       Top = 176
       Width = 184
       Height = 95
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000025DB4944415478DAED9D09D45D5575C7F77D5F
@@ -4652,6 +4655,7 @@ object frm_estudante_view: Tfrm_estudante_view
       Top = 296
       Width = 184
       Height = 95
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E00002DA74944415478DAED7D09901CD779DEDF337B

@@ -1,6 +1,7 @@
 object frm_menuAdmin_view: Tfrm_menuAdmin_view
   Left = 0
   Top = 0
+  Caption = 'Administrador'
   ClientHeight = 720
   ClientWidth = 1280
   Color = clBtnFace
@@ -745,6 +746,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 24
       Width = 191
       Height = 89
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000027854944415478DAED9D09B85C4595C7CFED97
@@ -1072,6 +1074,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 260
       Width = 191
       Height = 105
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E0000297C4944415478DAED7D69941CD775DEADEED9
@@ -1414,6 +1417,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 149
       Width = 183
       Height = 105
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000025DB4944415478DAED9D09D45D5575C7F77D5F
@@ -4414,6 +4418,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 513
       Width = 129
       Height = 67
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000023DC4944415478DAED9D09B45E5575C7F7F7A6
@@ -4712,6 +4717,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 513
       Width = 129
       Height = 67
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000022F24944415478DAED9D09B81D4595C74FDFB7
@@ -5003,6 +5009,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
       Top = 513
       Width = 129
       Height = 67
+      Cursor = crHandPoint
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000B50000
         00540806000000C44B768E000024F24944415478DAED5D07901CC775FDB3BB77
@@ -5447,6 +5454,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Top = 414
         Width = 126
         Height = 26
+        Cursor = crHandPoint
         Caption = 'Concluir'
         Color = clBtnHighlight
         ParentBackground = False
@@ -5458,6 +5466,7 @@ object frm_menuAdmin_view: Tfrm_menuAdmin_view
         Top = 13
         Width = 58
         Height = 26
+        Cursor = crHandPoint
         Caption = 'Sair'
         Color = clBtnHighlight
         ParentBackground = False

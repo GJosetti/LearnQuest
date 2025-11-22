@@ -185,7 +185,7 @@ end;
 procedure Tfrm_menuEscola.btn_cancelar_addNEdit_EscolaMenuClick(
   Sender: TObject);
 begin
-  pnl_addNEdit_EscolaMenu.Visible := false;
+  pnl_addNEdit_materias.Visible := false;
   ClearAllEdits;
 end;
 

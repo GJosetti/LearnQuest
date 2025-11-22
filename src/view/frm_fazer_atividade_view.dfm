@@ -1,7 +1,7 @@
 ﻿object frm_fazer_atividade_view: Tfrm_fazer_atividade_view
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Fazer Atividade!'
   ClientHeight = 720
   ClientWidth = 1280
   Color = clGoldenrod
@@ -51,6 +51,7 @@
     Top = 288
     Width = 353
     Height = 137
+    Cursor = crHandPoint
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
@@ -64,6 +65,7 @@
       Top = 80
       Width = 293
       Height = 54
+      Cursor = crHandPoint
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
@@ -91,6 +93,7 @@
     Top = 288
     Width = 353
     Height = 137
+    Cursor = crHandPoint
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
@@ -104,6 +107,7 @@
       Top = 80
       Width = 293
       Height = 54
+      Cursor = crHandPoint
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
@@ -131,6 +135,7 @@
     Top = 534
     Width = 353
     Height = 137
+    Cursor = crHandPoint
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
@@ -144,6 +149,7 @@
       Top = 80
       Width = 293
       Height = 54
+      Cursor = crHandPoint
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30
@@ -171,6 +177,7 @@
     Top = 534
     Width = 353
     Height = 137
+    Cursor = crHandPoint
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
@@ -184,6 +191,7 @@
       Top = 80
       Width = 293
       Height = 54
+      Cursor = crHandPoint
       Margins.Left = 30
       Margins.Top = 80
       Margins.Right = 30

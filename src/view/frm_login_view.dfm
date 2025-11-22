@@ -1,7 +1,7 @@
 object frm_login: Tfrm_login
   Left = 0
   Top = 0
-  Caption = 'frm_login'
+  Caption = 'Login'
   ClientHeight = 720
   ClientWidth = 1148
   Color = clWhite
@@ -6237,6 +6237,7 @@ object frm_login: Tfrm_login
       Top = 500
       Width = 42
       Height = 25
+      Cursor = crHandPoint
       Center = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000000660000
@@ -6309,6 +6310,7 @@ object frm_login: Tfrm_login
       Top = 516
       Width = 249
       Height = 124
+      Cursor = crHandPoint
       Center = True
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D494844520000010A0000

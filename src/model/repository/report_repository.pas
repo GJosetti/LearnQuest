@@ -32,35 +32,38 @@ begin
     Qry.Connection := DataModule1.FDConnection1;
 
     Qry.SQL.Text :=
-      'SELECT ' +
-      '    a.id AS atividade_id, ' +
-      '    a.title AS atividade_nome, ' +
-      '    m.name AS materia_nome, ' +
-      '    t.turma_name AS turma_nome, ' +
-      '    p.id AS professor_id, ' +
-      '    COUNT(ae.id) AS total_tentativas, ' +
-      '    SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END) AS total_acertos, ' +
-      '    ROUND( (SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END)::decimal / ' +
-      '           NULLIF(COUNT(ae.id), 0)) * 100, 2 ) AS porcentagem_acerto ' +
-      'FROM atividade_estudante ae ' +
-      'JOIN atividade_turma at ON ae.atividade_turma_id = at.id ' +
-      'JOIN atividades a ON at.atividade_id = a.id ' +
-      'LEFT JOIN materias m ON a.materia_id = m.id ' +
-      'LEFT JOIN turmas t ON at.turma_id = t.id ' +
-      'LEFT JOIN professores p ON a.professor_id = p.id ' +
-      'LEFT JOIN users u ON u.id = p.user_id ' +
-      'WHERE u.user_escola_id = :ESCOLA ' +
-      '  AND p.id = :PROFESSOR ' +   // 🔥 FILTRO DO PROFESSOR LOGADO
-      'GROUP BY a.id, a.title, m.name, t.turma_name, p.id ' +
-      'ORDER BY porcentagem_acerto ASC';
+  'SELECT ' +
+  '    a.id AS atividade_id, ' +
+  '    a.title AS atividade_nome, ' +
+  '    m.name AS materia_nome, ' +
+  '    t.turma_name AS turma_nome, ' +
+  '    p.id AS professor_id, ' +
+  '    SUM(CASE WHEN ae.id IS NOT NULL THEN 1 ELSE 0 END) AS total_tentativas, ' +
+  '    SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END) AS total_acertos, ' +
+  '    ROUND( (SUM(CASE WHEN ae.sucess = TRUE THEN 1 ELSE 0 END)::decimal / ' +
+  '           NULLIF(SUM(CASE WHEN ae.id IS NOT NULL THEN 1 ELSE 0 END), 0)) * 100, 2 ) AS porcentagem_acerto ' +
+
+  'FROM atividade_estudante ae ' +
+  'JOIN atividade_turma at ON ae.atividade_turma_id = at.id ' +
+  'JOIN atividades a ON at.atividade_id = a.id ' +
+  'LEFT JOIN materias m ON a.materia_id = m.id ' +
+  'LEFT JOIN turmas t ON at.turma_id = t.id ' +
+  'LEFT JOIN professores p ON a.professor_id = p.id ' +
+  'LEFT JOIN users u ON u.id = p.user_id ' +
+
+  'WHERE u.user_escola_id = :ESCOLA ' +
+  '  AND p.id = :PROFESSOR ' +
+
+  'GROUP BY a.id, a.title, m.name, t.id, t.turma_name, p.id ' +  // 👈 AGRUPANDO POR ID DA TURMA
+  'ORDER BY porcentagem_acerto ASC';
 
     Qry.ParamByName('ESCOLA').AsInteger := AEscolaID;
     Qry.ParamByName('PROFESSOR').AsInteger := AProfessorID;
 
     Qry.Open;
 
-    // Vincula ao FastReport
     DataModule1.frxDBDatasetAtividades.DataSet := Qry;
+
     DataModule1.frxReportAtividades.DataSets.Clear;
     DataModule1.frxReportAtividades.DataSets.Add(DataModule1.frxDBDatasetAtividades);
 
@@ -74,6 +77,7 @@ begin
       );
   end;
 end;
+
 
 procedure TReportRepository.ShowReportDesempenho;
 var

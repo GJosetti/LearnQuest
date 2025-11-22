@@ -8339,7 +8339,7 @@ object DataModule1: TDataModule1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45976.778352592600000000
-    ReportOptions.LastChange = 45977.694205011600000000
+    ReportOptions.LastChange = 45983.718175000000000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -8518,7 +8518,7 @@ object DataModule1: TDataModule1
           Frame.Typ = []
           Fill.BackColor = 15790320
           Memo.UTF8W = (
-            'Acessos no m'#234's')
+            'Dias Acessados')
           ParentFont = False
           Style = 'Header'
         end
@@ -16605,38 +16605,6 @@ object DataModule1: TDataModule1
     DataSetOptions = []
     Left = 711
     Top = 168
-    FieldDefs = <
-      item
-        FieldName = 'atividade_id'
-      end
-      item
-        FieldName = 'atividade_nome'
-        FieldType = fftString
-        Size = 100
-      end
-      item
-        FieldName = 'materia_nome'
-        FieldType = fftString
-        Size = 100
-      end
-      item
-        FieldName = 'turma_nome'
-        FieldType = fftString
-        Size = 255
-      end
-      item
-        FieldName = 'professor_id'
-      end
-      item
-        FieldName = 'total_tentativas'
-      end
-      item
-        FieldName = 'total_acertos'
-      end
-      item
-        FieldName = 'porcentagem_acerto'
-        Size = 64
-      end>
   end
   object frxReportAtividades: TfrxReport
     Version = '2026.1.1'
